@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Please cite the preprint when you use this work."
+type: article
+title: "Second-order distribution accuracy of explicit Euler on a fixed probability path"
+authors:
+  - family-names: Goyal
+    given-names: Dev D.
+version: 1.0.0
+date-released: '2026-10-30'
+url: 'https://github.com/dvgyl/euler-distribution-accuracy'
+license: CC-BY-4.0

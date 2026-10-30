@@ -1,0 +1,8 @@
+{
+  "evaluation_budgets": [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096],
+  "quadrature_orders": [64, 128, 256],
+  "primary_quadrature_order": 128,
+  "quadrature_relative_allowance": 0.002,
+  "reference_fraction_allowance": 0.001,
+  "reference_tolerance": {"rtol": 2.5e-14, "atol": 3e-15}
+}

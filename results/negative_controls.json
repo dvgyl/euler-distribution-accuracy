@@ -1,0 +1,5 @@
+{
+  "gaussian_grid_retuning": "Node 1: covariance mismatch 0.00832758 exceeds tolerance 2.04744e-13.",
+  "gaussian_restart": "Node 2: covariance mismatch 0.0112006 exceeds tolerance 4.13071e-13.",
+  "radial_restart": "Node 2: covariance mismatch 0.0990928 exceeds tolerance 2.11229e-13."
+}

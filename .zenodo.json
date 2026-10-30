@@ -1,0 +1,29 @@
+{
+  "title": "Second-order distribution accuracy of explicit Euler on a fixed probability path",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "description": "<p>In flow models, numerical solvers can approximate distributions more accurately than the individual trajectories used to generate them. We study when modifying the velocity field gives this improvement for explicit Euler without changing the exact distribution at any time. The freedom to modify the field in this way is known, and we use it to prove an error bound over a fixed time interval. Our sufficient condition requires motion along the material acceleration field to leave the current distribution unchanged at each fixed physical time. With smoothness, global Lipschitz, and moment assumptions, Euler has an error of O(H^2) in the Wasserstein distance, where H is the largest step size. Gaussian and nonlinear radial examples show that second-order distribution accuracy is achievable, although particle error remains first order. The correction doubles the leading particle error coefficient for the Gaussian and increases it by a similar factor in the tested nonlinear example. On uniform grids with equal numbers of field evaluations, corrected Euler exactly matches base-field Heun in Gaussian distribution. It also gives distribution errors close to Heun's in the tested nonlinear example. A different Gaussian rotation gives Heun third-order distribution accuracy and second-order particle accuracy, so the field and solver must be considered together. The condition rules out variance-preserving interpolation between independent standard Gaussian noise and data with the same second moment, unless the distribution is constant. Correcting less structured paths remains an open problem.</p><p>This preprint includes the mathematical proofs and appendix. The accompanying archive contains the manuscript sources, numerical code, calculation settings, results, and reproduction instructions.</p>",
+  "creators": [
+    {
+      "name": "Goyal, Dev D."
+    }
+  ],
+  "publication_date": "2026-10-30",
+  "version": "1.0.0",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "keywords": [
+    "explicit Euler",
+    "Wasserstein distance",
+    "flow models",
+    "numerical analysis",
+    "probability distributions"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/dvgyl/euler-distribution-accuracy",
+      "relation": "isSupplementedBy",
+      "scheme": "url"
+    }
+  ]
+}
