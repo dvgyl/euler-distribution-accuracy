@@ -1,0 +1,166 @@
+\section{Sharp global error and the limits of endpoint tests}
+\label{sec:sharp-global}
+
+Projected modified fields and Duhamel propagation of the density defect
+are established in recent work~\citep{obzherin2026density,obzherin2026finite}.
+The distinction needed here is between an upper bound that sums the
+magnitudes of local defects and the norm of their signed, transported
+sum.  The latter gives an exact coefficient for the actual recursive
+Euler method and a converse to the acceleration condition.
+
+Write $F_{s,t}$ for the exact flow from $s$ to $t$.  For $s\le t$, define
+the transported acceleration and its accumulated defect by
+\begin{align}
+ A_{s,t}&=(DF_{s,t}\,\acc_s)\circ F_{t,s},\nonumber\\
+ B_t^\sigma&=\int_0^t\sigma(s)A_{s,t}\,\dd s.
+ \label{eq:transported-global-defect}
+\end{align}
+The integral belongs to $L^2(p_t;\R^d)$.  It transports vectors by the
+derivative of the flow, not merely by composition with the inverse flow.
+
+\begin{theorem}[Exact global Wasserstein coefficient]
+\label{thm:sharp-global-euler}
+Assume the smoothness, growth, spatial Lipschitz, and moment hypotheses
+of Theorem~\ref{thm:distribution_order}, without imposing the acceleration
+condition.  Consider grids indexed by $n$, with $H_n\to0$, and scales $\eta_n\downarrow0$
+such that $H_n=O(\eta_n)$.  On the $k$th interval set
+$\sigma_n(s)=h_{n,k}/\eta_n$, and suppose
+$\sigma_n\rightharpoonup^*\sigma$ in $L^\infty(0,T)$.
+Let $\widehat p_t^n$ be the law of the piecewise linear Euler
+interpolation.  Then
+\begin{equation}
+ \sup_{0\le t\le T}\left|
+ \frac{W_2(\widehat p_t^n,p_t)}{\eta_n}
+ -\frac12\|\Pi_{p_t}B_t^\sigma\|_{L^2(p_t)}\right|\longrightarrow0.
+ \label{eq:sharp-global-uniform}
+\end{equation}
+In particular,
+\begin{equation}
+ \lim_n\frac{\max_kW_2(\widehat p_k^n,p_{t_{n,k}})}{\eta_n}
+ =\frac12\max_{0\le t\le T}\|\Pi_{p_t}B_t^\sigma\|_{L^2(p_t)}.
+ \label{eq:sharp-global-maximum}
+\end{equation}
+The coefficient is continuous in $t$.  No density, fourth moment, or
+regularity of the projected field is assumed.
+\end{theorem}
+
+The proof first obtains the classical variational error expansion in
+$L^2(p_0)$, uniformly in time.  It then proves a uniform Wasserstein
+tangent expansion using the frozen-flow lemma, spatial truncation, and
+the second-moment tail bound.  This establishes the coefficient without
+assuming differentiability of a velocity-to-density map; complete
+proofs are in Appendix~\ref{app:sharp-global}.
+
+A useful specialization fixes a positive $C^1$ allocation density
+$\rho$ with $\int_0^T\rho=1$ and chooses
+$\int_0^{t_k}\rho=k/N$.  Then $\eta_N=1/N$ and
+$\sigma_N\to1/\rho$ uniformly.  With
+$g_s^T=\Pi_{p_T}A_{s,T}$, the terminal coefficient is
+\begin{equation}
+ \lim_{N\to\infty}N W_2(\widehat p_T^{N,\rho},p_T)
+ =\frac12\left\|\int_0^T\frac{g_s^T}{\rho(s)}\,\dd s
+             \right\|_{L^2(p_T)}.
+ \label{eq:sharp-schedule-coefficient}
+\end{equation}
+Cancellation occurs inside this norm.  An allocation rule based on an
+integral of nonnegative local magnitudes generally optimizes an upper
+bound rather than this exact coefficient.
+
+\begin{theorem}[Characterization of second-order distribution accuracy]
+\label{thm:global-ap-characterization}
+Under the same hypotheses, the following are equivalent for a fixed
+field $u$ on $[0,T]$:
+\begin{enumerate}
+\item $\nabla\cdot(p_t\acc_t)=0$ for every $t$.
+\item There is a constant $C$ such that every finite grid satisfies
+      $\max_kW_2(\widehat p_k,p_{t_k})\le CH^2$.
+\item Along one sequence of uniform grids, with $h=T/N\to0$,
+      $\max_kW_2(\widehat p_k,p_{kh})=o(h)$.
+\item For every positive smooth allocation density $\rho$,
+      $W_2(\widehat p_T^{N,\rho},p_T)=o(N^{-1})$.
+\end{enumerate}
+In item 4 it suffices to use the densities in any fixed, arbitrarily
+small $C^1$ neighborhood of the uniform density $1/T$.
+\end{theorem}
+
+Consequently, a fixed field has a sharp alternative on uniform grids:
+the acceleration condition gives $O(h^2)$ error at all nodes; if the
+condition fails, the maximum over nodes is $c_u h+o(h)$ for a strictly
+positive $c_u$.  A first-order terminal coefficient that vanishes by
+cancellation can always be made positive by an arbitrarily small smooth
+perturbation of the allocation density.  These assertions concern a
+fixed field as the grid is refined; they do not assert a common positive
+constant over a changing family of learned fields.
+
+\begin{corollary}[Odd-dimensional location--scale order dichotomy]
+\label{cor:odd-global-order}
+Consider a path $p_t=\Law(m(t)+g(t)Z)$ covered by
+Theorem~\ref{thm:nonlinear-odd-rigidity}.  If either $m$ or $g$ is
+nonaffine in time, every fixed generator satisfying the hypotheses
+above has maximum Euler distribution error $c_uh+o(h)$ on uniform
+grids, with $c_u>0$.  If both are affine, the unique
+acceleration-preserving generator is Euler-exact, and every other
+fixed generator in the stated regularity class has $\Theta(h)$
+maximum distribution error.
+\end{corollary}
+This applies, in particular, to odd-dimensional expanding Gaussian
+paths with a nonaffine scale, and to the location--scale paths of
+finite nondegenerate Gaussian mixtures specified in
+Theorem~\ref{thm:nonlinear-odd-rigidity}.
+
+\begin{proposition}[Any finite set of terminal schedules can miss the defect]
+\label{prop:finite-schedule-blindness}
+Fix $a>0$ and any finite collection of positive smooth allocation
+densities $\rho_1,\ldots,\rho_m$ on $[0,1]$.  There is a smooth field
+generating the same path
+$p_t=\mathcal N(0,e^{2at}I_2)$ as $a(I+J)x$ such that the acceleration
+condition fails, yet
+\[
+ W_2(\widehat p_1^{N,\rho_i},p_1)=O(N^{-2})
+ \qquad (i=1,\ldots,m).
+\]
+Its maximum distribution error on uniform grids is $\Theta(N^{-1})$.
+The field can be arbitrarily close to $a(I+J)x$ in its time-dependent
+matrix coefficients and any prescribed finite number of their
+derivatives.
+\end{proposition}
+
+The construction is explicit up to a finite homogeneous linear system.
+Choose a nonzero smooth $f$ with $\|f\|_\infty<a^2$ and
+$\int_0^1 f/\rho_i=0$ for every $i$, and put
+\begin{equation}
+ u_t(x)=(aI+b(t)J)x,\qquad b(t)=\sqrt{a^2-f(t)}.
+ \label{eq:blind-gaussian-generator}
+\end{equation}
+Here $J$ is planar rotation by $\pi/2$.  The projected acceleration is
+exactly $f(t)x$.  Finitely many integral constraints leave nonzero
+choices of $f$; the proof uses disjoint smooth bumps.  The same argument
+can hide the first-order coefficient at any finite set of observation
+times in addition to the terminal time.
+
+\paragraph{Matching even the terminal second-order coefficient.}
+Take $f(t)=\epsilon\cos(2\pi t)$ with $0<\epsilon<a^2$ in
+Eq.~\eqref{eq:blind-gaussian-generator}.  Uniform Euler has
+\begin{equation}
+ \lim_{N\to\infty}N^2W_2(\widehat p_1^N,p_1)
+ =\frac{2\sqrt2\,e^a a^3}{3},
+ \label{eq:cosine-terminal-second}
+\end{equation}
+the same coefficient as the acceleration-preserving field $a(I+J)x$.
+Nevertheless, along $N$ divisible by four,
+\[
+ \lim_N N W_2(\widehat p_{1/4}^N,p_{1/4})
+ =\frac{\sqrt2\,e^{a/4}\epsilon}{4\pi}>0.
+\]
+For the arbitrarily small schedule perturbation
+$\rho_\delta(t)=1+\delta\cos(2\pi t)$, $0<|\delta|<1$, the terminal
+error instead satisfies
+\begin{equation}
+ \lim_N N W_2(\widehat p_1^{N,\rho_\delta},p_1)
+ =\frac{\sqrt2\,e^a\epsilon}{2|\delta|}
+       \left(\frac1{\sqrt{1-\delta^2}}-1\right)>0.
+ \label{eq:cosine-perturbed-first}
+\end{equation}
+Thus even an accurate terminal convergence plot, including its leading
+second-order coefficient, cannot by itself establish acceleration
+preservation or second-order accuracy throughout the path.

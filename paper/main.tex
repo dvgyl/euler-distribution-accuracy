@@ -1,4 +1,4 @@
-\documentclass[journal,10pt]{IEEEtran}
+\documentclass[journal,10pt,romanappendices]{IEEEtran}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
@@ -6,7 +6,7 @@
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage{xurl}
 \usepackage{hyperref}
-\hypersetup{pdftitle={Constructing and Certifying Second-Order Euler Distribution Accuracy},pdfauthor={Dev D. Goyal},pdflang={en-US},colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\hypersetup{pdftitle={When Euler Is Second-Order Accurate in Distribution: Global Criteria and Nonlinear Obstructions},pdfauthor={Dev D. Goyal},pdflang={en-US},colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -22,20 +22,20 @@
 \newcommand{\cV}{\mathcal V}
 \newcommand{\acc}{\mathbf a}
 \newcommand{\jerk}{\mathbf j}
-\title{Constructing and Certifying Second-Order Euler Distribution Accuracy}
+\title{When Euler Is Second-Order Accurate in Distribution: Global Criteria and Nonlinear Obstructions}
 \author{Dev D. Goyal}
-\markboth{Research manuscript, November 2026}{Goyal: Constructing and Certifying Euler Distribution Accuracy}
+\markboth{Research manuscript, November 2026}{Goyal: Global Criteria and Nonlinear Obstructions for Euler Distribution Accuracy}
 \input{../results/numerical_macros}
 \begin{document}
 \maketitle
 \begin{abstract}
-Explicit Euler can approximate a moving distribution to second order while its trajectories remain first-order accurate, provided the material acceleration preserves each instantaneous marginal. We develop constructive and quantitative criteria for this mechanism on a prescribed probability path. A reference-coordinate equation produces smooth, globally regular nonradial and nonlinear examples that are not affine images of radial or independent-product laws; a variant starts from a standard Gaussian. In a concrete correction family, a quartic minimization recovers the unique zero of an exact residual upper certificate. The weighted-gradient component of acceleration is exactly twice the leading local Wasserstein error coefficient. We use it to prove a finite-time mixed-order bound without requiring a regular flow for the projected solenoidal component, and combine this bound with target-path and velocity-regression errors. Convex-observable and covariance tests provide stronger infeasibility certificates; an explicit smooth path passes all second-moment tests yet has a positive universal residual floor. Reproducible experiments confirm correction recovery, second-order distribution bounds, first-order particle error, optimization failures, residual sensitivity, and a fitted-field error floor. The construction covers a structured class rather than arbitrary learned probability paths, and it establishes no wall-clock advantage over higher-order solvers.
+Explicit Euler can have second-order distribution accuracy while its particle trajectories remain first order. We characterize exactly when the maximum distribution error obeys a second-order bound for a fixed smooth field under global Lipschitz and second-moment assumptions. A transported-acceleration formula gives the sharp first-order Wasserstein coefficient of the recursively computed laws. Acceleration preservation is equivalent to superlinear maximum-node convergence, and also to superlinear terminal convergence for every smooth positive timestep density; otherwise the maximum-node error is first order. No prescribed finite collection of terminal schedule tests can certify this property. We then prove an obstruction applying to all globally Lipschitz nonlinear fields: in odd dimension, a scalar dilation of any finite nondegenerate Gaussian mixture admits acceleration preservation only for an affine scale, when the unique qualifying generator has Euler-exact trajectories. The proof combines a weighted stress identity with topology of remote density level sets. Gaussian specializations give explicit residual floors and necessary derivative growth. Convex Gaussian dilations pass every convex-observable energy test despite this obstruction. Nonradial positive constructions, residual certificates, and reproducible experiments complete the analysis. The results distinguish whole-path accuracy from terminal cancellation and linear-family failure from genuine nonlinear infeasibility.
 \end{abstract}
 \begin{IEEEkeywords}
-Flow matching, numerical integration, Wasserstein distance, probability transport, error certification.
+Flow matching, numerical integration, Wasserstein distance, probability transport, topological obstruction.
 \end{IEEEkeywords}
 \noindent\textbf{Impact statement.}
-Sampling systems are judged by output distributions, which can have different numerical errors from individual trajectories. This work supplies constructions, failure tests, and explicit residual certificates for that distinction. These tools can prevent unsupported claims that a small training loss or divergence penalty guarantees accurate sampling. The present experiments are controlled low-dimensional studies; they do not establish faster image generation or improvements in deployment cost.
+Sampling systems are judged by output distributions, which can have different errors from individual trajectories. This work identifies when changing the velocity can improve Euler's distribution order and when every globally regular correction must fail. It also shows how endpoint-only convergence tests can miss first-order errors within the path. The experiments validate mathematical mechanisms; they establish no image-generation or deployment speedup.
 
 \section{Introduction}
 
@@ -49,11 +49,13 @@ It preserves the entire probability path, not just the endpoints~\citep{ambrosio
 For explicit Euler, the leading omitted trajectory displacement is one half the squared step size times the material acceleration
 $\acc_t=\partial_tu_t+(D_xu_t)u_t$. If this acceleration also preserves the instantaneous distribution, its leading displacement can be removed by changing the coupling between numerical and exact outputs. Under global regularity and moment conditions this gives a finite-time $O(H^2)$ bound in full $W_2$, where $H$ is the largest step. Particle error can remain $\Theta(H)$.
 
-A conditional error theorem leaves a central question unanswered: which paths admit such a field, and how can an approximate correction be certified? Gauge preservation is linear in a correction, but acceleration preservation is nonlinear. Some paths cannot satisfy it at all. In particular, an evolving path with constant second moment is excluded, and a qualifying gradient field must have straight constant-velocity trajectories, which Euler already integrates exactly. Merely parameterizing divergence-free corrections or plotting the established Gaussian rotation does not resolve this problem.
+Recent density-level backward-error analyses already identify the projected local defect and obtain sufficient order-elevation conditions~\citep{obzherin2026density,obzherin2026finite}. Two questions remain distinct from these local results. Is acceleration preservation also necessary for the actual recursively computed distribution path to converge superlinearly? And can a failure within linear or shellwise correction families be overcome by an arbitrary nonlinear field?
 
-This paper supplies three complementary answers. First, a linear equation in reference coordinates constructs a family of nonradial, non-affine probability paths with exactly admissible corrections. An explicit two-harmonic example excludes every affine-radial or affine-product representation. Its correction is recovered by a finite global polynomial search; no exact correction is passed to the optimizer. A related construction starts from Gaussian noise. Second, the canonical projected acceleration residual gives a sharp local error coefficient and an operational global bound. Upper and lower residual certificates separate finite-dimensional approximation error from genuine small residual, and the global analysis includes target-path error. Third, convex observables produce path-level obstructions stronger than covariance tests, including an explicit positive residual floor that no correction family can remove.
+We answer the first question with an exact global Wasserstein expansion. For one fixed field, acceleration preservation is equivalent to maximum-node error $o(h)$ on uniform grids; it then gives $O(H^2)$ on every grid. Every other field has maximum-node error $\Theta(h)$. At a single terminal time, cancellation is possible. Requiring superlinear terminal convergence for every smooth positive timestep density restores the equivalence, but any prescribed finite collection of such tests can be fooled. A concrete example even has the same second-order terminal coefficient as an exactly acceleration-preserving field while its interior error is first order.
 
-The scope remains deliberate. We construct a meaningful class of paths rather than solve a general inverse problem for any supplied density. The correction search is finite-dimensional. The empirical learned-field test is a restricted noisy regression model, not a trained image generator. Corrected Euler need not beat Heun in distribution, and it can be substantially worse for common-start particle error. These limitations are part of the results.
+The second answer is a nonlinear topological obstruction. In odd dimension, scalar dilations of arbitrary finite nondegenerate Gaussian mixtures admit no globally Lipschitz acceleration-preserving generator unless the scale is affine. The result allows multimodal, nonradial sources and corrections that redistribute mass across density level sets. Its proof uses a weighted stress identity and the topology of remote level sets; it does not assume a linear field or tangential shell motion. Gaussian consequences include an explicit residual floor at fixed Lipschitz budget and a necessary growth rate for the Jacobian of any hypothetical smooth escape. A convex Gaussian dilation passes every convex-observable minimum-energy test, so this obstruction cannot be recovered by adding more tests of that type.
+
+The retained constructive results supply the positive side: smooth nonradial paths beyond affine-radial/product laws, a Gaussian-start variant, and a globally recoverable correction in a specified finite family. Computable residual and learned-path bounds describe approximation error. The experiments include favorable and unfavorable solver comparisons; no practical speedup or unrestricted correction algorithm is claimed.
 
 \section{Setting and the finite-time distribution bound}
 \label{sec:revision-setup}
@@ -72,6 +74,14 @@ For a positive density this is $\nabla\cdot(pw)=0$. Define
 $\acc=\partial_tu+(Du)u$ and $\jerk=\partial_t\acc+(D\acc)u$.
 The \emph{acceleration condition} is zero weighted divergence of $\acc_t$ under every $p_t$.
 
+For any $p\in\mathcal P_2$, let $\mathcal G_p$ be the $L^2(p)$ closure of
+$\{\nabla\phi:\phi\in C_c^\infty(\R^d)\}$ and let $\Pi_p$ be its
+orthogonal projection. Its orthogonal complement is exactly the space of
+weighted-solenoidal fields. We use the standard Wasserstein tangent
+decomposition~\citep{ambrosio2005gradient};
+$\varepsilon_t=\|\Pi_{p_t}\acc_t\|_{L^2(p_t)}$ is zero precisely under
+the acceleration condition. This quantity depends on the chosen generator.
+
 \begin{theorem}[Finite-time Euler distribution accuracy]
 \label{thm:distribution_order}
 Let $p_0$ have finite second moment. Suppose $u$ is $C^2$ on a neighborhood of $[0,T]\times\R^d$, globally $L$-Lipschitz in space, and $\sup_t\|u(t,0)\|<\infty$. Suppose each $\acc_t$ is globally $L_a$-Lipschitz, satisfies the acceleration condition, and
@@ -88,7 +98,7 @@ Then on every finite increasing grid,
 \end{align}
 \end{theorem}
 
-The proof uses the frozen acceleration flow $\Psi_t^\tau$. Since it preserves $p_t$, Euler applied to $\Psi_t^{h^2/2}X$ has the same output distribution as Euler applied to $X\sim p_t$. The displacement $h^2\acc_t(X)/2$ supplied by this shift cancels the leading trajectory defect. Taylor's theorem gives a local $O(h^3)$ coupling error; Euler's Lipschitz factor $1+Lh$ then gives the displayed bound. Appendix~\ref{app:general} contains the complete proof and constants. This is the original finite-time result, retained here; the following sections address construction, feasibility, and certification.
+The proof uses the frozen acceleration flow $\Psi_t^\tau$. Since it preserves $p_t$, Euler applied to $\Psi_t^{h^2/2}X$ has the same output distribution as Euler applied to $X\sim p_t$. The displacement $h^2\acc_t(X)/2$ supplied by this shift cancels the leading trajectory defect. Taylor's theorem gives a local $O(h^3)$ coupling error; Euler's Lipschitz factor $1+Lh$ then gives the displayed bound. Appendix~\ref{app:general} contains the complete proof and constants. This is the original finite-time result, retained here; the following sections give a global converse and nonlinear obstructions.
 
 The original second-moment identity is
 \begin{equation}
@@ -98,45 +108,96 @@ The original second-moment identity is
 where $m=\E X_t$, $M=\E\|X_t\|^2$, and $K_{\min}$ is the least instantaneous kinetic energy among path generators. Consequently the action of an admissible field is $[M'(T)-M'(0)]/2$. For a minimum-energy gradient generator $v$, orthogonality gives
 $\|r_t\|_{L^2(p_t)}^2=M''(t)/2-\|v_t\|_{L^2(p_t)}^2$ whenever $u=v+r$ is admissible. This budget is an existing consequence, not a new construction. Gradient velocities satisfying all theorem hypotheses have zero acceleration and Euler-exact trajectories (Proposition~\ref{prop:gradient-straight}).
 
-\input{revision_feasibility}
-\input{revision_construction}
-\input{revision_certification}
+\input{revision_global}
+\input{revision_parity}
+\input{revision_constructive_summary}
+\input{revision_certificate_summary}
+\input{revision_global_experiments}
 \input{revision_experiments}
 
 \section{Established examples and solver trade-offs}
 \label{sec:established-comparison}
 
-The Gaussian and nonlinear radial positive controls are retained with their complete proofs and numerical receipts in the supplement. For $p_t=\mathcal N(0,e^{2at}I_2)$, the base field $ax$ and the corrected field $a(I+J)x$ have identical exact marginals. The correction changes Euler's $W_2$ error from first to second order and doubles the leading common-start particle-error coefficient. With $N$ uniform Euler steps and $N/2$ base-field Heun steps, both methods use $N$ evaluations and have exactly identical Gaussian output distributions at their shared grid points (Proposition~\ref{prop:equal-nfe}). Thus this example does not show an advantage over using a second-order solver.
+The supplement retains all established Gaussian and nonlinear radial controls, proofs, and numerical receipts. For $p_t=\mathcal N(0,e^{2at}I_2)$, replacing $ax$ by $a(I+J)x$ improves Euler's distribution order but doubles the leading common-start particle-error coefficient. At equal NFE, corrected Euler and base-field Heun have exactly identical Gaussian output distributions at their shared nodes (Proposition~\ref{prop:equal-nfe}). This example therefore establishes no advantage over a second-order solver.
 
-For the shape-changing radial field $\alpha(r)x$, where
-$\alpha(r)=a+\eta r^2/(1+r^2)$, the correction
-$\beta(r)Jx$ with $\beta^2=\alpha^2+\alpha r\alpha'$ cancels radial acceleration. Theorem~\ref{thm:nonlinear} proves strict distribution-error improvement on every grid and positive first-order base, second-order corrected distribution, and first-order corrected particle constants. In the retained mixture example the particle coefficient increases by approximately $1.93$. At equal NFE corrected Euler has only $3.3$--$4.7\%$ smaller distribution error than base Heun; this does not imply lower wall-clock cost.
-
-A correction is solver-specific. For $(aI+bJ)x$, Heun's leading distribution coefficient is proportional to $|a^3-3ab^2|$. The Euler choice $b=a$ worsens that coefficient relative to $b=0$; the distinct choice $b=a/\sqrt3$ gives third-order distribution accuracy with second-order particle accuracy. Existing equal-NFE Heun/RK3 comparisons and all unfavorable particle results are retained. A fixed radial rotation mismatch restores first-order distribution error in the proven examples, although terminal cancellations can occur on other paths. Local necessity and a uniform-grid terminal-cancellation example are given in Appendix~\ref{app:local}.
+The shape-changing radial example also has second-order corrected distribution error and first-order particle error (Theorem~\ref{thm:nonlinear}). Its retained mixture calculation increases the particle coefficient by approximately $1.93$, while giving only $3.3$--$4.7\%$ smaller distribution error than base Heun at equal NFE. Corrections remain solver-specific: the Euler rotation worsens Heun's leading Gaussian distribution coefficient, while a different rotation cancels it. Complete Heun/RK3 comparisons, sensitivity formulas, and terminal-cancellation examples remain in the supplement. None establishes a wall-clock speedup; the new nonradial comparison favors Heun and RK3.
 
 \section{Relation to previous work}
 \label{sec:related}
 
-Gauge freedom, weighted-gradient decompositions, and action minimization on a prescribed path are established in transport geometry and generative modeling~\citep{ambrosio2005gradient,liu2022marginal,horvat2024gauge,neklyudov2023action,paohuang2026flux}. The Gaussian rotation family is also known~\citep{lim2025hidden}. We do not claim the stream-function representation, the Hilbert projection theorem, or the convex chain rule as new. The constructive contribution is the reference-coordinate acceleration equation, its globally regular harmonic realization beyond affine-radial/product laws, and the exact correction certificate in that family. The strict quartic-observable counterexample supplies information not contained in scalar or covariance tests.
+The closest prior results are the October 2026 analyses of Obzherin and
+Khrulkov~\citep{obzherin2026density,obzherin2026finite}. Their density-level
+backward-error paper identifies the local projected-defect coefficient,
+formulates a gauge objective, and derives propagation bounds and timestep
+allocation rules. Their finite-step geometry paper gives sufficient
+higher-order conditions, approximate-cancellation budgets, affine
+reachability, and several nonlinear constructions. The local projection
+formula and generic gauge mechanism are therefore credited as established.
+Our global theorem supplies an exact coefficient for recursive Euler under
+the stated Euclidean $P_2$ hypotheses, together with necessary-and-sufficient
+maximum-node and schedule-family criteria and a finite-test impossibility
+result.
 
-Hurault, Moreau, and Peyr\'e~\citep[Theorem~1 and Eq.~(4), v2]{hurault2026geometry} give weak Euler--Maruyama expansions for general smooth reverse diffusions, and specialize them to mean, covariance, and Fr\'echet errors. In their deterministic formula the propagated material acceleration controls the leading weak defect; our acceleration condition cancels it. The v2 analysis also develops Gaussian scale-mixture and parameter-selection expansions. Such weak and fitted-Gaussian discrepancies are distinct from full $W_2$ between non-Gaussian laws. Our finite-time coupling and projected-residual bounds control that full distance. The local coefficient theorem is a quantitative specialization of Wasserstein tangent geometry to Euler's defect, not a claim that tangent projection itself is new.
+Their Gaussian parity theorem is restricted to linear fields
+\citep[Theorem~12]{obzherin2026density}. Their shellwise topological result
+covers tangential corrections with deterministic output radius and a positive
+shell gap~\citep[Theorem~34]{obzherin2026finite}. Our obstruction allows all
+globally Lipschitz nonlinear corrections and arbitrary finite Gaussian
+mixtures. Weighted divergence makes a field small at a zero of its
+tangential projection on a remote density level set; the acceleration
+identity then gives a contradiction. The topological theorem itself is
+classical~\citep{hatcher2002algebraic}. The extensions are the unrestricted
+nonlinear obstruction, its residual and regularity consequences, and its
+separation from every convex-observable energy test.
 
-Tao and Choi~\citep{tao2026strain} analyze numerical particle error through strain, vorticity, and acceleration. Their same-start pairing cannot remove the leading rotation error in our examples. Rectified-flow re-pairing and kinetic path design can change intermediate distributions~\citep{liu2023flowstraight,pooladian2023multisample,tong2024otcfm,shaul2023kinetic}; our corrections preserve the stated path exactly. Bespoke solvers change the integrator~\citep{shaul2024bespoke}, while exponential solvers exploit a chosen linear part~\citep{zhang2023deis,lu2022dpmsolver}. A matrix exponential is already exact for the constant linear Gaussian example.
-
-Huang et al.~\citep{huang2025divergence} connect flow-matching and divergence losses to continuous-path error in total variation. That objective concerns velocity/path fidelity, rather than the projected material acceleration that controls Euler's integration defect here. Beyler and Bach~\citep{beyler2025convergence} combine discretization, initialization, and score error in Wasserstein bounds for diffusion samplers, including Heun. Our target-path theorem uses a related stability principle while retaining the acceleration-projection cancellation. Convexity criteria for functionals on Wasserstein space~\citep{parker2024convexity} and higher invariant-measure orders for stochastic integrators~\citep{abdulle2014invariant,debussche2012weak} are related background; neither is identified with our nonzero, distribution-preserving material acceleration on a changing path.
-
-Recent work on Neural Wasserstein Splines~\citep{banerjee2026splines} projects velocity and differentiates the moving projection to describe intrinsic Wasserstein acceleration. Our residual instead projects the material acceleration of the particular field being integrated. It is representation dependent, as the expanding Gaussian comparison demonstrates, and measures Euler's defect rather than an intrinsic acceleration of the marginal curve. The construction uses angular Fourier harmonics; it does not assert that its maps are spatially harmonic.
+Gauge freedom, weighted-gradient decompositions, and action minimization are
+standard~\citep{ambrosio2005gradient,horvat2024gauge,neklyudov2023action}.
+Hurault, Moreau, and Peyr\'e~\citep{hurault2026geometry} develop propagated
+weak discretization expansions; the signed transport mechanism is related,
+while our conclusions concern full $W_2$ and a global converse. Strain and
+vorticity analyses concern particle-error amplification
+\citep{tao2026strain}. Neural Wasserstein Splines projects velocity before
+differentiation to describe intrinsic curve acceleration
+\citep{banerjee2026splines}; our projected material acceleration belongs to
+the chosen generator and is representation dependent. The retained
+reference-coordinate construction supplies positive nonradial examples,
+while standard solvers, learned-path bounds, and unfavorable comparisons
+remain explicit. The accompanying literature audit records the two newly
+identified papers and corrects the first revision's novelty framing.
 
 \section{Discussion and limitations}
 
-The revised theory separates four regimes. Exact feasibility is demonstrated by the harmonic, Gaussian, and radial constructions. Certified approximation is described by upper residual bounds and the mixed $O(H^2)+O(\varepsilon H)$ guarantee. Proven infeasibility follows from convex-observable or covariance violations and can yield a strictly positive residual floor. For a general externally specified path, feasibility can remain unknown even when every tested moment condition passes.
+For a fixed regular field, the global theorem gives a complete alternative:
+acceleration preservation yields second-order maximum-node distribution
+accuracy; its failure gives a positive first-order coefficient. A terminal
+plot can conceal that failure, even under finitely many selected schedules.
+The nonlinear rigidity theorem rules out every admissible correction on its
+odd-dimensional location--scale paths with nonaffine mean or scale,
+including multimodal Gaussian mixtures.
+Convex-observable tests remain useful, but even their entire family does not
+characterize feasibility.
 
-The nonradial construction resolves the absence of an example beyond affine and product symmetry within a precise class; it does not establish a universal correction procedure. Its inverse-coordinate evaluation is additional computational work. A finite projection or small divergence penalty alone does not certify a small canonical residual. A correction selected separately as $H$ changes yields a statement about a uniformly controlled family, rather than second-order accuracy of one fixed learned field. The learned-path theorem requires regularity, moments, and a controlled mixed jerk term in addition to training loss. Global Lipschitz constants can make the bounds conservative.
+The global Lipschitz condition is substantive. Gaussian escape from the
+exact obstruction would require at least linear Jacobian growth on remote
+spheres, while approximation within a fixed Lipschitz budget has a positive
+residual gap. These statements do not claim a gap uniform over unbounded
+regularity budgets. The order dichotomy concerns one fixed field; constants
+need not be uniform over a changing family. Endpoint cancellation remains
+possible on infeasible paths and is compatible with the whole-path result.
 
-The experiments support a mathematical mechanism and its certificates. They do not establish a practical speedup over Heun or RK3, scalable optimization for neural velocity fields, or improvements on image-generation benchmarks. Common-start particle errors remain important for inversion, editing, and paired transport. The new Gaussian-start variant, broader harmonic families, and efficient correction methods for externally given paths warrant further investigation.
+The nonradial positive construction and its global correction search cover
+a specified family. They do not solve the inverse problem for arbitrary
+learned paths. The learned-field experiment is restricted parametric
+regression, and its theorem requires regularity and mixed-jerk control
+beyond training loss. The exact Gaussian validation examples and numerical
+nonradial bounds establish mathematical mechanisms, not an image-generation
+speedup. Heun and RK3 comparisons retain cases favoring those solvers, and
+particle errors remain relevant for paired transport and inversion.
 
 \section*{Acknowledgment and AI assistance}
-Artificial intelligence tools assisted the original preprint with mathematical analysis, literature review, code, and writing. This revision used OpenAI ChatGPT (GPT-6 Astra) for the feasibility, construction, certification, and new experimental sections, their supplementary proofs, the experimental code, and revised prose. Its roles included mathematical development, proof cross-checks, literature screening, software generation, numerical validation, and editing. The accompanying reproducibility report distinguishes analytical proofs, floating-point checks, and untested scope. These checks are not a formal proof-assistant certificate or independent human peer review. The author is responsible for validating the content before submission; this draft does not assert that the author has already independently verified the newly added results.
+Artificial intelligence tools assisted the original preprint with mathematical analysis, literature review, code, and writing. This revision used OpenAI ChatGPT (GPT-6 Astra) for the global characterization, nonlinear rigidity, feasibility, construction,
+certification, and experimental sections, their supplementary proofs, the
+experimental code, and revised prose. Its roles included mathematical development, proof cross-checks, literature screening, software generation, numerical validation, and editing. The accompanying reproducibility report distinguishes analytical proofs, floating-point checks, and untested scope. These checks are not a formal proof-assistant certificate or independent human peer review. The author is responsible for validating the content before submission; this draft does not assert that the author has already independently verified the newly added results.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
@@ -146,11 +207,17 @@ Artificial intelligence tools assisted the original preprint with mathematical a
 \label{sec:supplement-start}
 The following supplement contains the complete proofs, retained established results, numerical definitions, and additional validation details. The main paper and this supplement are also provided as one continuously referenced manuscript.
 \appendices
+\renewcommand{\theHsection}{Supplement.\arabic{section}}
 \setcounter{theorem}{0}
 \renewcommand{\thetheorem}{S\arabic{theorem}}
 \renewcommand{\theHtheorem}{S\arabic{theorem}}
+\input{revision_global_proofs}
+\input{revision_parity_proofs}
+\input{revision_construction}
 \input{revision_construction_proofs}
+\input{revision_certification}
 \input{revision_certification_proofs}
+\input{revision_feasibility}
 \input{revision_feasibility_proofs}
 \input{revision_experiments_details}
 \input{established_results}

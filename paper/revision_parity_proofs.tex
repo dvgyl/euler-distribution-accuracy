@@ -1,0 +1,429 @@
+\section{Nonlinear parity, rigidity, and quantitative residual gaps}
+\label{app:nonlinear-parity}
+
+\subsection{A pointwise identity for every fixed-shape dilation}
+
+First consider a centered scaling path $p_t(x)=g(t)^{-d}\rho(x/g(t))$,
+and abbreviate $\alpha=g'/g$ and $\kappa=g''/g=\alpha'+\alpha^2$.
+Every generating field can be written $u=\alpha x+r$ with
+$\nabla\cdot(p_tr)=0$.  Distributionally,
+\begin{align}
+ \partial_t p_t&=-\alpha\nabla\cdot(p_tx),\nonumber\\
+ \partial_{tt}p_t
+ &=\alpha^2\nabla\cdot\nabla\cdot(p_txx^\top)
+       -\kappa\nabla\cdot(p_tx).
+ \label{eq:dilation-second-density}
+\end{align}
+For clarity, the double divergence of a tensor $S$ is
+$\sum_{ij}\partial_i\partial_jS_{ij}$.  The identity
+\[
+ \nabla\cdot\nabla\cdot(p_txx^\top)
+ =\nabla\cdot(p_tx)+\nabla\cdot[x\nabla\cdot(p_tx)]
+\]
+proves the second formula directly.  Differentiating the continuity
+equation of $u$ gives
+\[
+ \partial_{tt}p_t
+ =\nabla\cdot\nabla\cdot(p_tuu^\top)
+      -\nabla\cdot(p_t\acc_u).
+\]
+Moreover
+$\nabla\cdot\nabla\cdot(p_txr^\top)
+=\nabla\cdot(p_tr)=0$, and the transposed cross tensor has the same
+double divergence.  Acceleration preservation therefore implies
+\begin{equation}
+ \nabla\cdot\nabla\cdot(p_trr^\top)
+ =-\kappa\nabla\cdot(p_tx).
+ \label{eq:dilation-stress}
+\end{equation}
+All identities follow either pointwise with the stated smoothness or
+by testing against compactly supported smooth functions.
+
+Fix time and write $p\propto e^{-V_t}$.  Since
+$\operatorname{div}r=\nabla V_t\cdot r$,
+\begin{align*}
+ p^{-1}\operatorname{div}\operatorname{div}(prr^\top)
+ &=p^{-1}\operatorname{div}(p(Dr)r)\\
+ &=\operatorname{tr}((Dr)^2)
+   +r\cdot\nabla(\operatorname{div}r)
+   -\nabla V_t\cdot(Dr)r\\
+ &=\operatorname{tr}((Dr)^2)+r^\top D^2V_t\,r.
+\end{align*}
+Dividing \eqref{eq:dilation-stress} by $p$ proves
+\eqref{eq:nonlinear-parity-identity}.  The trace is that of the matrix
+square, not the squared Frobenius norm; it can be negative.
+
+\subsection{Large level sets and the all-generator rigidity theorem}
+
+\begin{proof}[Proof of Theorem~\ref{thm:nonlinear-odd-rigidity}]
+The tail condition implies Gaussian upper tails.  In fact, on every ray
+outside $R_0$, $\partial_rV(re)\ge cr$; integration gives
+$V(re)\ge cr^2/2-C$ uniformly in unit $e$.  Thus all polynomial moments
+are finite.  The affine-mean restriction already proved in
+Corollary~\ref{cor:mean-action} gives $m''=0$.  Removing this affine mean
+does not change material acceleration or its weighted divergence, so
+we work with $m=0$.
+
+Let $M_\rho=\E_\rho\|Z\|^2>0$.  The gradient base field $v=\alpha x$
+belongs to the weighted-gradient closure, and $r=u-v$ is orthogonal to
+it.  The second-moment identity therefore gives
+\begin{equation}
+ \|r_t\|_{L^2(p_t)}^2
+ =\tfrac12\frac{\dd^2}{\dd t^2}(g(t)^2M_\rho)
+      -(g'(t))^2M_\rho
+ =g(t)g''(t)M_\rho.
+ \label{eq:scale-gauge-energy}
+\end{equation}
+Hence $g''\ge0$, and $g''=0$ forces $r=0$ almost everywhere, then
+everywhere by continuity and positivity of $p_t$.
+
+Suppose $g''>0$ at some time.  Freeze that time, let
+$L=\operatorname{Lip}(r)$, and put $W(x)=V(x/g)$, dropping an irrelevant
+additive constant.  For sufficiently large $\|x\|$ there are positive
+$c_t,M_t$ with
+$x\cdot\nabla W\ge c_t\|x\|^2$ and $D^2W\preceq M_tI$.
+Choose $R_1$ beyond this region and a level
+$s>\max_{\|x\|\le R_1}W(x)$.
+On every ray from zero, $W(re)$ is strictly increasing for $r\ge R_1$
+and tends to infinity.  It therefore crosses $s$ at exactly one radius
+$R_s(e)>R_1$.  The implicit function theorem shows that $R_s$ is smooth.
+Thus $\{W=s\}$ is a compact smooth radial graph diffeomorphic to
+$S^{d-1}$.  As $s\to\infty$, its minimum Euclidean radius tends to
+infinity.  Also $\|\nabla W(x)\|\ge c_t\|x\|$ there.
+
+Project $r$ onto the tangent bundle of this level set.  Because $d-1$
+is even, the hairy-ball theorem~\citep[Section~2.2]{hatcher2002algebraic}
+gives a point $x_s$ where that projection vanishes.  For $d=1$, the
+tangent space of a level point is zero and the same conclusion is
+immediate.  At $x_s$, $r$ is parallel to $\nabla W$.  Weighted divergence
+then gives
+\begin{equation}
+ \|r(x_s)\|
+ =\frac{|\nabla W(x_s)\cdot r(x_s)|}{\|\nabla W(x_s)\|}
+ =\frac{|\operatorname{div}r(x_s)|}{\|\nabla W(x_s)\|}
+ \le\frac{dL}{\|\nabla W(x_s)\|}.
+ \label{eq:levelset-pole}
+\end{equation}
+But the pointwise identity requires
+\[
+ \kappa(x_s\cdot\nabla W(x_s)-d)
+ \le dL^2+
+      \frac{M_td^2L^2}{\|\nabla W(x_s)\|^2}.
+\]
+The left side tends to infinity and the right side remains bounded.
+This contradiction proves that $g''=0$ everywhere.  Equation
+\eqref{eq:scale-gauge-energy} proves uniqueness of the generator.
+
+Conversely, if $m$ and positive $g$ are affine, the field
+\eqref{eq:odd-unique-generator} has zero material acceleration.  Its
+exact flow from $s$ to $t$ is
+$m(t)+(g(t)/g(s))(x-m(s))$; since both scalar and mean increments are
+affine, this map equals its Euler step on every interval.  Its global
+regularity and moment assumptions follow from $\min_{[0,T]}g>0$ and
+the source moments.
+\end{proof}
+
+The topological fact used here can be seen directly.  A nowhere-zero
+continuous tangent field on $S^{d-1}$ would normalize to $\tau(e)$ with
+$\|\tau(e)\|=1$ and $e\cdot\tau(e)=0$.  Then
+$H_s(e)=\cos(\pi s)e+\sin(\pi s)\tau(e)$ is a sphere-valued homotopy
+from the identity to the antipodal map.  Their degrees are $1$ and
+$(-1)^d$, which differ for odd $d$.  This argument is classical; the
+new use is to force an obstruction on the unconstrained nonlinear
+generator through its weighted-divergence and acceleration identities.
+
+\paragraph{Finite Gaussian mixtures.}
+Let $\rho=\sum_j\pi_j\rho_j$ with nondegenerate Gaussian components,
+and set $w_j=\pi_j\rho_j/\rho$, $Q_j=\Sigma_j^{-1}$,
+$s_j(x)=Q_j(x-\mu_j)$.  Differentiating the logarithm yields
+$\nabla V=\sum_jw_js_j$ and
+$D^2V=\sum_jw_jQ_j-\operatorname{Cov}_w(s_j)$.
+The covariance matrix is positive semidefinite, so
+$D^2V\preceq\Lambda I$.  The displayed radial lower bound in the
+main text gives $x\cdot\nabla V\ge(\lambda/2)\|x\|^2$ whenever
+$\|x\|\ge2B/\lambda$.  These prove every hypothesis of
+Theorem~\ref{thm:nonlinear-odd-rigidity}.  No separation, equal covariance,
+radial symmetry, or log-concavity of the mixture is required.
+
+\paragraph{Gaussian specialization.}
+For $p=\mathcal N(0,g^2I)$, the pointwise identity reduces to
+\begin{equation}
+ \|r(x)\|^2+g^2\operatorname{tr}((Dr(x))^2)
+ =\frac{g''}{g}\|x\|^2-dgg''.
+ \label{eq:gaussian-pointwise-parity}
+\end{equation}
+When $g''>0$, bounded $Dr$ would force asymptotically nonzero tangential
+speed on every sufficiently large sphere.  Equation
+\eqref{eq:levelset-pole} is the topological contradiction.  This is not
+the eigenvalue pairing argument for linear skew matrices.
+
+\begin{proposition}[Necessary Jacobian growth and polynomial rigidity]
+\label{prop:gaussian-escape-rigidity}
+Fix $p=\mathcal N(0,g^2I_d)$, $g>0$, and $\kappa>0$.  Let $r$ be a
+$C^2$ field satisfying $\operatorname{div}(pr)=0$ and the stress equation
+\eqref{eq:dilation-stress}.  No global Lipschitz or polynomial growth
+assumption is imposed here.  If $d$ is odd, then, for every $R>g\sqrt d$,
+\begin{equation}
+ \sup_{\|x\|=R}\|Dr(x)\|_{\rm op}
+ \ge \frac{\sqrt\kappa\,R}{g\sqrt d}
+       \sqrt{\frac{R^2-dg^2}{R^2+dg^2}}.
+ \label{eq:gaussian-jacobian-growth}
+\end{equation}
+Consequently the liminf of this supremum divided by $R$ is at least
+$\sqrt\kappa/(g\sqrt d)$.  In every dimension, if $r$ is polynomial,
+then $r(x)=Kx$, where $K^\top=-K$ and $K^2=-\kappa I_d$.
+Thus no polynomial correction is possible in odd dimension.
+\end{proposition}
+
+\begin{proof}
+Write $M_R=\sup_{\|x\|=R}\|Dr(x)\|_{\rm op}$.  At a hairy-ball pole
+$Re$ of this sphere, $r(Re)$ is parallel to $e$.  Weighted divergence
+therefore gives $\|r(Re)\|\le dg^2M_R/R$.  The Gaussian identity
+\eqref{eq:gaussian-pointwise-parity} implies
+\[
+ \kappa(R^2-dg^2)
+ \le\frac{d^2g^4M_R^2}{R^2}+dg^2M_R^2.
+\]
+Solving for $M_R$ proves \eqref{eq:gaussian-jacobian-growth}.
+
+If $r$ is a nonzero polynomial of degree $m\ge2$, the leading term of
+$\|r\|^2$ has degree $2m$ and is a nonzero sum of squares.  The
+derivative term in \eqref{eq:gaussian-pointwise-parity} has degree at
+most $2m-2$, while the right side has degree two.  This is impossible,
+so $r(x)=Kx+b$ is affine.  The polynomial identity
+$\operatorname{tr}K=g^{-2}x\cdot(Kx+b)$ forces $K^\top=-K$ and $b=0$.
+The quadratic terms in \eqref{eq:gaussian-pointwise-parity} then give
+$K^\top K=\kappa I_d$, equivalently $K^2=-\kappa I_d$.  An invertible
+real skew-symmetric matrix cannot have odd size.  These conclusions
+are instantaneous; any time-dependent polynomial generator of the
+Gaussian scaling path must meet them at every time.
+\end{proof}
+
+\subsection{Why all convex-observable tests can pass}
+
+\begin{proof}[Proof of Corollary~\ref{cor:convex-hierarchy-insufficient}]
+Let $X_t=g(t)Z$, with $Z$ centrally symmetric.  Differentiating along
+the base flow $v=\alpha x$ gives
+\[
+ F_\phi''=\E[v^\top D^2\phi(X_t)v]
+             +\kappa\E[X_t\cdot\nabla\phi(X_t)].
+\]
+Central symmetry shows
+\[
+ \E[X\cdot\nabla\phi(X)]
+ =\tfrac12\E\bigl[X\cdot
+       (\nabla\phi(X)-\nabla\phi(-X))\bigr]\ge0,
+\]
+because the gradient of a convex differentiable function is monotone.
+For $g''\ge0$ the second term is nonnegative.  The first term is at
+least $K_\phi$, since the base field is one admissible velocity in that
+infimum.  This proves all the convex and weighted-energy inequalities,
+under the stated integrability for each test.
+
+If $C_\rho=\operatorname{Cov}(Z)$ is positive definite, then
+$C=g^2C_\rho$ and the choice $B=gg'C_\rho$ in the covariance test has
+Schur complement $gg''C_\rho\succeq0$.  For singular $C_\rho$, the
+same positive semidefinite block matrix follows by a direct tensor
+factorization on its support.  The odd-dimensional exponential Gaussian
+has strictly convex scale, so Theorem~\ref{thm:nonlinear-odd-rigidity}
+nevertheless excludes every admissible generator.
+\end{proof}
+
+\subsection{Conditional variance identities and the Gaussian residual floor}
+
+Fix a time for a Gaussian scaling path and write $g=g(t)$,
+$\alpha=g'/g$, $\kappa=g''/g$, $c_t=gg''$.  Let $X\sim p_t$ and
+$r=u-\alpha x$.  For every unit vector $e$, write $Y=e\cdot X$,
+$q_g(y)=(2\pi g^2)^{-1/2}e^{-y^2/(2g^2)}$, and
+$Q_e(y)=\E[(e\cdot r(X))^2\mid Y=y]$.
+Projecting $\operatorname{div}(p_tr)=0$ onto this coordinate gives
+\begin{equation}
+ \E[e\cdot r(X)\mid Y=y]=0\quad\text{for every }y.
+ \label{eq:projected-gauge-mean}
+\end{equation}
+Indeed the derivative of $q_g(y)$ times this conditional mean is zero;
+the only constant compatible with Gaussian tails and linear field growth
+is zero.  The conditional mean and variance have continuous versions,
+by dominated convergence and Lipschitz growth, so these conclusions are
+available at every chosen $y$, not merely almost everywhere.
+
+For any twice differentiable scalar test with bounded first and second
+derivatives, the scaling identity and the physical chain rule give
+\begin{equation}
+ \int\nabla[\phi(e\cdot x)]\cdot\acc_u(x)\,p_t(\dd x)
+ =\int_{\R}\phi''(y)\{c_t-Q_e(y)\}q_g(y)\,\dd y.
+ \label{eq:gaussian-directional-defect}
+\end{equation}
+To verify this, if $s(t)=g(t)^2$ then
+$\partial_tq_g=(s'/2)\partial_{yy}q_g$ and
+$\partial_{tt}q_g=(s''/2)\partial_{yy}q_g+
+(s'^2/4)\partial_{yyyy}q_g$.
+The latter equals
+$\partial_{yy}[q_g(\alpha^2y^2+c_t)]$.
+By \eqref{eq:projected-gauge-mean}, the conditional squared velocity is
+$\alpha^2y^2+Q_e(y)$.  Subtracting the velocity-Hessian term from
+the second-derivative chain rule proves
+\eqref{eq:gaussian-directional-defect}.  If acceleration preservation
+were imposed, this also forces $Q_e(y)=c_t$: a function whose second
+distributional derivative is zero is affine, and integrability of
+$q_g(Q_e-c_t)$ excludes nonzero affine terms.
+
+\begin{proof}[Proof of Theorem~\ref{thm:quantitative-odd-floor}]
+Let $L=\operatorname{Lip}(r)$.  Pointwise weighted divergence gives
+\begin{equation}
+ |x\cdot r(x)|=g^2|\operatorname{div}r(x)|\le C,
+ \qquad C=dg^2L.
+ \label{eq:gaussian-radial-flux-bound}
+\end{equation}
+For every radius $R>0$, the tangential projection of $r$ on the sphere
+of radius $R$ has a zero $Re_R$.  Hence $r(Re_R)$ is parallel to $e_R$.
+For $y=R+s$, $0\le s\le g$, condition on $e_R\cdot X=y$ and write
+$X=ye_R+Z_\perp$, where
+$Z_\perp\sim\mathcal N(0,g^2I_{d-1})$.  Since
+$Z_\perp\cdot r(Re_R)=0$, \eqref{eq:gaussian-radial-flux-bound} and
+Lipschitzness give
+\[
+ |e_R\cdot r(ye_R+Z_\perp)|
+ \le\frac{C+L\|Z_\perp\|\sqrt{s^2+\|Z_\perp\|^2}}{R}.
+\]
+Minkowski's inequality, $\E\|Z_\perp\|^2=(d-1)g^2$, and
+$\E\|Z_\perp\|^4=(d-1)(d+1)g^4$ imply
+\begin{equation}
+ \sup_{R\le y\le R+g}\sqrt{Q_{e_R}(y)}
+ \le\frac{Lg^2}{R}\{d+\sqrt{d^2+d-2}\}
+ =\frac{Lg^2A_d}{R}.
+ \label{eq:gaussian-pole-strip}
+\end{equation}
+Choose $R=g\max\{1,2A_dL/\sqrt\kappa\}$.  Then
+$Q_{e_R}\le c_t/4$ throughout this strip.
+
+Choose a scalar convex $C^{1,1}$ test with
+$\phi''=g^{-1}\mathbf1_{[R,R+g]}$, and $\phi'=0$ below $R$, so
+$0\le\phi'\le1$.  Formula~\eqref{eq:gaussian-directional-defect}
+and the dual definition of the projected norm yield
+\[
+ \varepsilon_t\ge\frac{3c_t}{4g}\Pr\{R\le Y\le R+g\}
+ \ge\frac{3g''}{4\sqrt{2\pi}}
+       \exp[-(R/g+1)^2/2].
+\]
+The test is legitimate by smooth mollification and then compact cutoff:
+its first and second derivatives are bounded, it grows at most linearly,
+and its gradients converge in $L^2(p_t)$.  Gaussian moments dominate
+the chain-rule terms.  Weak derivatives at the strip endpoints do not
+create an additional term, since $\phi'$ is continuous.
+Weakening $3/4$ to $1/2$ gives
+\eqref{eq:quantitative-odd-floor}.  Solving this inequality for $L$
+under the stated threshold on $\eta$ gives
+\eqref{eq:odd-regularity-cost}.
+\end{proof}
+
+\subsection{A nonexplicit uniform gap for the broad source class}
+
+\begin{proposition}[Positive residual gap at fixed Lipschitz bound]
+\label{prop:compact-odd-gap}
+Fix a positive density $p\propto e^{-W}$ satisfying
+\eqref{eq:parity-tail-assumptions}, an odd $d$, $\kappa>0$, and a finite
+$L\ge0$.  Among all globally $L$-Lipschitz fields $r$ with
+$\operatorname{div}(pr)=0$, the quantity
+\[
+ \mathcal R_\kappa(r)=
+ \sup_{\substack{\phi\in C_c^\infty\\\|\nabla\phi\|_{L^2(p)}\le1}}
+ \left|\kappa\int x\cdot\nabla\phi\,\dd p
+       -\int r^\top D^2\phi\,r\,\dd p\right|
+\]
+attains a finite strictly positive minimum.  For a generator of the
+scaling path at this time, $\mathcal R_\kappa(r)=\|\Pi_p\acc_u\|$.
+\end{proposition}
+
+\begin{proof}
+Cutoff tests in the weighted-divergence equation give $\E_pr=0$.
+Consequently $\|r(0)\|\le L\E_p\|X\|$, giving a uniform linear-growth
+bound for this class.  Arzela--Ascoli and a diagonal extraction give a
+locally uniform subsequential limit of every sequence.  The Gaussian
+tail bound and uniform linear growth upgrade this to strong $L^2(p)$
+convergence.  Both the Lipschitz bound and weighted divergence survive
+the limit, so the class is compact in $L^2(p)$.
+For each fixed test $\phi$, its displayed quadratic integral is continuous
+in this topology.  A supremum of continuous functions is lower
+semicontinuous.  The minimum is attained, and is finite because the
+candidate $r=0$ has value $\kappa\|x\|_{L^2(p)}$.
+
+If the minimum were zero, its Lipschitz minimizer would satisfy
+\eqref{eq:dilation-stress} distributionally.  The pointwise identity
+extends to this regularity almost everywhere.  Here is a justification:
+$r\in W^{1,\infty}_{\rm loc}$ and
+$\operatorname{div}r=\nabla W\cdot r\in W^{1,\infty}_{\rm loc}$.
+Mollification, the product rule, and convergence in local Sobolev norms
+give
+\[
+ \operatorname{div}((Dr)r)
+ =\operatorname{tr}((Dr)^2)+r\cdot\nabla(\operatorname{div}r)
+\]
+as distributions.  Adding the weight cancels the first-order score
+terms exactly as above.  Since $\|Dr\|\le L$ almost everywhere and
+$D^2W\preceq MI$ in the tails, this yields
+\[
+ \kappa(x\cdot\nabla W-d)\le dL^2+M\|r(x)\|^2
+\]
+almost everywhere there.  Both sides are continuous, so the inequality
+holds everywhere.  Similarly
+$|\nabla W\cdot r|\le dL$ holds everywhere.  Applying the level-set
+hairy-ball argument to the continuous field $r$ gives the same
+contradiction as in Theorem~\ref{thm:nonlinear-odd-rigidity}.
+
+For an actual scaling generator, integrating its second-derivative
+identity against $\phi$ gives the formula for $\mathcal R_\kappa$.
+The cross term is zero because
+$\int r\cdot D^2\phi\,x\,\dd p
+=\int r\cdot\nabla(x\cdot\nabla\phi-\phi)\,\dd p=0$.
+The dual projection formula then proves the asserted equality.
+\end{proof}
+
+\subsection{A separate radial-score extension}
+
+For completeness, odd-dimensional affine-scale rigidity also holds for
+radial densities that need not meet the upper-Hessian assumption.
+Suppose $\rho>0$ is smooth and
+\[
+ \nabla\log\rho(z)=-b(\|z\|)z,\qquad
+ 0<\lambda\le b(r)\le\Lambda<\infty.
+\]
+These hypotheses give Gaussian tails.  At a fixed scale $g$, let $q_g$
+be any one-dimensional marginal and define its scalar Stein kernel
+\[
+ \tau_g(y)=q_g(y)^{-1}\int_y^\infty s q_g(s)\,\dd s.
+\]
+The marginal is even and
+$-q_g'(y)/q_g(y)=y\E[b(\|X\|/g)\mid e\cdot X=y]/g^2$.
+Integration of these score bounds gives
+$g^2/\Lambda\le\tau_g(y)\le g^2/\lambda$.
+
+For a scale path, the projected continuity equation first gives
+$\E[e\cdot r\mid e\cdot X=y]=0$.  Equation
+\eqref{eq:dilation-stress} then implies
+\[
+ \E[(e\cdot r)^2\mid e\cdot X=y]=\kappa\tau_g(y).
+\]
+Indeed, writing the conditional variance as $Q_e$, the equation is
+$(q_gQ_e)''=-\kappa(yq_g)'$; integrability removes the affine integration
+constants, and $(q_g\tau_g)'=-yq_g$.
+On the other hand, weighted divergence gives
+$|x\cdot r(x)|\le dg^2L/\lambda$.
+At a hairy-ball pole $Re_R$, tangency vanishes.  For
+$X=Re_R+Z_\perp$ conditioned on $e_R\cdot X=R$, the same cancellation
+$Z_\perp\cdot r(Re_R)=0$ bounds
+\[
+ |e_R\cdot r(X)|\le
+ \frac{dg^2L/\lambda+L\|Z_\perp\|^2}{R}.
+\]
+Conditional integration by parts gives, uniformly in $R$,
+$\E\|Z_\perp\|^2\le(d-1)g^2/\lambda$ and
+$\E\|Z_\perp\|^4\le(d-1)(d+1)g^4/\lambda^2$.
+For the latter identities, test the transverse score equation with
+$z$ and $\|z\|^2z$ and use its coefficient lower bound
+$\lambda/g^2$; cutoff limits are justified by the uniform Gaussian
+tails.  Thus the conditional variance tends to zero as $R\to\infty$,
+contradicting $\kappa\tau_g(R)\ge gg''/\Lambda>0$ if $g''>0$.
+Equation~\eqref{eq:scale-gauge-energy} handles the other signs and
+completes the same rigidity conclusion.  This argument uses no bound
+on derivatives of $b$.

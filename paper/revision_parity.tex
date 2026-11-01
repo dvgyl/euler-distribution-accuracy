@@ -1,0 +1,142 @@
+\section{Odd-dimensional rigidity for nonlinear corrections}
+\label{sec:nonlinear-parity}
+
+Parity obstructions were previously established for affine Gaussian gauges
+and for tangential fields with deterministic shell radii
+\citep{obzherin2026density,obzherin2026finite}.  Those restrictions do not
+exclude a nonlinear field that redistributes mass between angles and
+radii.  The next theorem removes these restrictions for a broad class of
+fixed-shape probability paths.  In particular, it applies to arbitrary
+finite mixtures of nondegenerate Gaussians, including multimodal and
+nonradial mixtures.
+
+\begin{theorem}[All-generator rigidity in odd dimension]
+\label{thm:nonlinear-odd-rigidity}
+Let $d$ be odd and let $\rho(z)=Z_\rho^{-1}e^{-V(z)}$ be a centered
+positive probability density, with $V\in C^3(\R^d)$.  Suppose there are
+$c,M,R_0>0$ such that, for $\|z\|\ge R_0$,
+\begin{equation}
+ z\cdot\nabla V(z)\ge c\|z\|^2,
+ \qquad D^2V(z)\preceq MI_d.
+ \label{eq:parity-tail-assumptions}
+\end{equation}
+For $g\in C^4([0,T])$ positive and $m\in C^4([0,T];\R^d)$, prescribe
+$p_t=\Law(m(t)+g(t)Z)$, $Z\sim\rho$.
+There is a generator satisfying the regularity, growth, and moment
+assumptions of Theorem~\ref{thm:distribution_order} and the acceleration
+condition if and only if both $m$ and $g$ are affine in time.
+In that case the generator is unique within this class:
+\begin{equation}
+ u(t,x)=m'(t)+\frac{g'(t)}{g(t)}(x-m(t)).
+ \label{eq:odd-unique-generator}
+\end{equation}
+Its material acceleration is zero, and Euler is exact on every finite
+increasing grid.  The conclusion allows arbitrary nonlinear,
+time-dependent corrections; no tangency or shell-preservation condition
+is imposed on them.
+\end{theorem}
+
+The source assumptions concern its tails, not log-concavity.  For
+$\rho=\sum_{j=1}^K\pi_j\mathcal N(\mu_j,\Sigma_j)$ with
+$\pi_j>0$, $\Sigma_j\succ0$ and $\sum_j\pi_j\mu_j=0$, let
+$Q_j=\Sigma_j^{-1}$.  Posterior weights $w_j(z)$ give
+\begin{align*}
+ \nabla V&=\sum_jw_jQ_j(z-\mu_j),\\
+ D^2V&=\sum_jw_jQ_j-\operatorname{Cov}_{w}(Q_j(z-\mu_j)).
+\end{align*}
+Consequently $D^2V\preceq\Lambda I$ and
+$z\cdot\nabla V\ge\lambda\|z\|^2-B\|z\|$, where
+$\lambda=\min_j\lambda_{\min}(Q_j)>0$,
+$\Lambda=\max_j\|Q_j\|_{\rm op}$, and $B=\max_j\|Q_j\mu_j\|$.
+Thus every such mixture meets the theorem's assumptions.  Uniformly
+strongly log-concave sources with bounded Hessian are another subclass.
+
+\paragraph{Why topology applies without assuming tangency.}
+After removing the necessarily affine mean, put
+$\alpha=g'/g$, $\kappa=g''/g$, and $r=u-\alpha x$.
+At any fixed time write $p_t\propto e^{-V_t}$.  Path preservation and
+acceleration preservation imply the exact identity
+\begin{equation}
+ \operatorname{tr}((Dr)^2)+r^\top D^2V_t\,r
+ =\kappa\{x\cdot\nabla V_t-d\}.
+ \label{eq:nonlinear-parity-identity}
+\end{equation}
+Large level sets of $V_t$ are spheres up to diffeomorphism.
+The hairy-ball theorem gives a point on each level where $r$ is normal
+to that level.  At this point weighted divergence and a global
+Lipschitz bound force $\|r\|\le d\operatorname{Lip}(r)/\|\nabla V_t\|$.
+The left side of \eqref{eq:nonlinear-parity-identity} stays bounded,
+whereas the right side diverges if $\kappa>0$.
+The second-moment identity excludes $\kappa<0$ and forces $r=0$ when
+$\kappa=0$.  Appendix~\ref{app:nonlinear-parity} supplies the details.
+
+\begin{corollary}[The complete convex-observable hierarchy is insufficient]
+\label{cor:convex-hierarchy-insufficient}
+For every centrally symmetric source with finite required moments and
+every positive convex scale $g$, the path $\Law(g(t)Z)$ passes all
+convex-observable and Hessian-weighted minimum-energy tests of
+Theorem~\ref{thm:convex-feasibility}.  Its covariance also passes
+\eqref{eq:covariance-lmi}.  Nevertheless, for odd $d$ the Gaussian path
+$p_t=\mathcal N(0,e^{2t}I_d)$ has no acceleration-preserving generator in
+the globally Lipschitz class.
+\end{corollary}
+
+Indeed, for a regular convex $\phi$,
+\[
+ F_\phi''=\E[v^\top D^2\phi\,v]
+       +\kappa\E[X\cdot\nabla\phi(X)]\ge K_\phi,
+ \qquad v=\alpha x,
+\]
+because central symmetry and gradient monotonicity make the last
+expectation nonnegative.  The topological obstruction therefore detects
+infeasibility that the entire convex-test family misses, not just a
+finite list of moments.
+
+\subsection{A quantitative obstruction to increasingly accurate gauges}
+
+\begin{theorem}[Gaussian residual floor at bounded spatial regularity]
+\label{thm:quantitative-odd-floor}
+Let $d$ be odd, $p_t=\mathcal N(0,g(t)^2I_d)$, and fix a time with
+$g''(t)>0$.  Let $u$ be any generator satisfying the hypotheses of
+Theorem~\ref{thm:projected-residual}, without acceleration preservation.
+At this time put $\kappa=g''/g$, $L=\operatorname{Lip}(u-(g'/g)x)$, and
+$A_d=d+\sqrt{d^2+d-2}$.  Then
+\begin{equation}
+ \varepsilon_t\ge
+ \frac{g''}{2\sqrt{2\pi}}
+ \exp\!\left[-\frac12
+       \left(1+\max\!\left\{1,\frac{2A_dL}{\sqrt\kappa}\right\}\right)^2
+      \right]>0.
+ \label{eq:quantitative-odd-floor}
+\end{equation}
+In particular, on this fixed path no family with uniformly bounded
+spatial Lipschitz constants can achieve $\varepsilon_t=O(H)$ as
+$H\downarrow0$.
+\end{theorem}
+
+The bound is conservative but applies to every admissible nonlinear
+gauge.  If $\varepsilon_t\le\eta<g''e^{-2}/(2\sqrt{2\pi})$, it requires
+\begin{equation}
+ L\ge\frac{\sqrt\kappa}{2A_d}
+ \left[\sqrt{2\log\!\left(\frac{g''}{2\sqrt{2\pi}\eta}\right)}-1\right].
+ \label{eq:odd-regularity-cost}
+\end{equation}
+Thus near-cancellation forces a diverging spatial Lipschitz constant.
+Corollary~\ref{cor:sharp-local-residual} turns half the right side of
+\eqref{eq:quantitative-odd-floor} into an actual one-step $h^2$ error
+coefficient lower bound.  For the broader source class in
+Theorem~\ref{thm:nonlinear-odd-rigidity}, compactness also gives a positive,
+possibly nonexplicit, residual gap at each fixed Lipschitz bound
+(Proposition~\ref{prop:compact-odd-gap}).
+Even outside the globally Lipschitz class, a hypothetical smooth Gaussian
+solution in odd dimension must have a Jacobian whose maximum on radius
+$R$ spheres grows at least linearly in $R$; no polynomial correction can
+satisfy the condition when $g''>0$
+(Proposition~\ref{prop:gaussian-escape-rigidity}).
+
+The dimension distinction is sharp in the radial subclass.  In even
+dimension, if $g''>0$ and $J^\top=-J$, $J^2=-I$, the known field
+$u=(g'/g)x+\sqrt{g''/g}\,Jx$ preserves every radial scaling path and has
+distribution-preserving acceleration.  A $C^4$ positive scale with
+$g''>0$ supplies the paper's regularity assumptions.  Degenerate zeros
+of $g''$ require separate square-root regularity checks.

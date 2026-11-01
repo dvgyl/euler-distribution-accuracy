@@ -19,7 +19,7 @@ The following command runs the complete numerical reproduction.
 make reproduce PYTHON=.reproduction-venv/bin/python
 ```
 
-The run checks 72 tests before generating numerical summaries, CSV files, raw arrays, tables, and eight PDF figures in `build/reproduction/`. If two calculations differ by more than the specified arithmetic tolerance, the run stops with a nonzero exit status. The command also verifies that the numerical source and configuration remain unchanged during the run.
+The run checks 80 tests before generating numerical summaries, CSV files, raw arrays, tables, and eight PDF figures in `build/reproduction/`. If two calculations differ by more than the specified arithmetic tolerance, the run stops with a nonzero exit status. The command also verifies that the numerical source and configuration remain unchanged during the run.
 
 To select another output directory, call the script directly.
 
@@ -62,6 +62,33 @@ interval-arithmetic enclosures of quadrature error. The `residual_upper`
 formula is analytic; its zero at the exact recovered coefficients follows
 from a sum-of-squares identity. A near-zero floating-point value is not itself
 a proof. The unfavorable Heun/RK3 comparison is reported.
+
+## Reproduce the endpoint-cancellation validation
+
+```sh
+make global-validation PYTHON=.reproduction-venv/bin/python
+```
+
+This writes `results/global_validation/`: convergence and full time-profile
+CSV files, matrix and high-precision cross-checks, JSON summaries, and the
+three-panel endpoint-cancellation figure. Parameters are `a=0.4`,
+`epsilon=0.08`, `delta=0.2`, with 16 through 4096 steps. The uniform schedule
+and the quantile schedule of `rho(t)=1+delta*cos(2*pi*t)` are compared for the
+cosine-defect field and an acceleration-preserving control.
+
+The Gaussian Wasserstein formula is exact; its evaluation uses stable
+logarithmic scale accumulation in floating point. Independent 2-by-2
+covariance recurrences and 100-digit mpmath calculations check the arithmetic.
+The twelve high-precision comparisons agree within `1.45e-12` relative error.
+These comparisons are not interval-arithmetic proofs. The convergence orders
+and coefficients are proved analytically in the global-theory supplement.
+The recorded whole-suite receipt is
+`results/global_validation/full_test_receipt.txt` (80 tests passed).
+
+For implementation and interpretation details, see
+[research/global_validation_notes.md](research/global_validation_notes.md).
+The terminal error alone is deliberately misleading in one example; inspect
+quarter-time and maximum-node errors as well as the endpoint.
 
 ## Build the complete manuscript
 

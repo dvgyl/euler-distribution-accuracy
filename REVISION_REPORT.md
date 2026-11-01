@@ -1,183 +1,158 @@
-# Revision report: constructive and certified Euler distribution accuracy
+# Strengthened revision: global criteria and nonlinear obstructions
 
-**Date:** 1 November 2026  
-**Author:** Dev D. Goyal  
-**Revised title:** *Constructing and Certifying Second-Order Euler Distribution Accuracy*  
-**Starting point:** repository commit `07749ae0b4c37a8ac0a29dad6f3c5dbd803052da` and the supplied version 1.0.0 ZIP/PDF. All 95 archived files were checked against the live repository's Git blob hashes and matched.  
-**Status:** research revision draft with analytical proofs, reproducible experiments, and a targeted literature audit. No journal submission, publication, or release is represented by this revision.
+Date: 1 November 2026. This report documents the second research revision of Dev D. Goyal's *When Euler Is Second-Order Accurate in Distribution: Global Criteria and Nonlinear Obstructions*. It supersedes the first revision's contribution claims and verification counts. The implementation map for the original 20 Markdown requests and the detailed nonradial experiments remain in [the first revision report](research/first_revision_report.md).
 
-## Outcome
+## 1. What changed most
 
-The revision adds a concrete nonradial construction and a provable way to recover its correction, rather than leaving the paper at a conditional acceleration-preservation theorem. It also makes the acceleration residual operational and proves that this residual is exactly the leading one-step Wasserstein error coefficient. Stronger convex-observable obstructions expose infeasible paths that pass every second-moment/covariance test.
+The paper now has two central results: an exact global error characterization for recursive Euler, and an obstruction covering all globally regular nonlinear generators of a broad class of odd-dimensional density paths. The earlier construction, certification, feasibility and learned-path results are retained with complete proofs. The main article gives compact summaries; the supplement carries the complete mathematical development.
 
-These are meaningful extensions of the supplied manuscript. They do **not** establish a universal correction procedure for arbitrary learned paths, a practical sampling speedup, or absolute priority over all literature. The contribution uses established gauge freedom, Hilbert projection, transport calculus, and Wasserstein tangent geometry; those ingredients are attributed rather than rebranded as new discoveries.
+These are analytical results with separate proof cross-checks and reproducible numerical examples. They are not proof-assistant certificates, independent human peer review, or an exhaustive claim of priority. The author has not been represented as having already approved or independently verified this new material.
 
-## 1. New mathematical contributions
+### A material correction to the literature assessment
 
-### 1.1 A full-support nonradial, nonlinear construction
+The follow-up search found two very close papers omitted by the first search:
 
-Identify the plane with the complex numbers. For a standard planar Gaussian reference variable Z, let
+- Obzherin and Khrulkov, [*Density-Level Backward Error for Low-NFE Generative Flows*, arXiv:2610.29475v1](https://arxiv.org/abs/2610.29475v1), dated 21 October 2026 in the primary PDF.
+- Obzherin and Khrulkov, [*Finite-Step Geometry of Marginal-Preserving Velocity Fields in Generative Flows*, arXiv:2610.37936v1](https://arxiv.org/abs/2610.37936v1), dated 27 October 2026 in the primary PDF.
 
-`F_t(z) = exp((1+i) a t) z + epsilon exp((1+i) a sqrt(2) t) z^2 exp(-|z|^2)`.
+The local projected-acceleration coefficient, generic gauge objective, propagated-defect mechanism, and sufficient order-elevation conditions must not be presented as newly discovered here. The revised introduction, certification summary, related work, bibliography and audit make that attribution explicit. The second paper also already applies the classical hairy-ball theorem to tangential fields with deterministic shell radius and a positive shell gap. The topological theorem and that restricted application are credited.
 
-The target path is the pushforward of the Gaussian reference by F_t. If
+The new nonlinear theorem removes the tangency and deterministic-shell restrictions, allows redistribution across density level sets, and covers arbitrary finite nondegenerate Gaussian mixtures. The new global theorem gives an exact full-Wasserstein coefficient under the stated Euclidean second-moment hypotheses and proves converses. [The follow-up audit](research/followup_literature_audit.md) records the primary versions and the specific theorem sections inspected. A negative search is not a proof of novelty.
 
-`(4/e) epsilon exp(a (sqrt(2)-1) T) < 1`,
+## 2. Exact global error and a necessary-and-sufficient criterion
 
-F_t is a globally smooth bi-Lipschitz diffeomorphism. Its inverse is computed by a uniformly contracting fixed-point iteration. The generator `u(t,F_t z)=partial_t F_t(z)` has the exact identity
+**Sources:** `paper/revision_global.tex`, `paper/revision_global_proofs.tex`; development and assumption record in `research/global_asymptotic_candidates.md`.
 
-`partial_tt F_t(z) = 2 a^2 D F_t(z) J z`.
+Write `a = partial_t u + (Du)u`, let `F_{s,t}` be the exact flow, and let `Pi_p` project onto the closure of smooth compactly supported gradients in `L2(p)`. Transport acceleration to the observation time:
 
-The reference rotation Jz preserves the Gaussian, so the material acceleration preserves the target marginal at every physical time. The global Lipschitz, smoothness, and moment assumptions of the original Euler theorem are all proved. Thus the fixed constructed field has O(H^2) full-Wasserstein error on arbitrary grids.
+`A_{s,t} = (DF_{s,t} a_s) composed with F_{t,s}`.
 
-The family is genuinely outside the previous Gaussian/radial/affine/product examples. Isotropic covariance and two incompatible complex third moments prove that the deformed law is neither an affine image of a radial law nor an invertible affine image of a product of two independent real variables. This is not an inference from a plot.
+For refining grids with normalized step profiles `sigma_n(s)=h_{n,k}/eta_n` converging weak-star to `sigma`, with maximum step `H_n=O(eta_n)`, the actual recursively computed Euler laws satisfy, uniformly in physical time,
 
-A finite collection of angular Fourier modes with arbitrary smooth rapidly decaying radial envelopes gives a broader family under an explicit small-perturbation bound. The term “angular harmonic” refers to the Fourier mode, not to spatial harmonicity of a map.
+`W2(p_hat_t^n,p_t)/eta_n -> (1/2) ||Pi_{p_t} integral_0^t sigma(s) A_{s,t} ds||`.
 
-**Gaussian-start variant.** Replacing the second coefficient by `epsilon sinh((1+i) a sqrt(2) t)` keeps the acceleration identity and makes F_0 the identity. Hence the target can start from standard Gaussian noise and become nonradial. Its regularity and nonproduct properties are proved. The numerical experiments use the exponential variant; the Gaussian-start variant is not presented as separately tested.
+This is a signed vector integral followed by projection and a norm. Summing local residual norms gives an upper bound but loses the cancellation responsible for the exact global coefficient.
 
-**Files:** `paper/revision_construction.tex`, `paper/revision_construction_proofs.tex`.
+The assumptions are those of the original finite-time theorem with the acceleration-preservation condition removed: a `C2` field, uniform global spatial Lipschitz bounds for velocity and material acceleration, bounded velocity at the origin, a finite-second-moment source, and uniform `L2` acceleration and material-jerk bounds. The proof adds no positive-density, fourth-moment, Poincare, or regular projected-flow assumption.
 
-### 1.2 Globally recoverable correction in a stated family
+For one fixed field, the following are equivalent:
 
-Every field
+1. Material acceleration preserves the instantaneous law at every time.
+2. The maximum-node distribution error is `O(H^2)` on every finite grid.
+3. Along even one refining sequence of uniform grids, the maximum-node error is `o(h)`.
+4. Terminal error is `o(1/N)` for every positive smooth allocation density defining a quantile grid.
 
-`u_omega(t,F_t z) = partial_t F_t(z) + (omega-a) D F_t(z) J z`
+An arbitrarily small `C1` neighborhood of uniform allocation suffices in item 4. If acceleration preservation fails, the maximum-node error is exactly `c_u h + o(h)` for a strictly positive field-dependent constant. This establishes a sharp first-order alternative, not merely failure of a second-order upper bound. Constants need not be uniform over fields that change with grid resolution or training.
 
-generates the same exact path. The reference rotation is a path-preserving gauge. An explicit solenoidal acceleration candidate `c D F_t Jz` gives an exact continuum L2 upper certificate R_t(omega,c) for the projected acceleration residual.
+## 3. Nonlinear rigidity in odd dimension
 
-Angular orthogonality reduces R_t squared to two weighted squares with known Gaussian moments. Eliminate c analytically; the resulting objective is a coercive quartic in omega. Enumerating every real root of its derivative, and interval endpoints if constrained, finds the global minimum. The sum-of-squares identity proves that its unique zero is `(omega,c)=(a,2a^2)`.
+**Sources:** `paper/revision_parity.tex`, `paper/revision_parity_proofs.tex`; independent derivation in `research/nonlinear_parity_audit.md`.
 
-The experiment discovers this minimum from the polynomial coefficients rather than receiving the correction as its initialization. It also records the nonzero local minimum that traps an ordinary local optimizer. This is a complete finite-dimensional guarantee, not a convergence theorem for an arbitrary neural optimizer.
+Let the dimension be odd. Consider a prescribed location-scale path
 
-The explicit phase coupling proves an O(h^2) full-Wasserstein upper bound and an attained first-order common-start particle limit. It does not assert that this upper coupling is optimal.
+`p_t = Law(m(t) + g(t) Z)`, with `g>0`,
 
-### 1.3 Exact local Wasserstein error coefficient
+where the centered source has a positive smooth density `rho proportional to exp(-V)`. Outside a ball, suppose
 
-Let Pi_p project onto the closure of smooth compactly supported gradients in L2(p). The paper now proves
+`z dot grad V(z) >= c |z|^2`, and `D2 V(z) <= M I`.
 
-`lim_{h downarrow 0} W2((Id+h u_t)#p_t, p_{t+h}) / h^2 = ||Pi_{p_t} a_t|| / 2`.
+Only an upper Hessian bound is needed; global log-concavity is not required. Under the smoothness conditions in the theorem, there is an acceleration-preserving generator in the original globally regular class **if and only if both the location and scale are affine in time**. In that case the qualifying generator is unique:
 
-This strengthens the old local necessity result to a sharp quantitative characterization. The proof needs no density, no classical flow for the projected solenoidal component, and no invertibility of Euler's map. The upper bound uses the new frozen-flow estimate; the lower bound uses Taylor expansion under an optimal coupling and the dual gradient norm.
+`u(t,x) = m'(t) + (g'(t)/g(t)) (x-m(t))`.
 
-The residual is canonical **for the selected generator**. It is not the intrinsic covariant acceleration of the marginal curve. Changing the generator on the same path can change the residual, as the expanding Gaussian example demonstrates. Recent Neural Wasserstein Splines work is cited to distinguish these notions.
+It has zero material acceleration and Euler transports its trajectories exactly on every grid.
 
-### 1.4 Residual, approximation, and learned-path guarantees
+### Why this includes arbitrary finite Gaussian mixtures
 
-The global projected-residual theorem gives
+For posterior mixture weights `w_j`, precision matrices `Q_j`, and component means `mu_j`,
 
-`max_k W2 <= exp(LT) [D_H sum_j h_j^3 + (B_H/2) sum_j h_j^2 epsilon_{t_j}]`,
+`grad V = sum_j w_j Q_j (z-mu_j)`,
 
-with explicit D_H and B_H, where `epsilon_t=||Pi_{p_t} a_t||`. The original acceleration retains its global Lipschitz assumption, but the projected solenoidal component no longer needs a regular flow. This removes the main gap between an abstract weighted projection and the old residual proposition.
+`D2 V = sum_j w_j Q_j - Cov_w(Q_j(z-mu_j)) <= Lambda I`.
 
-Additional results provide:
+Also `z dot grad V >= lambda |z|^2 - B |z|`, with `lambda>0`. Thus every finite mixture with positive weights and positive-definite component covariances meets the tail assumptions after centering. Components may have unequal means and covariances, and the mixture may be multimodal and nonradial.
 
-- upper and lower primal/dual certificates with an exact squared certificate gap;
-- weighted Poisson existence under a stated Poincare assumption;
-- an upper bound using a Galerkin strong residual and the Poincare constant;
-- explicit effects of quadrature and acceleration-approximation errors;
-- compactly supported stream potentials with uniform global regularity;
-- existence and a finite-net convergence guarantee for compact finite-dimensional gauge search;
-- a continuous-time envelope using a regular explicit upper-certificate field;
-- a target-path error bound separating initialization, cubic integration remainder, acceleration residual, and projected velocity/path discrepancy;
-- a population excess flow-matching regression-loss implication;
-- a density/score mismatch bound under explicit norms and Poincare conditions.
+### The mathematical mechanism
 
-A finite Galerkin projection norm is a **lower** bound, so minimizing it alone is not a certificate. The paper explicitly prevents that interpretation. The learned-path theorem requires a mixed jerk bound along the integrated field's flow from the target measure; that condition is not implied by training loss.
+After removing the necessarily affine mean, set `r=u-(g'/g)x` and `kappa=g''/g`. Weighted divergence and the acceleration condition give the pointwise stress identity
 
-**Files:** `paper/revision_certification.tex`, `paper/revision_certification_proofs.tex`.
+`tr((Dr)^2) + r^T D2 V_t r = kappa (x dot grad V_t - d)`.
 
-### 1.5 Stronger feasibility tests and an actual local error floor
+Here the trace is that of the matrix square, not the squared Frobenius norm. Large density level sets are smooth radial graphs over an even-dimensional sphere. The hairy-ball theorem gives a point where the tangential projection of `r` vanishes. At that point weighted divergence bounds the remaining normal field by `d Lip(r)/|grad V_t|`. The left side stays bounded while the right side diverges if `kappa>0`. The second-moment energy identity excludes `kappa<0` and forces `r=0` when `kappa=0`.
 
-Every convex spatial observable must have a convex expectation over time under acceleration preservation. A Hessian-weighted minimum-energy problem gives quantitative residual lower bounds. The paper also derives a covariance semidefinite necessary condition and convexity of every directional standard deviation.
+Combining this result with the global characterization gives a numerical-order consequence: on a nonaffine odd-dimensional mixture location-scale path, every fixed admissible generator has first-order maximum-node distribution error. If both location and scale are affine, the unique acceleration-preserving generator is Euler-exact; every other fixed admissible generator has first-order maximum-node error. A specially chosen endpoint may still exhibit cancellation.
 
-The strongest separating example is a smooth radial Gaussian pushforward on `[0,1/2]`:
+## 4. Stronger consequences and their scope
 
-`G_t(z) = z + (t^2/2) [(-1+5 exp(-|z|^2/2))/4] z`.
+### All convex-observable tests can be insufficient
 
-It passes the original minimum-energy second-moment test and the full covariance semidefinite test throughout that interval. Nonetheless, its fourth moment is strictly concave, so no admissible generator can preserve the path under its material acceleration. Every such generator has
+For every centrally symmetric source with the required moments, positive convex scalar dilation passes every convex-observable and Hessian-weighted minimum-energy test in the paper, as well as the covariance semidefinite test. Nevertheless, the odd-dimensional Gaussian path `N(0,exp(2t) I)` is infeasible by the nonlinear theorem.
 
-`epsilon_0 >= sqrt(3)/16`,
+This separates feasibility from the entire specified test hierarchy. It is stronger than the earlier fourth-moment counterexample, which separated feasibility only from second-moment and covariance tests. It does not claim to rule out every conceivable convex formulation involving other variables or constraints.
 
-and the sharp local theorem yields the actual one-step error floor
+### A residual floor at fixed regularity budget
 
-`lim_{h downarrow 0} W2(Euler_step#p_0,p_h)/h^2 >= sqrt(3)/32`.
+For the isotropic Gaussian at a time with `g''>0`, write `kappa=g''/g`, `L=Lip(r)`, and `A_d=d+sqrt(d^2+d-2)`. The canonical projected-acceleration residual obeys the explicit conservative bound
 
-The displayed minimum-action base field has the exactly computable residual `sqrt(23)/12` at every time. This is distinguished from the smaller universal floor for arbitrary alternative generators. The convex chain rule itself is standard; the concrete strict separation and quantitative obstruction are the added content.
+`epsilon_t >= g''/(2 sqrt(2 pi)) exp(-[1+max(1,2 A_d L/sqrt(kappa))]^2/2) > 0`.
 
-**Files:** `paper/revision_feasibility.tex`, `paper/revision_feasibility_proofs.tex`.
+Half this quantity lower-bounds the exact local `h^2` Wasserstein coefficient. A fixed finite Lipschitz budget therefore cannot meet a vanishing `O(H)` residual tolerance. Approaching zero residual requires a growing regularity budget; the explicit lower bound implies a necessary growth of order at least `sqrt(log(1/epsilon))`.
 
-## 2. Experimental evidence and its limits
+For the broader tail class, a compactness and lower-semicontinuity argument gives a positive, nonexplicit residual gap at each fixed finite Lipschitz budget. It uses a weak-Lipschitz extension of the stress obstruction. No bound uniform over unbounded Lipschitz budgets is claimed, and a local residual floor is not identified with a terminal global error coefficient.
 
-The principal new example uses a=0.4, epsilon=0.18, T=1. Its global contraction bound is approximately 0.312604.
+### What an escape from global Lipschitzness would require
 
-| Quantity at 512 Euler steps | Evaluated value | Observed order from 256 to 512 |
-| --- | ---: | ---: |
-| Corrected full-W2 lower bound | 3.438502e-7 | 1.99831 |
-| Corrected full-W2 coupling upper bound | 4.880645e-7 | 1.99915 |
-| Corrected common-start particle RMS | 6.608556e-4 | 0.99925 |
-| Base Euler full-W2 upper bound | 3.303088e-4 | 0.99914 |
+In the odd-dimensional Gaussian case, any hypothetical smooth exact correction outside the globally Lipschitz class must have a Jacobian growing at least linearly on remote spheres, with an explicit bound in the supplement. Every polynomial exact correction has degree at most one, because the highest-degree sum of squares in `|r|^2` cannot be canceled by the lower-degree derivative term. It then reduces to a skew linear field satisfying `K^2=-kappa I`, which is impossible in odd dimension for `kappa>0`.
 
-These are deterministic quadrature evaluations of continuum bounds. They are not exact nonradial optimal-transport distances, formal interval enclosures, or finite-sample uncertainty intervals. Refinement from 64 radial/64 angular nodes to 96/128 changes the corrected upper estimate by less than 8e-17. Independent DOP853 reference trajectories agree with the analytic trajectories within 6.5e-12 at the tested intermediate times.
+These are necessary restrictions, not existence claims for nonpolynomial fields with growing derivatives.
 
-The global correction search recovers omega=0.3999999999999999 and c=0.31999999999999995. Its residual formula evaluates to approximately 2.07e-16. The exact zero is certified by the analytical identity, not by interpreting machine precision as proof. A bad local minimum at omega approximately -0.392394 has residual upper bound 0.0724104.
+## 5. Why finitely many endpoint tests can fail
 
-Fixed +/-2% rotation perturbations restore an approximately first-order trend. A separate infeasible anisotropic Gaussian path supplies an all-field residual lower bound and a restricted affine optimum. A noisy, one-coefficient supervised velocity model over 512 observations and three seeds supplies an analytically tractable learned-path floor. This is a real but deliberately limited parametric fit, not a neural mixture-transport experiment.
+For any prescribed finite collection of positive smooth allocation densities, finitely many integral constraints leave a nonzero smooth function `f` with small amplitude. The two-dimensional field
 
-### The unfavorable comparison remains visible
+`u_t(x) = (a I + sqrt(a^2-f(t)) J) x`
 
-At equal 384 field evaluations:
+generates the same expanding Gaussian path as the acceleration-preserving control, while its projected acceleration is `f(t)x`. The constraints make terminal error `O(N^-2)` on every selected schedule despite first-order maximum-node error. The construction can be arbitrarily close to the valid field in any prescribed finite smoothness norm. Finitely many observation times can be hidden by adding finitely many constraints.
 
-| Method | Evaluated W2 lower bound | Evaluated W2 upper bound | Particle RMS |
+For the explicit choice `f(t)=epsilon cos(2 pi t)`, uniform-grid endpoint error even has the **same second-order leading coefficient** as the valid control:
+
+`N^2 W2(p_hat_1,p_1) -> 2 sqrt(2) exp(a) a^3 / 3`.
+
+At time one quarter, error is first order. Changing allocation to `rho_delta(t)=1+delta cos(2 pi t)` exposes a nonzero first-order endpoint coefficient for every nonzero admissible `delta`. This proves a limitation of a fixed finite family of asymptotic-order observations; it is not a statement that ordinary finite data can establish an exact asymptotic theorem.
+
+## 6. Numerical validation
+
+**Files:** `src/euler_path/global_validation.py`, `scripts/run_global_validation.py`, `tests/test_global_validation.py`, `results/global_validation/`; methods in `research/global_validation_notes.md`.
+
+The new example uses `a=0.4`, `epsilon=0.08`, `delta=0.2`, with 16 through 4096 steps. Errors use the full exact Gaussian Wasserstein formula evaluated through stable logarithmic scale accumulation.
+
+| Field and schedule | Endpoint order | Quarter-time order | Maximum-node order |
 | --- | ---: | ---: | ---: |
-| Corrected Euler | 6.110505e-7 | 8.675000e-7 | 8.809872e-4 |
-| Base Heun | 6.072879e-7 | 6.085053e-7 | 6.085053e-7 |
-| Base RK3 | 1.066869e-9 | 1.070191e-9 | 1.070191e-9 |
+| Cosine defect, uniform | 1.999795 | 1.001410 | 0.996874 |
+| Cosine defect, perturbed quantile | 0.995523 | 1.001357 | 0.997689 |
+| Acceleration-preserving, uniform | 1.999789 | 1.999789 | 1.999789 |
+| Acceleration-preserving, perturbed quantile | 1.999775 | 1.999811 | 1.999775 |
 
-Heun's upper estimate is slightly below corrected Euler's lower estimate, and the ordering survives an independent refinement at this exact budget. This is numerical evidence favoring Heun on this example; no interval-certified ordering is asserted. RK3 is substantially more accurate. All stages include inversion cost. Runtimes are comparable, and the experiments establish no speedup. Correction search time, inverse iteration counts, derivative-free analytical evaluation, hardware/thread settings, and the scope of tracked memory measurements are documented in the supplementary methods and CSV files.
+Orders use the final doubling from 2048 to 4096 steps. At 4096 steps, the uniform cosine endpoint error is `5.36463254e-9` while its maximum-node error is `2.96663228e-6`. Under perturbed allocation, its endpoint error is `2.11769611e-6`; the valid control's endpoint remains `5.70331240e-9`.
 
-## 3. Verification performed
+Independent 2-by-2 covariance recurrences agree within `1.05e-13` in covariance entries. Twelve independent 100-digit mpmath evaluations agree with the floating-point Wasserstein errors within `1.45e-12` relative error. These are arithmetic checks, not formal interval enclosures. The proofs establish the asymptotic rates; the tests verify implementation.
 
-- 72/72 tests passed: 63 established tests and 9 new checks.
-- Complete established reproduction passed: 81 baseline runs; 16,983 baseline node comparisons; 33 nonlinear runs; 24,600 nonlinear node comparisons; 72 sensitivity runs; 66 solver runs; 22 flow-matching runs; 36 equal-evaluation rows; 4 Gaussian higher-order rows; 8 original figures.
-- The original rounded manuscript numerical macros reproduced byte-for-byte. Remaining unrounded differences were within the established tolerances.
-- Independent checks compared trajectory finite differences with acceleration, inverse reconstruction, exact Fourier residuals with quadrature, global vs local optimization, moment formulas, phase couplings, and actual solver stage counts.
-- New constructions and proofs were reviewed through separate model derivations. One time-envelope definition gap was found and fixed; the valid statement requires an explicit regular certificate field rather than differentiability of an abstract projection.
-- The complete manuscript compiles with resolved references and no overfull boxes or duplicated PDF destinations. The main article and representative proof/figure/table pages were rendered and visually inspected.
+The earlier nonradial experiments, global-versus-local correction search, path checks, noisy restricted regression and actual-cost comparisons are retained. Their numerical Wasserstein bounds are quadrature evaluations of proved continuum inequalities. The unfavorable equal-NFE results remain visible: Heun slightly outperforms corrected Euler on the nonradial example and RK3 is substantially better. No runtime or generative-model sampling speedup is claimed.
 
-This is not Lean/Coq formalization, a formal floating-point proof, human peer review, or an exhaustive verification of the entire mathematical literature. The revision does not claim otherwise.
+## 7. Verification and packaging
 
-## 4. Response to all 20 requested changes
+- All **80 tests passed**: the previous 72 plus 8 global-validation tests. The whole-suite receipt is `results/global_validation/full_test_receipt.txt`.
+- Separate mathematical derivations checked the global expansion, uniform tangent argument, both converses, finite-schedule construction, nonlinear stress identity, level-set topology, mixture assumptions, quantitative floor, weak-Lipschitz compactness extension and polynomial/Jacobian consequences. No remaining gap was identified in those checks; that is not an assurance against undiscovered errors.
+- The complete established numerical reproduction passed during the first revision, with its rounded manuscript macros reproduced byte-for-byte. It was not needlessly rerun for this follow-up; the unchanged experiments and prior receipts remain available.
+- The title, abstract, introduction, related work, discussion, AI disclosure, README and reproduction instructions now reflect the stronger results and corrected prior-work comparison.
+- Full proofs are retained. Roman appendix numbering avoids the 26-appendix limit; distinct hyperlink destinations preserve cross-references in the combined manuscript.
+- The synchronized complete, main and supplement PDFs are generated by `make paper`. The combined PDF preserves internal cross-links; standalone subsets retain printed references and omit cross-document hyperlink annotations.
+- The final build contains 8 main pages and 54 supplement pages (62 combined). It has no unresolved references or citations, overfull boxes, multiply defined labels or duplicate PDF-destination warnings. The main article and the new supplementary proof pages were rendered for visual inspection. Source files, data, tests and figures are included in the source archive. Downloaded third-party literature PDFs and temporary build files are excluded.
 
-| Plan item | Implementation and status |
-| --- | --- |
-| 1. Potential-based corrections | Compact-support stream/tensor gauges, explicit regularity, finite-family scope; reference-coordinate construction provides a stronger exact example. |
-| 2. Computable weighted residual | Canonical projection, exact local coefficient, Poisson and primal/dual certificates; exact analytic upper certificate in the new example. |
-| 3. Optimize the relevant component | Compact finite-net guarantee and globally solved quartic family. Local failure documented. No general neural convergence claim. |
-| 4. Broader existence class | Full-support nonradial, nonlinear laws with proved exclusion of affine-radial/product structure; finite angular modes and Gaussian-start variant. |
-| 5. Stronger obstructions | Convex-observable hierarchy, covariance semidefinite condition, strict fourth-moment example, universal residual and local-error floors. |
-| 6. Operational residual theorem | Projection-based global bound with explicit constants and O(H) node-tolerance requirement; fixed-field vs H-dependent-family distinction. |
-| 7. Learned-path error | Combined target-measure theorem with projected velocity defect, mixed jerk condition, and population regression-loss consequence. |
-| 8. Construction errors | Explicit quadrature/acceleration/score error terms and assumptions. Numerical experiments use refinement, not formal quadrature intervals. |
-| 9. Discover a correction | Global quartic root enumeration from the objective, exact algebraic validation, and local-optimizer trap. |
-| 10. Residual plots | Analytic continuum upper certificates versus time/optimization/perturbation; not mislabeled as exact projection norms away from the zero. |
-| 11. Intermediate path preservation | Exact trajectory identity plus independent intermediate-time high-accuracy ODE checks. |
-| 12. Learned-field evidence | Restricted one-coefficient noisy fit with an analytic learned path and model-error floor. No neural mixture, moderate-dimensional, or image benchmark is claimed. |
-| 13. Actual cost | Equal NFE, batch wall time, inversion work, correction search and documented memory scope; unfavorable Heun/RK3 results retained. |
-| 14. Introduction | Rewritten around feasibility, construction, certification, and limits. |
-| 15. Organization | Compact IEEE main article with all complete new proofs and retained established results in the supplement. |
-| 16. Related work | Hurault v2 inspected; gauge/divergence/Wasserstein-solver comparisons updated; recent Neural Wasserstein Splines distinction added. Targeted rather than exhaustive novelty audit. |
-| 17. Four regimes | Exact, certified approximate, proven infeasible, and unknown feasibility distinguished. |
-| 18. Redundancy | Main exposition condensed; original results and inconvenient solver/particle limitations retained in the supplement. |
-| 19. Title/abstract | Changed to reflect the construction and certification actually proved, with explicit scope. |
-| 20. IEEE and audit | Standard IEEEtran layout, impact statement, truthful AI disclosure, complete proof and numerical audit. Current TAI-specific limits could not be fully verified; see below. |
+## 8. Remaining limits and submission status
 
-## 5. Literature and submission scope
+The core order dichotomy concerns one fixed field, with the exact regularity hypotheses in the theorems. The mixture impossibility is for odd dimension, a fixed-shape scalar location-scale path, and the globally regular generator class. It is not an impossibility theorem for arbitrary learned transport paths, even dimensions, all numerical solvers, or fields with unrestricted derivative growth.
 
-`research/literature_audit.md` records exact sources, versions, and which portions were read. The audit found no prior result that clearly subsumes the new construction in the inspected material, but negative search results do not prove novelty.
+The result is a theoretical strengthening with exact-model validation. There is no neural mixture-transport benchmark, image benchmark, general correction-training convergence theorem, or practical speedup claim. The retained learned-field experiment is deliberately a one-coefficient noisy regression model.
 
-The closest checked sources include Hurault–Moreau–Peyre arXiv:2605.08392v2 (7 October 2026), Horvat–Pfister (ICLR 2024), Huang et al. (ICML 2025), Beyler–Bach arXiv:2508.03210v2, Parker's convexity criteria, and Banerjee–Lee–Moosmuller arXiv:2610.19878v1 (14 October 2026). Standard transport and numerical-analysis references remain.
-
-The revision is formatted with the standard IEEEtran class and includes an impact statement and disclosure identifying AI-assisted portions and roles. The official current IEEE general AI-content policy was verified. The TAI author-information page repeatedly returned HTTP 418; current supplement limits, exact impact-statement constraints, and submission-file rules therefore remain unverified. Historical 2023 page/fee instructions are not presented as current rules. The main article is nine pages, but formatting alone does not certify submission readiness or acceptance.
-
-The original released citation files and archival metadata continue to identify version 1.0.0. This work is an unreleased revision, with no newly invented DOI, publication date, or claim of author validation. Before any journal submission the author must verify the new results and current journal requirements. No approval or submission action was undertaken on the author's behalf.
+Current TAI-specific submission limits remain unverified because the official author-information page could not be accessed during the first revision. Standard IEEEtran formatting and an AI-assistance disclosure do not certify submission readiness. The author should assess the mathematics, contribution framing and current journal requirements before submission. No journal submission, merge to the main branch, release or new DOI is asserted by this revision. Original version-1.0.0 citation metadata is retained as historical release metadata.

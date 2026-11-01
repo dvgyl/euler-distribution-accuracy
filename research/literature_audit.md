@@ -1,5 +1,7 @@
 # Targeted literature and submission-format audit
 
+**Follow-up notice:** the subsequent search identified two materially closer October 2026 papers that the first audit missed. Their local projected-defect and restricted parity results are now explicitly credited. See research/followup_literature_audit.md for the corrected comparison and the scope of the new global and nonlinear results. The historical first-audit conclusions below must be read subject to that correction.
+
 Audit date: 1 November 2026. Scope: the new reference-coordinate construction, projected-acceleration Euler error, and IEEE TAI submission preparation. This is a targeted literature check, not a proof of priority or an exhaustive novelty certification. No manuscript or numerical source was changed during this audit.
 
 ## Findings that affect scientific framing

@@ -65,7 +65,7 @@ def main():
             # annotations here rather than leave dangling destinations.
             for page_index in range(start, stop):
                 writer.add_page(reader.pages[page_index], excluded_keys=["/Annots"])
-            writer.add_metadata({"/Title": title + ": Constructing and Certifying Second-Order Euler Distribution Accuracy",
+            writer.add_metadata({"/Title": title + ": When Euler Is Second-Order Accurate in Distribution",
                                  "/Author": "Dev D. Goyal"})
             with (ROOT / name).open("wb") as stream:
                 writer.write(stream)

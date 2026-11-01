@@ -1,6 +1,6 @@
 PYTHON ?= python3
 
-.PHONY: paper reproduce revision test
+.PHONY: paper reproduce revision global-validation test
 
 paper:
 	$(PYTHON) -B scripts/build_paper.py
@@ -13,3 +13,6 @@ test:
 
 revision:
 	$(PYTHON) -B scripts/run_revision.py
+
+global-validation:
+	$(PYTHON) -B scripts/run_global_validation.py
