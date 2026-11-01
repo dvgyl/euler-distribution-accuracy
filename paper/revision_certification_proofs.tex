@@ -1,0 +1,416 @@
+\section{Proofs for residual certification and target-path stability}
+\label{app:certification-proofs}
+
+\subsection{Projection and the weighted weak problem}
+
+The space $L^2(p;\R^d)$ is Hilbert, and $\mathcal G_p$ is closed by
+definition.  The Hilbert projection theorem therefore gives a unique
+$g=\Pi_pa$.  Its complement $w=a-g$ satisfies
+$\int w\cdot\nabla\phi\,\dd p=0$ for every smooth compactly supported
+$\phi$.  Conversely this identity places $w$ in $\mathcal G_p^\perp$.
+Taking a supremum over a dense set of unit gradients proves
+Eq.~\eqref{eq:canonical-residual}.  This argument makes no regularity
+claim about $g$ or $w$.
+
+For a smooth positive density with a Poincar\'e constant $C_P$, the
+projection has a potential, unique modulo constants, satisfying
+\begin{equation}
+ \int\nabla\varphi\cdot\nabla\eta\,p\,\dd x
+   =\int a\cdot\nabla\eta\,p\,\dd x,
+ \qquad -\nabla\cdot(p\nabla\varphi)=-\nabla\cdot(pa).
+ \label{eq:weighted-poisson-certificate}
+\end{equation}
+The potential is understood in the completion of centered smooth test
+functions in weighted $H^1$.  On $\R^d$ this is a finite-energy weak problem;
+no unmentioned boundary condition at a numerical truncation boundary is
+imposed.  If an exact Galerkin $q_N$ has strong residual
+$d_N=p^{-1}\nabla\cdot[p(a-q_N)]\in L^2(p)$ with zero mean, then
+\begin{equation}
+ \|q_N\|_{L^2(p)}^2\le\|\Pi_pa\|_{L^2(p)}^2
+ \le\|q_N\|_{L^2(p)}^2+C_P\|d_N\|_{L^2(p)}^2.
+ \label{eq:poisson-residual-upper}
+\end{equation}
+This explains precisely when a divergence penalty gives an upper bound:
+the weighted norm, the Poincar\'e constant, and the weak residual identity
+must all be controlled.
+
+Numerical integration error must also be enclosed.  If computed values
+$\widehat{\mathcal L},\widehat{\mathcal U}$ have deterministic error bounds
+$\eta_L,\eta_U$, and the acceleration supplied to those computations differs
+from the true acceleration by at most $\delta_a$ in $L^2(p)$, then
+\begin{equation}
+ \max\!\left\{0,\sqrt{\max(0,\widehat{\mathcal L}-\eta_L)}-\delta_a\right\}
+ \le\|\Pi_pa\|
+ \le\sqrt{\max(0,\widehat{\mathcal U}+\eta_U)}+\delta_a.
+ \label{eq:inexact-certificate}
+\end{equation}
+Here the primal and dual fields must be admissible for the same exact
+$p$.  Sample standard errors alone are not deterministic quadrature
+certificates; confidence bounds give statements with their specified
+coverage.
+
+For the potential formulation, assume $p$ is a smooth positive density
+with $\|\eta-\E_p\eta\|_{L^2(p)}^2\le
+C_P\|\nabla\eta\|_{L^2(p)}^2$.  Complete the centered functions $f-\E_pf$, with $f\in C_c^\infty$,
+in the weighted $H^1$ norm.  The gradient norm is
+equivalent to that norm on this centered space.  The form
+$\int\nabla\varphi\cdot\nabla\eta\,p\,\dd x$ is continuous and
+coercive, and the functional $\int a\cdot\nabla\eta\,p\,\dd x$ is
+bounded.  The Hilbert-space representation theorem yields a unique
+centered $\varphi$ with Eq.~\eqref{eq:weighted-poisson-certificate}.
+Its gradient is the projection.  Other representatives differ by a
+constant within the uncentered completion.
+
+For an exact Galerkin solution, $g-q_N$ is orthogonal to the finite
+gradient space and hence to $q_N$.  If the stated strong residual exists,
+then for centered tests
+\[
+ \langle g-q_N,\nabla\eta\rangle
+   =-\int d_N\eta\,\dd p
+   \le\sqrt{C_P}\|d_N\|_{L^2(p)}\|\nabla\eta\|_{L^2(p)}.
+\]
+Density gives $\|g-q_N\|\le\sqrt{C_P}\|d_N\|$.  Pythagoras proves
+Eq.~\eqref{eq:poisson-residual-upper}.  The same argument applied to
+$p^{-1}\nabla\cdot(pr)$ proves Eq.~\eqref{eq:score-path-defect}; compact
+support removes boundary terms and implies zero mean of this divergence.
+
+Finally, using an approximate density has a measurable cost.  If
+$r=\widetilde p^{-1}J\nabla\psi$ has compact support, then
+\[
+ p^{-1}\nabla\cdot(pr)
+ =r\cdot(\nabla\log p-\nabla\log\widetilde p).
+\]
+When $p$ has Poincar\'e constant $C_P$, integration by parts gives
+\begin{equation}
+ \|\Pi_pr\|_{L^2(p)}
+ \le\sqrt{C_P}\,
+ \|r\cdot(\nabla\log p-\nabla\log\widetilde p)\|_{L^2(p)}.
+ \label{eq:score-path-defect}
+\end{equation}
+Thus a score approximation controls a path-defect term under explicit
+norm and Poincar\'e assumptions; it does not preserve the exact target
+path automatically.
+
+\begin{proof}[Proof of Proposition~\ref{prop:residual-certificates}]
+Write $a=g+z$ with $g=\Pi_pa$ and $z\in\mathcal G_p^\perp$.  Orthogonality
+gives
+\[
+ \|g\|^2-\mathcal L=\|g-q\|^2,\qquad
+ \mathcal U-\|g\|^2=\|z-w\|^2.
+\]
+Their sum is $\|g-q+z-w\|^2=\|a-w-q\|^2$.  For an exact Galerkin
+solution, $\langle a,q_N\rangle=\|q_N\|^2$, giving the stated matrix
+formula.  For Eq.~\eqref{eq:inexact-certificate}, first enclose the
+certificate for the approximate acceleration.  Orthogonal projection is
+contractive, so changing that acceleration by $\delta_a$ changes its
+projected norm by at most $\delta_a$.
+\end{proof}
+
+\subsection{A quantitative flow lemma requiring no solenoidal flow}
+
+We use the standard continuity-equation estimate
+\begin{equation}
+ W_2(\mu_b,\mu_a)\le\int_a^b\|V_s\|_{L^2(\mu_s)}\,\dd s
+ \quad\text{if}\quad
+ \partial_s\mu_s+\nabla\cdot(\mu_sV_s)=0,
+ \label{eq:ce-length}
+\end{equation}
+for narrowly continuous finite-second-moment curves and integrable
+$L^2$ velocities~\citep[Theorem~8.3.1]{ambrosio2005gradient}.  The
+estimate requires neither uniqueness nor classical trajectories for
+$V_s$.  All curves constructed below are continuous pushforwards by
+globally Lipschitz diffeomorphisms, so their continuity and moment
+conditions hold.
+
+\begin{lemma}[Frozen flow displacement controlled by projection]
+\label{lem:projected-frozen-flow}
+Let $p\in\mathcal P_2(\R^d)$ and let $a\in C^1(\R^d;\R^d)$ be globally
+$L_a$-Lipschitz, with $a\in L^2(p)$.  Write $\Phi^s$ for its autonomous
+flow and set
+\[
+ Q_a(\tau)=\int_0^\tau e^{L_as}\,\dd s
+ =\begin{cases}(e^{L_a\tau}-1)/L_a,&L_a>0,\\\tau,&L_a=0.
+ \end{cases}
+\]
+For every $\tau\ge0$,
+\begin{equation}
+ W_2((\Phi^\tau)_\#p,p)
+ \le Q_a(\tau)\|\Pi_pa\|_{L^2(p)}.
+ \label{eq:frozen-projected-bound}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $g=\Pi_pa$ and $w=a-g$.  On $0\le s\le\tau$, define
+$\mu_s=(\Phi^{\tau-s})_\#p$ and, with $y=\Phi^{\tau-s}(x)$,
+\[
+ V_s(y)=-D\Phi^{\tau-s}(x)g(x).
+\]
+For a compactly supported smooth test $f$, differentiating its integral
+under $\mu_s$ initially gives the same expression with $a$ instead of
+$g$.  The omitted term is
+$\int \nabla(f\circ\Phi^{\tau-s})(x)\cdot w(x)\,p(\dd x)=0$.
+The composition is $C^1$ and compactly supported; convolution extends
+the defining orthogonality from smooth tests to these tests.  Here
+$D\Phi^r(x)a(x)=a(\Phi^r(x))$, the autonomous flow identity, gives
+the differentiated expression.  Thus $(\mu_s,V_s)$ satisfies the
+continuity equation.  Moreover
+\[
+ \|V_s\|_{L^2(\mu_s)}
+ \le e^{L_a(\tau-s)}\|g\|_{L^2(p)}.
+\]
+Apply Eq.~\eqref{eq:ce-length} between
+$\mu_0=(\Phi^\tau)_\#p$ and $\mu_\tau=p$.
+The proof never constructs a flow for $w$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:projected-residual}]
+Fix $t$ and an admissible step $h$, write $X\sim p_t$, and set
+$\tau=h^2/2$.  For the frozen acceleration flow, the elementary
+Gronwall estimate
+$\|\acc_t(\Phi^sX)\|_{L^2}\le e^{L_as}\|\acc_t(X)\|_{L^2}$ gives
+\begin{align*}
+ \|\Phi^\tau X-X\|_{L^2}&\le Q_a(\tau)C_a,\\
+ \|\Phi^\tau X-X-\tau\acc_t(X)\|_{L^2}
+   &\le \tfrac12L_aC_a\tau^2e^{L_a\tau}.
+\end{align*}
+For completeness, the first pointwise estimate follows by writing
+$a(\Phi^s x)=a(x)+\int_0^sDa(\Phi^r x)a(\Phi^r x)\,\dd r$ and
+using $\|Da\|_{\rm op}\le L_a$.  The second bound follows by
+integrating $\|a(\Phi^sX)-a(X)\|\le L_a\|\Phi^sX-X\|$.
+
+The exact physical flow has expansion
+\[
+ F_{t,t+h}X=X+hu_t(X)+\tfrac12h^2\acc_t(X)+R,
+ \qquad \|R\|_{L^2}\le C_jh^3/6.
+\]
+The actual marginal at intermediate physical time is $p_s$, which
+justifies the $C_j$ bound under the integral Taylor remainder.
+Consequently, for $E_{t,h}(x)=x+hu_t(x)$,
+\begin{align*}
+ \|E_{t,h}(\Phi^\tau X)-F_{t,t+h}X\|_{L^2}
+ &\le C_jh^3/6+hLC_aQ_a(\tau)
+       +\tfrac12L_aC_a\tau^2e^{L_a\tau}\\
+ &\le D_Hh^3.
+\end{align*}
+The remaining change of input distribution is bounded by
+Lemma~\ref{lem:projected-frozen-flow} and the Euler Lipschitz constant:
+\[
+ W_2((E_{t,h})_\#p_t,
+       (E_{t,h})_\#(\Phi^\tau)_\#p_t)
+ \le(1+Lh)Q_a(\tau)\varepsilon_t
+ \le\tfrac12B_Hh^2\varepsilon_t.
+\]
+The triangle inequality gives the local bound.  The recurrence
+$e_{k+1}\le(1+Lh_k)e_k+D_Hh_k^3+B_Hh_k^2\varepsilon_{t_k}/2$,
+with $e_0=0$, proves Eq.~\eqref{eq:projected-bound} after multiplication
+by the later stability factors and use of
+$\prod_k(1+Lh_k)\le e^{LT}$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:sharp-local-residual}]
+Fix $t<T$ and let $\mu_h=(E_{t,h})_\#p_t$, $\nu_h=p_{t+h}$, and
+$d_h=W_2(\mu_h,\nu_h)$.  The single-step estimate proved above gives
+$\limsup_{h\downarrow0}d_h/h^2\le\varepsilon_t/2$.
+In particular $d_h=O(h^2)$, and $\mu_h\to p_t$ in $W_2$ because
+$\|E_{t,h}X-X\|_{L^2}=h\|u_t\|_{L^2(p_t)}$.
+
+For $\phi\in C_c^\infty$, Taylor expansion in an optimal coupling
+of $\mu_h$ and $\nu_h$ and Cauchy--Schwarz give
+\[
+ \left|\int\phi\,\dd\nu_h-\int\phi\,\dd\mu_h\right|
+ \le\|\nabla\phi\|_{L^2(\mu_h)}d_h
+       +\tfrac12\|D^2\phi\|_\infty d_h^2.
+\]
+The same-start Taylor expansion used for local necessity gives
+\[
+ \int\phi\,\dd\nu_h-\int\phi\,\dd\mu_h
+ =\tfrac12h^2\langle\acc_t,\nabla\phi\rangle_{L^2(p_t)}+o(h^2).
+\]
+This expansion needs only the stated $L^2$ acceleration and jerk bounds:
+replace the exact-minus-Euler displacement by $h^2\acc_t(X)/2$
+with an $L^2$ remainder $O(h^3)$, and use bounded first and second
+derivatives of $\phi$.
+Since $\|\nabla\phi\|_{L^2(\mu_h)}\to
+\|\nabla\phi\|_{L^2(p_t)}$, division by $h^2$ gives, whenever the
+latter norm is positive,
+\[
+ \liminf_{h\downarrow0}\frac{d_h}{h^2}
+ \ge\frac{|\langle\acc_t,\nabla\phi\rangle_{L^2(p_t)}|}
+            {2\|\nabla\phi\|_{L^2(p_t)}}.
+\]
+The supremum over these tests is $\varepsilon_t/2$ by
+Eq.~\eqref{eq:canonical-residual}.  If $\varepsilon_t=0$, the upper
+bound and nonnegativity suffice.  This proves the limit, including
+singular $p_t$, without requiring an optimal transport map.
+\end{proof}
+
+\subsection{Regularity and optimization of compact gauges}
+
+\begin{proposition}[Compact gauge search]
+\label{prop:compact-gauge-search}
+Suppose $p_t$ is a strictly positive $C^4$ density and is generated by a
+field $v$ satisfying the regularity and moment bounds of
+Theorem~\ref{thm:projected-residual}.  Let the $C^4$ potentials in
+Eq.~\eqref{eq:compact-stream-gauge} have spatial support in one compact set
+$K$, uniformly in time, and let $\theta$ range over a compact set
+$\Theta\subset\R^m$.  Then $u_\theta=v+r_\theta$ has a global flow
+generating exactly $p_t$.  The regularity and moment constants in
+Theorem~\ref{thm:projected-residual} can be chosen uniformly on $\Theta$.
+The objective
+\begin{equation}
+ \mathcal E(\theta)=\sup_{0\le t\le T}
+    \|\Pi_{p_t}[\partial_tu_\theta+(D_xu_\theta)u_\theta]\|_{L^2(p_t)}
+ \label{eq:gauge-objective}
+\end{equation}
+is Lipschitz on $\Theta$ and attains its minimum.
+If its Lipschitz constant is $K_\Theta$, a finite $\delta$-net of
+$\Theta$, evaluated with certified upper and lower objective bounds of
+width at most $\eta$, has a candidate $\widehat\theta$ chosen by its
+smallest upper bound satisfying
+\[
+ \mathcal E(\widehat\theta)
+ \le\min_{\theta\in\Theta}\mathcal E(\theta)+K_\Theta\delta+\eta.
+\]
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop:compact-gauge-search}]
+Positivity and continuity of $p$ give a positive minimum on
+$[0,T]\times K$.  Therefore $r_\theta$ and its derivatives through the
+orders used below are bounded and have support in $K$, uniformly for
+$\theta\in\Theta$.  The identity
+$\nabla\cdot(J\nabla\psi)=0$ proves exact weighted divergence
+freedom.  In higher dimensions, let $A_{ij}=-A_{ji}$ and set
+$r_i=p^{-1}\sum_j\partial_jA_{ij}$. For this antisymmetric tensor, mixed partial
+derivatives cancel in pairs in
+$\sum_{ij}\partial_i\partial_jA_{ij}$.
+
+The field $u_\theta$ is globally Lipschitz and has linear growth,
+uniformly over $\Theta$.  Its global flow is therefore defined on the
+whole interval.  The prescribed $p_t$ satisfies its continuity equation,
+and uniqueness for a globally Lipschitz field shows that this is its
+actual path.  The acceleration difference
+\begin{equation}
+ \acc_{u_\theta}-\acc_v
+ =\sum_i\theta_i b_i+\sum_{ij}\theta_i\theta_jc_{ij},
+ \quad
+ b_i=\partial_tr_i+(D_xv)r_i+(D_xr_i)v,
+ \quad c_{ij}=(D_xr_i)r_j,
+ \label{eq:acceleration-parameter-polynomial}
+\end{equation}
+is supported in $K$ with uniformly bounded first derivatives.  Thus
+the acceleration Lipschitz and $L^2$ bounds are uniform.  The jerk
+difference is also compactly supported and bounded, because it uses
+only the displayed regular derivatives and the locally bounded
+derivatives of $v$.  This proves all uniform moment assertions.
+
+Let $R=\sup_{\theta\in\Theta}\|\theta\|_2$,
+$B=(\sum_i\sup_t\|b_i\|_{L^2(p_t)}^2)^{1/2}$, and
+$C=(\sum_{ij}\sup_t\|c_{ij}\|_{L^2(p_t)}^2)^{1/2}$.
+Equation~\eqref{eq:acceleration-parameter-polynomial} and
+$\|\theta\otimes\theta-\eta\otimes\eta\|_2
+\le2R\|\theta-\eta\|_2$ imply
+\[
+ \sup_t\|\acc_{u_\theta,t}-\acc_{u_\eta,t}\|_{L^2(p_t)}
+ \le(B+2RC)\|\theta-\eta\|_2.
+\]
+Projection is contractive.  The reverse triangle inequality and then
+the supremum over time prove Lipschitz continuity of $\mathcal E$ with
+$K_\Theta=B+2RC$.  Compactness gives a minimizer $\theta_*$.  Choose
+a net point $\theta_i$ within $\delta$ of $\theta_*$.  Its upper
+certificate is at most
+$\mathcal E(\theta_*)+K_\Theta\delta+\eta$; selecting the smallest
+upper certificate proves the claimed bound.  This proof requires
+certificates of the continuous-time supremum, not unqualified values
+at sampled times.
+
+For the time envelope, choose a computable $C^1$ field $w_t$ with zero
+weighted divergence under the target and define $R_t=\acc_t-w_t$.
+Assume $K_R=\sup_t\|\partial_tR_t+(D_xR_t)v_t\|_{L^2(p_t)}<\infty$.
+Then $\varepsilon_t\le\|R_t\|$.  This regularity is imposed on the
+chosen upper-certificate field, not on the orthogonal projection.
+Couple $p_s$ and $p_t$ using the exact target flow.  The chain rule and
+Minkowski's inequality give
+\[
+ \big|\|R_t\|_{L^2(p_t)}-\|R_s\|_{L^2(p_s)}\big|
+ \le\int_s^t\|\partial_rR_r+(D_xR_r)v_r\|_{L^2(p_r)}\,\dd r.
+\]
+The bound $K_R|t-s|$ and the covering property of the time net give
+the envelope $\sup_t\|R_t\|\le\max_i\|R_{s_i}\|+K_R\Delta$,
+where $\Delta$ is the covering radius of the time net. A lower bound
+for $\sup_t\varepsilon_t$ is the maximum of the lower certificates
+at those nodes. Achieving uniformly vanishing bracket widths further
+requires control of the primal--dual gaps; it is not a consequence of
+time-grid refinement alone.
+\end{proof}
+
+\subsection{A target-measure stability estimate}
+
+\begin{lemma}[Exact-flow comparison using the projected path defect]
+\label{lem:projected-path-stability}
+Under the path and field assumptions of Theorem~\ref{thm:target-path-bound},
+for $s<t$,
+\begin{equation}
+ W_2((F^u_{s,t})_\#p_s,p_t)
+ \le\int_s^t e^{L(t-r)}\beta_r\,\dd r.
+ \label{eq:projected-path-stability}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Set $b_r=\Pi_{p_r}(u_r-v_r)$ and
+$\mu_r=(F^u_{r,t})_\#p_r$.  Differentiating a smooth compactly
+supported test integral and using the target continuity equation gives
+\[
+ \frac{\dd}{\dd r}\int f\,\dd\mu_r
+ =\int\nabla f(F^u_{r,t}x)\cdot
+             D_xF^u_{r,t}(x)(v_r(x)-u_r(x))\,p_r(\dd x).
+\]
+The term $u_r-v_r-b_r$ has zero weighted divergence under $p_r$.
+Testing it against $f\circ F^u_{r,t}$ replaces $v_r-u_r$ by $-b_r$.
+This gives a continuity-equation velocity of $\mu_r$ with norm at most
+$e^{L(t-r)}\beta_r$.  A Borel version of the projections may be
+obtained by projecting onto an increasing countable family of smooth
+gradient tests and taking the $L^2$ limit; the resulting weak identities
+are sufficient here.  Equation~\eqref{eq:ce-length} proves the claim.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:target-path-bound}]
+Start a single exact $u$-step from $X\sim p_{t_k}$.
+The integral Taylor remainder is at most $C_j^\diamond h_k^3/6$ by
+assumption.  All frozen-flow estimates in the proof of
+Theorem~\ref{thm:projected-residual} therefore apply under this target
+measure, giving
+\[
+ W_2((E^u_{t_k,h_k})_\#p_{t_k},
+          (F^u_{t_k,t_{k+1}})_\#p_{t_k})
+ \le D_Hh_k^3+\tfrac12B_Hh_k^2\varepsilon_{t_k}.
+\]
+Lemma~\ref{lem:projected-path-stability} bounds the difference between
+the second law and $p_{t_{k+1}}$.  Consequently, with
+$e_k=W_2(\widehat q_k,p_{t_k})$,
+\[
+ e_{k+1}\le(1+Lh_k)e_k+D_Hh_k^3
+       +\tfrac12B_Hh_k^2\varepsilon_{t_k}
+       +\int_{t_k}^{t_{k+1}}e^{L(t_{k+1}-s)}\beta_s\,\dd s.
+\]
+Iteration proves Eq.~\eqref{eq:target-path-bound}.  In fact the path
+term can retain the smaller factor
+$\int_0^{t_k}e^{L(t_k-s)}\beta_s\,\dd s$, since later Euler stability
+factors are bounded by $e^{L(t_k-t_{j+1})}$.
+
+To check the stated sufficient jerk condition, suppose
+\[
+ \|\jerk_u(s,x)\|\le J_0+J_1\|x\|,\qquad
+ \sup_t\|u(t,0)\|\le U_0,\qquad
+ \sup_t\E_{p_t}\|X\|^2\le M.
+\]
+The growth estimate
+$\|F^u_{t,s}(x)\|\le e^{LT}(\|x\|+TU_0)$ yields
+$C_j^\diamond\le J_0+J_1e^{LT}(\sqrt M+TU_0)$.
+Finally, conditional expectation makes the cross term in the squared
+regression loss zero.  Projection contraction and Cauchy--Schwarz in
+time give $\int\beta_t\,\dd t\le\sqrt{T\mathcal R_{\rm excess}}$.
+Linearity of $\Pi_{p_t}$ proves that a target-solenoidal correction
+leaves $\beta_t$ unchanged.
+\end{proof}

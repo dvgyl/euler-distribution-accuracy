@@ -1,0 +1,27 @@
+{
+  "original_reproduction": {
+    "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 -B scripts/reproduce.py --output build/reproduction",
+    "exit_code": 0,
+    "baseline_runs": 81,
+    "baseline_node_comparisons": 16983,
+    "nonlinear_runs": 33,
+    "nonlinear_node_comparisons": 24600,
+    "sensitivity_runs": 72,
+    "solver_runs": 66,
+    "flow_matching_runs": 22,
+    "equal_evaluation_rows": 36,
+    "gaussian_higher_order_rows": 4,
+    "figures": 8,
+    "elapsed_seconds": 84.33171210100045,
+    "original_numerical_macros_byte_identical": true,
+    "note": "Roundoff-scale differences in unrounded JSON summaries; all checks passed."
+  },
+  "final_tests": {
+    "count": 72,
+    "elapsed_seconds": 3.703,
+    "passed": true,
+    "log_sha256": "07016b11371ede0b20e20560311868af939b612c3a340ec8d729847706febb8a"
+  },
+  "revision_source_sha256": "f30ddb064212fd2f46c3bf1d66ea9d8f64ba5b2258abbd1cc2d7a90183eb9452",
+  "revision_summary_source_matches": true
+}

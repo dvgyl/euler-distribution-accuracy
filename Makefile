@@ -1,6 +1,6 @@
 PYTHON ?= python3
 
-.PHONY: paper reproduce test
+.PHONY: paper reproduce revision test
 
 paper:
 	$(PYTHON) -B scripts/build_paper.py
@@ -10,3 +10,6 @@ reproduce:
 
 test:
 	$(PYTHON) -B -m unittest discover -s tests -v
+
+revision:
+	$(PYTHON) -B scripts/run_revision.py

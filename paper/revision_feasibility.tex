@@ -1,0 +1,120 @@
+\section{Feasibility certificates beyond the second moment}
+\label{sec:convex-feasibility}
+
+The scalar second-moment test is one member of a larger family of
+path-level restrictions.  These restrictions can reject a path before a
+nonlinear correction search and give positive lower bounds on the best
+possible acceleration residual.  The underlying second-derivative chain
+rule is standard transport calculus; here it yields certificates that
+strictly strengthen the second-moment restriction.
+
+For fixed $t$, define the dual norm
+\begin{equation}
+ \varepsilon_t^{\rm acc}
+ =\sup_{\eta\in C_c^\infty,\,\|\nabla\eta\|_{L^2(p_t)}>0}
+ \frac{\left|\int \nabla\eta\cdot\acc_t\,\dd p_t\right|}
+ {\|\nabla\eta\|_{L^2(p_t)}}.
+ \label{eq:acc-dual-norm}
+\end{equation}
+It equals the norm of the weighted-gradient projection of $\acc_t$ and is
+no larger than $\|\acc_t-w\|_{L^2(p_t)}$ for every $w$ of zero weighted
+divergence.  This identity alone asserts no regularity of that projection.
+
+\begin{theorem}[Convex-observable and weighted-energy certificates]
+\label{thm:convex-feasibility}
+Assume the regularity and moment hypotheses of
+Theorem~\ref{thm:distribution_order}, except for the acceleration condition.
+For $\phi\in C^2(\R^d)$ with bounded Hessian, set
+$F_\phi(t)=\int\phi\,\dd p_t$.  Then
+\begin{equation}
+ F_\phi''(t)=\int u_t^\top D^2\phi\,u_t\,\dd p_t
+       +\int\nabla\phi\cdot\acc_t\,\dd p_t.
+ \label{eq:convex-chain-rule}
+\end{equation}
+If the acceleration condition holds and $\phi$ is convex, $F_\phi$ is
+convex in time.  More generally, let $K_\phi(t)$ be the infimum of
+$\int v^\top D^2\phi\,v\,\dd p_t$ over finite-energy instantaneous velocities
+satisfying $\partial_t p_t+\nabla\cdot(p_tv)=0$.  For convex $\phi$ and
+$\|\nabla\phi\|_{L^2(p_t)}>0$,
+\begin{equation}
+ \varepsilon_t^{\rm acc}\ge
+ \frac{[K_\phi(t)-F_\phi''(t)]_+}
+ {\|\nabla\phi\|_{L^2(p_t)}}
+ \ge\frac{[-F_\phi''(t)]_+}{\|\nabla\phi\|_{L^2(p_t)}}.
+ \label{eq:convex-residual-floor}
+\end{equation}
+Unbounded Hessians are permitted when the chain rule is dominated and
+$\nabla\phi$ belongs to the weighted-gradient closure, including
+polynomial tests under the corresponding finite moments.
+\end{theorem}
+
+Thus a feasible path satisfies
+$p_{(1-\lambda)s+\lambda t}\preceq_{\rm cx}(1-\lambda)p_s+\lambda p_t$:
+each convex observable at an intermediate time is bounded by its endpoint
+mixture average.  This is necessary, not sufficient.  Every straight
+stochastic interpolation $\Law((1-t)X_0+tX_1)$ already passes this test.
+Under weighted Poincare and uniform ellipticity assumptions, $K_\phi$
+is obtained by a linear weighted elliptic problem.
+Appendix~\ref{app:convex-feasibility} states these hypotheses and gives
+the characterization and all proofs.
+
+\begin{proposition}[Covariance constraints]
+\label{prop:matrix-feasibility}
+Under the acceleration condition and the preceding hypotheses, let
+$m(t)=m(0)+t\xi$ and $C(t)=\operatorname{Cov}(X_t)>0$.  There exists $B_t$
+such that
+\begin{equation}
+ C'=B_t+B_t^\top,\qquad
+ \begin{pmatrix}C&B_t^\top\\ B_t&C''/2\end{pmatrix}\succeq0.
+ \label{eq:covariance-lmi}
+\end{equation}
+In particular $C''\succeq0$, and every directional standard deviation
+$\sqrt{e^\top C(t)e}$ is convex.
+\end{proposition}
+
+The block-matrix condition is a semidefinite necessary test using only
+the prescribed covariance and its first two derivatives.  It can fail
+even when the scalar second-moment test passes.  The following example
+passes both tests but is excluded by a fourth-order convex observable.
+
+\begin{proposition}[A residual floor beyond covariance tests]
+\label{prop:quartic-obstruction}
+Let $Z\sim\mathcal N(0,I_2)$ and $0\le t\le1/2$.  Define
+\begin{equation}
+ \begin{split}
+ \kappa(r)&=\frac{-1+5e^{-r^2/2}}4,\qquad b(z)=\kappa(\|z\|)z,\\
+ G_t(z)&=z+\frac{t^2}{2}b(z),\qquad p_t=(G_t)_\#\Law(Z).
+ \end{split}
+ \label{eq:quartic-obstruction-path}
+\end{equation}
+This path has smooth positive densities and a smooth globally Lipschitz
+minimum-action generator $v_t(G_tz)=t b(z)$.  It passes the scalar
+second-moment and covariance tests throughout the interval.  Nevertheless,
+no generator with the stated regularity can satisfy the acceleration
+condition.  Every such generator obeys
+\begin{equation}
+ \varepsilon_0^{\rm acc}\ge\frac{\sqrt3}{16}.
+ \label{eq:quartic-floor}
+\end{equation}
+\end{proposition}
+
+The separation is explicit:
+$M''-2K_{\min}=1/4+23t^2/144>0$, and
+$C(t)=(1+t^2/16+23t^4/1152)I_2$ satisfies
+\eqref{eq:covariance-lmi}.  However,
+$(\E\|X_t\|^4)''<0$ on the entire interval, with value $-3$ at zero.
+Since $\|\nabla\|x\|^4\|_{L^2(p_0)}=16\sqrt3$,
+\eqref{eq:convex-residual-floor} gives the displayed floor.  The obstruction
+applies to every admissible generator, independently of its
+parameterization or optimization method.  In particular no correction
+family on this path can achieve
+$\sup_t\varepsilon_t^{\rm acc}=O(H)$ as $H\downarrow0$.
+By Corollary~\ref{cor:sharp-local-residual}, the same obstruction yields
+an actual local error floor for every such generator, with
+$E^u_{0,h}(x)=x+hu(0,x)$:
+\[
+ \lim_{h\downarrow0}h^{-2}W_2((E^u_{0,h})_\#p_0,p_h)
+ \ge\frac{\sqrt3}{32}.
+\]
+This local conclusion does not exclude accidental cancellation of
+terminal integration error.

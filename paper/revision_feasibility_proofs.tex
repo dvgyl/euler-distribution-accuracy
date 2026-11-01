@@ -1,0 +1,146 @@
+\section{Proofs of the path-level feasibility certificates}
+\label{app:convex-feasibility}
+
+\subsection{Convex observables and weighted kinetic energy}
+\begin{proof}
+Along an exact trajectory, two derivatives of $\phi(X_t)$ give
+$u_t(X_t)^\top D^2\phi(X_t)u_t(X_t)+
+\nabla\phi(X_t)\cdot\acc_t(X_t)$.
+The global growth bounds and the finite second moment dominate these terms
+when $D^2\phi$ is bounded.  Smooth compact cutoffs of $\phi$ have gradients
+converging to $\nabla\phi$ in $L^2(p_t)$: both the gradient and the cutoff
+error are bounded by $C(1+\|x\|)$, with the error supported in the tails.
+Thus the acceleration condition removes the final integral in
+\eqref{eq:convex-chain-rule}.  A convex Hessian makes the first integral
+nonnegative.  Without that condition, the first integral is at least
+$K_\phi(t)$, and the definition of $\varepsilon_t^{\rm acc}$ bounds the
+absolute value of the final integral by
+$\varepsilon_t^{\rm acc}\|\nabla\phi\|_{L^2(p_t)}$.  This proves
+\eqref{eq:convex-residual-floor}.  The additional hypotheses stated for
+unbounded tests justify the identical argument.
+\end{proof}
+
+The theorem implies the convex-order condition
+\begin{equation}
+ p_{(1-\lambda)s+\lambda t}
+ \preceq_{\rm cx}(1-\lambda)p_s+\lambda p_t,
+ \qquad 0\le s<t\le T,\quad 0\le\lambda\le1.
+ \label{eq:convex-order-path}
+\end{equation}
+Here $\preceq_{\rm cx}$ compares expectations of convex functions, and the
+right side is a mixture of endpoint measures.  To extend the proved
+inequality beyond smooth tests, first mollify convex Lipschitz functions
+and then approximate an arbitrary convex function from below by maxima of
+finitely many supporting affine functions.  Subtracting one supporting
+affine function permits monotone convergence; the mean is affine by
+Corollary~\ref{cor:mean-action}.  This is a necessary condition, not an
+existence theorem.  In particular, every straight stochastic interpolation
+$\Law((1-t)X_0+tX_1)$ already satisfies the convex-observable test, regardless
+of whether it has an acceleration-preserving deterministic generator.
+
+
+For a smooth positive density, the weighted quantity $K_\phi$ has a linear
+variational characterization.  If $B=D^2\phi$ satisfies $b_-I\preceq B\preceq b_+I$ for positive finite constants, a weighted Poincare
+inequality and one finite-energy generating field give a solution $\chi$,
+unique modulo constants in the weighted Sobolev completion of smooth
+functions, of
+\[
+ \int \nabla\eta^\top B^{-1}\nabla\chi\,\dd p_t
+ =\int\eta\,\partial_t p_t\,\dd x.
+\]
+Its velocity $v_\phi=B^{-1}\nabla\chi$ attains $K_\phi$.  Indeed, every other
+admissible velocity differs by a zero-weighted-divergence field $r$, and
+$\int r\cdot\nabla\chi\,\dd p_t=0$.  Expansion of the quadratic energy
+proves minimality.  This permits a linear elliptic feasibility diagnostic
+without asserting that the nonlinear correction problem is solvable.
+
+
+\subsection{Covariance constraints and their limits}
+\begin{proof}
+Applying \eqref{eq:convex-chain-rule} to quadratic coordinate products,
+or polarizing its quadratic-form identity, gives
+$\frac{\dd^2}{\dd t^2}\E[X_tX_t^\top]=2\E[u_tu_t^\top]$.
+Subtracting $m(t)m(t)^\top$ yields
+$C''=2\E[(u_t-\xi)(u_t-\xi)^\top]$.
+The displayed block matrix is the covariance of $(X_t,u_t(X_t))$.
+For $Z=e\cdot(X_t-m(t))$ and $V=e\cdot(u_t(X_t)-\xi)$,
+$q=\sigma_e^2$ satisfies $q'=2\E[ZV]$ and $q''=2\E[V^2]$.
+Hence
+\[
+ \sigma_e''=
+ \frac{\E[Z^2]\E[V^2]-(\E[ZV])^2}
+ {(\E[Z^2])^{3/2}}\ge0
+\]
+by Cauchy--Schwarz.
+\end{proof}
+
+These tests form a strict hierarchy.  For example, a diagonal Gaussian
+path with standard deviations $s_1(t)=1+t-t^2/10$ and
+$s_2(t)=1+t+t^2$ on $[0,1/4]$ has positive $C''$ and passes the scalar
+minimum-energy test, because
+$M''/2-K_{\min}=s_1s_1''+s_2s_2''>0$.
+It is nevertheless infeasible because $s_1''=-1/5<0$.
+The next example also passes the full covariance test.
+
+
+\subsection{The quartic obstruction and its residual floor}
+\begin{proof}
+The bounds $|\kappa|\le1$ and
+$r|\kappa'(r)|\le5/(2e)<1$ give $\|Db\|_{\rm op}<2$.
+Thus $G_t$ is a global smooth bi-Lipschitz map, with lower Lipschitz
+constant at least $1-t^2\ge3/4$.  Its nonlinear terms have bounded
+derivatives, and its inverse has uniformly bounded first derivatives on
+the interval.  The generator and its material acceleration
+$b\circ G_t^{-1}$ are globally Lipschitz.  The source is Gaussian and the
+maps have linear growth, so every required moment is finite.  The generator
+is radial, hence a gradient, with a potential of at most quadratic growth;
+the weighted-gradient orthogonality argument establishes its minimum
+kinetic energy.
+
+For $R=\|Z\|$, $R^2/2$ is exponential with mean one, and
+\[
+ \E[R^{2\ell}e^{-jR^2/2}]
+ =\frac{2^\ell\ell!}{(1+j)^{\ell+1}}.
+\]
+It follows exactly that
+\[
+ M(t)=2+\frac{t^2}{8}+\frac{23t^4}{576},\qquad
+ K_{\min}(t)=\frac{23t^2}{144},\qquad
+ M''-2K_{\min}=\frac14+\frac{23t^2}{144}>0.
+\]
+The mean is zero and $C(t)=q(t)I_2$, where
+$q(t)=1+t^2/16+23t^4/1152$.
+For $q=1+\alpha t^2+\beta t^4$ with $\alpha,\beta>0$,
+\[
+ qq''-\tfrac12(q')^2
+ =2\alpha+12\beta t^2+6\alpha\beta t^4+4\beta^2t^6>0.
+\]
+Thus $\sqrt q$ is convex and the choice $B_t=(q'/2)I_2$ satisfies
+\eqref{eq:covariance-lmi}.
+
+For the convex observable $\phi(x)=\|x\|^4$, direct expansion instead gives
+\begin{align*}
+ F_\phi(t)
+ &=8-\frac32t^2+\frac{73}{144}t^4
+       +\frac{29}{9216}t^6+\frac{179}{73728}t^8,\\
+ F_\phi''(t)
+ &=-3+\frac{73}{12}t^2+\frac{145}{1536}t^4
+       +\frac{1253}{9216}t^6<0
+       \qquad(0\le t\le1/2).
+\end{align*}
+For the last inequality, the expression is increasing in $t^2$ and its
+value at $t=1/2$ is $-867715/589824<0$.
+The polynomial test is justified by the Gaussian moments and global
+linear growth.  Theorem~\ref{thm:convex-feasibility} therefore excludes
+every acceleration-preserving generator of this path, not only the
+displayed base field or a selected correction family.  Finally,
+$F_\phi''(0)=-3$ and
+$\|\nabla\phi\|_{L^2(p_0)}=4\sqrt{\E R^6}=16\sqrt3$.
+Equation~\eqref{eq:convex-residual-floor} gives
+\eqref{eq:quartic-floor}.  Corollary~\ref{cor:sharp-local-residual}
+then gives the stated local Euler coefficient lower bound.  For the
+displayed radial base field itself, $\acc_t(G_tz)=b(z)$ is a gradient
+with linear growth, so its projection equals itself and
+$\varepsilon_t^{\rm acc}=\|b\|_{L^2(\rho)}=\sqrt{23}/12$
+throughout the interval; this is larger than the universal floor.
+\end{proof}
