@@ -1,0 +1,216 @@
+\section{Constructing and certifying approximate corrections}
+\label{sec:certification}
+
+The useful residual is the component of acceleration that changes the
+distribution.  This component has a canonical definition even when its
+orthogonal complement does not have a classical flow.  For a probability
+measure $p$, write
+\[
+ \mathcal G_p=\overline{\{\nabla\phi:\phi\in C_c^\infty(\R^d)\}}^{L^2(p)}
+\]
+and let $\Pi_p$ be the orthogonal projection onto this space.
+Its orthogonal complement consists exactly
+of the fields with zero weighted divergence.  This is the standard tangent
+space decomposition in Wasserstein geometry~\citep[Chapter~8]{ambrosio2005gradient};
+the contribution below is its quantitative use in the Euler error bound.
+Define
+\begin{equation}
+ \varepsilon_t=\|\Pi_{p_t}\acc_t\|_{L^2(p_t)}
+ =\sup_{\substack{\phi\in C_c^\infty\\\|\nabla\phi\|_{L^2(p_t)}\le1}}
+       \left|\int\acc_t\cdot\nabla\phi\,\dd p_t\right|.
+ \label{eq:canonical-residual}
+\end{equation}
+Thus $\varepsilon_t=0$ is equivalent to the acceleration condition.
+No density or Poincar\'e inequality is needed for this definition.
+
+Here canonical refers to the projection for the chosen generator $u$,
+not an intrinsic acceleration of the probability path. For the expanding
+circular Gaussian, $u(x)=ax$ gives $\Pi_p\acc=a^2x$, whereas
+$u(x)=a(I+J)x$ gives $\Pi_p\acc=0$ on the same path. Intrinsic
+Wasserstein covariant acceleration instead first uses the minimum-energy
+gradient velocity $\Pi_pu$.
+
+\subsection{A residual theorem without a regular projected flow}
+
+\begin{theorem}[Projected acceleration controls Euler error]
+\label{thm:projected-residual}
+Keep the smoothness, spatial Lipschitz, growth, and moment assumptions of
+Theorem~\ref{thm:distribution_order}, including the common Lipschitz constant
+$L_a$ of $\acc_t$, but do not impose the acceleration condition.  Set
+\begin{align}
+ E_H&=\exp(L_aH^2/2),\qquad B_H=(1+LH)E_H,\nonumber\\
+ D_H&=\frac{C_j}{6}+E_H\left(\frac{LC_a}{2}
+                         +\frac{HL_aC_a}{8}\right).
+ \label{eq:projected-constants}
+\end{align}
+Then on every finite increasing grid,
+\begin{align}
+ \max_k W_2(\widehat p_k,p_{t_k})
+ &\le e^{LT}\left(D_H\sum_jh_j^3
+                   +\frac{B_H}{2}\sum_jh_j^2\varepsilon_{t_j}\right)
+ \label{eq:projected-bound}\\
+ &\le e^{LT}T\left(D_HH^2+\frac{B_H}{2}\varepsilon H\right)
+ .\nonumber
+\end{align}
+The second line assumes $\sup_t\varepsilon_t\le\varepsilon$.
+In particular, the projected solenoidal field
+$\acc_t-\Pi_{p_t}\acc_t$ need not be continuous or Lipschitz.
+\end{theorem}
+
+Proposition~\ref{prop:robustness} required a regular flow for the
+distribution-preserving part of acceleration.  Theorem~\ref{thm:projected-residual}
+instead follows the full acceleration field and bounds the change of its
+distribution by the projected residual.  The price is the explicit factor
+$B_H=1+O(H)$ and a different cubic constant; no elliptic regularity of the
+projection is required.  Appendix~\ref{app:certification-proofs} proves the
+result.  A certificate $\varepsilon_{t_j}\le\kappa H$ at every Euler node
+gives an $O(H^2)$ bound when the other constants are uniform.  The certificate
+may belong to one fixed field or to a family of fields indexed by $H$; these
+are different assertions.  A small value only at a training grid does not
+control a different evaluation grid without an interpolation bound.
+
+\begin{corollary}[Exact local Wasserstein coefficient]
+\label{cor:sharp-local-residual}
+Under Theorem~\ref{thm:projected-residual}, at every fixed $t<T$,
+\begin{equation}
+ \lim_{h\downarrow0}\frac{W_2((E_{t,h})_\#p_t,p_{t+h})}{h^2}
+ =\tfrac12\|\Pi_{p_t}\acc_t\|_{L^2(p_t)}.
+ \label{eq:sharp-local-residual}
+\end{equation}
+\end{corollary}
+The projected residual is therefore the exact leading local error
+coefficient.  This strengthens the local necessity result, but does not
+rule out cancellation between different steps at the final time.
+
+\subsection{Upper and lower certificates for the residual}
+
+A finite test space detects only part of the gradient projection.  Its norm
+is a lower bound, so reducing it alone cannot certify a small residual.
+The following identity supplies both sides using a gradient approximation
+and an independently admissible solenoidal field.
+
+\begin{proposition}[Primal and dual residual certificates]
+\label{prop:residual-certificates}
+Fix $p$ and $a\in L^2(p;\R^d)$.  For any $q\in\mathcal G_p$ and
+$w\in\mathcal G_p^\perp$, put
+\begin{align*}
+ \mathcal L&=2\langle a,q\rangle_{L^2(p)}-\|q\|_{L^2(p)}^2,\\
+ \mathcal U&=\|a-w\|_{L^2(p)}^2.
+\end{align*}
+Then
+\begin{align}
+ \max(0,\mathcal L)&\le\|\Pi_pa\|_{L^2(p)}^2\le\mathcal U,\nonumber\\
+ \mathcal U-\mathcal L&=\|a-w-q\|_{L^2(p)}^2.
+ \label{eq:primal-dual-certificate}
+\end{align}
+For an exact Galerkin solution
+$q_N=\sum_i c_i\nabla\phi_i$, where
+$A_{ij}=\langle\nabla\phi_i,\nabla\phi_j\rangle$ and
+$b_i=\langle a,\nabla\phi_i\rangle$, $Ac=b$ gives
+$\mathcal L=\|q_N\|^2=b^\top A^{-1}b$ when $A$ is positive definite.
+The general certificate remains valid for inexact coefficients.
+\end{proposition}
+
+This Hilbert-space identity turns a numerical projection into an upper
+certificate for Eq.~\eqref{eq:projected-bound}.  For fixed acceleration,
+gradient and solenoidal linear bases give two quadratic least-squares
+problems; the gap checks their resolution.  An explicit admissible $w$
+already gives an upper bound, so a Poisson solve is optional.
+
+A weighted Poisson formulation, an a posteriori Poincar\'e estimate, and
+explicit bounds for quadrature and acceleration approximation errors appear
+in Appendix~\ref{app:certification-proofs}.  A raw divergence penalty or
+Monte Carlo standard error alone is not a deterministic residual certificate.
+
+\subsection{A finite-dimensional construction with explicit scope}
+
+In two dimensions let $J$ denote the quarter-turn matrix.  For a known
+positive density, stream potentials give the established gauge
+parameterization~\citep{horvat2024gauge}
+\begin{align}
+ r_\theta(t,x)&=p_t(x)^{-1}J\nabla_x\psi_\theta(t,x),\nonumber\\
+ \psi_\theta&=\sum_{\ell=1}^m\theta_\ell\psi_\ell,
+ \qquad \nabla\cdot(p_tr_\theta)=0.
+ \label{eq:compact-stream-gauge}
+\end{align}
+Compactly supported potentials avoid dividing by arbitrarily small density
+in the tails.  The proof appendix gives the antisymmetric-tensor version in higher
+dimensions. A finite family need not represent every admissible field.
+
+For a base field satisfying the theorem's bounds, a positive $C^4$ density,
+uniformly compactly supported $C^4$ potentials and a compact parameter set,
+the corrected fields preserve the
+exact path and have uniform regularity bounds.  Their objective
+$\mathcal E(\theta)=\sup_t\|\Pi_{p_t}\acc_{u_\theta,t}\|$ is
+Lipschitz and attains a minimum.  Proposition~\ref{prop:compact-gauge-search}
+in the proof appendix gives the assumptions and a certified finite-net
+search guarantee: parameter mesh $\delta$ and objective certificate width
+$\eta$ achieve residual at most
+$\min_\Theta\mathcal E+K_\Theta\delta+\eta$.
+
+
+This finite-dimensional guarantee does not imply efficiency or convergence
+of a local nonlinear optimizer.  A positive minimum in one family does
+not prove path infeasibility.  The appendix also certifies the continuous
+time supremum from a time grid.
+
+\subsection{Separating path error from integration error}
+
+Let $p_t$ now be a target path generated by $v$, and let $u$ be the field
+actually integrated.  Its exact path need not equal $p_t$.  Besides the
+acceleration residual under the target, define the path defect
+\begin{equation}
+ \beta_t=\|\Pi_{p_t}(u_t-v_t)\|_{L^2(p_t)}.
+ \label{eq:path-defect}
+\end{equation}
+This defect ignores velocity differences that preserve the target
+continuity equation.  Both diagnostics in the next theorem are evaluated under the target
+$p_t$; no density substitution for an unknown learned path is made.
+
+\begin{theorem}[Target-path, residual, and integration errors]
+\label{thm:target-path-bound}
+Let $p_t$ be generated by a smooth, uniformly spatially Lipschitz $v$ from
+$p_0\in\mathcal P_2(\R^d)$, with
+$\sup_t\|v_t\|_{L^2(p_t)}<\infty$.  Let $u$ satisfy the smoothness,
+growth, and Lipschitz assumptions of Theorem~\ref{thm:projected-residual}.
+Write $F^u_{t,s}$ for its exact flow and assume
+\begin{align*}
+ C_a&=\sup_t\|\acc_{u,t}\|_{L^2(p_t)}<\infty,\\
+ C_j^\diamond&=
+ \sup_{0\le t\le s\le T}
+ \|\jerk_u(s,F^u_{t,s}(\cdot))\|_{L^2(p_t)}<\infty.
+\end{align*}
+Suppose $\beta_t$ is integrable.  Let $\widehat q_k$ be Euler's laws for
+$u$ from any $q_0\in\mathcal P_2$.  With
+$\varepsilon_t=\|\Pi_{p_t}\acc_{u,t}\|$ and with $D_H$ in
+Eq.~\eqref{eq:projected-constants} using $C_j^\diamond$ in place of
+$C_j$,
+\begin{align}
+ \max_k W_2(\widehat q_k,p_{t_k})
+ \le e^{LT}\bigg[&W_2(q_0,p_0)+D_H\sum_jh_j^3\nonumber\\
+                 &+\frac{B_H}{2}\sum_jh_j^2\varepsilon_{t_j}
+                  +\int_0^T\beta_t\,\dd t\bigg].
+ \label{eq:target-path-bound}
+\end{align}
+\end{theorem}
+
+The mixed jerk assumption concerns exact $u$-trajectories started from
+the target at any time.  It is automatic from a uniform linear-growth
+bound on $\jerk_u$ and bounded target second moments, but does not follow
+from a training loss alone.  If $u$ generates $p_t$, then
+$C_j^\diamond=C_j$ and $\beta_t=0$, recovering
+Theorem~\ref{thm:projected-residual}.
+
+For conditional flow matching with $v_t(x)=\E[Y_t\mid X_t=x]$ and
+$\Law(X_t)=p_t$, the population excess squared regression loss is
+$\mathcal R_{\rm excess}=\int_0^T\|u_t-v_t\|_{L^2(p_t)}^2\,\dd t$.
+Projection contraction gives
+$\int_0^T\beta_t\,\dd t\le\sqrt{T\mathcal R_{\rm excess}}$.
+These population and exact-flow facts are standard~\citep{lipman2023flow,benton2024error};
+Eq.~\eqref{eq:target-path-bound} combines them with the Euler residual.
+There is no finite-sample learning guarantee.  An exactly target-solenoidal
+correction leaves $\beta_t$ unchanged, but can change the other constants.
+
+For a stream correction formed with an approximate density, the resulting
+path defect can be bounded using the score discrepancy and a Poincar\'e
+constant; Eq.~\eqref{eq:score-path-defect} gives the precise bound.

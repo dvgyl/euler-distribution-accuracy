@@ -1,0 +1,18 @@
+Command: PYTHONPATH=build/deps:src python -m unittest discover -s tests -p test_global_validation.py -v
+
+test_changed_schedule_destroys_cosine_endpoint_cancellation ... ok
+test_endpoint_cancels_but_interior_does_not ... ok
+test_finest_endpoint_agrees_with_100_digit_product ... ok
+test_material_acceleration_projection_is_nonzero ... ok
+test_quantile_schedule_is_the_declared_probability_mesh ... ok
+test_scalar_metric_agrees_with_independent_covariance_recursion ... ok
+test_uniform_signed_third_order_term_matches_expansion ... ok
+test_weighted_coefficients_match_independent_quadrature ... ok
+
+Ran 8 tests in 0.302s
+
+OK
+
+Only the eight new tests were run for this validation. The existing 72-test
+suite was not rerun by this agent during this task.
+

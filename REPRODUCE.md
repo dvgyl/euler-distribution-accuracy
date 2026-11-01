@@ -1,13 +1,13 @@
 # Reproduce the paper and results
 
-This guide explains how to regenerate the numerical results and build the complete paper. Run the commands from the package directory with Python 3.14.6 and the dependency versions in the lockfile. No GPU, training data, or model checkpoint is needed.
+This guide explains how to regenerate the numerical results and build the complete paper. Run the commands from the package directory with the dependency versions in the lockfile. The original release used Python 3.14.6; this revision was reproduced with Python 3.12.14 on Linux x86-64. No GPU, training data, or model checkpoint is needed.
 
 ## Install the dependencies
 
 Create a Python environment with the pinned dependency versions.
 
 ```sh
-python3.14 -m venv .reproduction-venv
+python3 -m venv .reproduction-venv
 .reproduction-venv/bin/python -m pip install -r requirements.lock.txt
 ```
 
@@ -19,7 +19,7 @@ The following command runs the complete numerical reproduction.
 make reproduce PYTHON=.reproduction-venv/bin/python
 ```
 
-The run checks 63 tests before generating numerical summaries, CSV files, raw arrays, tables, and eight PDF figures in `build/reproduction/`. If two calculations differ by more than the specified arithmetic tolerance, the run stops with a nonzero exit status. The command also verifies that the numerical source and configuration remain unchanged during the run.
+The run checks 80 tests before generating numerical summaries, CSV files, raw arrays, tables, and eight PDF figures in `build/reproduction/`. If two calculations differ by more than the specified arithmetic tolerance, the run stops with a nonzero exit status. The command also verifies that the numerical source and configuration remain unchanged during the run.
 
 To select another output directory, call the script directly.
 
@@ -43,17 +43,76 @@ The output gives both distribution error and particle error. The quantity `w2` i
 
 Small numerical differences can arise between linear-algebra libraries, while font-processing versions can change the bytes of figure PDFs. Compare the numerical values within the stated tolerances and inspect the resulting figures.
 
+## Reproduce the revision experiments
+
+```sh
+make revision PYTHON=.reproduction-venv/bin/python
+```
+
+This writes the new nonradial construction, global quartic search, local
+optimizer failure, correction sensitivity, independent path checks, infeasible
+Gaussian control, noisy one-coefficient regression, cost measurements, five
+figures, and raw CSV/JSON files to `results/revision/`. It uses a=0.4,
+deformation=0.18, T=1 and deterministic polar quadrature. Regression seeds are
+7, 19, and 42. See the supplementary methods and `research/experiment_notes.md`.
+
+The nonradial `w2_lower` and `w2_upper` columns evaluate proven continuum
+bounds by quadrature. They are neither exact optimal-transport distances nor
+interval-arithmetic enclosures of quadrature error. The `residual_upper`
+formula is analytic; its zero at the exact recovered coefficients follows
+from a sum-of-squares identity. A near-zero floating-point value is not itself
+a proof. The unfavorable Heun/RK3 comparison is reported.
+
+## Reproduce the endpoint-cancellation validation
+
+```sh
+make global-validation PYTHON=.reproduction-venv/bin/python
+```
+
+This writes `results/global_validation/`: convergence and full time-profile
+CSV files, matrix and high-precision cross-checks, JSON summaries, and the
+three-panel endpoint-cancellation figure. Parameters are `a=0.4`,
+`epsilon=0.08`, `delta=0.2`, with 16 through 4096 steps. The uniform schedule
+and the quantile schedule of `rho(t)=1+delta*cos(2*pi*t)` are compared for the
+cosine-defect field and an acceleration-preserving control.
+
+The Gaussian Wasserstein formula is exact; its evaluation uses stable
+logarithmic scale accumulation in floating point. Independent 2-by-2
+covariance recurrences and 100-digit mpmath calculations check the arithmetic.
+The twelve high-precision comparisons agree within `1.45e-12` relative error.
+These comparisons are not interval-arithmetic proofs. The convergence orders
+and coefficients are proved analytically in the global-theory supplement.
+The recorded whole-suite receipt is
+`results/global_validation/full_test_receipt.txt` (80 tests passed).
+
+For implementation and interpretation details, see
+[research/global_validation_notes.md](research/global_validation_notes.md).
+The terminal error alone is deliberately misleading in one example; inspect
+quarter-time and maximum-node errors as well as the endpoint.
+
 ## Build the complete manuscript
 
-Install Tectonic 0.17.0, whose first build can require network access to obtain TeX resources. The [paper/](paper/) directory contains the TMLR template and license notices.
+Install TeX Live with `latexmk`, `pdflatex`, and BibTeX. The standard IEEEtran
+class and bibliography style are vendored with their original notices.
+Python dependency `pypdf==6.10.0` splits the combined PDF. No external network
+is needed during the build once LaTeX and declared dependencies are installed.
 
 ```sh
 make paper PYTHON=.reproduction-venv/bin/python
 ```
 
-This command builds `manuscript.pdf` from the included sources, numerical macros, tables, and PDF figures, with the PDF date fixed at midnight UTC. Compiler output is written under `build/`, and the `TECTONIC` variable selects a different compiler executable.
+This builds three synchronized outputs:
 
-The build uses the figures and `.tex` files in `results/`, rather than the regenerated outputs in `build/reproduction/`. To use regenerated results, copy the required PDF figures and `.tex` files to their corresponding paths in `results/`, then run `make paper`.
+- `manuscript.pdf`: the revised main article and complete supplement together;
+- `ieee_tai_main.pdf`: the IEEE-style main article, including references;
+- `ieee_tai_supplement.pdf`: all full proofs and detailed calculations.
+
+Separate PDFs retain the combined page numbers. Use the combined PDF for all
+internal cross-links. The build checks unresolved and multiply defined
+references, fixes the source date to 1 November 2026, and records compiler
+output under `build/`. `LATEXMK` can select a different executable. The build
+uses included `.pdf` and `.tex` results. Compare independently regenerated
+established results before copying their figures and macros into `results/`.
 
 The two explanatory figures can also be regenerated separately.
 

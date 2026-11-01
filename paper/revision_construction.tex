@@ -1,0 +1,178 @@
+\section{Constructing a nonradial probability path and its correction}
+\label{sec:nonradial-construction}
+
+The acceleration condition can be imposed before solving a nonlinear
+Eulerian equation. Let $\rho$ be a reference law, $b$ a field preserving
+$\rho$, and $F_t$ smooth diffeomorphisms. If
+\begin{equation}
+ \begin{aligned}
+  \partial_{tt}F_t(z)&=D F_t(z)b(z),\\
+  p_t&=(F_t)_\#\rho,\\
+  u_t(F_tz)&=\partial_tF_t(z).
+ \end{aligned}
+ \label{eq:reference-acceleration}
+\end{equation}
+then $\acc_t(F_tz)=DF_t(z)b(z)$. For every compactly supported smooth test
+$\phi$, the change of variables gives
+$\int\nabla\phi\cdot\acc_t\,\dd p_t
+=\int\nabla(\phi\circ F_t)\cdot b\,\dd\rho=0$.
+Thus the linear equation for $F_t$ in
+Eq.~\eqref{eq:reference-acceleration} constructs an admissible acceleration.
+A general nonlinear pushforward does not have this property: the displayed
+second-derivative identity is essential.
+
+\subsection{An explicit globally regular family}
+
+Identify $\R^2$ with $\mathbb C$, so $Jz=iz$. Take
+$\rho=\mathcal N(0,I_2)$, $a,T>0$, and $\epsilon>0$. Define
+\begin{align}
+ f(z)&=z^2e^{-|z|^2},\qquad
+ A_t=e^{(1+i)at},\qquad B_t=\epsilon e^{(1+i)a\sqrt2t},\nonumber\\
+ F_t(z)&=A_tz+B_tf(z),\qquad
+ q=\frac{4\epsilon}{e}e^{a(\sqrt2-1)T}<1.
+ \label{eq:harmonic-map}
+\end{align}
+The source law is $\rho$; the initial target law is $p_0=(F_0)_\#\rho$,
+which is already non-Gaussian. Writing
+$k_t(F_tz)=DF_t(z)Jz$, set
+\begin{equation}
+ v_t(F_tz)=\partial_tF_t(z)-a k_t(F_tz),\qquad
+ u_{\omega,t}=v_t+\omega k_t.
+ \label{eq:harmonic-gauge}
+\end{equation}
+Here $v$ is a base generator, not a claimed minimum-action field.
+
+\begin{theorem}[A constructive nonradial family]
+\label{thm:harmonic-construction}
+Under Eq.~\eqref{eq:harmonic-map}, each $F_t$ is a global smooth
+bi-Lipschitz diffeomorphism, uniformly on $[0,T]$. The laws
+$p_t=(F_t)_\#\rho$ have smooth positive densities on $\R^2$ and finite
+moments of every order. For every fixed $\omega\in\R$,
+$u_\omega$ generates exactly this same path, with trajectories
+\[
+ X_t=F_t\bigl(e^{i(\omega-a)t}Z\bigr),\qquad Z\sim\rho.
+\]
+The choice $\omega=a$ satisfies the acceleration condition, and all
+smoothness, growth, global Lipschitz, and moment assumptions of
+Theorem~\ref{thm:distribution_order}. Consequently its Euler distributions
+have error $O(H^2)$ on every finite grid. For $\epsilon>0$, no $p_t$ is
+an invertible affine image of a radial law or of a product of two
+independent real laws.
+\end{theorem}
+
+The key identity is
+\[
+ \partial_{tt}F_t=2a^2\partial_\theta F_t
+                 =2a^2DF_tJz.
+\]
+It follows because the angular harmonics $z$ and $f(z)$ have degrees one
+and two, and their time exponents have squares $2ia^2$ and $4ia^2$.
+Also $\|Df\|_\infty\le4/e$, so $F_t^{-1}(x)$ is the unique limit of
+the contraction
+$z_{m+1}=A_t^{-1}(x-B_tf(z_m))$, with contraction factor at most $q$.
+Thus the density
+$p_t(x)=\rho(F_t^{-1}x)/\det DF_t(F_t^{-1}x)$ and the velocity are
+computable without a PDE solve. The inverse iteration adds real
+computational cost; the numerical comparison includes it.
+
+This is a family, not just one isolated deformation. Replace $B_tf$ by
+$\sum_{n=2}^m\epsilon_n e^{(1+i)a\sqrt n t}f_n(z)$, where
+$f_n(e^{i\theta}z)=e^{in\theta}f_n(z)$ and the $f_n$ are smooth rapidly
+decaying functions. The same construction works whenever
+\[
+ \sum_{n=2}^m|\epsilon_n|e^{a(\sqrt n-1)T}\|Df_n\|_\infty<1.
+\]
+Arbitrary smooth radial profiles times $z^n$ give such harmonics.
+This constructs a specified class of paths. It does not solve the
+inverse problem for an arbitrary externally supplied density path.
+Appendix~\ref{app:harmonic-proofs} proves all assertions, including the
+nonproduct certificate.
+
+\begin{corollary}[A Gaussian starting law]
+\label{cor:gaussian-start}
+Replace $B_t$ by $\epsilon\sinh((1+i)a\sqrt2t)$ and assume
+$(4/e)\epsilon\sqrt2\sinh(a\sqrt2T)<1$.
+Then $F_0$ is the identity, so $p_0=\mathcal N(0,I_2)$, and the
+acceleration-preserving construction and its $O(H^2)$ bound still hold.
+For every $t>0$ the target law is neither affine-radial nor affine-product.
+\end{corollary}
+
+This follows from $B_t''=4ia^2B_t$ and
+$|\sinh((1+i)s)|^2=\sinh^2s+\sin^2s\le2\sinh^2s$.
+The numerical study below uses the exponential-coefficient family of
+Eq.~\eqref{eq:harmonic-map}; the Gaussian-start variant is an additional
+proved construction, not a separately reported empirical result.
+
+\subsection{Discovering the correction by a finite global search}
+
+For the two-mode family let $F_{1,t}=A_tz$, $F_{2,t}=B_tf(z)$, and
+\[
+ \zeta_n=a\sqrt n+i\{a\sqrt n+n(\omega-a)\}.
+\]
+Then $\acc_\omega(t,F_tz)=\sum_{n=1}^2\zeta_n^2F_{n,t}(z)$.
+Every $c k_t$ preserves $p_t$, so the following is an upper certificate
+for the projected acceleration residual:
+\begin{align}
+ R_t(\omega,c)^2
+ &=\|\acc_\omega-c k_t\|_{L^2(p_t)}^2\nonumber\\
+ &=\sum_{n=1}^2 M_n(t)|\zeta_n^2-inc|^2,\label{eq:harmonic-residual}\\
+ M_1(t)&=2e^{2at},\qquad
+ M_2(t)=\frac8{125}\epsilon^2e^{2a\sqrt2t}.\nonumber
+\end{align}
+Angular orthogonality makes this formula exact for the continuum law.
+It avoids numerical differentiation and a weighted Poisson solve.
+
+\begin{proposition}[Global correction recovery in the stated family]
+\label{prop:harmonic-search}
+At any fixed $t$, minimizing Eq.~\eqref{eq:harmonic-residual} over
+$(\omega,c)\in\R^2$ has the unique zero $(a,2a^2)$.
+For a fixed $\omega$ the unique minimizing coefficient is
+\[
+ c_*(\omega)=
+ \frac{\sum_{n=1}^2nM_n\operatorname{Im}(\zeta_n^2)}
+      {\sum_{n=1}^2n^2M_n}.
+\]
+After substitution, $R_t(\omega,c_*(\omega))^2$ is a coercive quartic
+polynomial. Its global minimum is found by evaluating its real cubic
+stationary points; on a bounded interval include the endpoints.
+The same statement holds for a time-integrated squared residual after
+replacing $M_n(t)$ by their positive integrals.
+\end{proposition}
+
+The proof is elementary and useful operationally. A zero in mode one
+forces $\omega=\pm a$ and $c=2a\omega$. Mode two excludes $\omega=-a$.
+The leading quartic coefficient is $\sum n^4M_n>0$, while $c_*$ is
+affine in $\omega$. A local optimizer can converge to a nonzero residual
+minimum; the finite global search resolves this failure within this
+one-parameter correction family. Floating-point root enumeration is
+validated against the exact sum-of-squares identity, not presented as
+an interval-arithmetic proof.
+
+\subsection{An explicit distribution coupling and a particle limit}
+
+\begin{theorem}[Phase coupling for the constructed field]
+\label{thm:harmonic-coupling}
+For $u_a$, a uniform grid $h=T/N$, and Euler initialized at $F_0(Z)$,
+there is a constant $C$ independent of $N$ such that
+\begin{equation}
+ W_2(\widehat p_N,p_T)
+ \le \|\widehat X_N-F_T(e^{-ia^2Th}Z)\|_{L^2(\rho)}
+ \le Ch^2.
+ \label{eq:harmonic-coupling}
+\end{equation}
+Meanwhile the common-start particle error has the strictly positive limit
+\begin{equation}
+ \lim_{h\downarrow0}\frac{\|\widehat X_N-F_T(Z)\|_{L^2}}h
+ =a^2T\|DF_T(Z)JZ\|_{L^2(\rho)}>0.
+ \label{eq:harmonic-particle-limit}
+\end{equation}
+\end{theorem}
+
+The comparison curve $F_t(e^{-ia^2ht}Z)$ solves the explicit modified
+field $u_a-(h/2)\acc_{u_a}$, which generates the same marginals.
+A second-order Taylor expansion cancels Euler's quadratic local defect,
+giving the strong $O(h^2)$ comparison in
+Eq.~\eqref{eq:harmonic-coupling}; no infinite modified-equation series is
+used. This gives a computable coupling bound for a genuinely nonradial
+law. It is an upper bound on full $W_2$, not its exact value. The theorem
+does not claim a positive $h^2$ limit for that optimal distance.

@@ -1,0 +1,457 @@
+% Detailed established results, retained from the original preprint.
+\section{Error measures and the acceleration condition}
+\label{sec:setup}
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.22\linewidth}p{0.57\linewidth}p{0.14\linewidth}@{}}
+\toprule
+Term or symbol & Meaning & Definition\\
+\midrule
+Probability path $p_t$ & The distribution specified at each time $t$ & Section~\ref{sec:path}\\
+Local and global error & Error from one Euler step started from the exact distribution, and error accumulated through repeated steps & Section~\ref{sec:path}\\
+Particle error & Root mean squared distance using the same starting point & Section~\ref{sec:errors}\\
+Coupling and $W_2$ & A joint distribution with given marginals, and the least root mean squared distance over all such pairings & Eq.~\eqref{eq:w2}\\
+Material acceleration $\acc_t$ & Velocity change along an exact particle & Eq.~\eqref{eq:acceleration}\\
+Acceleration condition & $\int\nabla\phi\cdot\acc_t\,\dd p_t=0$ for every smooth compactly supported $\phi$ and every $t$ & Definition~\ref{def:flux}\\
+Kinetic action $\cA_T$ & Time integral of kinetic energy $\E_{p_t}\|u_t\|^2$ & Eq.~\eqref{eq:action}\\
+Second moment $M(t)$ & $\E_{p_t}\|X\|^2$ & Section~\ref{sec:path-restrictions}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{The probability path and Euler's method}
+\label{sec:path}
+
+A velocity field $u$ generates the probability path $(p_t)_{0\le t\le T}$ when the solution of $\dot X_t=u(t,X_t)$, with $X_0\sim p_0$, has distribution $p_t$ at each time. Each $p_t$, called a \emph{marginal distribution}, describes positions at one time without recording the particles' starting points. Different particle motions can therefore give the same probability path, as the outward and rotating Gaussian fields do. We assume finite second moments and write $\E$ for expectation, $\Law$ for distribution, and $\|\cdot\|$ for the Euclidean norm. Single bars $|\cdot|$ denote scalar absolute value or complex modulus, while $\|\cdot\|_{\rm op}$ denotes the induced operator norm of a linear or multilinear map.
+
+On a grid $0=t_0<\cdots<t_N=T$, with step lengths $h_k=t_{k+1}-t_k$ and largest step $H=\max_kh_k$, Euler's method is
+\begin{equation}
+ \widehat X_{k+1}=\widehat X_k+h_ku(t_k,\widehat X_k),
+ \qquad \widehat X_0\sim p_0,\qquad
+ \widehat p_k=\Law(\widehat X_k).
+ \label{eq:euler}
+\end{equation}
+For $u(x)=x$, a particle starting at one reaches $1.1$ after an Euler step of length $0.1$ and reaches $1.21$ after the next step. The second step starts from the first numerical position, so it includes the error from the first step. We call the error after repeated steps the \emph{global error}. The \emph{local error} is the error from one step that starts from the exact distribution $p_t$. We compare fields on the same grid. When studying convergence, we decrease the step sizes while keeping both fields and the final time fixed.
+
+\subsection{Particle error and distribution error}
+\label{sec:errors}
+
+A rotation shows why particle displacement and distribution change can differ. Rotating the uniform unit circle by $30^\circ$ moves each point by $2\sin(15^\circ)\approx0.518$, although the distribution stays the same. We can pair each rotated point with an original point at the same location, giving zero distance between the distributions. Such a pairing is a \emph{coupling}, a joint distribution with the two given marginal distributions. The Wasserstein distance is the least root mean squared distance over these couplings,
+\begin{equation}
+ W_2(\mu,\nu)=
+ \left(\inf_{\gamma\in\Gamma(\mu,\nu)}
+ \int\|x-y\|^2\dd\gamma(x,y)\right)^{1/2},
+ \label{eq:w2}
+\end{equation}
+where $\Gamma(\mu,\nu)$ is the set of couplings of $\mu$ and $\nu$. Particle error uses the numerical and exact particles from the same starting point. Its root mean squared value is $\|\widehat X_N-X_T\|_{L^2}=(\E\|\widehat X_N-X_T\|^2)^{1/2}$. This pairing is one of the couplings in Eq.~\eqref{eq:w2}, so distribution error cannot exceed particle error. Practical sampling metrics also compare distributions. For example, Fr\'echet Inception Distance uses the squared Wasserstein distance between Gaussian fits to feature distributions~\citep{heusel2017gans}. Our examples use $W_2$ between the full distributions.
+
+We calculate the errors from Gaussian formulas or deterministic quadrature, so they have no sampling uncertainty. Smaller values mean better accuracy in all figures and tables. An $O(H^2)$ bound means that the error is at most a constant times $H^2$ for small $H$, but the error could decrease faster. A positive limit of error divided by $h^2$ shows that second order is the actual rate. In that case, halving a sufficiently small uniform step reduces the error by approximately a factor of four.
+
+\subsection{The acceleration condition}
+\label{sec:condition}
+
+For a density $p_t$, the continuity equation $\partial_t p_t+\nabla\cdot(p_tu_t)=0$ describes how the velocity field changes the distribution. Adding a field $r_t$ with $\nabla\cdot(p_tr_t)=0$ leaves this equation unchanged, although it can change how individual particles move. When the probability measure has no density, we express the same condition using expectations of smooth functions. We apply it to material acceleration and use \emph{jerk} for the change in acceleration along an exact trajectory,
+\begin{equation}
+ \acc_t=\partial_tu_t+(D_xu_t)u_t,\qquad
+ \jerk_t=\partial_t\acc_t+(D_x\acc_t)u_t.
+ \label{eq:acceleration}
+\end{equation}
+Here $\acc_t(X_t)$ and $\jerk_t(X_t)$ are the second and third time derivatives of the exact particle position. The term $(D_xu_t)u_t$ accounts for the change in velocity caused by the particle's motion through space.
+
+\begin{definition}[Distribution-preserving fields and the acceleration condition]
+\label{def:flux}
+A field $w$ has \emph{zero weighted divergence under} a probability measure $p$ if
+\begin{equation}
+ \int \nabla\phi(x)\cdot w(x)\,p(\dd x)=0
+ \quad\text{for every }\phi\in C_c^\infty(\R^d),
+ \label{eq:flux-null}
+\end{equation}
+where the tests are smooth and compactly supported. A velocity field $u$ satisfies the \emph{acceleration condition} along $(p_t)$ if Eq.~\eqref{eq:flux-null} holds with $w=\acc_t$ and $p=p_t$ at every time.
+\end{definition}
+
+Zero weighted divergence refers to the probability measure $p$, while ordinary zero divergence refers to volume. For example, rotation preserves a circularly symmetric distribution because it keeps the angle uniform. A constant rightward field also has zero ordinary divergence, but it moves a Gaussian to the right and changes its distribution. Under the regularity assumptions of Proposition~\ref{prop:frozen-preservation}, Eq.~\eqref{eq:flux-null} means that the flow of $w$ preserves $p$ exactly. For acceleration, this means that motion along $\acc_t$ preserves $p_t$ while physical time $t$ is held fixed.
+
+\subsection{Kinetic action as a comparison objective}
+
+Penalties on speed or velocity derivatives are used to make numerical integration easier~\citep{finlay2020regularization,kelly2020easy,lee2023curvature}. We compare Euler's distribution error with kinetic action, the time integral of average squared speed,
+\begin{equation}
+ \cA_T(u)=\int_0^T\E_{p_t}\|u(t,X)\|^2\dd t,
+ \label{eq:action}
+\end{equation}
+where the integrand is kinetic energy, defined here without the factor $1/2$. The base fields in Sections~\ref{sec:gaussian} and~\ref{sec:nonlinear} minimize this action among finite-action fields that satisfy the same weak continuity equation. Their Euler distribution errors are nevertheless larger than those of the corrected fields. Section~\ref{sec:path-restrictions} proves this action comparison and shows which restrictions the acceleration condition places on the path.
+
+
+\section{Rotation separates the two error orders for a Gaussian}
+\label{sec:gaussian}
+
+For a Gaussian path, we can find the correction by comparing how Euler and the exact flow change the radius. Let $J$ be a quarter-turn in two dimensions, so $Jx$ is perpendicular to $x$ and has the same length. The field $ax+bJx$ combines expansion at rate $a>0$ with rotation at rate $b$. An Euler step sends $x$ to $(1+ah)x+bhJx$ and multiplies the squared radius by $(1+ah)^2+b^2h^2$. The exact expansion gives $e^{2ah}=1+2ah+2a^2h^2+O(h^3)$, while Euler without rotation misses one $a^2h^2$ term. Choosing $b=a$ supplies this term, and the same choice works as the step size changes.
+
+For the probability path
+\begin{equation}
+ p_t=\mathcal N(0,e^{2at}I_2),\qquad a>0,
+ \label{eq:gaussian-path}
+\end{equation}
+the base and corrected fields are therefore
+\begin{equation}
+ v_0(x)=ax,\qquad v_1(x)=a(I+J)x.
+ \label{eq:fixed-fields}
+\end{equation}
+These fields are part of the known Gaussian rotation family~\citep{lim2025hidden}. We use them to compare action, distribution error, and particle error. A linear change of coordinates gives the same construction for every positive definite covariance in even dimension. Euler also reproduces an added affine mean exactly. Appendix~\ref{app:fixed-gaussian} gives these extensions, and Figure~\ref{fig:gaussian} shows an elliptical Gaussian example.
+
+\begin{theorem}[Gaussian distribution and particle errors]
+\label{thm:fixed-gaussian}
+For the fields in Eq.~\eqref{eq:fixed-fields} on $[0,T]$ with $T>0$, the base field $v_0$ minimizes kinetic action among finite-action fields satisfying the same weak continuity equation. The corrected field adds $a(e^{2aT}-1)>0$ to that action. Euler's numerical covariance is $q_{i,k}I_2$, where
+\begin{equation}
+ q_{0,k}=\prod_{j<k}(1+ah_j)^2,\qquad
+ q_{1,k}=\prod_{j<k}(1+2ah_j+2a^2h_j^2).
+ \label{eq:fixed-covariance}
+\end{equation}
+At every grid point after the start,
+\begin{equation}
+ 0<W_2(\widehat p_k^1,p_{t_k})
+   <W_2(\widehat p_k^0,p_{t_k}),\qquad
+ W_2(\widehat p_k^i,p_{t_k})
+ =\sqrt{2}\,[e^{at_k}-\sqrt{q_{i,k}}].
+ \label{eq:fixed-error}
+\end{equation}
+For uniform $h=T/N\to0$, write $C_\Sigma=\sqrt{2}e^{aT}$. Then
+\begin{align}
+ W_2(\widehat p_N^0,p_T)&=C_\Sigma\,\tfrac12a^2T h+O(h^2),
+ \label{eq:base-order}\\
+ W_2(\widehat p_N^1,p_T)&=C_\Sigma\,\tfrac23a^3T h^2+O(h^3),
+ \label{eq:fixed-order}\\
+ \|\widehat X_N^1-X_T^1\|_{L^2}
+ &=C_\Sigma\,a^2T h+O(h^2).
+ \label{eq:particle-order}
+\end{align}
+\end{theorem}
+
+For $z=ah>0$, the covariance factors satisfy $(1+z)^2<1+2z+2z^2<e^{2z}$. Both numerical clouds are therefore too small, but the corrected cloud is closer to the exact size. Multiplying these factors keeps the same strict ordering on every increasing grid. To find the error orders, we take logarithms and add the errors over the steps. The one-step log-scale errors are $z-\log(1+z)=z^2/2+O(z^3)$ for the base field and $z-\frac12\log(1+2z+2z^2)=2z^3/3+O(z^4)$ for the corrected field. On a uniform grid, the sum over $T/h$ steps gives first-order and second-order errors, respectively.
+
+
+An optimal coupling pairs Gaussian points at the same angle, so the distribution error depends only on scale. Particle error also includes the angle error between particles from the same starting point. The base field has no angle error. Eqs.~\eqref{eq:base-order} and~\eqref{eq:particle-order} show that adding the correction doubles the leading particle error coefficient, although distribution error becomes second order. The elliptical Gaussian in Figure~\ref{fig:gaussian} has the same behavior. Increasing the uniform step count from 32 to 64 reduces base distribution error from $1.51\times10^{-2}$ to $7.63\times10^{-3}$, a factor of $1.98$. Corrected distribution error decreases from $3.74\times10^{-4}$ to $9.47\times10^{-5}$, a factor of $3.94$. Appendix~\ref{app:fixed-gaussian} gives the proof and bounds for unequal steps.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{../results/gaussian_convergence.pdf}
+\caption{Adding rotation gives second-order Gaussian distribution error, although particle error remains first order with twice the base field's leading coefficient. The left panel shows $W_2$ between numerical and exact distributions. The right panel shows particle error from the same starting point. The fields stay fixed as the uniform step count $N$ increases, and the reference lines show the $N^{-1}$ and $N^{-2}$ rates. Parameters are $a=0.6$, $T=1$, and $\Sigma_0=\left(\begin{smallmatrix}1.5&0.25\\0.25&0.75\end{smallmatrix}\right)$.}
+\label{fig:gaussian}
+\end{figure}
+
+
+This improvement on every grid requires expansion. During contraction, the added rotation can make the numerical radius too large. For $a=-0.6$ and one step of length one, the base scale $0.4$ is closer to the exact scale $e^{-0.6}\approx0.549$ than the corrected scale $\sqrt{0.52}\approx0.721$.
+
+For the expanding circular Gaussian, the corrected acceleration is $2a^2Jx$. Motion along this field follows circles and preserves the distribution. We use the same property below to bound the error without assuming a Gaussian path.
+
+
+\section{The acceleration condition bounds global distribution error}
+\label{sec:general}
+
+A velocity field can preserve a distribution even when its acceleration does not. For steady rotation $u(x)=Jx$ on the uniform unit circle, the velocity preserves the distribution, but the acceleration $\acc(x)=J^2x=-x$ points inward. Motion along this acceleration shrinks the circle. The corrected expanding Gaussian has tangential acceleration, so motion along its acceleration preserves the distribution. This is the property we use to bound Euler's distribution error.
+
+\subsection{A coupling that reduces the local error}
+
+Let $E_{t,h}(x)=x+hu_t(x)$ be the Euler map and $F_{t,t+h}$ the exact flow over the same interval. Hold physical time $t$ fixed, and let $\Psi_t^\tau$ be the flow that follows $\acc_t$ for duration $\tau$. Under the acceleration condition and the regularity assumptions below, $X\sim p_t$ and $\Psi_t^\tau X$ have the same distribution. Applying Euler to either starting point therefore gives the same output distribution. We can use the shifted start for Euler and the original start for exact motion to form a closer pairing.
+
+The choice $\tau=h^2/2$ supplies the leading displacement that Euler omits. We write $O_{L^2}(h^q)$ for a remainder whose root mean squared norm is at most $Ch^q$, with $C$ independent of $h$ as $h\downarrow0$. The shifted start satisfies $\Psi_t^{h^2/2}X=X+h^2\acc_t(X)/2+O_{L^2}(h^4)$. Evaluating velocity at this point changes the Euler displacement by only $O_{L^2}(h^3)$. Thus the root mean squared distance between $E_{t,h}(\Psi_t^{h^2/2}X)$ and $F_{t,t+h}(X)$ is $O(h^3)$, as Figure~\ref{fig:coupling} shows. For the circular Gaussian with $a=0.6$, the shift rotates the start by $2a^2\tau=0.36h^2$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{../results/figures/acceleration_coupling.pdf}
+\caption{Shifting the start along the acceleration field gives a closer pairing and keeps Euler's output distribution unchanged. During the shift, physical time is held fixed and the distribution remains $p_t$. The shift supplies the leading displacement that Euler omits. We pair the Euler output from the shifted start with exact motion from the original start. Under Theorem~\ref{thm:distribution_order}, their root mean squared distance is $O(h^3)$.}
+\label{fig:coupling}
+\end{figure}
+\FloatBarrier
+
+To obtain the global bound, we also need to control how later steps increase this local error. Two continuous derivatives of velocity give the trajectory expansion. Global Lipschitz bounds control how far apart the outputs can be when the inputs differ, and mean square bounds allow us to integrate over the distribution. The theorem states these assumptions.
+
+The exact theorem statement is Theorem~\ref{thm:distribution_order} in the main paper.
+
+
+Each step adds an error bounded by a constant times $h_j^3$. The sum $\sum_j h_j^3\le TH^2$ gives the total contribution of these errors, and $e^{LT}$ bounds how much later Euler steps can increase them. The error is therefore at most a constant times $H^2$ at every grid point, without any Gaussian or symmetry assumption. The theorem gives a test for a particular field. It does not give a suitable field for every path, and Section~\ref{sec:path-restrictions} shows that some paths cannot satisfy the condition. Appendix~\ref{app:general} proves the bound using the local coupling and the Euler stability estimate $1+Lh$.
+
+\subsection{Local necessity and weak error}
+
+The acceleration condition is also necessary if one Euler step from the exact distribution has error $o(h^2)$. Here $o(h^2)$ means that the error divided by $h^2$ tends to zero. For this rate to hold, the acceleration must preserve the distribution in the sense of Eq.~\eqref{eq:flux-null}.
+\begin{proposition}[Local converse]
+\label{prop:local-converse}
+Let $u$ and $p_t$ satisfy the regularity, growth, and moment assumptions of Theorem~\ref{thm:distribution_order}, without imposing the acceleration condition. At a fixed $t<T$, suppose
+\[
+ W_2((E_{t,h})_\#p_t,p_{t+h})=o(h^2)
+ \quad\text{as }h\downarrow0.
+\]
+Then $\acc_t$ satisfies Eq.~\eqref{eq:flux-null} under $p_t$.
+\end{proposition}
+Here $(E_{t,h})_\#p_t$ is the distribution obtained by applying Euler to a point drawn from $p_t$. The result concerns one step from the exact distribution. Errors across several steps can cancel at the final time, even when the acceleration condition fails. For example, the field $u(t,x)=\sin(2\pi t)e_1$ on $[0,1]$ with a Gaussian source has zero exact displacement and zero total Euler displacement on every uniform grid. Euler therefore gives the exact terminal distribution, although the acceleration changes the current distribution whenever it is nonzero. Appendix~\ref{app:local} gives the proof and this example.
+
+For a smooth compactly supported test function $\phi$, the difference between expectations after one Euler step and exact motion is
+\begin{equation}
+ \E_{p_t}\phi(E_{t,h}X)-\E_{p_{t+h}}\phi
+ =-\tfrac12h^2\int\nabla\phi\cdot\acc_t\,\dd p_t+o(h^2).
+ \label{eq:weak-defect}
+\end{equation}
+Under the proposition's assumptions, the absolute difference in expectations is at most the Lipschitz constant of $\phi$ times $W_2$. If $W_2=o(h^2)$, the leading integral in Eq.~\eqref{eq:weak-defect} must therefore be zero. This gives the acceleration condition. Appendix~\ref{app:local} justifies the remainder, and Proposition~\ref{prop:weak-euler} in Appendix~\ref{app:weak} gives an explicit cubic bound under a stronger moment assumption. Earlier global weak expansions follow expectation errors through the later exact flow~\citep{talay1990expansion,hurault2026geometry}. The coupling in Theorem~\ref{thm:distribution_order} bounds the distribution distance directly.
+
+\section{A nonlinear path has different error orders}
+\label{sec:nonlinear}
+
+The same difference in error orders is possible when the distribution changes shape. We use a radial distribution whose outer radii expand by larger relative factors. Unlike uniform expansion, this motion does not multiply all radii by the same number. Radial symmetry still gives an optimal pairing by radius, so we can compare errors when a covariance calculation is no longer enough.
+
+We choose the rotation to cancel the radial part of acceleration. For the outward field $\alpha(r)x$, this part is $[\alpha(r)^2+\alpha(r)r\alpha'(r)]x$. Adding the tangential velocity $\beta(r)Jx$ contributes $-\beta(r)^2x$ to the radial acceleration. Choosing $\beta(r)^2=\alpha(r)^2+\alpha(r)r\alpha'(r)$ cancels the radial acceleration. The remaining tangential acceleration preserves a radial distribution. We choose an increasing $\alpha$ so that the relative expansion depends on radius. We also keep $\alpha$ bounded to control growth at large radii. With $J=\left(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\right)$ and $a,\eta>0$, define
+\begin{equation}
+ \alpha(r)=a+\eta\frac{r^2}{1+r^2},\qquad
+ P(r)=\alpha(r)^2+\alpha(r)r\alpha'(r),\qquad
+ \beta(r)=\sqrt{P(r)}.
+ \label{eq:nonlinear-coefficients}
+\end{equation}
+The positive function $P$ gives a real rotation rate, and the resulting base and corrected fields are
+\begin{equation}
+ u_0(x)=\alpha(\|x\|)x,\qquad
+ u_1(x)=\alpha(\|x\|)x+\beta(\|x\|)Jx.
+ \label{eq:nonlinear-fields}
+\end{equation}
+
+For both fields, the radius satisfies $\dot R=\alpha(R)R$. We write $R(t,r)$ for its solution from radius $r$, with $R(0,r)=r$. When the source is rotationally invariant, the added rotation keeps the angle uniform at each positive radius and leaves the origin fixed. The two fields therefore give the same distribution at every time, although their particles follow different trajectories. Since $\alpha$ increases with radius, the distribution changes shape whenever the source support contains two distinct positive radii.
+
+For example, $a=0.6$ and $\eta=0.3$ give relative expansion rates $\alpha(1)=0.75$ and $\alpha(2)=0.84$. The outer circle therefore grows faster relative to its own radius. Figure~\ref{fig:shape} shows this shape change by dividing radius quantiles by the median radius. These ratios change along the nonlinear path. They would stay constant if every radius grew by the same factor.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\linewidth]{../results/figures/nonlinear_shape.pdf}
+\caption{The nonlinear distribution changes shape because outer radii expand by larger relative factors. The left panel shows the percentage change, from $t=0$, in each radius quantile divided by the median radius. Uniform scaling would leave these ratios unchanged. The right panel shows the expansion factor as a function of starting radius, with the parameters of Figure~\ref{fig:nonlinear}.}
+\label{fig:shape}
+\end{figure}
+
+The corrected field also satisfies the acceleration condition. Differentiation gives
+\begin{equation}
+ \acc_{u_1}(x)=\beta_a(\|x\|)Jx,\qquad
+ \beta_a(r)=2\alpha(r)\beta(r)+\alpha(r)r\beta'(r)\ge2a^2.
+ \label{eq:nonlinear-acceleration}
+\end{equation}
+
+This acceleration is tangent to each circle, so motion along it at fixed physical time preserves every radial distribution. The acceleration is nonzero away from the origin, so these trajectories are not straight with constant velocity as in Proposition~\ref{prop:gradient-straight}. The next theorem shows that the correction gives smaller distribution error on every grid. It also gives the exact error orders on uniform grids. Appendix~\ref{app:nonlinear} contains the regularity checks and proofs.
+
+\begin{theorem}[Nonlinear error separation on every grid]
+\label{thm:nonlinear}
+Let $a,\eta,T>0$, and let $p_0$ be rotationally invariant on $\R^2$, with
+$0<\E\|X_0\|^2<\infty$. The fields in Eq.~\eqref{eq:nonlinear-fields} are smooth and globally Lipschitz. They generate the same probability path. The base field minimizes kinetic action among finite-action fields satisfying the same weak continuity equation, and the correction strictly increases it. On every finite increasing time grid,
+\begin{equation}
+ 0<W_2(\widehat p_k^1,p_{t_k})
+   <W_2(\widehat p_k^0,p_{t_k})\qquad(k\ge1).
+ \label{eq:nonlinear-ordering}
+\end{equation}
+On uniform grids $h=T/N\to0$, there are finite, strictly positive constants $\kappa_0,\kappa_1,\kappa_{\rm p}$ such that
+\begin{equation}
+ \frac{W_2(\widehat p_N^0,p_T)}{h}\to \kappa_0,\qquad
+ \frac{W_2(\widehat p_N^1,p_T)}{h^2}\to \kappa_1,\qquad
+ \frac{\|\widehat X_N^1-X_T^1\|_{L^2}}{h}\to \kappa_{\rm p}.
+ \label{eq:nonlinear-limits}
+\end{equation}
+\end{theorem}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\linewidth]{../results/figures/nonlinear_convergence.pdf}
+\caption{The corrected nonlinear field gives second-order distribution error, although particle error remains first order with a larger leading coefficient. The left panel uses Eq.~\eqref{eq:radial-transport} to measure distribution error, while the right panel compares particles from the same start. Both fields remain fixed as the uniform step size decreases, and the reference slopes give the rates in Eq.~\eqref{eq:nonlinear-limits}. The source is $0.6\mathcal N(0,0.5^2I_2)+0.4\mathcal N(0,1.5^2I_2)$, with $a=0.6$, $\eta=0.3$, and $T=1$.}
+\label{fig:nonlinear}
+\end{figure}
+
+The error comparison follows from the one-step radius maps
+\[
+ G_{0,h}(r)=r(1+h\alpha(r)),\qquad
+ G_{1,h}(r)=r\sqrt{(1+h\alpha(r))^2+h^2P(r)}.
+\]
+For every $h,r>0$, both maps increase with the starting radius and satisfy $G_{0,h}(r)<G_{1,h}(r)<R(h,r)$. The corrected radius is below the quadratic Taylor approximation of the exact radius. That approximation is below the exact radius because the exact radius has a positive third time derivative. Since the maps are increasing, the same ordering holds after repeated steps. Let $R_{i,k}(r)$ be the numerical radius after $k$ steps under $u_i$. An optimal coupling pairs points at the same angle and matches their radii in increasing order. Since all radius maps are increasing, this pairs the radii that came from the same source radius. Thus
+\begin{equation}
+ W_2(\widehat p_k^i,p_{t_k})^2
+ =\E\!\left[\bigl(R_{i,k}(R_0)-R(t_k,R_0)\bigr)^2\right],\qquad R_0=\|X_0\|.
+ \label{eq:radial-transport}
+\end{equation}
+
+Equation~\eqref{eq:radial-transport} shows how the radius ordering gives the stated distribution error ordering. In one step, the radius falls short by positive leading terms of orders $h^2$ and $h^3$ for the base and corrected fields. After repeated steps, these give positive leading terms of orders $h$ and $h^2$. The error bounds are proportional to the source radius, so a finite second moment is enough to average the squared errors.
+
+Particle error remains first order because each corrected Euler step rotates too little by a term of order $h^2$. Over repeated steps, this gives a first-order angle error that is larger than the second-order radius error for sufficiently small steps. The base field keeps each angle fixed, so its particle and distribution errors are equal. For the mixture in Figure~\ref{fig:nonlinear}, the correction increases the leading particle error coefficient from $1.39$ to $2.68$, a factor of about $1.93$. Appendix~\ref{app:nonlinear} derives these coefficients.
+
+A fixed invertible affine transformation keeps the same error orders, and independent products give examples in higher dimensions. These extensions need not keep the same exact distances or strict error comparison between fields. Appendix~\ref{app:extensions} states which properties hold.
+
+\paragraph{Numerical verification.}\label{sec:numerics}
+For the mixture in Figure~\ref{fig:nonlinear}, increasing the step count from 2,048 to 4,096 gives observed orders $\NonlinearBaseOrder$, $\NonlinearCorrectedOrder$, and $\NonlinearParticleOrder$ for base distribution, corrected distribution, and corrected particle error, respectively. These values agree with the limiting orders in the theorem. We check numerical accuracy using Cartesian updates, an independent reference calculation, and finer quadrature. Appendix~\ref{app:numerics} and Table~\ref{tab:nonlinear-results} give the results. The supplement includes the summary outputs and reproduction commands.
+
+
+\FloatBarrier
+\section{Which probability paths can satisfy the condition?}
+\label{sec:path-restrictions}
+
+\subsection{Mean, second moment, and kinetic action}
+
+The acceleration condition rules out some probability paths before we choose a velocity field. To see why, let $M(t)=\E\|X_t\|^2$ be the second moment. Its second derivative equals twice the kinetic energy plus $2\E[X_t\cdot\acc_t(X_t)]$. Under the assumptions below, the acceleration condition makes the last term zero. The path therefore determines the kinetic energy of every field that satisfies the condition.
+
+\begin{proposition}[Second-moment restriction]
+\label{prop:obstruction}
+Suppose exact trajectories and their first two time derivatives are continuous, and
+\[
+ \E\sup_{0\le t\le T}
+ \bigl[\|X_t\|^2+\|u_t(X_t)\|^2+\|\acc_t(X_t)\|^2\bigr]<\infty.
+\]
+If $\acc_t$ satisfies Eq.~\eqref{eq:flux-null}, then
+\begin{equation}
+ \frac{\dd^2}{\dd t^2}\E\|X_t\|^2
+ =2\E\|u_t(X_t)\|^2
+ \ge 2K_{\min}(t),
+ \label{eq:moment-obstruction}
+\end{equation}
+where $K_{\min}(t)$ is the infimum of kinetic energy among fields satisfying the weak continuity equation at time $t$ for the given probability path.
+\end{proposition}
+
+When the second moment is constant, Eq.~\eqref{eq:moment-obstruction} forces velocity to be zero almost everywhere. This rules out a changing distribution with constant second moment. For example, a centered noncircular Gaussian can rotate without changing its second moment. No field that generates this path can satisfy both the acceleration condition and the proposition's assumptions. A circular Gaussian stays unchanged under rotation, so its path does satisfy the condition with the zero field.
+
+The condition also requires an affine mean, which moves at constant velocity. To prove this, we apply smooth cutoffs to the coordinate functions and let their supports expand. The acceleration condition gives zero second derivative of the mean. Integrating the second-moment identity also determines the action.
+\begin{corollary}[Affine mean and action fixed by the path]
+\label{cor:mean-action}
+Under the assumptions and acceleration condition of Proposition~\ref{prop:obstruction}, let $m(t)=\E X_t$, $M(t)=\E\|X_t\|^2$, and $\xi=\E u_0(X_0)$. Then
+\begin{equation}
+ m(t)=m(0)+t\xi,\qquad
+ \cA_T(u)=\tfrac12\bigl[M'(T)-M'(0)\bigr].
+ \label{eq:mean-action}
+\end{equation}
+Thus any two fields that generate the same probability path and satisfy these assumptions have the same kinetic action.
+\end{corollary}
+
+The assumptions of Theorem~\ref{thm:distribution_order} imply those of Proposition~\ref{prop:obstruction}, as verified in Appendix~\ref{app:obstruction}. The energy inequality also excludes any interval with $g''<0$ on a scaling path $p_t=\Law(g(t)X_0)$, provided $g>0$ and $\E\|X_0\|^2>0$.
+
+The action required by the acceleration condition need not be the minimum action on the path. Suppose a finite-action gradient field $v^\nabla$ generates the path and lies in the $L^2(p_t)$ closure of compactly supported smooth gradients for almost every $t$. Every finite-action correction $r_t$ that preserves the weak continuity equation is orthogonal to this closure. The cross term in the squared velocity is therefore zero, which gives
+\begin{equation}
+ \cA_T(v^\nabla+r)
+ =\cA_T(v^\nabla)+\int_0^T\E_{p_t}\|r_t\|^2\dd t.
+ \label{eq:projection}
+\end{equation}
+The added term is nonnegative. It is positive whenever the correction is nonzero in space-time $L^2$, so $v^\nabla$ minimizes action within this class~\citep{ambrosio2005gradient,liu2022marginal,neklyudov2023action}. Here the distribution at every time is fixed. We are not minimizing over different paths with the same endpoints. Appendix~\ref{app:projection} checks the closure assumption for the Gaussian and nonlinear examples.
+
+\subsection{Tests for generative probability paths}
+
+We next apply these moment restrictions to paths used in generative modeling. Let $X_0$ be standard Gaussian noise independent of data $X_1$ with finite second moment, and write $m_1=\E X_1$ and $M_1=\E\|X_1\|^2$. We test whether a field that generates each path can satisfy both the acceleration condition and the assumptions of Proposition~\ref{prop:obstruction}.
+
+\paragraph{Variance-preserving interpolation.}
+Independence gives the following mean and second moment for $X_t=\rho_tX_1+\sqrt{1-\rho_t^2}X_0$:
+\[
+ m(t)=\rho_tm_1,\qquad M(t)=d+(M_1-d)\rho_t^2.
+\]
+When $M_1=d$, the second moment is constant, so only a stationary path can satisfy the stated condition and assumptions. This rules out a path from Gaussian noise to a different data distribution with the same second moment. When $M_1\ne d$, the cosine schedule $\rho_t=\sin(\pi t/(2T))$ is also ruled out. In this case, $(\rho_t^2)''$ changes sign, so $M''$ is negative somewhere and contradicts Eq.~\eqref{eq:moment-obstruction}. The schedule also has an affine mean only if $m_1=0$.
+
+\paragraph{Independent linear interpolation.}
+For $X_t=(1-t)X_0+tX_1$ on $[0,1]$, each noise-data pair moves along a straight segment. The conditional-mean field averages the velocities of segments that pass through each position. Its trajectories can therefore curve even though the original segments are straight. Conditional averaging cannot increase mean squared speed, so
+\[
+ \tfrac12M''(t)=d+M_1
+ =\E\|X_1-X_0\|^2
+ \ge\E\|\E[X_1-X_0\mid X_t]\|^2\ge K_{\min}(t).
+\]
+The last inequality uses $v_t(x)=\E[X_1-X_0\mid X_t=x]$ as a candidate for $K_{\min}(t)$. This assumes enough regularity for the field to generate the path. With this assumption, independent linear interpolation passes the necessary moment test. Passing this test does not prove that a field satisfying the acceleration condition exists. Any such field must have constant kinetic energy $d+M_1$, and its action over the unit interval must also equal $d+M_1$.
+
+\subsection{Gradient fields force straight motion}
+
+The moment test does not decide whether a suitable field exists for independent linear interpolation. For global gradient fields, we can say more. Under all assumptions of the main theorem, the acceleration condition forces the acceleration to be zero.
+\begin{proposition}[Gradient fields have straight trajectories]
+\label{prop:gradient-straight}
+Under all assumptions of Theorem~\ref{thm:distribution_order}, suppose each $u_t$ is a global spatial gradient on $\R^d$. Then $\acc_t=0$ $p_t$-almost everywhere for every $t\in[0,T]$. For $p_0$-almost every start,
+\[
+ X_t=X_0+t u(0,X_0)\qquad(0\le t\le T).
+\]
+Euler is exact on every finite increasing grid for this same full-probability set of starts. Both particle error and distribution error are zero.
+\end{proposition}
+A gradient velocity has a symmetric Jacobian, which makes its material acceleration a gradient as well. The global assumptions put this acceleration in the weighted gradient closure. The acceleration condition makes it orthogonal to that closure, so the acceleration must be zero. Continuity along trajectories then gives straight motion for one full-probability set of starts. Appendix~\ref{app:gradient} gives the proof.
+
+For independent linear interpolation from standard Gaussian noise, the exact conditional-mean field is a gradient when the intermediate densities are smooth and positive~\citep{lipman2023flow}:
+\[
+ v_t(x)=\frac{x}{t}+\frac{1-t}{t}\nabla\log p_t(x),\qquad 0<t<1.
+\]
+Both terms are spatial gradients. Under the theorem's global assumptions, the acceleration condition can therefore hold only when Euler is exact for almost every start. Exact probability-flow fields are also gradients when their forward drift is isotropic and linear~\citep{song2021score}. A learned field need not equal these exact fields, so the assumptions must be checked for the learned field separately.
+
+Regular displacement interpolation gives one class of straight trajectories. It pairs endpoints optimally and moves each pair at constant velocity. Appendix~\ref{app:displacement} states sufficient regularity conditions. Another class follows from Liu's straight rotated coupling between standard Gaussians~\citep[Example~3.5]{liu2022marginal}. We scale the target and use the quarter-turn pairing $X_1=\sigma JX_0$. In even dimension, the resulting straight segments have the same distribution at every time as independent interpolation to $\mathcal N(0,\sigma^2I)$. Appendix~\ref{app:fm} proves this identity.
+
+\FloatBarrier
+\section{Solver choice and imperfect corrections}
+\label{sec:limits}
+
+\subsection{The useful correction depends on the solver}
+\label{sec:solvers}
+
+A correction selected for Euler need not improve another solver. We compare Euler with Heun's method, which averages the initial velocity with the velocity at an Euler prediction:
+\[
+ y=x+hu(t,x),\qquad
+ x^+=x+\tfrac h2\{u(t,x)+u(t+h,y)\}.
+\]
+Heun uses two field evaluations per step and is also used in generative sampling~\citep{karras2022elucidating}. For the circular Gaussian field $(aI+bJ)x$, its one-step complex multiplier is $1+h(a+ib)+\tfrac12h^2(a+ib)^2$. The magnitude of this multiplier gives the scale change, and its argument gives the rotation. Adding the log-scale errors over a uniform grid gives distribution error
+\begin{equation}
+ C_\Sigma\frac{T|a^3-3ab^2|}{6}h^2+O(h^3),
+ \qquad C_\Sigma=\sqrt{2}e^{aT}.
+ \label{eq:heun-order}
+\end{equation}
+The Euler choice $b=a$ doubles the coefficient in Eq.~\eqref{eq:heun-order} compared with $b=0$. Choosing $b=a/\sqrt3$ instead cancels this coefficient for Heun. Thus the useful correction depends on the solver. Appendix~\ref{app:solver} derives the expansion and extends it to the Gaussian family of Appendix~\ref{app:fixed-gaussian}.
+
+\paragraph{Comparison at equal NFE.}
+Heun uses twice as many evaluations per step as Euler. To compare them at equal NFE, we therefore use two corrected Euler steps of length $h$ for each base-field Heun step of length $2h$. Both methods then give the same length multiplier,
+\[
+ \left(\sqrt{1+2ah+2a^2h^2}\right)^2
+ =1+a(2h)+\tfrac12a^2(2h)^2.
+\]
+\begin{proposition}[Gaussian equality at equal NFE]
+\label{prop:equal-nfe}
+For the circular Gaussian fields in Theorem~\ref{thm:fixed-gaussian}, let $N$ be even and $h=T/N$. Compare corrected-field Euler with $N$ steps of length $h$ and base-field Heun with $N/2$ steps of length $2h$. Their distributions agree at every shared grid point. Each method uses $N$ field evaluations over $[0,T]$.
+\end{proposition}
+The identity extends to the Gaussian construction in Appendix~\ref{app:fixed-gaussian} and to nonuniform grids with equal lengths within each consecutive pair of Euler steps. Appendix~\ref{app:equal-evaluation} proves both statements.
+
+The two methods have the same distributions at shared grid points, although their particle errors differ. Corrected Euler still has a first-order angle error, while base-field Heun has second-order particle error.
+
+For the nonlinear mixture in Figure~\ref{fig:equal-evaluation}, corrected Euler has 3.3--4.7\% smaller distribution error than base-field Heun over 2 to 4,096 NFE. Its particle error is much larger. Base-field Heun keeps each angle fixed and has an increasing radius map, so its particle error equals its distribution error. Table~\ref{tab:few-evaluations} gives the low-NFE values and ratios.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{../results/figures/equal_evaluation.pdf}
+\caption{Corrected Euler closely matches base-field Heun in nonlinear distribution error at equal NFE, although it has larger particle error. The source and parameters are those of Figure~\ref{fig:nonlinear}, and each even $N$ gives $N$ uniform Euler steps or $N/2$ Heun steps of twice the length. The left and right panels compare distribution and particle errors, respectively. Base-field Heun has particle error equal to $W_2$.}
+\label{fig:equal-evaluation}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\caption{At these low NFE values, corrected Euler has slightly smaller distribution error and larger particle error than base-field Heun. The setup is that of Figure~\ref{fig:nonlinear}, and the displayed $W_2$ equals particle error for both base-field methods. The final column gives the ratio of corrected Euler to base-field Heun distribution error, calculated from unrounded values.}
+\label{tab:few-evaluations}
+\par\smallskip
+\input{../results/equal_evaluation_table}
+\end{table}
+
+With the rotation $b=a/\sqrt3$, Heun has third-order distribution error while particle error remains second order. We compare this corrected Heun method with Kutta's third-order Runge--Kutta method, denoted RK3, on the base field at equal NFE. Corrected Heun has 18.0--20.9\% smaller distribution error at 12, 48, 192, and 384 NFE, although its particle error is larger. Appendix Table~\ref{tab:gaussian-higher-order} gives the values. Appendix~\ref{app:heun-rk3} derives the coefficients, and Appendix Figure~\ref{fig:solver} shows convergence.
+
+\subsection{A residual acceleration adds a first-order term to the bound}
+
+An imperfect correction can keep the probability path unchanged without fully satisfying the acceleration condition. Write $\acc_t=w_t+g_t$, where $w_t$ satisfies Eq.~\eqref{eq:flux-null} under $p_t$ and $g_t$ is the residual. Shifting the starting points along $w_t$ supplies the part of Euler's missing displacement that preserves the distribution. The contribution from $g_t$ remains.
+\begin{proposition}[Residual acceleration]
+\label{prop:robustness}
+Keep the assumptions on $u$ and $C_j$ from Theorem~\ref{thm:distribution_order}. Assume that $w_t$ is $C^1$, globally Lipschitz with common constant $L_w$, and satisfies Eq.~\eqref{eq:flux-null} under $p_t$. If
+$C_{w,2}=\sup_t\|w_t\|_{L^2(p_t)}<\infty$ and
+$\sup_t\|g_t\|_{L^2(p_t)}\le\varepsilon$, then
+\begin{equation}
+ \max_kW_2(\widehat p_k,p_{t_k})
+ \le e^{LT}T\left(C_wH^2+\tfrac12\varepsilon H\right),
+ \qquad C_w=\frac{C_j}{6}+\frac{LC_{w,2}}{2}+\frac{TL_wC_{w,2}}{8}.
+ \label{eq:robustness}
+\end{equation}
+\end{proposition}
+
+In each step, the residual adds at most $\varepsilon h^2/2$ to the root mean squared distance between the paired points. Adding these contributions over the steps gives the $\varepsilon H$ term. If the other constants stay bounded, $\varepsilon=O(H)$ is enough for second-order accuracy. For example, halving both $H$ and $\varepsilon$ divides both terms in $H^2+\varepsilon H$ by four. Halving only $H$ divides the residual term by two. A fixed residual leaves a first-order term in the bound, but this does not mean that the actual error is always first order. Appendix~\ref{app:robustness} proves the bound and gives the sum over individual steps.
+
+In the nonlinear example, a fixed mismatch in rotation gives first-order error. Replacing $\beta$ by $\lambda\beta$, with $\lambda\ge0$ fixed as the grid is refined, keeps the probability path unchanged but gives acceleration
+\[
+ \acc_{u_\lambda}(x)=(1-\lambda^2)P(r)x+\lambda\beta_a(r)Jx.
+\]
+For $\lambda\ne1$, the remaining radial acceleration leads to
+$W_2(\widehat p_N^\lambda,p_T)/h\to|1-\lambda^2|\kappa_0>0$,
+as proved in Appendix~\ref{app:nonlinear-sensitivity}. Even a small fixed mismatch therefore gives first-order convergence. It can still reduce error compared with the base field over a finite range of step sizes.
+
+We can estimate where the mismatch starts to matter by equating its leading contribution $|1-\lambda^2|\kappa_0h$ with the exact correction's contribution $\kappa_1h^2$. This gives
+\[
+ h_*\approx |1-\lambda^2|\frac{\kappa_0}{\kappa_1}.
+\]
+For the Gaussian path, the corresponding coefficients are $c_0^{\rm G}=C_\Sigma a^2T/2$ and $c_1^{\rm G}=2C_\Sigma a^3T/3$, where $C_\Sigma=e^{aT}\sqrt{\tr\Sigma_0}$. They give $h_*^{\rm G}\approx |1-\lambda^2|c_0^{\rm G}/c_1^{\rm G}=3|1-\lambda^2|/(4a)$. At $a=0.6$ on $[0,1]$, the 2\% mismatches $\lambda=0.98$ and $1.02$ give about $20$ steps, as shown in Appendix Figure~\ref{fig:sensitivity}. The first-order error dominates at sufficiently smaller step sizes. When $\lambda>1$, the two contributions can have opposite signs and cancel near this estimate. Thus the estimate gives a range where both terms matter, rather than an exact threshold between orders.
+
+\FloatBarrier

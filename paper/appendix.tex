@@ -77,7 +77,7 @@ Write
 \]
 Subtracting the mean and applying the inverse covariance factor gives a Gaussian source with identity covariance. These coordinates are called whitened coordinates. Each corrected Euler step changes scale and angle, but rotation leaves the Gaussian distribution unchanged. Distribution error therefore depends only on scale. Particles from the same starting point also have an angle error. The scale error has a positive second-order coefficient, while the angle error has a positive first-order coefficient.
 
-The correction belongs to the Gaussian family of \citet[Proposition~5.5]{lim2025hidden}. For a single Gaussian with $\Sigma_t=e^{2at}C_0C_0^\top$, the skew matrix $K_t=b e^{-2at}C_0^{-\top}JC_0^{-1}$ gives $\Sigma_tK_t(x-m_t)=b\Omega(x-m_t)$. This form lets us calculate kinetic action and Euler error over the full time interval.
+The correction belongs to the Gaussian family of Lim~\citep[Proposition~5.5]{lim2025hidden}. For a single Gaussian with $\Sigma_t=e^{2at}C_0C_0^\top$, the skew matrix $K_t=b e^{-2at}C_0^{-\top}JC_0^{-1}$ gives $\Sigma_tK_t(x-m_t)=b\Omega(x-m_t)$. This form lets us calculate kinetic action and Euler error over the full time interval.
 
 \begin{proof}[Proof of Theorem~\ref{thm:fixed-gaussian} and its Gaussian extension]
 \label{proof:fixed-gaussian}
@@ -1007,7 +1007,7 @@ At each fixed time, acceleration is zero almost everywhere. We need this conclus
 \label{app:displacement}
 
 
-Regular displacement interpolation moves each source point to its target at constant velocity along a straight line. Euler follows these trajectories exactly. Under the assumptions below, the field also minimizes action. \citet[Remark~7]{tao2026strain} note exactness on straight trajectories. The proposition gives sufficient assumptions on the map and proves exactness at successive grid points.
+Regular displacement interpolation moves each source point to its target at constant velocity along a straight line. Euler follows these trajectories exactly. Under the assumptions below, the field also minimizes action. Tao and Choi~\citep[Remark~7]{tao2026strain} note exactness on straight trajectories. The proposition gives sufficient assumptions on the map and proves exactness at successive grid points.
 
 \begin{proposition}[Euler exactness on regular displacement interpolation]
 \label{prop:displacement-euler}
@@ -1070,7 +1070,7 @@ These map assumptions are sufficient for both exactness and action minimization.
 \section{A scaled rotated Gaussian coupling}
 \label{app:fm}
 
-We scale the rotated Gaussian pairing of \citet[Example~3.5]{liu2022marginal} to obtain the same probability path as independent Gaussian interpolation, using dependent endpoints. In even dimension, let $\sigma>0$, $J^\top=-J$, $J^\top J=I$, and $X_0\sim\mathcal N(0,I)$. With $\mathcal T_t=(1-t)I+\sigma tJ$ on $[0,1]$, each particle follows a straight line to a scaled rotation of its start. The endpoints are dependent, but $\mathcal T_t\mathcal T_t^\top=q_{\rm G}(t)I$ with $q_{\rm G}(t)=(1-t)^2+\sigma^2t^2>0$, giving the same Gaussian marginals as independent interpolation. The velocity field is
+We scale the rotated Gaussian pairing of Liu~\citep[Example~3.5]{liu2022marginal} to obtain the same probability path as independent Gaussian interpolation, using dependent endpoints. In even dimension, let $\sigma>0$, $J^\top=-J$, $J^\top J=I$, and $X_0\sim\mathcal N(0,I)$. With $\mathcal T_t=(1-t)I+\sigma tJ$ on $[0,1]$, each particle follows a straight line to a scaled rotation of its start. The endpoints are dependent, but $\mathcal T_t\mathcal T_t^\top=q_{\rm G}(t)I$ with $q_{\rm G}(t)=(1-t)^2+\sigma^2t^2>0$, giving the same Gaussian marginals as independent interpolation. The velocity field is
 \begin{equation}
  u(t,x)=(\sigma J-I)\mathcal T_t^{-1}x
  =\frac{\sigma^2t-(1-t)}{q_{\rm G}(t)}x+\frac\sigma{q_{\rm G}(t)}Jx.

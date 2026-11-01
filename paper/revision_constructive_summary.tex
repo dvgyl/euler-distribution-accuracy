@@ -1,0 +1,59 @@
+\section{A nonradial positive construction}
+\label{sec:positive-summary}
+
+The obstruction concerns a specified class of paths.  Nontrivial
+acceleration-preserving paths do exist.  A useful sufficient construction
+starts from a reference law $\rho$, a field $b$ preserving $\rho$, and
+smooth diffeomorphisms satisfying
+\begin{equation}
+ \begin{aligned}
+ F_{tt}(z)&=DF_t(z)b(z),\\
+ p_t&=(F_t)_\#\rho,\qquad u_t(F_tz)=F_t'(z).
+ \end{aligned}
+ \label{eq:reference-summary}
+\end{equation}
+Then $\acc_t(F_tz)=DF_t(z)b(z)$ and
+$\int\nabla\phi\cdot\acc_t\,\dd p_t
+=\int\nabla(\phi\circ F_t)\cdot b\,\dd\rho=0$.
+
+Identify $\R^2$ with $\mathbb C$, take $a,\epsilon>0$ and
+$\rho=\mathcal N(0,I_2)$, and define
+\begin{equation}
+ F_t(z)=e^{(1+i)at}z+\epsilon e^{(1+i)a\sqrt2t}z^2e^{-|z|^2}.
+ \label{eq:positive-summary-map}
+\end{equation}
+If $(4\epsilon/e)e^{a(\sqrt2-1)T}<1$, these maps are uniformly
+bi-Lipschitz smooth diffeomorphisms and satisfy
+$F_{tt}=2a^2DF_tJz$.  The complete construction theorem and proof
+(Theorem~\ref{thm:harmonic-construction}) verify all the global
+regularity and moment assumptions and exclude every affine-radial and
+affine-product representation of the target laws.  Replacing the second
+time coefficient by $\epsilon\sinh((1+i)a\sqrt2t)$ gives a Gaussian
+starting law under the stated smallness condition
+(Corollary~\ref{cor:gaussian-start}).  These shape-changing paths are not
+scalar dilations, so there is no conflict with the rigidity theorem.
+
+The path-preserving family
+\[
+ u_{\omega,t}(F_tz)=F_t'(z)+(\omega-a)DF_t(z)Jz
+\]
+admits an exact continuum upper certificate for
+$\|\Pi_{p_t}\acc_{u_\omega,t}\|$.  Minimizing over a solenoidal
+acceleration comparison field eliminates one scalar analytically and
+leaves a coercive quartic in $\omega$.  Evaluating all its real cubic
+stationary points recovers the unique zero $\omega=a$; a positive local
+minimum demonstrates the limitation of local optimization
+(Proposition~\ref{prop:harmonic-search}).  This is a global recovery
+guarantee within the specified family.
+
+For $u_a$, an explicit phase coupling satisfies
+\[
+ W_2(\widehat p_N,p_T)
+ \le\|\widehat X_N-F_T(e^{-ia^2Th}Z)\|_2=O(h^2),
+\]
+while the common-start particle error divided by $h$ tends to the
+strictly positive constant
+$a^2T\|DF_T(Z)JZ\|_2$ (Theorem~\ref{thm:harmonic-coupling}).
+The construction provides a positive counterpart to the global
+characterization and nonlinear obstruction; it is not an inverse solver
+for arbitrary supplied density paths.

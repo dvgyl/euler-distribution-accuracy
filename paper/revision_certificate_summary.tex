@@ -1,0 +1,54 @@
+\section{Certification and target-path error}
+\label{sec:certificate-summary}
+
+The local projected-defect formula is established in recent work
+\citep{obzherin2026density,obzherin2026finite}.  In the present
+Euclidean setting, Corollary~\ref{cor:sharp-local-residual} proves it
+under the smoothness, Lipschitz and second-moment assumptions used here,
+without a density or a regular projected solenoidal flow:
+\[
+ \lim_{h\downarrow0}h^{-2}
+ W_2((\operatorname{Id}+hu_t)_\#p_t,p_{t+h})
+ =\tfrac12\varepsilon_t.
+\]
+The new global coefficient retains cancellation between transported
+defects; a sum of local norms alone cannot identify that coefficient.
+
+For finite error control, Theorem~\ref{thm:projected-residual} gives
+explicit constants $D_H=O(1)$ and $B_H=1+O(H)$ with
+\begin{equation}
+ \max_k W_2(\widehat p_k,p_{t_k})
+ \le e^{LT}\left(D_H\sum_jh_j^3+
+                    \frac{B_H}{2}\sum_jh_j^2\varepsilon_{t_j}\right).
+ \label{eq:certificate-summary}
+\end{equation}
+Its proof follows the full acceleration flow and controls its change of
+law, rather than assuming that the projected solenoidal component has a
+regular flow.  Node certificates $\varepsilon_{t_j}\le K H$ give
+second-order accuracy if the remaining constants are uniform.
+The quantitative odd-dimensional obstruction makes this residual
+requirement impossible under a fixed Lipschitz budget on its stated
+Gaussian paths.
+
+Certification requires an upper bound.  For
+$q\in\mathcal G_p$ and $w\in\mathcal G_p^\perp$, orthogonality gives
+\begin{align*}
+ \max\{0,2\langle a,q\rangle-\|q\|^2\}
+ &\le\|\Pi_pa\|^2\le\|a-w\|^2,\\
+ \|a-w\|^2-2\langle a,q\rangle+\|q\|^2
+ &=\|a-w-q\|^2.
+\end{align*}
+The complete statements include weighted-Poisson, approximation-error,
+compact gauge-search, and time-grid certificates.  A finite gradient
+projection norm is a lower bound and cannot by itself certify small
+residual.
+
+If $u$ is integrated while a different field $v$ generates the intended
+target $p_t$, Theorem~\ref{thm:target-path-bound} adds initialization
+error and
+$\int_0^T\|\Pi_{p_t}(u_t-v_t)\|_2\,\dd t$ to
+\eqref{eq:certificate-summary}, under its explicit mixed-jerk bound.
+Population excess flow-matching regression loss controls this latter
+term by Cauchy--Schwarz.  It does not alone imply the required regularity
+or eliminate discretization error.  All proofs and precise assumptions
+are retained in the supplement.

@@ -1,0 +1,586 @@
+\section{Proofs of the sharp global asymptotic and its converses}
+\label{app:sharp-global}
+
+Throughout this appendix the assumptions are the non-acceleration
+hypotheses of Theorem~\ref{thm:distribution_order}: $p_0\in\mathcal P_2(\R^d)$,
+$u\in C^2$, $u_t$ is globally $L$-Lipschitz with uniformly bounded
+$u_t(0)$, $\acc_t$ is globally $L_a$-Lipschitz, and the stated uniform
+$L^2(p_t)$ bounds on acceleration and material jerk hold.  The
+acceleration condition is not imposed.  All constants below may depend
+on this fixed field and on $T$, but not on the grid.  The proof does not
+assume a positive density, a Poincar\'e inequality, a fourth moment, or
+a smooth weighted-gradient projection.
+
+\subsection{Reference coordinates and transport of solenoidal fields}
+
+For $z\in\R^d$, set
+\begin{align*}
+ X_t(z)&=F_{0,t}(z),& J_t(z)&=DF_{0,t}(z),\\
+ c_t(z)&=J_t(z)^{-1}\acc_t(X_t(z)),&
+ C_t^\sigma(z)&=\int_0^t\sigma(s)c_s(z)\,\dd s.
+\end{align*}
+Then
+\begin{equation}
+ B_t^\sigma(X_t(z))=J_t(z)C_t^\sigma(z).
+ \label{eq:global-reference-defect}
+\end{equation}
+Standard flow bounds, used here directly, give constants $C<\infty$
+such that, uniformly in $t\in[0,T]$ and $z$,
+\begin{align}
+ |X_t(z)|+|\acc_t(X_t(z))|&\le C(1+|z|),\nonumber\\
+ \|J_t(z)\|_{\rm op}+\|J_t(z)^{-1}\|_{\rm op}&\le2e^{LT}.
+ \label{eq:global-flow-growth}
+\end{align}
+Indeed $\sup_t|\acc_t(0)|<\infty$ follows from continuity and compactness
+in time, so the assumed Lipschitz bound gives linear growth of
+acceleration.  The spatial derivative satisfies
+$\partial_tJ_t=Du_t(X_t)J_t$.  In particular, as multiplication
+operators on $\mathcal H=L^2(p_0;\R^d)$,
+\begin{equation}
+ \|J_t-J_r\|_{\mathcal H\to\mathcal H}
+ \le Le^{LT}|t-r|.
+ \label{eq:jacobian-operator-continuity}
+\end{equation}
+Moreover $c_t$ is continuous in $\mathcal H$ by dominated convergence.
+In fact it is Lipschitz there: differentiating along exact trajectories
+gives
+\[
+ \partial_tc_t
+ =J_t^{-1}\{\jerk_t(X_t)-Du_t(X_t)\acc_t(X_t)\},
+\]
+whose $\mathcal H$ norm is at most $e^{LT}(C_j+LC_a)$.  Thus
+$C_t^\sigma$ is Lipschitz in $\mathcal H$ for every bounded measurable
+$\sigma$.  The field $B_t^\sigma$ is continuous in $(t,x)$, locally
+$C^1$ in $x$ with spatial derivatives bounded uniformly on compact
+sets for $0\le t\le T$, and has uniformly linear growth.  These claims
+follow by differentiating the reference formula locally: $u\in C^2$
+makes $J_t$ locally $C^1$ in $z$, $\acc\in C^1$, and all flow images
+and inverse images of a fixed compact set remain in a common compact
+set.  Differentiation under the bounded-time integral is then justified
+by its local continuous bounds.
+
+\begin{lemma}[Transport of the weighted solenoidal space]
+\label{lem:global-solenoidal-transport}
+Let $F$ be a $C^1$ bi-Lipschitz diffeomorphism, $q=F_\#p$, and define
+\[
+ (F_*w)(y)=DF(F^{-1}y)w(F^{-1}y).
+\]
+This is a bounded invertible map from $L^2(p)$ to $L^2(q)$ and maps
+$\mathcal G_p^\perp$ onto $\mathcal G_q^\perp$.
+\end{lemma}
+
+\begin{proof}
+The norm statements follow from the derivative bounds for $F$ and its
+inverse.  For a compactly supported smooth test $\phi$,
+\[
+ \int\nabla\phi\cdot F_*w\,\dd q
+ =\int\nabla(\phi\circ F)\cdot w\,\dd p.
+\]
+The composition is compactly supported and $C^1$.  Such tests can be
+approximated by smooth compactly supported tests with uniformly
+convergent gradients, so the right side vanishes if
+$w\in\mathcal G_p^\perp$.  Apply the same argument to $F^{-1}$ for
+the converse.
+\end{proof}
+
+\begin{lemma}[Continuity of the projected global coefficient]
+\label{lem:global-coefficient-continuity}
+For bounded $\sigma$, the function
+$K(t)=\|\Pi_{p_t}B_t^\sigma\|_{L^2(p_t)}$ is Lipschitz on $[0,T]$.
+\end{lemma}
+
+\begin{proof}
+Put $S=\mathcal G_{p_0}^\perp$, a fixed closed subspace of $\mathcal H$.
+Lemma~\ref{lem:global-solenoidal-transport} and
+Eq.~\eqref{eq:global-reference-defect} give
+\begin{equation}
+ K(t)=\inf_{z\in S}\|J_t(C_t^\sigma-z)\|_{\mathcal H}.
+ \label{eq:global-fixed-hilbert-distance}
+\end{equation}
+The norms $q_t(v)=\|J_tv\|_{\mathcal H}$ are uniformly equivalent to
+the norm of $\mathcal H$: with $m=e^{-LT}$ and $M=e^{LT}$,
+$m\|v\|\le q_t(v)\le M\|v\|$.  The infimum has a minimizer in
+$S$ because $q_t$ is an equivalent Hilbert norm.  If $z_r$ is a
+minimizer at $r$, then
+\begin{align*}
+ K(t)-K(r)
+ &\le M\|C_t^\sigma-C_r^\sigma\|_{\mathcal H}
+   +\|J_t-J_r\|_{\mathcal H\to\mathcal H}
+       \|C_r^\sigma-z_r\|_{\mathcal H}\\
+ &\le M\|C_t^\sigma-C_r^\sigma\|_{\mathcal H}
+   +m^{-1}\|J_t-J_r\|_{\mathcal H\to\mathcal H}K(r).
+\end{align*}
+The same bound with $t,r$ exchanged controls the other sign.
+$C_t^\sigma$ and $J_t$ are Lipschitz in the indicated norms and
+$K(t)\le M\sup_r\|C_r^\sigma\|_{\mathcal H}<\infty$.  This proves
+the assertion without differentiating $\Pi_{p_t}$.
+\end{proof}
+
+\subsection{A tangent expansion uniform over the probability path}
+
+The next lemma supplies the exact norm needed after the classical
+trajectory expansion.  Its single-measure version is the standard
+Wasserstein tangent norm~\citep[Chapter~8]{ambrosio2005gradient}; the
+proof below records the uniformity and domination needed here.
+
+\begin{lemma}[Uniform tangent expansion]
+\label{lem:uniform-global-tangent}
+Let $p_t=(X_t)_\#p_0$ be the flow family above.  Suppose $b_t(x)$ is
+continuous in $(t,x)$, locally $C^1$ in $x$ with derivatives bounded
+uniformly on compact sets in time and space, and
+$|b_t(x)|\le C(1+|x|)$.  Suppose also that
+$k(t)=\|\Pi_{p_t}b_t\|_{L^2(p_t)}$ is continuous.  Then
+\begin{equation}
+ \sup_{t\in[0,T]}
+ \left|\frac{W_2((\mathrm{Id}+\epsilon b_t)_\#p_t,p_t)}{|\epsilon|}
+       -k(t)\right|\longrightarrow0
+ \quad\text{as }\epsilon\to0.
+ \label{eq:uniform-tangent-expansion}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The uniform linear-growth bounds imply
+$M_b=\sup_t\|b_t\|_{L^2(p_t)}<\infty$ and uniform tail control.
+Explicitly, $|X_t(z)|\le C_0(1+|z|)$ implies
+\begin{align*}
+ &\sup_t\int_{|x|>R}|b_t(x)|^2\,p_t(\dd x)\\
+ &\qquad\le C_1\int_{|z|>R/C_0-1}(1+|z|)^2\,p_0(\dd z)
+ \longrightarrow0.
+\end{align*}
+Let $\chi_R$ be a smooth spatial cutoff, equal to one on the ball of
+radius $R$ and zero outside the ball of radius $2R$, and put
+$b_t^R=\chi_Rb_t$.  For fixed $R$ the fields $b_t^R$ are globally
+Lipschitz with a common constant $L_R$ and
+\[
+ d_R:=\sup_t\|b_t-b_t^R\|_{L^2(p_t)}\longrightarrow0.
+\]
+Apply Lemma~\ref{lem:projected-frozen-flow} to $b_t^R$ or $-b_t^R$
+according to the sign of $\epsilon$.  The difference between its frozen
+flow and the map $\mathrm{Id}+\epsilon b_t^R$ has $L^2(p_t)$ norm
+at most
+$L_R\epsilon^2e^{L_R|\epsilon|}\|b_t^R\|_{L^2(p_t)}/2$.
+Coupling the two Euler maps, and using contraction of $\Pi_{p_t}$,
+therefore yields, uniformly in $t$,
+\begin{equation}
+ \frac{W_2((\mathrm{Id}+\epsilon b_t)_\#p_t,p_t)}{|\epsilon|}
+ \le k(t)+2d_R+C_R|\epsilon|
+ \label{eq:uniform-tangent-upper}
+\end{equation}
+for $|\epsilon|\le1$, where $C_R$ is finite.  First let
+$\epsilon\to0$ and then $R\to\infty$ for the uniform upper bound.
+
+For the lower bound, write
+$d_{t,\epsilon}=W_2((\mathrm{Id}+\epsilon b_t)_\#p_t,p_t)$.
+The same-start coupling gives $d_{t,\epsilon}\le|\epsilon|M_b$.
+Taylor expansion first in this coupling and then in an optimal
+coupling gives, for every $\phi\in C_c^\infty$,
+\begin{align}
+ |\langle b_t,\nabla\phi\rangle_{p_t}|
+ &\le \|\nabla\phi\|_{L^2(p_t)}
+              \frac{d_{t,\epsilon}}{|\epsilon|}
+       +|\epsilon|\|D^2\phi\|_\infty M_b^2.
+ \label{eq:uniform-tangent-test-lower}
+\end{align}
+For each fixed test both its numerator and its gradient norm are
+continuous in $t$: compose with $X_t(z)$ and use the stated continuity
+and the integrable growth bound.  Fix $\delta>0$.  At each $t$ with
+$k(t)\ge\delta$, the dual definition of projection supplies a test
+with positive gradient norm and ratio at least $k(t)-\delta$.
+Continuity gives a neighborhood in which that norm stays bounded
+away from zero and its ratio is at least $k(s)-2\delta$.
+The compact set $\{t:k(t)\ge\delta\}$ admits a finite subcover by
+such neighborhoods.  Equation~\eqref{eq:uniform-tangent-test-lower}
+for this finite collection consequently gives
+$d_{t,\epsilon}/|\epsilon|\ge k(t)-2\delta-C_\delta|\epsilon|$
+on this set.  On its complement nonnegativity gives a lower bound of
+$k(t)-\delta$.  Let $\epsilon\to0$ and then $\delta\to0$.
+\end{proof}
+
+\subsection{The global trajectory expansion with only a second moment}
+
+\begin{lemma}[Variational expansion of recursive Euler]
+\label{lem:global-strong-expansion}
+Under the grids and profiles of Theorem~\ref{thm:sharp-global-euler},
+initialize Euler and the exact trajectory at the same $z$.  Then
+\begin{equation}
+ \left\|\sup_{0\le t\le T}
+ \left|\frac{\widehat X_t^n-X_t}{\eta_n}
+          +\frac12J_t C_t^\sigma\right|\right\|_{L^2(p_0)}
+ \longrightarrow0.
+ \label{eq:global-strong-expansion}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Suppress $n$ temporarily, and write $e_k(z)=\widehat X_k(z)-X_{t_k}(z)$.
+The exact local defect before its second-order expansion is
+\[
+ X_{t_{k+1}}-X_{t_k}-h_ku_{t_k}(X_{t_k})
+ =\int_0^{h_k}(h_k-s)\acc_{t_k+s}(X_{t_k+s})\,\dd s.
+\]
+Equation~\eqref{eq:global-flow-growth} and discrete Gronwall therefore
+give the pointwise estimate
+\begin{equation}
+ \max_k|e_k(z)|\le C H(1+|z|).
+ \label{eq:global-pointwise-euler-bound}
+\end{equation}
+Taylor expansion along the exact trajectory also gives
+\begin{align*}
+ X_{t_{k+1}}={}&X_{t_k}+h_ku_{t_k}(X_{t_k})
+      +\tfrac12h_k^2\acc_{t_k}(X_{t_k})+r_k,\\
+ \|r_k\|_{L^2(p_0)}\le{}& C_jh_k^3/6.
+\end{align*}
+Put $D_k(z)=Du_{t_k}(X_{t_k}(z))$ and
+\[
+ n_k=u_{t_k}(X_{t_k}+e_k)-u_{t_k}(X_{t_k})-D_ke_k.
+\]
+The exact recurrence is
+\begin{equation}
+ e_{k+1}=(I+h_kD_k)e_k
+       -\tfrac12h_k^2\acc_{t_k}(X_{t_k})+h_kn_k-r_k.
+ \label{eq:global-error-recurrence}
+\end{equation}
+The last two terms are negligible after propagation and division by
+$\eta_n$.  For the Taylor remainder, Minkowski's inequality gives
+\[
+ \frac1{\eta_n}\sum_k\|r_k\|_{L^2(p_0)}
+ \le\frac{C_jTH_n^2}{6\eta_n}\longrightarrow0.
+\]
+For the nonlinear remainder, fix $z$.  All its exact and numerical
+positions for small $H_n$ lie in one compact set depending on $z$.
+On that set $Du$ is uniformly continuous in $(t,x)$.  If $\omega_z$
+is a corresponding modulus in the spatial variable, then
+\[
+ \frac1{\eta_n}\sum_k h_k|n_k(z)|
+ \le C\frac{H_n}{\eta_n}(1+|z|)
+               \omega_z(CH_n(1+|z|))\longrightarrow0.
+\]
+The left side is bounded by $C'(1+|z|)$, since
+$\|Du\|_{\rm op}\le L$ and $H_n/\eta_n$ is bounded.
+Dominated convergence in $L^2(p_0)$ is therefore valid.  This is the
+step that avoids a fourth-moment assumption or a global bound on
+$D^2u$.
+
+The fundamental matrix products of $I+h_kD_k(z)$ are bounded by
+$e^{LT}$.  For each fixed $z$ they converge, uniformly over pairs of
+grid nodes, to the fundamental matrix of
+$\dot v=Du_t(X_t(z))v$, namely $J_t(z)J_s(z)^{-1}$.
+Here is an explicit consistency justification: the coefficient is
+continuous on $[0,T]$ and bounded by $L$; comparing one exact linear
+step with $I+h_kD_k$ gives a defect bounded by
+$C h_k\{\omega_{D,z}(H_n)+H_n\}$ in operator norm.
+Summing and applying the uniform stability bound makes the total
+error tend to zero.  Replacing the starting node $t_{k+1}$ of a
+propagation product by $t_k$ adds $O(H_n)$ by the same flow bound.
+Variation of constants in Eq.~\eqref{eq:global-error-recurrence}
+now yields
+\begin{equation}
+ \left\|\max_k\left|
+ \frac{e_k}{\eta_n}+\frac12J_{t_k}
+       \sum_{j<k}\frac{h_{n,j}^2}{\eta_n}c_{t_{n,j}}
+                  \right|\right\|_{L^2(p_0)}\longrightarrow0.
+ \label{eq:global-discrete-variation}
+\end{equation}
+Indeed every pointwise matrix-replacement error tends to zero and is
+bounded by $C(1+|z|)$ after summation, because
+$\sum_j h_{n,j}^2/\eta_n\le TH_n/\eta_n$.  Thus these replacements
+also pass to $L^2(p_0)$ by dominated convergence.
+
+For each fixed $z$, continuity of $c_s(z)$ shows uniformly in the
+upper grid node that
+\[
+ \sum_{j<k}\frac{h_{n,j}^2}{\eta_n}c_{t_{n,j}}(z)
+ -\int_0^{t_{n,k}}\sigma_n(s)c_s(z)\,\dd s\longrightarrow0.
+\]
+The difference is bounded by
+$(TH_n/\eta_n)\sup_{|s-r|\le H_n}|c_s(z)-c_r(z)|$.
+Weak-star convergence of $\sigma_n$ gives, for every fixed $z,t$,
+\[
+ \int_0^t\sigma_n(s)c_s(z)\,\dd s
+ \longrightarrow\int_0^t\sigma(s)c_s(z)\,\dd s.
+\]
+The primitives are equi-Lipschitz in $t$ for this fixed $z$, so the
+convergence is uniform over $t\in[0,T]$.  Both differences are
+dominated by $C(1+|z|)$, allowing one more application of dominated
+convergence in $L^2(p_0)$.  This proves the node version of
+Eq.~\eqref{eq:global-strong-expansion}.
+
+Finally, Euler's continuous interpolation is the linear interpolation
+of its node values.  The difference between the chord of the exact
+trajectory and that trajectory is bounded by
+$CH_n^2(1+|z|)$, using its second derivative $\acc_t(X_t(z))$.
+After division by $\eta_n$ this vanishes in $L^2$.  The continuous
+field $t\mapsto J_t(z)C_t^\sigma(z)$ has a uniformly vanishing
+interpolation modulus for each fixed $z$, dominated by $C(1+|z|)$.
+These two facts extend the node result uniformly to all times.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:sharp-global-euler}]
+Let $b_t=-B_t^\sigma/2$.  Equations~\eqref{eq:global-reference-defect}
+and \eqref{eq:global-strong-expansion}, using the common starting point
+as a coupling, imply
+\[
+ \sup_tW_2\bigl(\widehat p_t^n,
+              (\mathrm{Id}+\eta_nb_t)_\#p_t\bigr)=o(\eta_n).
+\]
+The regularity and growth properties of $b_t$ were proved above, and
+Lemma~\ref{lem:global-coefficient-continuity} gives continuity of its
+projected norm.  Apply Lemma~\ref{lem:uniform-global-tangent} and the
+triangle inequality to obtain Eq.~\eqref{eq:sharp-global-uniform}.
+Since $H_n\to0$, the maximum of the continuous coefficient over grid
+nodes converges to its maximum over $[0,T]$.  This proves
+Eq.~\eqref{eq:sharp-global-maximum}.
+\end{proof}
+
+\subsection{Quantile schedules and the characterization theorem}
+
+For a positive $C^1$ function $\rho$ with integral one, the quantile
+nodes obey, by the mean value theorem,
+$Nh_k=1/\rho(\xi_k)$ for some $\xi_k\in[t_k,t_{k+1}]$.
+The positive minimum of $\rho$ gives $H_N=O(N^{-1})$, and uniform
+continuity gives $\sigma_N=Nh_k\to1/\rho$ uniformly on the intervals.
+Taking $t=T$ in Theorem~\ref{thm:sharp-global-euler} proves
+Eq.~\eqref{eq:sharp-schedule-coefficient}.  The projection can be moved
+inside the integral because it is a bounded linear operator on the
+fixed Hilbert space $L^2(p_T)$.  Also
+$g_s^T=\Pi_{p_T}A_{s,T}$ is continuous in that space: after composition
+with $X_T$, $A_{s,T}$ is $J_Tc_s$, a continuous $L^2(p_0)$ curve.
+
+\begin{proof}[Proof of Theorem~\ref{thm:global-ap-characterization}]
+Item 1 implies item 2 by Theorem~\ref{thm:distribution_order}; item 2
+implies item 3 immediately.  For item 3, take $\eta_n=h_n=T/N_n$,
+so $\sigma_n=1$.  Equation~\eqref{eq:sharp-global-maximum} forces
+$B_t^1\in\mathcal G_{p_t}^\perp$ at every $t$.
+Lemma~\ref{lem:global-solenoidal-transport} says equivalently
+\[
+ C_t^1=\int_0^tc_s\,\dd s\in S=\mathcal G_{p_0}^\perp
+ \quad\text{for every }t.
+\]
+The curve is continuously differentiable in $L^2(p_0)$ with derivative
+$c_t$.  Difference quotients lie in the closed subspace $S$, so
+$c_t\in S$ for all $t$, including the endpoints by one-sided limits.
+Transporting back gives
+$\acc_t\in\mathcal G_{p_t}^\perp$, which is item 1.
+
+Item 1 also implies item 4, because each fixed positive allocation
+density has $H_N=O(N^{-1})$ and item 2 applies.  Conversely suppose
+item 4 holds, even only for densities in a prescribed $C^1$
+neighborhood of $1/T$.  Equation~\eqref{eq:sharp-schedule-coefficient}
+gives $\int g_s^T/\rho(s)\,\dd s=0$ for each such density.
+For an arbitrary smooth real function $f$, set
+\[
+ \sigma_\lambda(s)=1+\lambda f(s),\qquad
+ Z_\lambda=\int_0^T\frac{\dd s}{\sigma_\lambda(s)},\qquad
+ \rho_\lambda=\frac{\sigma_\lambda^{-1}}{Z_\lambda}.
+\]
+For sufficiently small $|\lambda|$, these are positive smooth
+probability densities and $\rho_\lambda\to1/T$ in $C^1$.
+Since $1/\rho_\lambda=Z_\lambda(1+\lambda f)$, subtracting the
+$\lambda=0$ equality gives
+$\int_0^Tf(s)g_s^T\,\dd s=0$.  Testing against every vector in
+$L^2(p_T)$ and then using continuity in $s$ gives $g_s^T=0$ for
+every $s$.  Thus $A_{s,T}$ is solenoidal under $p_T$; the inverse
+of the transport in Lemma~\ref{lem:global-solenoidal-transport}
+makes $\acc_s$ solenoidal under $p_s$.  This is item 1.
+\end{proof}
+
+For clarity, the positive first-order constant in the non-preserving
+case on uniform grids is
+\begin{equation}
+ c_u=\frac12\max_{0\le t\le T}
+ \left\|\Pi_{p_t}\int_0^t A_{s,t}\,\dd s\right\|_{L^2(p_t)}.
+ \label{eq:global-positive-constant}
+\end{equation}
+If it vanished, the preceding proof would establish the acceleration
+condition.  It is finite by the flow bounds and strictly positive
+otherwise.  Equation~\eqref{eq:sharp-global-maximum} therefore gives
+$\max_kW_2=c_uh+o(h)$, which proves the claimed $\Theta(h)$ conclusion.
+
+If the uniform terminal coefficient vanishes but the acceleration
+condition fails, then $\int_0^Tg_s^T\,\dd s=0$ but the continuous
+Hilbert-valued curve $g_s^T$ is not identically zero.  Choose a smooth
+$f$ such that $V=\int_0^Tf(s)g_s^T\,\dd s\ne0$.  The densities
+$\rho_\lambda$ just constructed have exact terminal coefficient
+$Z_\lambda|\lambda|\|V\|/2>0$ for every sufficiently small nonzero
+$\lambda$.  This proves the stated sensitivity to arbitrarily small
+schedule changes.
+The same conclusion holds near any positive smooth density $\rho_0$
+whose terminal coefficient vanishes: replace $1+\lambda f$ by
+$1/\rho_0+\lambda f$ and normalize its reciprocal.  At $\lambda=0$
+the normalizing integral is $\int\rho_0=1$, and the first-order
+coefficient is again a positive scalar times $|\lambda|\|V\|/2$.
+
+\begin{proof}[Proof of Corollary~\ref{cor:odd-global-order}]
+Theorem~\ref{thm:nonlinear-odd-rigidity} excludes the acceleration
+condition for every generator in the stated class when $m$ or $g$ is
+nonaffine.  Equation~\eqref{eq:global-positive-constant} and
+Theorem~\ref{thm:sharp-global-euler} then give the strictly positive
+first-order constant for each fixed generator.  When both functions
+are affine, the same rigidity theorem identifies the unique
+acceleration-preserving generator and proves its acceleration is
+identically zero.  Its exact trajectories are straight with constant
+velocity, so Euler is exact on every grid.  Every other fixed
+generator fails the acceleration condition and is covered by the
+same positive-constant conclusion.
+\end{proof}
+
+\subsection{Finite schedule tests and the Gaussian counterexample}
+
+Fix $T=1$, $a>0$, and a smooth real function $f$ with
+$\|f\|_\infty<a^2$.  Put $b=\sqrt{a^2-f}$ and
+$M_t=aI+b(t)J$.  The flow of $u_t(x)=M_tx$ is
+\[
+ F_{s,t}=e^{a(t-s)}
+       \exp\left(J\int_s^tb(r)\,\dd r\right).
+\]
+It therefore generates $p_t=\mathcal N(0,e^{2at}I_2)$ from the
+standard Gaussian.  Direct differentiation gives
+\begin{equation}
+ \acc_t(x)=\{f(t)I+[b'(t)+2ab(t)]J\}x,
+ \qquad \Pi_{p_t}\acc_t=f(t)x.
+ \label{eq:cosine-acceleration-projection}
+\end{equation}
+Indeed $Jx$ is solenoidal for every circular Gaussian, whereas $x$
+is in its gradient closure by smooth cutoff approximation of
+$|x|^2/2$.  All hypotheses of Theorem~\ref{thm:projected-residual}
+hold: the fields are smooth and linear in $x$ with bounded matrix
+coefficients on the compact time interval, and Gaussian moments are
+finite.  The acceleration condition holds exactly when $f=0$.
+
+Every Euler update is a scalar expansion followed by a rotation.
+Writing its isotropic standard deviation after $k$ steps as $r_k$,
+we have the exact recurrences and distance
+\begin{align}
+ r_0&=1,&
+ r_{k+1}&=r_k\sqrt{(1+ah_k)^2+b(t_k)^2h_k^2},\nonumber\\
+ W_2(\widehat p_k,p_{t_k})&=\sqrt2\,|r_k-e^{at_k}|.
+ \label{eq:cosine-exact-euler-distance}
+\end{align}
+For sufficiently small $H$, uniformly in $t$ and $0\le h\le H$,
+\begin{align}
+ &\frac12\log\{1+2ah+(2a^2-f(t))h^2\}-ah\nonumber\\
+ &\quad=-\frac12f(t)h^2
+       +\left(-\frac23a^3+af(t)\right)h^3\nonumber\\
+ &\qquad\quad+\left(a^4-a^2f(t)-\frac14f(t)^2\right)h^4
+       +O(h^5).
+ \label{eq:cosine-log-expansion}
+\end{align}
+The remainder is uniform because $f$ is bounded and the logarithm's
+argument stays in a fixed neighborhood of one.  In particular, for
+any refining grid,
+\begin{equation}
+ \log(r_N/e^a)=-\frac12\sum_kf(t_k)h_k^2
+                     +O\left(\sum_kh_k^3\right).
+ \label{eq:finite-schedule-log-error}
+\end{equation}
+
+For a fixed positive $C^1$ density $\rho$, its quantile grid satisfies
+\begin{equation}
+ \sum_kf(t_k)h_k^2
+ =\frac1N\int_0^1\frac{f(s)}{\rho(s)}\,\dd s+O(N^{-2}).
+ \label{eq:weighted-quantile-riemann}
+\end{equation}
+To see the order of the remainder, write the sum as
+$N^{-1}\sum_k f(t_k)(Nh_k)h_k$.  The mean value formula and the
+$C^1$ bound on $1/\rho$ give
+$Nh_k=1/\rho(t_k)+O(H_N)$ uniformly.  The remaining left Riemann
+sum for $f/\rho$ has error $O(H_N)$, and $H_N=O(N^{-1})$.
+Also $\sum h_k^3=O(N^{-2})$.  Thus vanishing of the integral in
+Eq.~\eqref{eq:weighted-quantile-riemann} gives an actual
+$O(N^{-2})$ endpoint error through
+Eq.~\eqref{eq:cosine-exact-euler-distance}, rather than merely the
+$o(N^{-1})$ conclusion supplied by a zero first-order coefficient.
+
+\begin{proof}[Proof of Proposition~\ref{prop:finite-schedule-blindness}]
+Choose $m+1$ nonzero smooth bump functions with disjoint compact
+supports in $(0,1)$.  The $m$ constraints
+$\int_0^1 f/\rho_i=0$ form a homogeneous linear system in their
+$m+1$ coefficients, so there is a nonzero solution.  Disjoint
+supports make the resulting $f$ nonzero.  Multiplying it by a
+sufficiently small nonzero scalar gives $\|f\|_\infty<a^2$ and
+arbitrarily small size in any fixed finite number of derivative
+norms.  The same is true of $\sqrt{a^2-f}-a$ by smoothness of the
+square root near $a^2$.  Equations~\eqref{eq:finite-schedule-log-error}
+and \eqref{eq:weighted-quantile-riemann} prove all the endpoint
+$O(N^{-2})$ bounds.  Equation~\eqref{eq:cosine-acceleration-projection}
+shows failure of the acceleration condition, and
+Theorem~\ref{thm:global-ap-characterization} gives
+$\Theta(N^{-1})$ maximum error on uniform grids.
+
+For finitely many observation times $\tau_j$, impose the additional
+linear constraints $\int_0^{\tau_j}f/\rho_i=0$ and choose more
+disjoint bumps than constraints.  If the time is not a grid node,
+insert it into the quantile grid or use the Euler continuous
+interpolation.  Splitting the one interval containing a fixed time
+changes the sum in Eq.~\eqref{eq:finite-schedule-log-error} by
+$O(N^{-2})$.  The same endpoint argument at $\tau_j$ applies.
+This is a finite collection of observation times, not a dense family
+whose size grows with $N$.
+\end{proof}
+
+\subsection{The explicit cosine example and its exact coefficients}
+
+Take $f(t)=\epsilon\cos(2\pi t)$, with $0<\epsilon<a^2$.
+For uniform steps $h=1/N$ and $N\ge3$, discrete Fourier sums give
+\[
+ \sum_{k=0}^{N-1}f(k/N)=0,\qquad
+ \sum_{k=0}^{N-1}f(k/N)^2=N\epsilon^2/2.
+\]
+Summing Eq.~\eqref{eq:cosine-log-expansion} gives the stronger expansion
+\begin{equation}
+ \log(r_N/e^a)
+ =-\frac{2a^3}{3N^2}
+    +\frac{a^4-\epsilon^2/8}{N^3}+O(N^{-4}).
+ \label{eq:cosine-terminal-log-expansion}
+\end{equation}
+Since $W_2=\sqrt2 e^a|\exp(\log(r_N/e^a))-1|$, this proves
+Eq.~\eqref{eq:cosine-terminal-second}.  Setting $\epsilon=0$
+gives the preserving field $a(I+J)x$ and exactly the same leading
+second-order coefficient.
+
+Because all involved matrices commute with the rotation flow,
+\[
+ A_{s,t}(x)=\{f(s)I+[b'(s)+2ab(s)]J\}x.
+\]
+Projection under $p_t$ removes its $Jx$ component.  Thus the entire
+first-order error profile for uniform grids, including continuous
+interpolation, is
+\begin{equation}
+ \lim_{N\to\infty}N W_2(\widehat p_t^N,p_t)
+ =\frac{\sqrt2\,e^{at}\epsilon}{4\pi}|\sin(2\pi t)|,
+ \label{eq:cosine-uniform-first-profile}
+\end{equation}
+uniformly in $t$.  At $t=1/4$, taking $N$ divisible by four
+identifies the interpolation with the numerical node and proves the
+displayed intermediate-time coefficient in the main text.  The
+maximum coefficient is positive and, if an explicit value is desired,
+its maximizer and value are
+\begin{align*}
+ t_*&=1-\frac{1}{2\pi}\arctan(2\pi/a),\\
+ C_{\max}&=\frac{\sqrt2\,\epsilon}{4\pi}
+    e^{at_*}\sin\!\bigl(\arctan(2\pi/a)\bigr).
+\end{align*}
+There is one local maximum in each half interval; the second is
+larger by the factor $e^{a/2}>1$.
+
+Finally let $\rho_\delta(t)=1+\delta\cos(2\pi t)$ with
+$0<|\delta|<1$.  Its quantile nodes are the unique solutions of
+\[
+ t_k+\frac{\delta}{2\pi}\sin(2\pi t_k)=k/N.
+\]
+The classical integral
+$\int_0^1(1+\delta\cos(2\pi t))^{-1}\,\dd t
+=(1-\delta^2)^{-1/2}$ follows, for example, by the substitution
+$z=\tan(\pi t)$ on the two half intervals.  Since
+$\cos\theta/(1+\delta\cos\theta)
+=\delta^{-1}\{1-(1+\delta\cos\theta)^{-1}\}$,
+\[
+ \int_0^1\frac{f(t)}{\rho_\delta(t)}\,\dd t
+ =\frac{\epsilon}{\delta}
+          \left(1-\frac1{\sqrt{1-\delta^2}}\right).
+\]
+Equation~\eqref{eq:sharp-schedule-coefficient}, or directly
+Eqs.~\eqref{eq:finite-schedule-log-error}--\eqref{eq:weighted-quantile-riemann},
+now gives Eq.~\eqref{eq:cosine-perturbed-first}.  Its coefficient is
+strictly positive for every nonzero $\delta$, however small.
