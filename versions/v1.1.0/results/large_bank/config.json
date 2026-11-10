@@ -1,0 +1,39 @@
+{
+  "samples": 262144,
+  "inference_batch": 8192,
+  "projection_count": 128,
+  "sample_seed": 2026110201,
+  "times": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "steps": [
+    8,
+    16,
+    64
+  ],
+  "dtype": "float64",
+  "torch_threads": 1,
+  "python": "3.14.6",
+  "numpy": "2.3.5",
+  "torch": "2.10.0",
+  "metric": "sqrt(mean of squared sorted projection displacement over samples and directions)",
+  "checkpoint_hashes": {
+    "d2_fm_s17_w48": "3e0b3731df999a25ee616d4ebd6ded11f2756436cb3e3586c211df548cd83216",
+    "d2_fm_s29_w48": "05ec935ce3c083b503db8aa7a35a42dd8dbd5ad05279ac7a99765d8ab4f46aba",
+    "d2_fm_s43_w48": "c6af601662da3b1aeb6f409af498548b2e8f2ccbd8a0f604746102a4625ee56f",
+    "d2_discretization_s17_w48": "5030cbd6606410cab932ed824adec4e470db61d23962b36dfdf586c9b3ab8563",
+    "d2_discretization_s29_w48": "6810a1583e7ba500563e9b108605142b82d03c5327c8427955641edb4f97af7b",
+    "d2_discretization_s43_w48": "956a452fc91691cf5401d81f84b41f22363044d235701d9c8d22f84726d626c6",
+    "d2_transfer_s17_w48": "022d844e81d92c8feb4573b7373b39c62f133ad448481420afffb0148487830c",
+    "d2_transfer_s29_w48": "ea83e4d2325db7cdccb87cec02307c3b2950cc372c65c17b2721c7117b0f45f7",
+    "d2_transfer_s43_w48": "d7feb18c780583cd148367fbd00f07ca3fe8fcc91a99fbb1ae115e53ccfcef35"
+  },
+  "independent_trig_seed": 2026110202,
+  "independent_tanh_seed": 2026110204,
+  "scope": "Descriptive fixed-model diagnostic. Not a population Wasserstein or causal feature-family guarantee.",
+  "target_preparation_seconds": 13.439436458051205
+}

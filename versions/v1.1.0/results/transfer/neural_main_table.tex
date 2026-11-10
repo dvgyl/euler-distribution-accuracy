@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{Neural diagnostic: mean over three seeds; brackets give the seed range. Each checkpoint is frozen across all step counts. The metrics are quantile approximations, not certified intervals.}
+\label{tab:neural}
+\small
+\begin{tabular}{@{}llrr@{}}
+\toprule
+Teacher & Steps & Target error & Own-flow error\\
+\midrule
+Bayes & 16 & \shortstack[r]{0.1406\\\scriptsize [0.1379, 0.1438]} & \shortstack[r]{0.1423\\\scriptsize [0.1414, 0.1430]}\\[3pt]
+Bayes & 32 & \shortstack[r]{0.0726\\\scriptsize [0.0689, 0.0774]} & \shortstack[r]{0.0749\\\scriptsize [0.0743, 0.0755]}\\[3pt]
+Bayes & 128 & \shortstack[r]{0.0185\\\scriptsize [0.0154, 0.0230]} & \shortstack[r]{0.0197\\\scriptsize [0.0194, 0.0200]}\\[3pt]
+Secant & 16 & \shortstack[r]{0.0248\\\scriptsize [0.0147, 0.0318]} & \shortstack[r]{0.1486\\\scriptsize [0.1477, 0.1493]}\\[3pt]
+Secant & 32 & \shortstack[r]{0.0931\\\scriptsize [0.0856, 0.0980]} & \shortstack[r]{0.0810\\\scriptsize [0.0807, 0.0813]}\\[3pt]
+Secant & 128 & \shortstack[r]{0.1466\\\scriptsize [0.1404, 0.1505]} & \shortstack[r]{0.0225\\\scriptsize [0.0219, 0.0238]}\\[3pt]
+\bottomrule
+\end{tabular}
+\end{table}

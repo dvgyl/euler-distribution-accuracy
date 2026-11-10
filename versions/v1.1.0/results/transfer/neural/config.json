@@ -1,0 +1,32 @@
+{
+  "args": {
+    "steps": 6000,
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "width": 48,
+    "test_points": 512,
+    "eval_only": false
+  },
+  "path": {
+    "weight": 0.35,
+    "mean_left": -2.6,
+    "mean_right": 1.4,
+    "sigma": 0.6
+  },
+  "hfit": 0.0625,
+  "train_seed": 811,
+  "validation_seed": 1823,
+  "training_count": 32768,
+  "validation_count": 8192,
+  "teacher": "analytic Bayes velocity or fixed-h quantile secant",
+  "time_sampling": "90% uniform, 5% t=0, 5% t=1",
+  "dtype_training": "float32",
+  "dtype_evaluation": "float64",
+  "torch": "2.10.0+cpu",
+  "python": "3.13.5",
+  "cpu_threads": 1,
+  "test_metric": "equal-weight quantile approximation of full 1D W2, not certified"
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "coefficient_relative_difference": 0.0001196135660501696,
+    "expected_order": 1,
+    "method": "base",
+    "observed_order": 0.9998274473951428,
+    "predicted_coefficient": 0.49197207610543736,
+    "solver": "euler"
+  },
+  {
+    "coefficient_relative_difference": 0.0002197051029427799,
+    "expected_order": 2,
+    "method": "corrected",
+    "observed_order": 1.9996829900000377,
+    "predicted_coefficient": 0.3935776608843498,
+    "solver": "euler"
+  },
+  {
+    "coefficient_relative_difference": 1.4662595793413224e-05,
+    "expected_order": 1,
+    "method": "heun_cubic_cancellation",
+    "observed_order": 0.9999788050488523,
+    "predicted_coefficient": 0.3279813840702916,
+    "solver": "euler"
+  },
+  {
+    "coefficient_relative_difference": 0.0001098579165960123,
+    "expected_order": 2,
+    "method": "base",
+    "observed_order": 1.9998414978906256,
+    "predicted_coefficient": 0.09839441522108745,
+    "solver": "heun"
+  },
+  {
+    "coefficient_relative_difference": 0.00021971154307176555,
+    "expected_order": 2,
+    "method": "corrected",
+    "observed_order": 1.9996829620960117,
+    "predicted_coefficient": 0.1967888304421749,
+    "solver": "heun"
+  },
+  {
+    "coefficient_relative_difference": 0.00011718749890721192,
+    "expected_order": 3,
+    "method": "heun_cubic_cancellation",
+    "observed_order": 2.999830904461911,
+    "predicted_coefficient": 0.039357766088434984,
+    "solver": "heun"
+  }
+]

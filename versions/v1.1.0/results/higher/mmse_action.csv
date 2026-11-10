@@ -1,0 +1,4 @@
+mu,within_variance,integrated_bayes_risk,Gaussian_same_covariance_upper_bound,difference,scope
+0.0,0.5,1.1107207345395902,1.1107207345395915,1.3322676295501878e-15,conditional action interpretation; no AP existence claim
+0.8,0.5,1.668965191934237,1.6771515299192459,0.008186337985008896,conditional action interpretation; no AP existence claim
+1.2,0.5,2.134980983586021,2.187866114397391,0.05288513081137003,conditional action interpretation; no AP existence claim

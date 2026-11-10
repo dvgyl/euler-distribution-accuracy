@@ -1,0 +1,40 @@
+{
+  "target": {
+    "mu": 1.5,
+    "sigma": 0.5
+  },
+  "width": 48,
+  "updates": 8000,
+  "batch": 1024,
+  "learning_rate": 0.001,
+  "grid_weight": 10.0,
+  "fit_steps": {
+    "one_grid": [
+      8
+    ],
+    "two_grid": [
+      8,
+      16
+    ]
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "quadrature": {
+    "z_max": 9.0,
+    "nodes": 8001
+  },
+  "reference": {
+    "method": "rk4",
+    "steps": 1024
+  }
+}

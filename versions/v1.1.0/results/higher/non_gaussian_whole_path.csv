@@ -1,0 +1,7 @@
+N,d,target_component_mean,target_component_sd,maximum_node_W2_32,maximum_node_W2_48,quadrature_change,metric
+16,3,1.2,0.7,0.11665446229473735,0.11665446229473739,4.163336342344337e-17,full W2 product-quantile formula; non-certified quadrature
+32,3,1.2,0.7,0.05923704967990293,0.05923704967990303,9.71445146547012e-17,full W2 product-quantile formula; non-certified quadrature
+64,3,1.2,0.7,0.029858692428373707,0.02985869242837374,3.122502256758253e-17,full W2 product-quantile formula; non-certified quadrature
+128,3,1.2,0.7,0.014991052245516943,0.01499105224551704,9.71445146547012e-17,full W2 product-quantile formula; non-certified quadrature
+256,3,1.2,0.7,0.007511165615496565,0.007511165615496623,5.724587470723463e-17,full W2 product-quantile formula; non-certified quadrature
+512,3,1.2,0.7,0.0037595196238220732,0.003759519623822119,4.597017211338539e-17,full W2 product-quantile formula; non-certified quadrature

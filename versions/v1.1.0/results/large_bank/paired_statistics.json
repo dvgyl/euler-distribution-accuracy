@@ -1,0 +1,98 @@
+[
+  {
+    "dimension": 2,
+    "method": "fm",
+    "sample_size": 3,
+    "paired_sw2_16_minus_8": [
+      -0.050416044349562095,
+      -0.03937158747025152,
+      -0.05493748285722458
+    ],
+    "mean_difference": -0.04824170489234606,
+    "sample_sd_difference": 0.008007502035963036,
+    "t": -10.434850162012891,
+    "df": 2,
+    "two_sided_p": 0.009059298499309865,
+    "scope": "Exploratory three-seed paired t test. No multiple-comparison adjustment or superiority claim."
+  },
+  {
+    "dimension": 2,
+    "method": "discretization",
+    "sample_size": 3,
+    "paired_sw2_16_minus_8": [
+      0.02347161093775088,
+      0.007718659080303419,
+      0.01528486231434456
+    ],
+    "mean_difference": 0.015491710777466286,
+    "sample_sd_difference": 0.007878512725812291,
+    "t": 3.405773538300337,
+    "df": 2,
+    "two_sided_p": 0.07645599160635816,
+    "scope": "Exploratory three-seed paired t test. No multiple-comparison adjustment or superiority claim."
+  },
+  {
+    "dimension": 2,
+    "method": "transfer",
+    "sample_size": 3,
+    "paired_sw2_16_minus_8": [
+      0.014995997559555357,
+      0.0013133997171411727,
+      0.009219849474699393
+    ],
+    "mean_difference": 0.008509748917131974,
+    "sample_sd_difference": 0.006868882953632453,
+    "t": 2.1458099640979125,
+    "df": 2,
+    "two_sided_p": 0.1650292303334432,
+    "scope": "Exploratory three-seed paired t test. No multiple-comparison adjustment or superiority claim."
+  },
+  {
+    "dimension": 8,
+    "method": "fm",
+    "sample_size": 3,
+    "paired_sw2_16_minus_8": [
+      -0.03411844297068574,
+      -0.03871867580783542,
+      -0.032978686904415355
+    ],
+    "mean_difference": -0.035271935227645504,
+    "sample_sd_difference": 0.0030388774972012218,
+    "t": -20.10373368186984,
+    "df": 2,
+    "two_sided_p": 0.0024651216658466008,
+    "scope": "Exploratory three-seed paired t test. No multiple-comparison adjustment or superiority claim."
+  },
+  {
+    "dimension": 8,
+    "method": "discretization",
+    "sample_size": 3,
+    "paired_sw2_16_minus_8": [
+      -0.016503450848039072,
+      -0.019316327747559703,
+      -0.017334535747812435
+    ],
+    "mean_difference": -0.01771810478113707,
+    "sample_sd_difference": 0.0014451342551674551,
+    "t": -21.235852368057248,
+    "df": 2,
+    "two_sided_p": 0.002210135860228498,
+    "scope": "Exploratory three-seed paired t test. No multiple-comparison adjustment or superiority claim."
+  },
+  {
+    "dimension": 8,
+    "method": "transfer",
+    "sample_size": 3,
+    "paired_sw2_16_minus_8": [
+      -0.018811599908957435,
+      -0.020130151982481526,
+      -0.01908995210851963
+    ],
+    "mean_difference": -0.019343901333319532,
+    "sample_sd_difference": 0.0006949910425545224,
+    "t": -48.208707557954355,
+    "df": 2,
+    "two_sided_p": 0.0004300003732142589,
+    "scope": "Exploratory three-seed paired t test. No multiple-comparison adjustment or superiority claim."
+  }
+]

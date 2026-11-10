@@ -1,0 +1,9 @@
+{
+  "case_count": 4,
+  "grid_count": 9,
+  "max_analytic_mixture_jet_discrepancy": 2.220446049250313e-16,
+  "max_even_roundoff_W2": 4.867286621919703e-15,
+  "d3_isotropic_terminal_limit": 2.8254795812993674,
+  "d3_anisotropic_terminal_limit": 2.616871804176311,
+  "numerical_claim_scope": "exact_W2_only_for_diagonal_gaussian_laws; roundoff checks are not a positive error; all-general-field impossibility is analytical"
+}

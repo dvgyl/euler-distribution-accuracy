@@ -1,0 +1,8 @@
+{
+  "model": "d2_discretization_s17_w48",
+  "steps": 16,
+  "time": 1,
+  "direct_source_sw2": 0.14577203589662455,
+  "chunked_saved_sw2": 0.14577203589662452,
+  "absolute_difference": 2.7755575615628914e-17
+}

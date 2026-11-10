@@ -1,0 +1,25 @@
+{
+  "retain_refinement_trajectories": false,
+  "a": 0.6,
+  "eta": 0.3,
+  "horizon": 1.0,
+  "mixture_weights": [0.6, 0.4],
+  "mixture_scales": [0.5, 1.5],
+  "step_counts": [8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096],
+  "quadrature_orders": [64, 128, 256],
+  "reference_tolerances": [
+    {"rtol": 2e-11, "atol": 2e-12},
+    {"rtol": 2e-13, "atol": 2e-14},
+    {"rtol": 2.5e-14, "atol": 3e-15}
+  ],
+  "quadrature_relative_allowance": 0.002,
+  "coefficient_relative_allowance": 0.005,
+  "order_absolute_allowance": 0.01,
+  "reference_fraction_allowance": 0.001,
+  "cartesian_radii": [0.07, 0.4, 1.0, 3.0, 8.0],
+  "cartesian_angles": [0.0, 0.3, 1.0, 2.1, 4.0],
+  "shape_times": [0.0, 0.25, 0.5, 0.75, 1.0],
+  "sensitivity_rotation_ratios": [0.0, 0.9, 0.98, 1.0, 1.02, 1.1],
+  "sensitivity_step_counts": [8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192],
+  "flow_matching_sigma": 1.5
+}

@@ -1,0 +1,271 @@
+\section{Beyond Gaussian sources: a radial confinement obstruction}
+\label{app:radial-extension}
+The source two-jet is the pair of first and second time derivatives of
+the distribution path at its start. The same calculation can be made for
+some non-Gaussian sources. To complete the obstruction proof, we must
+bound the squared correction perpendicular to a selected direction.
+We prove that bound for the radial source class below. Odd dimension alone
+would not supply the needed moment estimate.\AIassistance
+
+Let
+\begin{equation}
+ q_W(x)=Z_W^{-1}\exp\{-|x|^2/2-W(|x|^2)\},
+ \quad W\in C^2([0,\infty)),\quad W(0)=0,\quad W'\ge0.
+ \label{eq:radial-source}
+\end{equation}
+The normalizing constant makes the density integrate to one. The
+additional radial term reduces the relative weight of large radii.
+This includes $W(s)=\epsilon s^2/4$, $\epsilon>0$, which is non-Gaussian.
+The density is positive and smooth, and its moments of every order are finite. Let
+$X\sim q_W$ and $Y$ be independent, with $\E Y=0$, $Y\in\mathcal P_2$,
+and covariance $S\succ0$. Prescribe $p_t=\Law((1-t)X+tY)$ near zero.
+
+\begin{theorem}[Non-Gaussian source-local obstruction]
+\label{thm:radial-proof}
+If $d$ is odd, this path has no $C^1$ generator near zero that is globally
+Lipschitz in space, whose source acceleration satisfies $a_0\in L^1(q_W)$,
+and whose source acceleration preserves the source distribution:
+$\operatorname{div}(q_Wa_0)=0$. Every field in $\overline{\mathcal B}_K$
+satisfies the integrability condition. Differentiation of compact flow observables
+twice at zero must be valid; the common derivative bound in the paper is a sufficient,
+but not necessary, condition. No Gaussian, symmetry, or smooth-density
+assumption is made on the target.
+\end{theorem}
+\begin{proof}
+The proof follows the Gaussian argument until the moment estimate.
+The first path derivative says that the correction leaves the source
+distribution unchanged. The second derivative relates the squared
+correction in a direction to acceleration in that direction.
+We then bound moments in the perpendicular directions for this source.
+With those bounds, the large-sphere argument again produces a test that
+detects nonzero acceleration.
+
+Put $r=u_0+x$ and $L=\operatorname{Lip}(r)$. Differentiating the path once
+gives $\operatorname{div}(q_Wr)=0$. Since $r$ is $C^1$, this identity is
+pointwise and gives
+\[
+ \operatorname{div}r=(1+2W'(|x|^2))x\cdot r,
+ \qquad |x\cdot r(x)|\le dL.
+\]
+For a unit $e$, the marginal flux
+$q_{W,e}(y)\E[e\cdot r(X)\mid e\cdot X=y]$ has zero distributional
+derivative. It is integrable and hence identically zero. The source
+second-jet argument consequently gives exactly
+\begin{equation}
+ \E[\psi'(e\cdot X)e\cdot a_0(X)]
+ =\int\psi''(y)\{e^\top Se-Q_e(y)\}q_{W,e}(y)\,dy,
+ \quad Q_e(y)=\E[(e\cdot r(X))^2\mid e\cdot X=y].
+ \label{eq:radial-twojet}
+\end{equation}
+Indeed $(e\cdot(Y-X))^2$ has conditional mean $y^2+e^\top Se$, while
+$(e\cdot u_0(X))^2$ has conditional mean $y^2+Q_e(y)$; the cross term
+vanishes by the flux identity. Cutoffs, finite second moments, and
+$a_0\in L^1(q_W)$ justify the extension from compact tests to the scalar
+bounded-derivative tests used below: the cutoff error is at most a constant
+times $\int_{|x|\ge R}|a_0|q_W\dd x$.
+
+Conditional on $e\cdot X=y$, the perpendicular coordinate has density
+proportional to
+$\exp(-|z|^2/2)\exp\{-W(y^2+|z|^2)\}$.
+Relative to a standard Gaussian perpendicular coordinate, this density
+gives smaller relative weight to larger radii. The weight is nonincreasing
+because $W'\ge0$. The following elementary comparison therefore bounds
+its increasing radial moments by the Gaussian moments. For an increasing function $f$ and a
+decreasing nonnegative $w$, $\E[f(R)w(R)]\le\E f(R)\E w(R)$: subtract
+using two independent copies of $R$ and note that
+$(f(R)-f(R'))(w(R)-w(R'))\le0$.
+Thus the conditional moments satisfy
+\[
+ \E|Z_\perp|^2\le d-1,\qquad
+ \E|Z_\perp|^4\le(d-1)(d+1).
+\]
+The same argument shows finiteness of all needed source moments.
+
+Let $A_d=d+\sqrt{d^2+d-2}$ and choose
+$R\ge\max\{1,2A_dL/\sqrt{\lambda_{\min}(S)}\}$.
+The tangential projection of $r$ has a zero at $Re$ for some $e$ by the
+hairy-ball theorem on $S^{d-1}$; for $d=1$ its tangent space is zero.
+For $y\in[R,R+1]$, the pointwise divergence identity and Lipschitzness give
+\[
+ |e\cdot r(ye+z)|\le\frac L R
+       \{d+|z|\sqrt{(y-R)^2+|z|^2}\}.
+\]
+The conditional moment bounds therefore imply
+$\sqrt{Q_e(y)}\le A_dL/R\le\sqrt\lambda/2$.
+A convex scalar test with $\psi''=\mathbf1_{[R,R+1]}$ and
+$0\le\psi'\le1$ has positive pairing at least
+$(3\lambda/4)\Pr\{e\cdot X\in[R,R+1]\}>0$ in
+\eqref{eq:radial-twojet}. This contradicts source acceleration preservation.
+An explicit positive pairing bound follows by bounding the probability below
+by
+\begin{equation}
+ \frac{\operatorname{vol}(B_{d-1}(1))}{(2\pi)^{d/2}}
+ \exp\left\{-\frac{(R+1)^2+1}{2}
+              -W((R+1)^2+1)\right\},
+ \label{eq:radial-strip-mass}
+\end{equation}
+using $Z_W\le(2\pi)^{d/2}$ and integrating over the perpendicular unit
+ball. For $d=1$ use $\operatorname{vol}(B_0)=1$; the displayed bound is
+still conservative.
+\end{proof}
+
+The two-grid characterization also allows $\gamma_d$ to be replaced by
+a fixed positive continuous source density with a finite fourth moment.
+The changes to the proof are specific. In
+Lemmas~\ref{lem:compact}--\ref{lem:weak}, use the source's second and
+fourth moments in place of Gaussian moment bounds. Second-moment tails
+justify compactness and necessity. The fourth moment controls the
+acceleration-flow coupling used for sufficiency, with physical time fixed.
+A $C^1$ bi-Lipschitz flow preserves the positive continuous density needed
+in that proof. The preceding
+obstruction therefore gives a uniform target-only $c/N$ barrier for
+\eqref{eq:radial-source} under the same common derivative bound and balanced
+refinements. The quantitative Hermite result does \emph{not} extend to
+this non-Gaussian source without a corresponding spectral argument.
+
+An invertible affine change of source coordinates preserves the source
+obstruction and Euler update algebra. If $X=A\widetilde X+b$, transform
+velocities and target covariances by $A^{-1}$; the derivative bound changes by the chain rule, including the affine
+shift and the operator norms of $A,A^{-1}$, and
+$W_2(A_\#\mu,A_\#\nu)\ge s_{\min}(A)W_2(\mu,\nu)$.
+This covers non-isotropic elliptical versions of the source class. It does
+not cover arbitrary multimodal initial densities, arbitrary heavy tails,
+or discontinuous velocities. It also does not cover velocities assumed only
+to have weak derivatives in a Sobolev space.
+
+\section{The exact asymptotic optimum over all scalar nonlinear candidates}
+\label{app:sharp-minimax}
+The characterization gives the error's order of decay, but it generally
+does not give the smallest coefficient multiplying that order.
+For the scalar Gaussian path below, we find that coefficient over
+\emph{all} admissible nonlinear fields. Each field is judged by the sum of
+its worst coarse and refined errors over the tested times. We then choose
+the best field. This order of worst-time and best-field choices defines the
+minimax problem. No general sharp constant is established above one dimension.
+Let $d=T=1$ and $p_t=\mathcal N(0,g(t)^2)$ with
+$g(t)=\sqrt{(1-t)^2+t^2}$. Use uniform $N$-step Euler and its fixed
+$m$-fold refinement, $m\ge2$. Write $q_N^{(m)}=\inf_{u\in\mathcal B_K}
+(E_c+E_r)$.\AIassistance
+
+\begin{theorem}[Sharp all-candidate scalar constant]
+\label{thm:sharp-minimax-proof}
+For any fixed derivative bound strictly exceeding
+$\max\{1,\|c\|_\infty,\|c'\|_\infty,\|c''\|_\infty\}$,
+where $c=g'/g$ on $[0,1]$, the secant fields belong to $\mathcal B_K$ for
+all sufficiently large $N$, and
+\begin{equation}
+ \lim_{N\to\infty}Nq_N^{(m)}
+ =\frac12(1-1/m)(1+\pi/2).
+ \label{eq:sharp-minimax}
+\end{equation}
+In particular the bisection constant is $(2+\pi)/8$.
+\end{theorem}
+\begin{proof}
+We first show that an asymptotically accurate sequence must approach the
+unique exact scalar generator. A uniform particle-error expansion then gives
+a lower bound on the separation between its coarse and fine numerical laws.
+Finally, the secant field attains that lower bound.
+
+Any globally Lipschitz exact generator of this scalar Gaussian path is
+$v(t,x)=c(t)x$. Indeed the difference of two generators satisfies
+$\partial_x(p_tr_t)=0$; Gaussian integrability and at most linear growth
+force its constant flux to be zero. This is the standard one-dimensional uniqueness argument for a generator
+with vanishing flux.
+
+We first record an elementary uniform particle expansion on uniform grids.
+For any $u\in\overline{\mathcal B}_K$, with $X_t=F^u_{0,t}(G)$, let
+\[
+ B_t^u=J_t(G)\int_0^tJ_s(G)^{-1}a_s(X_s)\,ds.
+\]
+The common-start recursive Euler error satisfies, in $L^2$ uniformly over
+nodes and the derivative class,
+\begin{equation}
+ \widehat X_k-X_{kh}=-\tfrac h2 B_{kh}^u+O_{L^2}(h^2).
+ \label{eq:scalar-variational-expansion}
+\end{equation}
+To derive the expansion, write $e_k=\widehat X_k-X_{kh}$. Taylor's
+formula gives
+$e_{k+1}=(1+hDu(t_k,X_{t_k}))e_k-h^2a_{t_k}(X_{t_k})/2+r_k$,
+where $|r_k|\le C h^3(1+|G|)^2$ after using the uniform strong bound
+$|e_k|\le Ch(1+|G|)$ and $\|D^2u\|\le K$.
+Variation of constants for $B'=Du(t,X_t)B+a(t,X_t)$ has a one-step
+quadrature remainder $O_{L^2}(h^2)$; multiplying it by $h/2$ and comparing
+the recurrences yields \eqref{eq:scalar-variational-expansion} by discrete
+Gronwall. Gaussian fourth moments bound all remainder terms. This uses
+only the derivatives already controlled by the class.
+
+Choose approximate minimizers with $E_c+E_r=O(1/N)$, possible by the
+secant upper construction below. Every convergent subsequence has, by the
+node-to-path bound and compactness, an exact limiting generator and hence
+limit $v$. Local $C^1$ convergence plus Gaussian tails implies
+$B^{u_N}\to B^v$ in uniform-in-time $L^2$. Subtract
+\eqref{eq:scalar-variational-expansion} for steps $h$ and $h/m$ to obtain
+\[
+ h^{-1}(\widehat X^c_k-\widehat X^r_{mk})
+ \longrightarrow-\tfrac12(1-1/m)B^v_{t_k}.
+\]
+For $hK<1$, each scalar Euler update is increasing. Particles therefore
+keep the order of their initial positions. Pairing the same initial
+quantiles also pairs the same output quantiles. Such a pairing is
+\emph{optimal} in one dimension. Thus the $W_2$ distance between the two
+numerical laws equals the displayed common-start $L^2$ norm. The target triangle inequality proves the lower bound with
+constant $\tfrac12(1-1/m)\sup_t\|B_t^v\|_2$.
+
+For $v=cx$, direct integration gives
+$B_t^v=g(t)\int_0^t g''(s)/g(s)\,ds\,G$.
+Let $I(t)=\int_0^t1/g(s)^4\,ds$. The product $g(t)I(t)$ is increasing.
+On $t\le1/2$, $I(t)\le t/g(t)^4$, so its derivative is at least
+$(1-3t+4t^2)/g(t)^5>0$; on $t\ge1/2$ both terms in the derivative are
+nonnegative. Its maximum is thus $I(1)=1+\pi/2$, obtained by substituting
+$z=2s-1$.
+
+Finally $u_h(t,x)=[g(t+h)-g(t)]x/[hg(t)]$ converges to $v$ in the scalar
+coefficient $C^2$ norm and satisfies the derivative bound strictly for sufficiently small
+$h$. It gives exact coarse target marginals, while its refined target
+error has coefficient $\tfrac12(1-1/m)\sup_t g(t)I(t)$. This supplies the
+matching upper bound and proves the limit. The optimal constant concerns
+uniform grids, this fixed scalar path, and the sum-of-maxima objective;
+it is not a sharp constant for general dimension or optimized nonuniform
+grids.
+\end{proof}
+
+\section{One-dimensional geometry and the limit of endpoint tests}
+\label{app:observable-geometry}
+A quantile function gives the position below which a specified proportion
+of a distribution lies. For example, the middle quantile has half the
+probability below it. In one dimension, following each fixed quantile
+through time exactly transports the distribution. We can therefore read
+the acceleration condition directly from these quantile trajectories.\AIassistance
+
+Let $p_t$ be a scalar path with a positive continuous density and a finite
+second moment, and let $Q_t$ be its quantile function. Among the fields in
+$\overline{\mathcal B}_K$, the flux argument of Supplementary
+Section~\ref{app:sharp-minimax} shows that the unique exact generator is
+$u(t,Q_t(z))=\partial_tQ_t(z)$ and
+$a(t,Q_t(z))=\partial_{tt}Q_t(z)$.
+Thus an order-elevating generator exists exactly when
+$\partial_{tt}Q_t=0$ in $L^2(0,1)$ and the resulting generator belongs to
+the chosen class closure. Necessity follows because the scalar weighted flux must vanish.
+For sufficiency, each quantile moves along a straight trajectory, so Euler
+reproduces that motion exactly. This is the standard one-dimensional
+displacement-interpolation criterion. It constructs a field for an
+externally specified scalar path. In several dimensions, a straight,
+invertible interpolation of prescribed transport maps also gives a
+sufficient Euler-exact construction. This construction is known in
+displacement geometry and is not necessary in general.
+
+Accuracy only at the final time cannot replace accuracy along the whole
+path. Errors with different signs can cancel before the final time. The smooth
+scalar field $u(t,x)=-5t^2x$ generates $g(t)=\exp(-5t^3/3)$, and
+\[
+ \int_0^1\{c'(s)+c(s)^2\}\,ds
+ =\int_0^1(-10s+25s^4)\,ds=0.
+\]
+The terminal Euler error is $O(h^2)$ simultaneously for every fixed
+integer refinement factor, while the acceleration is nonzero and the
+maximum-node error is first-order. Conversely, under a \emph{specified}
+transported test whose pairing has one sign and satisfies $|I(t)|\ge a>0$
+on the full interval, \eqref{eq:balanced-contrast} with $i=0,j=N$ and
+$Z_0=0$ gives a terminal $c/N$ bound whenever the remainder is dominated.
+The extra sign condition is an observability assumption; it is not implied
+by a nonzero local residual.

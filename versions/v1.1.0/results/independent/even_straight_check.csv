@@ -1,0 +1,10 @@
+N,terminal_roundoff_W2,max_node_roundoff_W2,theoretical_exact_W2,note
+8,3.14018491736755e-16,3.14018491736755e-16,0,floating_point_check_of_exact_algebraic_identity
+16,0,3.14018491736755e-16,0,floating_point_check_of_exact_algebraic_identity
+32,3.14018491736755e-16,6.280369834735101e-16,0,floating_point_check_of_exact_algebraic_identity
+64,2.198129442157285e-15,2.51214793389404e-15,0,floating_point_check_of_exact_algebraic_identity
+128,6.280369834735101e-16,1.25607396694702e-15,0,floating_point_check_of_exact_algebraic_identity
+256,1.25607396694702e-15,2.041120196288908e-15,0,floating_point_check_of_exact_algebraic_identity
+512,3.14018491736755e-15,3.14018491736755e-15,0,floating_point_check_of_exact_algebraic_identity
+1024,2.826166425630795e-15,4.082240392577816e-15,0,floating_point_check_of_exact_algebraic_identity
+2048,3.768221900841061e-15,4.867286621919703e-15,0,floating_point_check_of_exact_algebraic_identity

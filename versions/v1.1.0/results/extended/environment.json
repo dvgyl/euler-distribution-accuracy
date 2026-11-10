@@ -1,0 +1,26 @@
+{
+  "python": "3.13.5",
+  "torch": "2.10.0+cpu",
+  "numpy": "2.3.5",
+  "threads": 1,
+  "cuda": false,
+  "command_args": {
+    "eval_only": false,
+    "steps": 1800,
+    "dims": [
+      2,
+      8
+    ],
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "methods": [
+      "fm",
+      "discretization",
+      "transfer"
+    ],
+    "width": 48
+  }
+}

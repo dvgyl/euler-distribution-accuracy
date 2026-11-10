@@ -1,0 +1,501 @@
+\section{Finite-step observability and nondegenerate refinements}
+\label{app:observable}
+The candidate has its own exact distribution at each time, which may
+differ from the target. We use two numerical runs to bound how much
+acceleration can change that exact distribution. Lemma~\ref{lem:weak}
+controls one test average at a time. To control the full component of
+acceleration that changes the distribution, we must also bound the
+part that the chosen tests leave unmeasured.\AIassistance
+
+\subsection{How the interval splits determine the comparison}
+Adding more time points need not substantially change a numerical run.
+For example, a split can leave one subinterval almost as long as the coarse
+interval. The refinement energy below measures the reduction in squared
+step sizes. A positive lower bound makes the two runs different enough to
+reveal the leading error.
+
+Split the $k$th coarse interval into positive fractions
+$\theta_{k,1},\ldots,\theta_{k,m_k}$ summing to one. Define
+\begin{equation}
+ \beta_k=1-\sum_r\theta_{k,r}^2,\qquad \beta_k\ge\beta_0>0.
+ \label{eq:refinement-energy}
+\end{equation}
+The error $E_r$ is measured at common coarse nodes; set $E=E_c+E_r$.
+For any transported test with acceleration pairing $I(t)$, Lipschitz constant
+$M$, and weak-remainder constant $C_w$, direct subtraction gives
+\begin{equation}
+ Z_j-Z_i=-\frac12\sum_{k=i}^{j-1}\beta_k h_k^2 I(t_k)+R_{ij},
+ \qquad |R_{ij}|\le C_\times H\sum_{k=i}^{j-1}h_k^2,
+ \quad C_\times=2C_w+M/2.
+ \label{eq:balanced-contrast}
+\end{equation}
+Indeed the fine leading sum is $-\tfrac12\sum_{k,r}
+\theta_{k,r}^2h_k^2 I(t_k+s_{k,r})$, with $0\le s_{k,r}\le h_k$.
+Replacing each pairing by $I(t_k)$ costs at most $(M/2)\sum h_k^3$.
+The two recursive remainders together cost at most $2C_wH\sum h_k^2$.
+No numerical trajectory is restarted at an exact marginal. For equal
+$m$-fold subdivision a smaller constant is available:
+\begin{equation}
+ \beta_0=1-1/m,\qquad
+ C_\times=(1+m^{-2})C_w+\frac{m-1}{4m^2}M.
+ \label{eq:equal-m-constant}
+\end{equation}
+
+\begin{lemma}[Explicit observation of a signed residual]
+\label{lem:master-observer}
+Suppose $|I|\le A_o$, $\operatorname{Lip}(I)\le M$, $|Z_k|\le DE$,
+and \eqref{eq:balanced-contrast} holds. Assume $A_o,M>0$ and put
+\[
+ c_o=\min\{T/(2A_o),1/(2M)\},\qquad
+ L_o=\max\{4/c_o,8C_\times/\beta_0\}.
+\]
+Then, on any coarse grid,
+\begin{equation}
+ \|I\|_\infty\le L_oH+
+ \left(\frac{64DN E}{\beta_0c_o^2}\right)^{1/3}.
+ \label{eq:observer-cube}
+\end{equation}
+On a uniform coarse grid this improves to
+\begin{equation}
+ \|I\|_\infty\le L_oH+
+ \left(\frac{32DN E}{\beta_0Tc_o}\right)^{1/2}.
+ \label{eq:observer-square}
+\end{equation}
+Zero values of $A_o$ or $M$ are handled directly or by increasing them to
+any positive upper bounds.
+\end{lemma}
+\begin{proof}
+The proof uses the fact that $I$ cannot change arbitrarily quickly.
+If its magnitude is large at one time, it stays away from zero with the
+same sign on a nearby interval. The difference between the two runs on
+that interval then forces a lower bound on their target errors.
+
+Let $a=\|I\|_\infty>0$ and choose a maximizing time. On its longer side
+there is an interval of length
+$\ell=\min\{T/2,a/(2M)\}\ge c_oa$ where $I$ has one sign and
+$|I|\ge a/2$. If $H\le\ell/4$, its first and last coarse nodes are
+separated by at least $\ell/2$. If also $H\le\beta_0a/(8C_\times)$,
+\eqref{eq:balanced-contrast} gives
+\[
+ 2DE\ge |Z_j-Z_i|\ge\frac{\beta_0a}{8}\sum_{k=i}^{j-1}h_k^2
+ \ge\frac{\beta_0a\ell^2}{32N}.
+\]
+This proves the cubic bound. On a uniform grid the last squared-step sum
+is at least $T\ell/(2N)$, proving the square-root bound. If either mesh
+condition fails, $a\le L_oH$. Adding the two alternatives proves the
+statements for every grid, including coarse grids where the bound is weak.
+\end{proof}
+
+For source tests with $\|\nabla\phi\|_\infty,
+\operatorname{Lip}(\nabla\phi)\le1$, the constants in
+Supplementary Section~\ref{app:uniform} and Lemma~\ref{lem:weak} can be used directly.
+Taking the supremum over all such tests bounds the largest effect detected
+by this test class at any time. This is a weak acceleration residual.
+It is not yet an $L^2$ bound on the whole acceleration component.
+
+\subsection{Bounding the full residual with a Gaussian polynomial expansion}
+A finite collection of measurements can miss a nonzero acceleration
+component. We therefore also bound the part that is not measured.
+We express the transported acceleration as a sum of orthogonal Gaussian
+polynomial components. A derivative estimate bounds the contribution of
+the omitted higher-degree components, called the spectral tail.
+This argument uses standard Gaussian initialization. Write
+\[
+ X_t=F_{0,t}(G),\quad J_t=DF_{0,t},\quad
+ V_t=J_t^{-1}a_t\circ F_{0,t},\quad
+ \varepsilon_t=\|\Pi_{\rho_t^u}a_t\|_{L^2(\rho_t^u)}.
+\]
+Here $J_t$ is the spatial Jacobian, which describes how the flow changes
+when its initial position changes. The field $V_t$ expresses acceleration
+in those initial coordinates. The projection $\Pi_{\rho_t^u}$ keeps the
+component detected by gradients of test functions. Its norm $\varepsilon_t$
+measures the part that can change the current distribution.
+We use the constants $C_F,A,B,C_D,C_E,M_2,M_4$ from
+\eqref{eq:base-constants}--\eqref{eq:flow-bounds}. Define
+\begin{align}
+ A_o&=AC_F^2\sqrt{M_2},&M&=BC_F^3\sqrt{M_4},\\
+ c_o&=\min\{T/(2A_o),1/(2M)\},&
+ V_1&=KTAC_F^5+C_D C_F^3. \label{eq:spectral-core}
+\end{align}
+Let $H_\alpha$ be normalized multivariate probabilists' Hermite polynomials,
+so $\E H_\alpha(G)H_\eta(G)=\mathbf1_{\alpha=\eta}$. These polynomials are
+orthogonal under the standard Gaussian law, so the mean product of two
+different basis polynomials is zero. The multi-index $\alpha$ lists the
+degree in each coordinate, and $|\alpha|$ is their total degree.
+For $\ell=|\alpha|\ge1$ set $\phi_\alpha=H_\alpha/\sqrt \ell$.
+In the polynomial envelopes below, $m=\ell$ denotes this total degree;
+it is distinct from the subdivision factor in \eqref{eq:equal-m-constant}.
+If
+$\phi_\alpha(x)=\sum_b c_bx^b$, use the explicitly finite envelopes
+\[
+ P_{1,\alpha}=\sum_b|c_b||b|,\qquad
+ P_{2,\alpha}=\sum_b|c_b||b|(|b|-1).
+\]
+Then $|\nabla\phi_\alpha(x)|\le P_{1,\alpha}(1+|x|)^{m-1}$ and
+$\|D^2\phi_\alpha(x)\|\le P_{2,\alpha}(1+|x|)^{\max(m-2,0)}$.
+Set $\mu_r=\E(1+|G|)^r$, including $\mu_0=1$. Every $\mu_r$ is explicit:
+\[
+ \mu_r=\sum_{j=0}^r\binom{r}{j}2^{j/2}
+       \frac{\Gamma((d+j)/2)}{\Gamma(d/2)}.
+\]
+The next constants keep track of how each polynomial and its derivatives
+grow after transport by the flow. They make the coefficient bounds
+explicit. For each $\alpha$ define
+\begin{align}
+ G_\alpha&=P_{1,\alpha}C_F^\ell,&
+ H_\alpha^*&=(P_{2,\alpha}+KTP_{1,\alpha}C_F)C_F^\ell,\\
+ D_\alpha&=G_\alpha 2^{m-1}C_F^{m-1}\sqrt{\mu_{2m-2}},\\
+ C_{0,\alpha}&=JC_F^3G_\alpha/6+KAC_FG_\alpha/2
+             +TH_\alpha^*A^2C_F^{\ell+1}/8,\\
+ C_{b,\alpha}&=H_\alpha^*A+G_\alpha C_D,\\
+ C_{w,\alpha}&=\mu_{\ell+1}\{C_{0,\alpha}C_F^{\ell+1}
+                   +\tfrac12 C_{b,\alpha}C_F^mC_ET\}.
+ \label{eq:polynomial-constants}
+\end{align}
+Use \eqref{eq:balanced-contrast} or \eqref{eq:equal-m-constant} to define
+$C_{\times,\alpha}$, and put
+\begin{align}
+ L_\alpha&=\max\{4/c_o,8C_{\times,\alpha}/\beta_0\},\\
+ b_\alpha(E,H)&=L_\alpha H+
+       \left(\frac{64D_\alpha NE}{\beta_0c_o^2}\right)^{1/3}.
+ \label{eq:hermite-coefficient-bound}
+\end{align}
+On a uniform coarse grid replace the cube-root term by
+$\{32D_\alpha NE/(\beta_0Tc_o)\}^{1/2}$.
+
+\begin{theorem}[Explicit spectral residual observability]
+\label{thm:spectral-proof}
+For every $u\in\overline{\mathcal B}_K$, every balanced refinement,
+and every integer $q\ge0$,
+\begin{equation}
+ \boxed{\quad
+ \sup_{0\le t\le T}\varepsilon_t
+ \le C_F\left\{
+   \sum_{1\le|\alpha|\le q+1}b_\alpha(E,H)^2
+       +\frac{dM_2 V_1^2}{q+1}\right\}^{1/2}.
+ \quad}
+ \label{eq:spectral-bound}
+\end{equation}
+The infimum over $q$ is a fully specified upper bound. The acceleration and
+projection refer to the field's own exact law; exact target-path
+preservation is not assumed. The same statement is valid if $E$ is replaced
+by the maximum cross-grid $W_2$ distance, which may be smaller than $E_c+E_r$.
+\end{theorem}
+\begin{proof}
+We first apply the signed observer to each polynomial coefficient.
+We then bound the coefficients beyond the retained degree and carry
+the resulting norm bound from source coordinates to the current law.
+This second step is what turns finitely many coefficient estimates into
+a bound for the full residual.
+
+For $\phi=\phi_\alpha$, let $\phi_t=\phi\circ F_{t,0}$.
+Its gradient and Hessian are bounded by
+$G_\alpha(1+|x|)^{m-1}$ and $H_\alpha^*(1+|x|)^{m-1}$.
+The second bound follows from the two terms in the second derivative of a
+composition and $\|D^2F_{t,0}\|\le KTC_F^2$.
+A Taylor expansion of $\phi_{t+h}$ at the exact endpoint, comparing it to
+the Euler endpoint, gives a remainder at most
+$C_{0,\alpha}h^3(1+|x|)^{\ell+1}$.
+The three terms in \eqref{eq:polynomial-constants} bound three sources of
+error. They are the change in particle acceleration, the transport of the
+test gradient, and the Taylor remainder involving the Hessian. The Hessian
+contains the test function's second spatial derivatives. For
+example, along the segment between the two endpoints,
+$1+|z|\le C_F(1+|x|)$ and
+$|E-Y|\le A C_F h^2(1+|x|)/2$; its Hessian remainder is therefore at most
+$H_\alpha^*A^2C_F^{\ell+1}h^4(1+|x|)^{\ell+1}/8$.
+
+The pairing $\nabla\phi_t\cdot a_t$ has spatial derivative bounded by
+$C_{b,\alpha}(1+|x|)^\ell$. Comparing recursive numerical states to exact
+states and then summing over any subinterval gives exactly
+$C_{w,\alpha}H\sum h_k^2$, using
+$\E(1+|G|)^{\ell+1}=\mu_{\ell+1}$. Thus all recursive estimates continue to hold
+for these unbounded polynomial tests; no target moment beyond the
+Wasserstein comparisons is used.
+For two numerical laws, the mean-value inequality and Cauchy--Schwarz give
+\[
+ |\E\phi_t(\widehat X)-\E\phi_t(\widetilde X)|
+ \le D_\alpha W_2(\Law\widehat X,\Law\widetilde X).
+\]
+To check the constant, the squared gradient factor has moment at most
+$G_\alpha^2 2^{2m-2}C_F^{2m-2}\mu_{2m-2}$ under any coupling, using only
+the separate Gaussian-start marginal moment bounds.
+
+The Hermite normalization gives $\|\nabla\phi_\alpha\|_{L^2(\gamma_d)}=1$.
+The coefficient
+$c_\alpha(t)=\E\nabla\phi_\alpha(G)\cdot V_t(G)$ therefore satisfies
+$|c_\alpha|\le A_o$ and $\operatorname{Lip}(c_\alpha)\le M$, because
+$|V_t(G)|\le AC_F^2(1+|G|)$ and
+$\partial_tV_t=J_t^{-1}(j_t-Du_ta_t)\circ F_{0,t}$ has $L^2$ norm at
+most $BC_F^3\sqrt{M_4}$. Lemma~\ref{lem:master-observer} yields
+$\sup_t|c_\alpha(t)|\le b_\alpha$.
+
+We must also account for components outside the retained finite set.
+The gradients $\nabla H_\alpha/\sqrt{|\alpha|}$ form an orthonormal basis
+of the Gaussian gradient subspace. Thus their coefficients account for
+the full projected field, not only the measurements kept in the sum. Orthogonality follows
+from $\partial_iH_\alpha=\sqrt{\alpha_i}H_{\alpha-e_i}$.
+Completeness follows by expanding a smooth compact potential in Hermite
+polynomials in the Gaussian Sobolev norm; integration by parts identifies
+its derivative coefficients. Polynomial gradients themselves belong to
+the closure of compact smooth gradients by Gaussian-tail cutoffs.
+Gaussian differentiation also gives
+$\sum_{i,b}|b|\,|\langle V_i,H_b\rangle|^2=\E\|DV\|_{\mathrm F}^2$ for
+$V\in W^{1,2}(\gamma_d)$, first for polynomials and then by approximation in that Sobolev norm. Here the Gaussian Sobolev norm
+controls both the square-integrable function and its square-integrable first
+derivatives under the Gaussian law.
+Since projection onto gradients preserves each total Hermite degree,
+\[
+ \|\Pi_{\gamma_d}V_t\|_2^2
+ \le\sum_{1\le|\alpha|\le q+1}|c_\alpha(t)|^2
+       +\frac{\E\|DV_t\|_{\mathrm F}^2}{q+1}.
+\]
+The chain rule, $D(J^{-1})=-J^{-1}(DJ)J^{-1}$, and the flow estimates give
+$\|DV_t(x)\|_{\rm op}\le (KTAC_F^5+C_D C_F^3)(1+|x|)$, hence the numerator
+is at most $dM_2V_1^2$.
+Finally, for any physical test $\psi$ and $\phi=\psi\circ F_{0,t}$,
+\[
+ \langle\nabla\psi,a_t\rangle_{\rho_t^u}
+ =\langle\nabla\phi,V_t\rangle_{\gamma_d},\qquad
+ \|\nabla\phi\|_2\le C_F\|\nabla\psi\|_{L^2(\rho_t^u)}.
+\]
+Taking the dual supremum proves
+$\varepsilon_t\le C_F\|\Pi_{\gamma_d}V_t\|_2$ and the theorem.
+All derivative estimates are valid almost everywhere for closure fields; the weak
+expansion passes from smooth approximants with the stated uniform
+remainders.
+\end{proof}
+
+The cutoff degree $q$ sets how many coefficients enter the finite sum.
+For fixed $q$, all constants are finite and explicit. They can nevertheless
+grow rapidly with $q$, $K$, and dimension, so the bound is not a practical
+dimension-free certificate.
+
+The order of choices explains what the bound does establish. First choose
+$q$ large enough to make the tail small. Then make $H$ and $NE$ small
+enough to control the retained coefficients. Consequently, $H\to0$ and
+$NE\to0$ force the \emph{full} projected-acceleration norm to zero,
+uniformly in time. This conclusion does not assume that a finite dictionary
+alone detects every component. It also gives no power-law estimate of
+distance to the set of exact generators.
+
+\paragraph{Converting a residual lower bound into an error lower bound.}
+Suppose a separate argument proves that the projected acceleration cannot
+be arbitrarily small. The upper bound just obtained then prevents the
+two-grid error from being arbitrarily small. The construction below gives
+explicit constants for this implication.
+
+Fix a proved floor $\sup_t\varepsilon_t\ge\delta>0$. Choose an integer $q$
+with $q+1\ge4C_F^2dM_2V_1^2/\delta^2$. Write
+$b_\alpha=L_\alpha H+\Lambda_\alpha(NE)^{1/p}$, where $p=3$ for arbitrary
+balanced grids and $p=2$ for uniform grids, and let
+$L_q=(\sum L_\alpha^2)^{1/2}$ and
+$\Lambda_q=(\sum\Lambda_\alpha^2)^{1/2}$ over the retained indices. Then
+\[
+ H\le H_\delta:=\frac{\delta}{4C_FL_q}
+ \quad\Longrightarrow\quad
+ E\ge\frac{c_\delta}{N},\qquad
+ c_\delta=\left(\frac{\delta}{4C_F\Lambda_q}\right)^p.
+\]
+Indeed, a smaller error makes the retained coefficient norm at most
+$\delta/(2C_F)$ and the tail at most $\delta^2/(4C_F^2)$, contradicting the
+floor via \eqref{eq:spectral-bound}. All constants are explicit. A proved positive acceleration pairing
+can supply such a floor; a target-feature discrepancy alone cannot.
+The constants and number of retained coefficients may be impractical.
+
+\subsection{Why bounded tests alone do not give the full norm}
+A test average can be small because positive and negative contributions
+cancel. The squared norm does not have this cancellation. A rapidly
+oscillating acceleration can therefore have very small smooth-test
+averages while its norm is larger. The example below shows why no common
+linear bound compares these quantities under the stated derivative bound.
+
+For $d=1$, $u_n(t,x)=t\sin(nx)/n^2$ belongs to $\mathcal B_1$ for
+$0\le t\le1$, and $a_0=\sin(nx)/n^2$. Its full source residual is
+\[
+ \|a_0\|_2=\frac{\sqrt{(1-e^{-2n^2})/2}}{n^2}.
+\]
+In contrast, Gaussian integration by parts gives, for
+$|\phi'|,|\phi''|\le1$,
+\[
+ |\E\phi'(G)a_0(G)|\le (1+\E|G|)/n^3.
+\]
+The flow of $u_n$ satisfies $F_{0,t}(x)=x+O(n^{-2})$ and
+$DF_{0,t}(x)=1+O(n^{-1})$ uniformly for $0\le t\le1$, so the transported
+pairings are $O(n^{-3})$ at every time.
+Hence no common linear bound of the full norm by this weak residual holds,
+even within the stated derivative bound. A finite fixed dictionary can
+also miss an entire nonzero orthogonal component. The spectral tail in
+\eqref{eq:spectral-bound}, rather than an unproved norm equivalence, repairs
+that logical gap.
+
+\section{Refinement and Runge--Kutta versions of the characterization}
+\label{app:scheme-extension}
+The characterization depends on separating the leading errors of the two
+numerical runs. Balanced interval subdivision supplies that separation for
+Euler. A suitable pair of Runge--Kutta methods can supply it on one common
+grid. We state the conditions for each comparison and then give examples
+showing why weaker conditions do not suffice.\AIassistance
+
+With \eqref{eq:refinement-energy}, the necessity proof of
+Theorem~\ref{thm:characterization} applies with the same steps after replacing its
+contrast by \eqref{eq:balanced-contrast}. A nonzero limiting pairing
+retains one sign on a fixed interval of length $\ell$, and $\sum h_k^2\ge\ell^2/(4N)$ there.
+The constant $\beta_0$ must be uniform in the sequence. Sufficiency is
+unchanged since the fine maximum step is at most $H$.
+Thus all equivalences and the uniform $c/N$ conclusion hold for every
+fixed integer refinement factor and every uniformly balanced, possibly
+interval-dependent subdivision. Fine step counts may differ from $2N$;
+the reference step count is the coarse number of steps.
+
+\subsection{Pairs of Runge--Kutta methods with distinct leading defects}
+A Runge--Kutta update evaluates the velocity at several intermediate stage
+states before forming the next state. Its coefficients specify those states
+and the weighted output. The leading defect is the first local error term
+relative to the exact update. The scalar coefficient below determines that
+term under the stated consistency condition.
+
+Consider a fixed explicit Runge--Kutta method with coefficients
+$\mathsf A_{ij}$, $\mathsf b_i$, $c_i=\sum_j \mathsf A_{ij}\in[0,1]$, and $\sum_i \mathsf b_i=1$.
+All coefficients and the number of stages are independent of $N$.
+Write
+\[
+ \kappa=\tfrac12-\sum_i \mathsf b_ic_i.
+\]
+The internal consistency $c=\mathsf A\mathbf1$ is essential when the
+velocity depends explicitly on time. It makes the two second-order terms
+involving time and space derivatives have the same coefficient.
+Taylor expansion of the stages gives
+\begin{equation}
+ \Psi_h^u(t,x)=x+hu(t,x)+h^2(\tfrac12-\kappa)a_t(x)
+                 +O(h^3(1+|x|)^2).
+ \label{eq:rk-leading-defect}
+\end{equation}
+The remainder bound holds for every field in $\mathcal B_K$ with the same
+constants. Applying the estimates stage by stage gives common linear-growth
+and Lipschitz bounds $1+Ch$ for $h\le H_0$. The constants depend only on
+$K,T$ and the fixed tableau. The $C^2$ derivative bound bounds each
+Taylor remainder. Gaussian fourth moments then bound its $L^2$ norm.
+
+\begin{theorem}[Leading-defect separation for a solver pair]
+\label{thm:rk-pair-proof}
+Run two such methods on the same deterministic $N$-step grid with the same
+field, and let their constants satisfy $\kappa_1\ne\kappa_2$.
+Replace $E_c+E_f$ in Theorem~\ref{thm:characterization} by the sum of
+these methods' maximum-node target $W_2$ errors. All three equivalences
+and the uniform $c/N$ alternative remain valid. The common derivative bound and
+target path are unchanged; the fields and grids may depend on $N$.
+\end{theorem}
+\begin{proof}
+For a transported bounded-gradient test, \eqref{eq:rk-leading-defect}
+and the same recursive state comparison as Lemma~\ref{lem:weak} give
+\[
+ D_j^{(l)}-D_i^{(l)}=-\kappa_l\sum_{k=i}^{j-1}h_k^2 I(t_k)
+             +O\!\left(H\sum_{k=i}^{j-1}h_k^2\right),\quad l=1,2.
+\]
+Subtracting cancels the model law and retains coefficient
+$\kappa_1-\kappa_2\ne0$. All constants are common to the derivative class.
+The constants can depend on the full fixed tableaus.
+The strong first-order bound \eqref{eq:strong} and the node-to-path bound
+\eqref{eq:bias-general} hold for each method with such constants, for
+$H\le H_0$.
+Strong first-order convergence on arbitrary refining grids gives an exact
+limiting generator whenever the two target errors vanish. A nonzero acceleration
+pairing in that generator persists on an interval; the signed contrast and
+$\sum h_k^2\ge\ell^2/(4N)$ contradict superlinear two-method accuracy,
+exactly as in Supplementary Section~\ref{app:characterization}.
+
+Conversely, suppose an order-elevating generator belongs to the closure.
+We change how numerical and exact particles are paired without changing
+their distributions. For method $l$, move the exact particles along the
+acceleration field for auxiliary time $\kappa_l h^2$, while physical time
+stays fixed. This auxiliary time may be negative. Linear growth makes the
+acceleration flow complete in both directions. Inserting the recoupled state into
+\eqref{eq:rk-leading-defect} gives the exact trajectory through order two,
+with local $W_2$ defect $O(h^3)$; the local Lipschitz and moment estimates
+are the same as the Euler recoupling proof up to tableau constants.
+Method stability propagates the error to $O(H^2)$. Smooth approximants to
+a generator in the closure approximate both finite numerical runs simultaneously.
+The contradiction proof of a common lower bound is then unchanged.
+\end{proof}
+
+Euler has $\kappa=1/2$ and Heun has $\kappa=0$, so Euler--Heun on the same
+grid is a concrete instance, using $N$ and $2N$ field evaluations.
+Two second-order Runge--Kutta methods both have $\kappa=0$ and do
+\emph{not} satisfy this theorem: ordinary second-order accuracy already
+allows superlinear two-grid accuracy for any sufficiently regular exact generator.
+The theorem is a class of solver-pair converses, not a claim that every
+integrator has the Euler obstruction.
+
+Distinct leading defects are needed even when both methods have first-order
+accuracy.
+Take an explicit three-stage tableau with $c=(0,1/2,1)$, $\mathsf A_{21}=1/2$,
+$\mathsf A_{31}=1$, other entries zero, and
+$\mathsf b=(1+\eta,-2\eta,\eta)$ for fixed $\eta\ne0$.
+It is consistent, has $\mathsf b^\top c=0$, and is distinct from Euler, but both
+have $\kappa=1/2$. Their local difference is $O(h^3)$.
+On the scalar Gaussian secant family Euler is target-exact; this distinct
+method has $O(h^2)$ target error on the same uniform grid even though no
+order-elevating generator exists. Thus distinct method names alone are not
+sufficient either. Negative weights in this counterexample are permitted
+by the stated class; no strong-stability-preserving property is claimed.
+
+\paragraph{Degenerate refinement is a genuine counterexample.}
+For the Gaussian secant field in \eqref{eq:secant}, split each step $h=1/N$
+into $h/N$ and $h(1-1/N)$. There are $2N$ fine steps, but
+$\beta_k=2N^{-1}(1-N^{-1})$. A direct second-order expansion of the two
+updates shows their map differs from the coarse Euler update by
+$O(h^3)(1+|x|)$, uniformly in $k$. Consequently both target errors are
+$O(N^{-2})$ although no order-elevating generator exists in dimension one.
+Likewise, a field fitted to $N$ uniform steps has $O(N^{-2})$ error on
+$N+1$ uniform steps: their leading step sizes differ by only $O(N^{-2})$.
+A statement about two \emph{distinct counts} without a nondegenerate
+contrast is therefore false.
+
+\paragraph{An additional assumption for parameter distance to a generator.}
+The residual measures an effect of acceleration, not a distance between
+parameter vectors. A small residual need not place the model parameters
+close to those of an exact generator. That further conclusion requires
+local identifiability in a finite-dimensional exact-path family.
+Here identifiability means that every parameter direction changes the
+selected observations by a quantitatively nonzero amount. Let $\theta\mapsto
+u_\theta$ be such a family with the common derivative bound, let $R(\theta)$ collect
+finitely many transported Hermite coefficients at fixed times, and suppose
+$R(\theta_*)=0$ for an order-elevating generator,
+$s_{\min}(DR(\theta_*))\ge\sigma>0$, and $DR$ is $L_R$-Lipschitz on a
+parameter ball. For $\|\theta-\theta_*\|\le\sigma/L_R$, Taylor's theorem gives
+\[
+ \|\theta-\theta_*\|\le 2\|R(\theta)\|/\sigma.
+\]
+The observer bounds control each coordinate of $R$. The proof is simply
+$\|R(\theta)\|\ge\sigma\|\theta-\theta_*\|-L_R\|\theta-\theta_*\|^2/2$.
+This is a conditional inverse-function estimate, not an assertion that an
+arbitrary neural parametrization is identifiable, that a nearby order-elevating generator exists,
+or that the selected finite tests characterize all order-elevating generators globally.
+
+\paragraph{Why first-derivative bounds alone do not suffice.}
+The uniform bounds must control changes in time as well as changes in space.
+Otherwise, a field can oscillate between the evaluated times and fit both
+numerical grids without satisfying the required acceleration condition.
+On the scalar nonaffine Gaussian path let $a_h(t)=[g(t+h)-g(t)]/[hg(t)]$,
+with $g$ smoothly extended to a neighborhood of the time strip. Define
+\begin{align}
+ b_h(t)&=\frac{a_h(t-h/2)}{1+(h/2)a_h(t-h/2)},\\
+ c_h(t)&=a_h(t)+\{b_h(t)-a_h(t)\}\sin^2(\pi t/h).
+ \label{eq:temporal-alias-field}
+\end{align}
+For small $h$, the field $u_h(t,x)=c_h(t)x$ has common bounds on
+$|u|/(1+|x|)$, $|\partial_tu|/(1+|x|)$, $D_xu$,
+$D_x\partial_tu$, and $D_x^2u=0$. Indeed $b_h-a_h=O(h)$ in every fixed
+coefficient derivative norm, so differentiation once of the oscillatory
+factor remains bounded. At a coarse node $kh$, $c_h=a_h$ and the coarse
+map is exactly the target scale ratio. At its midpoint,
+$c_h(kh+h/2)=a_h(kh)/(1+ha_h(kh)/2)$, and the two half-step multipliers
+multiply to $1+ha_h(kh)$. Both runs are therefore target-exact at \emph{every
+common coarse node}. Nevertheless the path has no order-elevating generator in
+dimension one. The second time derivative of $c_h$ is generally
+$\Theta(h^{-1})$, violating the common derivative bound precisely where compactness
+of the first time derivative is needed. This disproves a version of the
+characterization that keeps only uniform first-derivative bounds. It does
+not rule out replacing the second-derivative bound by an appropriate
+uniform modulus of continuity.

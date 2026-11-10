@@ -1,0 +1,236 @@
+[
+  {
+    "name": "d2_fm_s17_w48",
+    "resolutions": {
+      "8": {
+        "stored_primary": 0.25940505417773746,
+        "reevaluated_float32": 0.2594050530007899,
+        "reevaluation_difference": -1.176947539427431e-09,
+        "float64": 0.25940505181082635,
+        "precision_difference": -1.1899635721235313e-09
+      },
+      "16": {
+        "stored_primary": 0.20898900982817536,
+        "reevaluated_float32": 0.20898901238795625,
+        "reevaluation_difference": 2.559780887256835e-09,
+        "float64": 0.2089890115290289,
+        "precision_difference": -8.589273459147506e-10
+      },
+      "64": {
+        "stored_primary": 0.19412615759241686,
+        "reevaluated_float32": 0.19412615545459266,
+        "reevaluation_difference": -2.13782419544728e-09,
+        "float64": 0.1941261547661154,
+        "precision_difference": -6.884772751902801e-10
+      }
+    }
+  },
+  {
+    "name": "d2_fm_s29_w48",
+    "resolutions": {
+      "8": {
+        "stored_primary": 0.21294120095216434,
+        "reevaluated_float32": 0.2129412095068557,
+        "reevaluation_difference": 8.554691344198062e-09,
+        "float64": 0.21294120258932525,
+        "precision_difference": -6.917530437355879e-09
+      },
+      "16": {
+        "stored_primary": 0.17356961348191283,
+        "reevaluated_float32": 0.17356962259076675,
+        "reevaluation_difference": 9.108853921135918e-09,
+        "float64": 0.17356962273341328,
+        "precision_difference": 1.4264653347417777e-10
+      },
+      "64": {
+        "stored_primary": 0.17368794265903528,
+        "reevaluated_float32": 0.17368795829968747,
+        "reevaluation_difference": 1.5640652190063165e-08,
+        "float64": 0.17368797284374174,
+        "precision_difference": 1.4544054266485418e-08
+      }
+    }
+  },
+  {
+    "name": "d2_fm_s43_w48",
+    "resolutions": {
+      "8": {
+        "stored_primary": 0.26313462747507516,
+        "reevaluated_float32": 0.26313463209513016,
+        "reevaluation_difference": 4.6200550052333256e-09,
+        "float64": 0.26313463613020166,
+        "precision_difference": 4.0350714991532755e-09
+      },
+      "16": {
+        "stored_primary": 0.20819714461785058,
+        "reevaluated_float32": 0.20819714637841413,
+        "reevaluation_difference": 1.7605635560524746e-09,
+        "float64": 0.20819715151426604,
+        "precision_difference": 5.135851910420541e-09
+      },
+      "64": {
+        "stored_primary": 0.18856558965778178,
+        "reevaluated_float32": 0.1885655851283484,
+        "reevaluation_difference": -4.5294333839152046e-09,
+        "float64": 0.18856560177237972,
+        "precision_difference": 1.664403131984571e-08
+      }
+    }
+  },
+  {
+    "name": "d2_discretization_s17_w48",
+    "resolutions": {
+      "8": {
+        "stored_primary": 0.1691923089474272,
+        "reevaluated_float32": 0.1691923079278037,
+        "reevaluation_difference": -1.0196234967452256e-09,
+        "float64": 0.1691923052117669,
+        "precision_difference": -2.716036812122624e-09
+      },
+      "16": {
+        "stored_primary": 0.1926639198851781,
+        "reevaluated_float32": 0.19266392122519285,
+        "reevaluation_difference": 1.3400147658160222e-09,
+        "float64": 0.19266391039607994,
+        "precision_difference": -1.0829112911947547e-08
+      },
+      "64": {
+        "stored_primary": 0.2313477925254218,
+        "reevaluated_float32": 0.23134779738069863,
+        "reevaluation_difference": 4.855276819482057e-09,
+        "float64": 0.23134778785606266,
+        "precision_difference": -9.524635968816142e-09
+      }
+    }
+  },
+  {
+    "name": "d2_discretization_s29_w48",
+    "resolutions": {
+      "8": {
+        "stored_primary": 0.23084586820420713,
+        "reevaluated_float32": 0.2308458663344741,
+        "reevaluation_difference": -1.869733035064769e-09,
+        "float64": 0.23084586922098202,
+        "precision_difference": 2.8865079215734113e-09
+      },
+      "16": {
+        "stored_primary": 0.23856452728451055,
+        "reevaluated_float32": 0.2385645278520799,
+        "reevaluation_difference": 5.675693526274728e-10,
+        "float64": 0.23856453140706826,
+        "precision_difference": 3.554988359244504e-09
+      },
+      "64": {
+        "stored_primary": 0.26264806056153844,
+        "reevaluated_float32": 0.26264805932597457,
+        "reevaluation_difference": -1.2355638734362628e-09,
+        "float64": 0.2626480652620249,
+        "precision_difference": 5.9360503179561874e-09
+      }
+    }
+  },
+  {
+    "name": "d2_discretization_s43_w48",
+    "resolutions": {
+      "8": {
+        "stored_primary": 0.24207971338262674,
+        "reevaluated_float32": 0.2420797073232268,
+        "reevaluation_difference": -6.059399926261477e-09,
+        "float64": 0.24207971380626797,
+        "precision_difference": 6.483041159466296e-09
+      },
+      "16": {
+        "stored_primary": 0.2573645756969713,
+        "reevaluated_float32": 0.25736456947922776,
+        "reevaluation_difference": -6.217743542258347e-09,
+        "float64": 0.2573645802937956,
+        "precision_difference": 1.0814567852346357e-08
+      },
+      "64": {
+        "stored_primary": 0.2869532638281831,
+        "reevaluated_float32": 0.28695326365247026,
+        "reevaluation_difference": -1.757128331725255e-10,
+        "float64": 0.2869532750350773,
+        "precision_difference": 1.1382607023602276e-08
+      }
+    }
+  },
+  {
+    "name": "d2_transfer_s17_w48",
+    "resolutions": {
+      "8": {
+        "stored_primary": 0.17011136544259994,
+        "reevaluated_float32": 0.17011136184538528,
+        "reevaluation_difference": -3.5972146650298242e-09,
+        "float64": 0.1701113681347419,
+        "precision_difference": 6.289356618838227e-09
+      },
+      "16": {
+        "stored_primary": 0.1851073630021553,
+        "reevaluated_float32": 0.18510736413523676,
+        "reevaluation_difference": 1.1330814619903151e-09,
+        "float64": 0.18510736690223217,
+        "precision_difference": 2.7669954105746797e-09
+      },
+      "64": {
+        "stored_primary": 0.21992455900639635,
+        "reevaluated_float32": 0.21992455787458146,
+        "reevaluation_difference": -1.1318148918082471e-09,
+        "float64": 0.21992455526871976,
+        "precision_difference": -2.6058616930946243e-09
+      }
+    }
+  },
+  {
+    "name": "d2_transfer_s29_w48",
+    "resolutions": {
+      "8": {
+        "stored_primary": 0.23264745655749747,
+        "reevaluated_float32": 0.23264746336775144,
+        "reevaluation_difference": 6.810253971867297e-09,
+        "float64": 0.23264745809863902,
+        "precision_difference": -5.269112424155509e-09
+      },
+      "16": {
+        "stored_primary": 0.23396085627463864,
+        "reevaluated_float32": 0.23396085508844186,
+        "reevaluation_difference": -1.1861967796900075e-09,
+        "float64": 0.2339608573941611,
+        "precision_difference": 2.3057192266584536e-09
+      },
+      "64": {
+        "stored_primary": 0.25410669243374834,
+        "reevaluated_float32": 0.2541066887376394,
+        "reevaluation_difference": -3.6961089189269103e-09,
+        "float64": 0.25410669511487144,
+        "precision_difference": 6.3772320202382105e-09
+      }
+    }
+  },
+  {
+    "name": "d2_transfer_s43_w48",
+    "resolutions": {
+      "8": {
+        "stored_primary": 0.24650460863670415,
+        "reevaluated_float32": 0.2465046080563976,
+        "reevaluation_difference": -5.803065528109386e-10,
+        "float64": 0.24650461871872006,
+        "precision_difference": 1.0662322469379149e-08
+      },
+      "16": {
+        "stored_primary": 0.25572445811140354,
+        "reevaluated_float32": 0.2557244607127403,
+        "reevaluation_difference": 2.6013367571131596e-09,
+        "float64": 0.2557244602925464,
+        "precision_difference": -4.2019387969105537e-10
+      },
+      "64": {
+        "stored_primary": 0.28150148082799065,
+        "reevaluated_float32": 0.2815014677309025,
+        "reevaluation_difference": -1.3097088136238e-08,
+        "float64": 0.2815014604044717,
+        "precision_difference": -7.32643079537354e-09
+      }
+    }
+  }
+]

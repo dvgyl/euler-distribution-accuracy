@@ -1,0 +1,1002 @@
+{
+  "refinements": [
+    {
+      "kind": "balanced",
+      "N": 32,
+      "factor": 2,
+      "error": 0.02028088677663442,
+      "scaled_error": 0.6489883768523015,
+      "limit": 0.6426990816987241
+    },
+    {
+      "kind": "balanced",
+      "N": 32,
+      "factor": 3,
+      "error": 0.027131855399630034,
+      "scaled_error": 0.8682193727881611,
+      "limit": 0.8569321089316323
+    },
+    {
+      "kind": "balanced",
+      "N": 32,
+      "factor": 4,
+      "error": 0.030574730198740685,
+      "scaled_error": 0.9783913663597019,
+      "limit": 0.9640486225480862
+    },
+    {
+      "kind": "degenerate",
+      "N": 32,
+      "beta": 0.060546875,
+      "error": 0.0024346189184560885
+    },
+    {
+      "kind": "N_plus_1",
+      "N": 32,
+      "error": 0.0012177508528770087
+    },
+    {
+      "kind": "endpoint_cancel",
+      "N": 32,
+      "terminal": 0.00010264518268238154,
+      "max_node": 0.01567393281916618
+    },
+    {
+      "kind": "equal_defect_RK",
+      "N": 32,
+      "error": 5.0051365677927784e-05
+    },
+    {
+      "kind": "temporal_alias",
+      "N": 32,
+      "error": 5.551115123125783e-16
+    },
+    {
+      "kind": "balanced",
+      "N": 64,
+      "factor": 2,
+      "error": 0.010091959539326512,
+      "scaled_error": 0.6458854105168967,
+      "limit": 0.6426990816987241
+    },
+    {
+      "kind": "balanced",
+      "N": 64,
+      "factor": 3,
+      "error": 0.013478488670371824,
+      "scaled_error": 0.8626232749037968,
+      "limit": 0.8569321089316323
+    },
+    {
+      "kind": "balanced",
+      "N": 64,
+      "factor": 4,
+      "error": 0.015176028165933664,
+      "scaled_error": 0.9712658026197545,
+      "limit": 0.9640486225480862
+    },
+    {
+      "kind": "degenerate",
+      "N": 64,
+      "beta": 0.03076171875,
+      "error": 0.0006179931856640231
+    },
+    {
+      "kind": "N_plus_1",
+      "N": 64,
+      "error": 0.0003090240374408193
+    },
+    {
+      "kind": "endpoint_cancel",
+      "N": 64,
+      "terminal": 2.5194694792063377e-05,
+      "max_node": 0.00776861446282362
+    },
+    {
+      "kind": "equal_defect_RK",
+      "N": 64,
+      "error": 1.2733793388064463e-05
+    },
+    {
+      "kind": "temporal_alias",
+      "N": 64,
+      "error": 7.771561172376096e-16
+    },
+    {
+      "kind": "balanced",
+      "N": 128,
+      "factor": 2,
+      "error": 0.005033613173884621,
+      "scaled_error": 0.6443024862572315,
+      "limit": 0.6426990816987241
+    },
+    {
+      "kind": "balanced",
+      "N": 128,
+      "factor": 3,
+      "error": 0.006717103527406287,
+      "scaled_error": 0.8597892515080048,
+      "limit": 0.8569321089316323
+    },
+    {
+      "kind": "balanced",
+      "N": 128,
+      "factor": 4,
+      "error": 0.007559908315521113,
+      "scaled_error": 0.9676682643867025,
+      "limit": 0.9640486225480862
+    },
+    {
+      "kind": "degenerate",
+      "N": 128,
+      "beta": 0.0155029296875,
+      "error": 0.000155693557251535
+    },
+    {
+      "kind": "N_plus_1",
+      "N": 128,
+      "error": 7.784849114145231e-05
+    },
+    {
+      "kind": "endpoint_cancel",
+      "N": 128,
+      "terminal": 6.237801337988236e-06,
+      "max_node": 0.0038663711165507486
+    },
+    {
+      "kind": "equal_defect_RK",
+      "N": 128,
+      "error": 3.2103792794169195e-06
+    },
+    {
+      "kind": "temporal_alias",
+      "N": 128,
+      "error": 5.551115123125783e-16
+    },
+    {
+      "kind": "balanced",
+      "N": 256,
+      "factor": 2,
+      "error": 0.0025136848491158492,
+      "scaled_error": 0.6435033213736574,
+      "limit": 0.6426990816987241
+    },
+    {
+      "kind": "balanced",
+      "N": 256,
+      "factor": 3,
+      "error": 0.0033529825380154143,
+      "scaled_error": 0.8583635297319461,
+      "limit": 0.8569321089316323
+    },
+    {
+      "kind": "balanced",
+      "N": 256,
+      "factor": 4,
+      "error": 0.003772895143340449,
+      "scaled_error": 0.9658611566951549,
+      "limit": 0.9640486225480862
+    },
+    {
+      "kind": "degenerate",
+      "N": 256,
+      "beta": 0.007781982421875,
+      "error": 3.907466684105465e-05
+    },
+    {
+      "kind": "N_plus_1",
+      "N": 256,
+      "error": 1.9537440393291305e-05
+    },
+    {
+      "kind": "endpoint_cancel",
+      "N": 256,
+      "terminal": 1.5517248127261407e-06,
+      "max_node": 0.0019287126885284556
+    },
+    {
+      "kind": "equal_defect_RK",
+      "N": 256,
+      "error": 8.059203630006451e-07
+    },
+    {
+      "kind": "temporal_alias",
+      "N": 256,
+      "error": 8.881784197001252e-16
+    },
+    {
+      "kind": "balanced",
+      "N": 512,
+      "factor": 2,
+      "error": 0.0012560582676717225,
+      "scaled_error": 0.6431018330479219,
+      "limit": 0.6426990816987241
+    },
+    {
+      "kind": "balanced",
+      "N": 512,
+      "factor": 3,
+      "error": 0.0016750947786510206,
+      "scaled_error": 0.8576485266693226,
+      "limit": 0.8569321089316323
+    },
+    {
+      "kind": "balanced",
+      "N": 512,
+      "factor": 4,
+      "error": 0.0018846788315156626,
+      "scaled_error": 0.9649555617360193,
+      "limit": 0.9640486225480862
+    },
+    {
+      "kind": "degenerate",
+      "N": 512,
+      "beta": 0.00389862060546875,
+      "error": 9.787697195617895e-06
+    },
+    {
+      "kind": "N_plus_1",
+      "N": 512,
+      "error": 4.893855283460979e-06
+    },
+    {
+      "kind": "endpoint_cancel",
+      "N": 512,
+      "terminal": 3.8695938331390067e-07,
+      "max_node": 0.0009632396351754169
+    },
+    {
+      "kind": "equal_defect_RK",
+      "N": 512,
+      "error": 2.0189329763553587e-07
+    },
+    {
+      "kind": "temporal_alias",
+      "N": 512,
+      "error": 2.1094237467877974e-15
+    },
+    {
+      "kind": "balanced",
+      "N": 1024,
+      "factor": 2,
+      "error": 0.0006278326317321614,
+      "scaled_error": 0.6429006148937333,
+      "limit": 0.6426990816987241
+    },
+    {
+      "kind": "balanced",
+      "N": 1024,
+      "factor": 3,
+      "error": 0.0008371977480532422,
+      "scaled_error": 0.85729049400652,
+      "limit": 0.8569321089316323
+    },
+    {
+      "kind": "balanced",
+      "N": 1024,
+      "factor": 4,
+      "error": 0.0009418967376919607,
+      "scaled_error": 0.9645022593965678,
+      "limit": 0.9640486225480862
+    },
+    {
+      "kind": "degenerate",
+      "N": 1024,
+      "beta": 0.0019512176513671875,
+      "error": 2.449310784857772e-06
+    },
+    {
+      "kind": "N_plus_1",
+      "N": 1024,
+      "error": 1.224655808984565e-06
+    },
+    {
+      "kind": "endpoint_cancel",
+      "N": 1024,
+      "terminal": 9.661801889104815e-08,
+      "max_node": 0.00048134161181501156
+    },
+    {
+      "kind": "equal_defect_RK",
+      "N": 1024,
+      "error": 5.052482332512653e-08
+    },
+    {
+      "kind": "temporal_alias",
+      "N": 1024,
+      "error": 1.9984014443252818e-15
+    }
+  ],
+  "radial_conditional_moments": [
+    {
+      "eps": 0.1,
+      "y": 0.0,
+      "second": 1.5554491173417095,
+      "fourth": 4.445508826582881,
+      "bounds": [
+        2.0,
+        8.0
+      ]
+    },
+    {
+      "eps": 0.1,
+      "y": 1.0,
+      "second": 1.459561392602474,
+      "fourth": 3.9448246813727867,
+      "bounds": [
+        2.0,
+        8.0
+      ]
+    },
+    {
+      "eps": 0.1,
+      "y": 3.0,
+      "second": 0.9594327404513974,
+      "fourth": 1.770777931423447,
+      "bounds": [
+        2.0,
+        8.0
+      ]
+    },
+    {
+      "eps": 1.0,
+      "y": 0.0,
+      "second": 0.8327056412987832,
+      "fourth": 1.167294358702011,
+      "bounds": [
+        2.0,
+        8.0
+      ]
+    },
+    {
+      "eps": 1.0,
+      "y": 1.0,
+      "second": 0.6389675142347928,
+      "fourth": 0.7220649715304377,
+      "bounds": [
+        2.0,
+        8.0
+      ]
+    },
+    {
+      "eps": 1.0,
+      "y": 3.0,
+      "second": 0.19270005486368166,
+      "fourth": 0.072999451363185,
+      "bounds": [
+        2.0,
+        8.0
+      ]
+    }
+  ],
+  "spectral_formula_checks": [
+    {
+      "q": 0,
+      "bound": 1941.3040741698055,
+      "coefficient_square_sum": 1.581331338390602e-45,
+      "tail_square": 510032.87266064866,
+      "outer_F": 2.718281828459045,
+      "coefficients": [
+        {
+          "alpha": [
+            1
+          ],
+          "bound": 3.976595702847603e-23,
+          "comparison": 2.718281828459045,
+          "weak_remainder": 6874.529500636396
+        }
+      ]
+    },
+    {
+      "q": 1,
+      "bound": 1372.7092751905418,
+      "coefficient_square_sum": 4.58950031048084e-44,
+      "tail_square": 255016.43633032433,
+      "outer_F": 2.718281828459045,
+      "coefficients": [
+        {
+          "alpha": [
+            1
+          ],
+          "bound": 3.976595702847603e-23,
+          "comparison": 2.718281828459045,
+          "weak_remainder": 6874.529500636396
+        },
+        {
+          "alpha": [
+            2
+          ],
+          "bound": 2.1050812755430086e-22,
+          "comparison": 76.1744523684373,
+          "weak_remainder": 162756.44279554542
+        }
+      ]
+    },
+    {
+      "q": 2,
+      "bound": 1120.8124298008545,
+      "coefficient_square_sum": 2.206733985054209e-42,
+      "tail_square": 170010.95755354955,
+      "outer_F": 2.718281828459045,
+      "coefficients": [
+        {
+          "alpha": [
+            1
+          ],
+          "bound": 3.976595702847603e-23,
+          "comparison": 2.718281828459045,
+          "weak_remainder": 6874.529500636396
+        },
+        {
+          "alpha": [
+            2
+          ],
+          "bound": 2.1050812755430086e-22,
+          "comparison": 76.1744523684373,
+          "weak_remainder": 162756.44279554542
+        },
+        {
+          "alpha": [
+            3
+          ],
+          "bound": 1.469979245414506e-21,
+          "comparison": 3714.4456675582096,
+          "weak_remainder": 6114835.116047291
+        }
+      ]
+    },
+    {
+      "q": 4,
+      "bound": 868.1775749681956,
+      "coefficient_square_sum": 6.113957038071758e-39,
+      "tail_square": 102006.57453212973,
+      "outer_F": 2.718281828459045,
+      "coefficients": [
+        {
+          "alpha": [
+            1
+          ],
+          "bound": 3.976595702847603e-23,
+          "comparison": 2.718281828459045,
+          "weak_remainder": 6874.529500636396
+        },
+        {
+          "alpha": [
+            2
+          ],
+          "bound": 2.1050812755430086e-22,
+          "comparison": 76.1744523684373,
+          "weak_remainder": 162756.44279554542
+        },
+        {
+          "alpha": [
+            3
+          ],
+          "bound": 1.469979245414506e-21,
+          "comparison": 3714.4456675582096,
+          "weak_remainder": 6114835.116047291
+        },
+        {
+          "alpha": [
+            4
+          ],
+          "bound": 1.0119921039213816e-20,
+          "comparison": 176045.8744379063,
+          "weak_remainder": 291058990.1573267
+        },
+        {
+          "alpha": [
+            5
+          ],
+          "bound": 7.751991681011262e-20,
+          "comparison": 10329949.541163139,
+          "weak_remainder": 18083065080.532272
+        }
+      ]
+    },
+    {
+      "q": 8,
+      "bound": 647.1013580566018,
+      "coefficient_square_sum": 1.3332050701087491e-31,
+      "tail_square": 56670.31918451652,
+      "outer_F": 2.718281828459045,
+      "coefficients": [
+        {
+          "alpha": [
+            1
+          ],
+          "bound": 3.976595702847603e-23,
+          "comparison": 2.718281828459045,
+          "weak_remainder": 6874.529500636396
+        },
+        {
+          "alpha": [
+            2
+          ],
+          "bound": 2.1050812755430086e-22,
+          "comparison": 76.1744523684373,
+          "weak_remainder": 162756.44279554542
+        },
+        {
+          "alpha": [
+            3
+          ],
+          "bound": 1.469979245414506e-21,
+          "comparison": 3714.4456675582096,
+          "weak_remainder": 6114835.116047291
+        },
+        {
+          "alpha": [
+            4
+          ],
+          "bound": 1.0119921039213816e-20,
+          "comparison": 176045.8744379063,
+          "weak_remainder": 291058990.1573267
+        },
+        {
+          "alpha": [
+            5
+          ],
+          "bound": 7.751991681011262e-20,
+          "comparison": 10329949.541163139,
+          "weak_remainder": 18083065080.532272
+        },
+        {
+          "alpha": [
+            6
+          ],
+          "bound": 6.035746049260436e-19,
+          "comparison": 626229499.2856736,
+          "weak_remainder": 1300253147642.105
+        },
+        {
+          "alpha": [
+            7
+          ],
+          "bound": 4.968891354383364e-18,
+          "comparison": 42441488404.48021,
+          "weak_remainder": 101942413668326.3
+        },
+        {
+          "alpha": [
+            8
+          ],
+          "bound": 4.170044878795063e-17,
+          "comparison": 2989186843275.4634,
+          "weak_remainder": 8464604376664661.0
+        },
+        {
+          "alpha": [
+            9
+          ],
+          "bound": 3.627072087568787e-16,
+          "comparison": 226143431868955.12,
+          "weak_remainder": 7.316397300703223e+17
+        }
+      ]
+    }
+  ],
+  "network_budgets": [
+    {
+      "checkpoint": "checkpoints/extended/ablations/capacity_w24/d2_discretization_s17_w24.pt",
+      "frobenius_integer_upper": [
+        6,
+        7,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 73,
+      "first_derivative_upper": 126,
+      "second_derivative_upper": 12096,
+      "K_integer_upper": 12096,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/ablations/capacity_w24/d2_fm_s17_w24.pt",
+      "frobenius_integer_upper": [
+        6,
+        7,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 73,
+      "first_derivative_upper": 126,
+      "second_derivative_upper": 12096,
+      "K_integer_upper": 12096,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/ablations/capacity_w24/d2_transfer_s17_w24.pt",
+      "frobenius_integer_upper": [
+        6,
+        7,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 73,
+      "first_derivative_upper": 126,
+      "second_derivative_upper": 12096,
+      "K_integer_upper": 12096,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/ablations/capacity_w96/d2_discretization_s17_w96.pt",
+      "frobenius_integer_upper": [
+        8,
+        10,
+        2
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 193,
+      "first_derivative_upper": 160,
+      "second_derivative_upper": 28160,
+      "K_integer_upper": 28160,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/ablations/capacity_w96/d2_fm_s17_w96.pt",
+      "frobenius_integer_upper": [
+        8,
+        11,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 289,
+      "first_derivative_upper": 264,
+      "second_derivative_upper": 50688,
+      "K_integer_upper": 50688,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/ablations/capacity_w96/d2_transfer_s17_w96.pt",
+      "frobenius_integer_upper": [
+        8,
+        10,
+        2
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 193,
+      "first_derivative_upper": 160,
+      "second_derivative_upper": 28160,
+      "K_integer_upper": 28160,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/ablations/jacobian_0.01/d2_transfer_s17_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        9,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 189,
+      "second_derivative_upper": 26460,
+      "K_integer_upper": 26460,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/ablations/jacobian_0.1/d2_transfer_s17_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        8,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 168,
+      "second_derivative_upper": 21168,
+      "K_integer_upper": 21168,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/ablations/weight_100/d2_discretization_s17_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        8,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 168,
+      "second_derivative_upper": 21168,
+      "K_integer_upper": 21168,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/ablations/weight_100/d2_transfer_s17_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        8,
+        2
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 97,
+      "first_derivative_upper": 112,
+      "second_derivative_upper": 14112,
+      "K_integer_upper": 14112,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/ablations/weight_3/d2_discretization_s17_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        9,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 189,
+      "second_derivative_upper": 26460,
+      "K_integer_upper": 26460,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/ablations/weight_3/d2_transfer_s17_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        9,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 189,
+      "second_derivative_upper": 26460,
+      "K_integer_upper": 26460,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d2_discretization_s17_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        9,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 189,
+      "second_derivative_upper": 26460,
+      "K_integer_upper": 26460,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d2_discretization_s29_w48.pt",
+      "frobenius_integer_upper": [
+        6,
+        9,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 162,
+      "second_derivative_upper": 19440,
+      "K_integer_upper": 19440,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d2_discretization_s43_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        9,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 189,
+      "second_derivative_upper": 26460,
+      "K_integer_upper": 26460,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d2_fm_s17_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        9,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 189,
+      "second_derivative_upper": 26460,
+      "K_integer_upper": 26460,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d2_fm_s29_w48.pt",
+      "frobenius_integer_upper": [
+        6,
+        9,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 162,
+      "second_derivative_upper": 19440,
+      "K_integer_upper": 19440,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d2_fm_s43_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        9,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 189,
+      "second_derivative_upper": 26460,
+      "K_integer_upper": 26460,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d2_transfer_s17_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        9,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 189,
+      "second_derivative_upper": 26460,
+      "K_integer_upper": 26460,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d2_transfer_s29_w48.pt",
+      "frobenius_integer_upper": [
+        6,
+        9,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 162,
+      "second_derivative_upper": 19440,
+      "K_integer_upper": 19440,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d2_transfer_s43_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        9,
+        3
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 145,
+      "first_derivative_upper": 189,
+      "second_derivative_upper": 26460,
+      "K_integer_upper": 26460,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d8_discretization_s17_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        8,
+        4
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 193,
+      "first_derivative_upper": 224,
+      "second_derivative_upper": 28224,
+      "K_integer_upper": 28224,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d8_discretization_s29_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        8,
+        4
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 193,
+      "first_derivative_upper": 224,
+      "second_derivative_upper": 28224,
+      "K_integer_upper": 28224,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d8_discretization_s43_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        8,
+        4
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 193,
+      "first_derivative_upper": 224,
+      "second_derivative_upper": 28224,
+      "K_integer_upper": 28224,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d8_fm_s17_w48.pt",
+      "frobenius_integer_upper": [
+        8,
+        9,
+        4
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 193,
+      "first_derivative_upper": 288,
+      "second_derivative_upper": 46080,
+      "K_integer_upper": 46080,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d8_fm_s29_w48.pt",
+      "frobenius_integer_upper": [
+        8,
+        9,
+        4
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 193,
+      "first_derivative_upper": 288,
+      "second_derivative_upper": 46080,
+      "K_integer_upper": 46080,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d8_fm_s43_w48.pt",
+      "frobenius_integer_upper": [
+        8,
+        9,
+        4
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 193,
+      "first_derivative_upper": 288,
+      "second_derivative_upper": 46080,
+      "K_integer_upper": 46080,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d8_transfer_s17_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        8,
+        4
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 193,
+      "first_derivative_upper": 224,
+      "second_derivative_upper": 28224,
+      "K_integer_upper": 28224,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d8_transfer_s29_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        8,
+        4
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 193,
+      "first_derivative_upper": 224,
+      "second_derivative_upper": 28224,
+      "K_integer_upper": 28224,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    },
+    {
+      "checkpoint": "checkpoints/extended/d8_transfer_s43_w48.pt",
+      "frobenius_integer_upper": [
+        7,
+        8,
+        4
+      ],
+      "last_bias_integer_upper": 1,
+      "output_upper": 193,
+      "first_derivative_upper": 224,
+      "second_derivative_upper": 28224,
+      "K_integer_upper": 28224,
+      "meaning": "Exact integer a priori bound for real tanh network with stored coefficients; not a numerical inference enclosure."
+    }
+  ],
+  "interpretation": "floating numerical sanity checks except the exact-rational network coefficient norm enclosures"
+}

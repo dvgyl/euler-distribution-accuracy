@@ -1,11 +1,20 @@
 cff-version: 1.2.0
 message: "Please cite the preprint when you use this work."
-type: article
-title: "Second-order distribution accuracy of explicit Euler on a fixed probability path"
+title: "Source and results for A Two-Grid Characterization of Euler Sampling Accuracy in Flow Matching"
 authors:
   - family-names: Goyal
     given-names: Dev D.
-version: 1.0.0
-date-released: '2026-10-30'
-url: 'https://github.com/dvgyl/euler-distribution-accuracy'
-license: CC-BY-4.0
+version: 1.1.0
+date-released: '2026-11-10'
+repository-code: 'https://github.com/dvgyl/euler-distribution-accuracy'
+preferred-citation:
+  type: unpublished
+  title: "A Two-Grid Characterization of Euler Sampling Accuracy in Flow Matching"
+  authors:
+    - family-names: Goyal
+      given-names: Dev D.
+  year: 2026
+  version: 1.1.0
+  doi: '10.5281/zenodo.24103957'
+  url: 'https://zenodo.org/records/24103957'
+  notes: "Preprint"

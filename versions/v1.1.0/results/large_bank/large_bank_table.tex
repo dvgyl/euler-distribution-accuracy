@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\caption{Sliced-distance evaluation on the larger evaluation set in two dimensions. Each row is one trained model evaluated on the same 262,144 held-out samples and 128 fixed directions. Entries are maxima over five diagnostic times; lower is better. These are descriptive empirical measurements.}
+\label{tab:large-bank}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Training & Seed & SW2$_8$ & SW2$_{16}$ & SW2$_{64}$\\
+\midrule
+CFM & 17 & 0.27820 & 0.20568 & 0.16570\\
+CFM & 29 & 0.23745 & 0.17249 & 0.14596\\
+CFM & 43 & 0.29447 & 0.22403 & 0.18508\\
+One-grid fit & 17 & 0.15552 & 0.14577 & 0.16972\\
+One-grid fit & 29 & 0.23913 & 0.22611 & 0.23636\\
+One-grid fit & 43 & 0.21501 & 0.20510 & 0.22141\\
+Two-grid fit & 17 & 0.16453 & 0.14451 & 0.16142\\
+Two-grid fit & 29 & 0.24429 & 0.22472 & 0.23007\\
+Two-grid fit & 43 & 0.22542 & 0.20909 & 0.22021\\
+\bottomrule
+\end{tabular}
+\end{table}

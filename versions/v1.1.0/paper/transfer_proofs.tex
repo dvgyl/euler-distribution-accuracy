@@ -1,0 +1,933 @@
+\section{Uniform estimates and compactness}
+\label{app:uniform}
+
+The fitted velocity may change when the number of steps changes. We therefore
+need estimates with the same constants for every velocity in the allowed
+class. This is what ``uniform'' means below. An estimate for one fixed
+velocity would not justify optimizing over the whole class. We derive these
+estimates from the numerical recursion itself, without a Wasserstein tangent
+expansion.\AIassistance
+
+All norms of spatial derivatives below are operator norms, which measure the
+largest output produced by an input of unit norm. Second derivatives are
+bilinear operator norms, with both input vectors restricted to unit norm.
+The time interval is $[0,T]$, with $0<T\le1$. Write $\gamma_d=\mathcal N(0,I_d)$.
+The class $\mathcal B_K$ and its $C^1_{\rm loc}$ closure $\overline{\mathcal B}_K$
+are those of Eq.~\eqref{eq:budget}. The closure includes limits of sequences
+whose fields and first derivatives converge uniformly on each compact
+space--time set. We include both endpoints of the time interval and use
+one-sided time derivatives there.
+A limiting field need not have continuous second derivatives.
+
+\subsection{Constants and deterministic estimates}
+We first control how far particles move, how the exact flow depends on its
+starting point, and how Euler error accumulates. The constants depend only
+on the common derivative bound and source moments. They therefore remain
+valid when the fitted field changes.
+Set
+\begin{align}
+ C_F&=e^{KT}, & A&=K(1+K), & B&=K(1+K)^2,\\
+ J&=B+KA, & C_D&=K+2K^2, & C_E&=AC_F^3,\\
+ M_2&=2(1+d), & M_4&=8\{1+d(d+2)\}, & M_3&=M_4^{3/4}.
+ \label{eq:base-constants}
+\end{align}
+These are conservative upper bounds. We use $B$ only for this scalar constant;
+model-path bias is denoted $\mathfrak b(u)$.
+The variational equations describe the derivatives of the flow with respect
+to its starting point. Applying Gronwall's inequality to those equations and
+to the trajectories gives, for the flow $F_{s,t}$ of any $u\in\mathcal B_K$,
+\begin{align}
+ 1+|F_{s,t}(x)|&\le e^{K|t-s|}(1+|x|), &
+ \|DF_{s,t}\|&\le e^{K|t-s|},\\
+ \|D^2F_{s,t}\|&\le K|t-s|e^{2K|t-s|}, &
+ |a_t(x)|&\le A(1+|x|),\\
+ \|Da_t(x)\|&\le C_D(1+|x|), &
+ |j_t(x)|&\le J(1+|x|)^2,
+ \label{eq:flow-bounds}
+\end{align}
+where $a=\partial_tu+Du\,u$ is the acceleration along an exact trajectory
+and $j=\partial_ta+Da\,u$ is its time derivative along that trajectory,
+sometimes called jerk.
+The Jacobian $DF_{s,t}$ records how a small change in the starting point
+changes the final position. The Hessian records how this Jacobian changes.
+To obtain its bound, differentiate the Jacobian equation and integrate
+$\|D^2u\|\|DF\|^2$ using the solution of the associated homogeneous linear
+equation. The next identity follows by expanding the derivative along a
+trajectory.
+\begin{equation}
+ j-Du\,a=b:=\partial_{tt}u+2D\partial_tu\,u+D^2u[u,u],
+ \qquad |b(t,x)|\le B(1+|x|)^2
+ \label{eq:transport-jerk}
+\end{equation}
+The right side contains exactly the second derivatives controlled by
+Eq.~\eqref{eq:budget}.
+
+To compare individual trajectories, start the exact flow and Euler from the
+same random point $G\sim\gamma_d$. This pairs their outputs and thus defines
+a coupling of the two distributions. The root mean squared displacement
+under this pairing gives an upper bound on Wasserstein distance. The
+pairing need not be optimal. If
+$S_{2,j}=\sum_{k<j}h_k^2$, then
+\begin{align}
+ 1+|X_{t_j}|,\ 1+|\widehat X_j|&\le C_F(1+|G|),\\
+ |\widehat X_j-X_{t_j}|&\le C_E S_{2,j}(1+|G|).
+ \label{eq:strong}
+\end{align}
+Here the particle defect means the difference between one Euler update and
+one exact update from the same position. It is at most
+$Ah^2e^{Kh}(1+|x|)/2$ and the Euler map has Lipschitz constant $1+Kh$.
+The Lipschitz bound controls the propagation of errors from earlier steps.
+Combining the one-step defects with these propagation factors gives the
+displayed $C_E$ bound.
+The moments satisfy $\E(1+|G|)^2\le M_2$,
+$\E(1+|G|)^4\le M_4$, and $\E(1+|G|)^3\le M_3$.
+These are moments of the Gaussian starting point, not moments of a target law.
+
+The next lemma allows us to take limits of fitted fields. It also ensures
+that their exact and numerical distributions converge to those of the
+limiting field.
+
+\begin{lemma}[Compact closure and continuous laws]
+\label{lem:compact}
+The class $\overline{\mathcal B}_K$ is sequentially compact in $C^1_{\rm loc}$.
+Its elements are $C^1$, with locally Lipschitz first derivatives, globally
+$K$-Lipschitz spatial velocities, and the growth bounds in
+Eq.~\eqref{eq:budget}. They have complete $C^1$ bi-Lipschitz flows on the time
+strip. If $u_n\to u$ in $C^1_{\rm loc}$, then the flows and their spatial
+Jacobians converge uniformly on compact cylinders, and
+\[
+ \sup_{0\le t\le T}\|F^{u_n}_{0,t}(G)-F^u_{0,t}(G)\|_{L^2}\longrightarrow0.
+\]
+The same $L^2$ continuity holds for the Euler law on any fixed finite grid.
+\end{lemma}
+\begin{proof}
+We first prove convergence on bounded space--time regions. We then control
+the contributions from starting points outside those regions. A compact cylinder here
+is a compact time interval times a bounded closed spatial set.
+On each compact cylinder the first derivatives are bounded and
+uniformly Lipschitz, by the three second-derivative bounds in
+Eq.~\eqref{eq:budget}. The function values are bounded there by the growth
+bound. Arzel\`a--Ascoli, a diagonal subsequence, and the fundamental theorem of
+calculus identify a $C^1$ limit with locally Lipschitz first derivatives.
+The local topology can be described by a metric. Taking the closure therefore
+preserves this compactness property. The common linear-growth and spatial
+Lipschitz bounds give flows throughout the interval, including backward
+time. Gronwall's inequality on a common compact set of trajectories gives
+flow convergence. The Jacobian equation has coefficients $Du_n$ that converge
+locally uniformly, so the same argument gives convergence of the Jacobians.
+
+For $|G|\le R$, the convergence is uniform in time. On the complement,
+the square of the difference is at most $4C_F^2(1+|G|)^2$, an integrable
+Gaussian tail independent of $n$. Taking $R\to\infty$ proves the asserted
+$L^2$ convergence. On a fixed grid, Euler applies only finitely many update
+maps. These maps converge locally uniformly and satisfy the same growth
+bound, so the same argument applies to their composition. Bounds
+\eqref{eq:flow-bounds} involving first derivatives pass directly to the limit.
+Second-derivative bounds hold almost everywhere. The Taylor and weak-error
+estimates below pass from smooth approximations because their remainders
+have common bounds. This argument does not require $C^2$ convergence.
+\end{proof}
+
+We also need to pass from accuracy at grid nodes to accuracy at every time.
+For a prescribed $W_2$-continuous path $p$ starting at $\gamma_d$, write
+\[
+ \mathfrak b(u)=\sup_{t\in[0,T]}W_2(\rho_t^u,p_t),\qquad
+ \omega_p(r)=\sup_{|t-s|\le r}W_2(p_t,p_s).
+\]
+The first quantity is the largest continuous-model bias along the path.
+The second bounds how much the prescribed distribution can change over a
+short time interval. Compactness and the preceding lemma make $\mathfrak b$
+continuous on the closure. With $E_c$ defined at the coarse nodes,
+Eq.~\eqref{eq:strong} gives
+\begin{equation}
+ \mathfrak b(u)\le E_c+C_E\sqrt{M_2}\,TH+KC_F\sqrt{M_2}\,H+\omega_p(H).
+ \label{eq:bias-general}
+\end{equation}
+The second term bounds integration error at nodes, and the final two terms
+compare a time with the preceding node. For the independent interpolation
+\eqref{eq:independent}, $\omega_p(H)\le\sqrt{d+\nu}\,H$, where
+$\nu=\tr S$. Consequently
+\begin{equation}
+ \mathfrak b(u)\le E_c+C_{\rm path}H,\qquad
+ C_{\rm path}=C_E\sqrt{M_2}\,T+KC_F\sqrt{M_2}+\sqrt{d+\nu}.
+ \label{eq:bias-from-nodes}
+\end{equation}
+This bound needs no exact marginal preservation by $u$.
+
+\section{Signed recursive errors and the two-grid contrast}
+\label{app:contrast}
+
+A test average can change in either direction. We keep its sign so we
+can tell when changes from different steps add or cancel. To use the
+same measurement at different times, trace a point backward through the
+exact flow before applying the starting test. The value is constant
+along each exact trajectory, so the exact-model average is shared by
+both runs. Subtracting their errors cancels that average.\AIassistance
+
+Let $\phi\in C^{1,1}(\R^d)$ with
+$\|\nabla\phi\|_\infty\le1$ and $\operatorname{Lip}(\nabla\phi)\le1$.
+Set
+\begin{equation}
+ \phi_t=\phi\circ F_{t,0},\qquad
+ I_u(t)=\E[\nabla\phi_t(X_t)\cdot a_t(X_t)].
+ \label{eq:I-def}
+\end{equation}
+The exact-flow expectation $\E\phi_t(X_t)=\E\phi(G)$ is constant.
+The quantity $I_u$ measures the effect of acceleration on this time-dependent
+test. The next constants control its variation and the remainders in the
+expectation error. Such an error is called a weak error because it compares
+averages of tests, rather than the positions of individual particles. Define
+\begin{align}
+ H_\phi&=(1+KT)C_F^3,\\
+ C_0&=JC_F^3/6+KAC_F^2/2+TH_\phi A^2C_F^2/8,\\
+ C_b&=H_\phi A+C_FC_D,\\
+ C_w&=C_0C_F^2M_2+\tfrac12 C_bC_FC_EM_2T,
+ & M_w&=BC_F^3\sqrt{M_4}.
+ \label{eq:weak-constants}
+\end{align}
+
+\begin{lemma}[Uniform weak error, including subintervals]
+\label{lem:weak}
+For every pair of nodes $i<j$, write
+$D_k=\E\phi_{t_k}(\widehat X_k)-\E\phi(G)$. Then
+\begin{equation}
+ D_j-D_i=-\tfrac12\sum_{k=i}^{j-1}h_k^2I_u(t_k)+R_{ij},\qquad
+ |R_{ij}|\le C_wH\sum_{k=i}^{j-1}h_k^2.
+ \label{eq:weak-interval}
+\end{equation}
+Moreover $\operatorname{Lip}(\phi_t)\le C_F$ and
+$\operatorname{Lip}(I_u)\le M_w$, uniformly over fields in
+$\overline{\mathcal B}_K$.
+\end{lemma}
+\begin{proof}
+We first compare a numerical update and an exact update from the same point.
+We then include the error already present in the numerical starting point.
+This second comparison is needed because Euler does not restart from the
+exact distribution at each step.
+First take a smooth field. For $Y=F_{t,t+h}(x)$ and $E=x+hu(t,x)$,
+trajectory Taylor expansion gives
+\[
+ E-Y=-\tfrac12h^2a_t(x)+R,\qquad
+ |R|\le JC_F^2h^3(1+|x|)^2/6,
+\]
+and the lower-order estimate is $|E-Y|\le A C_F h^2(1+|x|)/2$.
+The transported test has Hessian bound $H_\phi$, and
+\[
+ \nabla\phi_{t+h}(Y)=DF_{t,t+h}(x)^{-\top}\nabla\phi_t(x).
+\]
+The difference from $\nabla\phi_t(x)$ is at most $KhC_F$.
+The $C^{1,1}$ Taylor inequality therefore proves
+\[
+ \phi_{t+h}(E)-\phi_t(x)
+ =-\tfrac12h^2\nabla\phi_t(x)\cdot a_t(x)+R_0,
+ \quad |R_0|\le C_0h^3(1+|x|)^2.
+\]
+The three terms in $C_0$ bound the three remainder contributions in this
+one-step comparison.
+The spatial gradient of $\nabla\phi_t\cdot a_t$ has norm at most
+$C_b(1+|x|)$ almost everywhere. Comparing its numerical-state and exact-state
+expectations by \eqref{eq:strong} costs at most
+$C_bC_FC_EM_2 S_{2,k}\le C_bC_FC_EM_2TH$ at every node, including nodes after $i$.
+Now sum over the requested subinterval to obtain \eqref{eq:weak-interval}.
+The common $TH$ bound includes particle error accumulated before $i$.
+Thus this is an estimate for the actual recursive Euler computation, not
+for a computation restarted from exact marginals.
+
+Let $J_t(x)=DF_{0,t}(x)$ and $U_t=J_t^{-1}a_t\circ F_{0,t}$.
+Equation~\eqref{eq:transport-jerk} gives
+$\partial_tU_t=J_t^{-1}b_t\circ F_{0,t}$ and
+$\|\partial_tU_t(G)\|_2\le BC_F^3\sqrt{M_4}$. Since
+$I_u(t)=\E[\nabla\phi(G)\cdot U_t(G)]$, this proves the Lipschitz bound.
+Smooth approximations of the test preserve its first-derivative and
+Lipschitz bounds. To pass to the $C^1$ closure, use
+Lemma~\ref{lem:compact} and local convergence of accelerations on bounded
+sets. Gaussian moment bounds control the remaining tails. The time-Lipschitz
+bound passes as an inequality. It does not assert that a limiting second
+derivative is continuous.
+\end{proof}
+
+Let $\widetilde X_{2k}$ denote the recursive Euler state on the bisected grid
+at the common node $t_k$, for the \emph{same} field. Define
+\[
+ Z_k=\E\phi_{t_k}(\widehat X_k)-\E\phi_{t_k}(\widetilde X_{2k}).
+\]
+
+\begin{lemma}[Two-grid contrast]
+\label{lem:contrast}
+For any $i<j$,
+\begin{equation}
+ Z_j-Z_i=-\tfrac14\sum_{k=i}^{j-1}h_k^2 I_u(t_k)+\mathcal R_{ij},\qquad
+ |\mathcal R_{ij}|\le C_{\times,w}H\sum_{k=i}^{j-1}h_k^2,
+ \quad C_{\times,w}=\tfrac54C_w+M_w/16.
+ \label{eq:contrast-full}
+\end{equation}
+Also $|Z_k|\le C_F(E_c+E_f)$, without assuming that $\rho_t^u=p_t$.
+\end{lemma}
+\begin{proof}
+The fine-grid leading term contributed by one coarse interval is
+$-h_k^2\{I_u(t_k)+I_u(t_k+h_k/2)\}/8$. Subtract it from the coarse
+term $-h_k^2I_u(t_k)/2$ to obtain
+\[
+ -h_k^2I_u(t_k)/4+
+ h_k^2\{I_u(t_k+h_k/2)-I_u(t_k)\}/8.
+\]
+The second summand is at most $M_wh_k^3/16$ in absolute value.
+The fine-grid remainder has bound $C_w(H/2)(\sum h_k^2/2)$, one quarter
+of the coarse bound. This proves the constant in
+\eqref{eq:contrast-full}. Finally, couple the two numerical laws and use
+$\operatorname{Lip}(\phi_{t_k})\le C_F$, followed by the triangle inequality
+through $p_{t_k}$. The prescribed law need not be the exact law of the field.
+Comparing one step with two half steps is the classical step-doubling
+construction. Here it removes the candidate model's unknown bias and gives
+a bound that is uniform over the common regularity class.
+\end{proof}
+
+\section{Proof of the two-grid characterization}
+\label{app:characterization}
+
+The proof first shows that sufficiently accurate coarse and fine runs must
+approach an exact generator whose acceleration preserves the distribution.
+It then shows how such a generator permits second-order distribution
+accuracy. We keep the compact closure because a convergent sequence of
+smooth fields need not have a smooth limit. The proof permits unequal
+deterministic step sizes.\AIassistance
+
+\subsection{Necessity: a successful sequence produces an order-elevating generator}
+First we identify a limiting exact generator. We then show that a test with
+a nonzero average acceleration effect would contradict the assumed accuracy
+of the two runs. The contradiction uses a time interval on which that effect
+has one sign. This is why accuracy is required along the path, rather than
+only at its endpoint.
+
+Suppose there exist $u_n\in\mathcal B_K$, grids with $N_n\to\infty$ and
+$H_n\to0$, and $N_n(E_c+E_f)\to0$. Extract $u_n\to u$ in
+$C^1_{\rm loc}$ using Lemma~\ref{lem:compact}. By
+\eqref{eq:bias-general}, $\mathfrak b(u_n)\to0$; continuity of the
+exact laws shows that $u$ generates $p$ on the whole interval.
+
+Assume the acceleration condition fails at some $s\in[0,T]$. Then there
+is a compact smooth $\psi$ for which
+$\E[\nabla\psi(X_s)\cdot a_s(X_s)]\ne0$.
+Set $\phi=\psi\circ F^u_{0,s}$ and rescale by a positive constant so that
+its gradient and gradient-Lipschitz bounds are at most one. The flow is
+$C^{1,1}$ in space, so this is an admissible compactly supported $C^{1,1}$
+test. Its transported version equals a positive multiple of $\psi$ at $s$.
+For each $u_n$, transport this \emph{same source test} with that field's
+own flow. Lemma~\ref{lem:compact} and the representation
+$I_{u_n}(t)=\E[\nabla\phi(G)J_{n,t}^{-1}a^{u_n}_t(X^{u_n}_t)]$
+show that $I_{u_n}\to I_u$ uniformly in $t$. Local convergence is uniform
+on bounded Gaussian initial states; the tail is bounded by a common
+multiple of $1+|G|$.
+
+Thus there is a closed interval of positive length $\ell$, possibly
+one-sided at an endpoint, on which all sufficiently large $n$ have
+$I_{u_n}$ of one sign and $|I_{u_n}|\ge\eta>0$.
+Choose the first and last coarse nodes inside this interval. When $H_n$
+is small their separation is at least $\ell/2$. Equation~\eqref{eq:contrast-full}
+and $C_{\times,w}H_n\le\eta/8$ yield
+\[
+ |Z_j-Z_i|\ge\frac\eta8\sum_{k=i}^{j-1}h_k^2
+ \ge\frac{\eta\ell^2}{32N_n}.
+\]
+The last inequality follows from Cauchy--Schwarz. It needs neither a positive
+lower bound on individual step sizes nor a limit for their relative sizes.
+But the lemma also gives
+$|Z_j-Z_i|\le2C_F(E_c+E_f)=o(N_n^{-1})$, a contradiction.
+Therefore $\int\nabla\psi\cdot a_t\,dp_t=0$ for every compact smooth
+$\psi$ and every $t$. This proves necessity for arbitrary refining grids,
+not only uniform or quasi-uniform ones.
+
+\subsection{Sufficiency: locally Lipschitz acceleration is enough here}
+Euler omits the leading displacement due to acceleration. To compare
+distributions, we can pair an exact particle with a different numerical
+particle, provided each population still has the same distribution.
+The acceleration flow gives such a pairing. With physical time fixed,
+it supplies the leading displacement Euler misses while leaving the
+input distribution unchanged. This change of
+pairing is a recoupling.
+
+Suppose $u\in\overline{\mathcal B}_K$ generates $p$ and satisfies the
+acceleration condition. Fix $t$, and let $\Psi_t^r$ be the autonomous flow
+of $a_t$. The acceleration is locally Lipschitz with linear growth, so
+this flow is complete and locally bi-Lipschitz. It preserves $p_t$.
+For clarity, $p_t$ is the positive continuous density obtained by pushing
+Gaussian density through a $C^1$ bi-Lipschitz flow. The weak identity
+$\operatorname{div}(p_ta_t)=0$ extends from smooth tests to compactly
+supported Lipschitz tests by local mollification. Applied to
+$\psi\circ\Psi_t^r$, the characteristic chain rule gives
+$\frac{d}{dr}\int\psi(\Psi_t^r(x))p_t(dx)=0$ almost everywhere in $r$.
+Preimages of compact sets remain compact on bounded $r$ intervals by
+linear growth. The derivative and the local mollification limits are
+therefore dominated. Integrating in $r$ proves invariance. Equivalently,
+this is uniqueness of the stationary continuity equation under a locally
+Lipschitz complete vector field.
+
+For $X\sim p_t$ use the recoupling $Z=\Psi_t^{h^2/2}(X)$.
+The new starting point has the same distribution, $Z\sim p_t$.
+Euler starting at $Z$ therefore has the required one-step output law, but
+it is now paired differently with the exact particle. Let $G_A=e^{AT^2/2}$.
+The acceleration estimates imply
+\begin{align*}
+ |Z-X|&\le (A G_A/2)h^2(1+|X|),\\
+ |Z-X-\tfrac12h^2a_t(X)|
+ &\le (C_D A G_A^2/8)h^4(1+|X|)^2.
+\end{align*}
+The second inequality follows by integrating
+$|a_t(\Psi_t^rX)-a_t(X)|$ and using the local bound on $Da_t$ along
+the orbit. Exact-flow Taylor expansion gives
+\[
+ F_{t,t+h}(X)=X+hu_t(X)+\tfrac12h^2a_t(X)+R,
+ \quad |R|\le JC_F^2h^3(1+|X|)^2/6.
+\]
+This remains valid in the closure by passage from smooth fields with the
+uniform remainder. Consequently
+\begin{equation}
+ |Z+hu_t(Z)-F_{t,t+h}(X)|
+ \le C_{\rm loc}h^3(1+|X|)^2,
+ \quad C_{\rm loc}=C_D A G_A^2T/8+KA G_A/2+JC_F^2/6.
+ \label{eq:AP-local}
+\end{equation}
+We can now average the particle bound using the Gaussian fourth moment.
+This gives local $W_2$ error at most
+$C_{\rm loc}C_F^2\sqrt{M_4}h^3$. Propagating it with Euler's
+$(1+Kh)$ Lipschitz stability proves, on every grid,
+\begin{equation}
+ \max_k W_2(\widehat\rho_k^u,p_{t_k})
+ \le C_F^3 C_{\rm loc}\sqrt{M_4}\sum_kh_k^3
+ \le C_F^3 C_{\rm loc}\sqrt{M_4}\,TH^2.
+ \label{eq:AP-global}
+\end{equation}
+The acceleration need not be globally Lipschitz: its derivative grows at
+most linearly, and the required fourth moment comes from Gaussian
+initialization and the common linear-growth bound on the velocity.
+
+If $u$ belongs only to the closure, approximate it by a smooth
+$u_N\in\mathcal B_K$ so closely that both finite-grid Euler laws have
+additional $W_2$ discrepancy at most $N^{-2}$ at their finitely many common
+nodes. Such approximation follows from Lemma~\ref{lem:compact}; it need
+not preserve the target path exactly. On the uniform grid and its
+bisection, \eqref{eq:AP-global} proves $\mathcal J_N(u_N)=O(N^{-2})$.
+The same approximant is used for the two runs. This proves sufficiency
+without asserting that a $C^1$ limit is itself a smooth member of the class.
+
+\subsection{Uniform lower bound and the three optimized regimes}
+The same necessity argument gives a lower bound for all admissible fields
+on sufficiently fine grids. If no such common bound existed, we could
+choose a sequence with progressively smaller error. That sequence would
+produce exactly the generator that is assumed not to exist.
+
+If there were no constants $c,H_0>0$ in
+\eqref{eq:general-uniform-barrier}, for each integer $m$ we could select a
+field and a grid with $H_m\le1/m$ and
+$\mathcal J_{N_m}<1/(mN_m)$. Necessarily $N_m\ge T/H_m\to\infty$.
+The necessity argument would produce an order-elevating generator in
+the closure, a contradiction. Thus the lower bound is uniform over all
+fields, all sufficiently fine deterministic grids, and all numbers of
+steps, not just over a single refinement sequence.
+
+For uniform grids define $q_N=\inf_{u\in\mathcal B_K}\mathcal J_N(u)$.
+For each fixed $N$ this infimum equals a minimum over the compact closure,
+since Euler laws are continuous there. Put
+$b_*=\min_{u\in\overline{\mathcal B}_K}\mathfrak b(u)$.
+Uniformly over that closure,
+\[
+ |E_c-\mathfrak b(u)|+|E_f-\mathfrak b(u)|
+ \le C h+2\omega_p(h),\qquad h=T/N,
+\]
+for a class-dependent constant $C$. This follows from strong Euler error
+and the difference between a continuous-time supremum and the maximum
+over common coarse nodes. Therefore $q_N\to2b_*$.
+If no exact generator exists, compactness gives $b_*>0$.
+If an exact generator exists but no order-elevating generator does, the
+uniform lower bound gives $q_N\ge c/N$, and approximation of an exact
+generator, together with strong Euler error, gives $q_N\le C/N$.
+If an order-elevating generator exists, the previous subsection gives
+$q_N=O(N^{-2})$. This is a statement about the optimized two-grid error;
+individual nonoptimal sequences can have other rates.
+
+\section{Gaussian-source topology and the odd-dimensional application}
+\label{app:source}
+
+We now specify a path for which the generator required by
+Theorem~\ref{thm:characterization} cannot exist in odd dimension.
+Only the first two time derivatives of the path at its Gaussian starting
+distribution are needed. This pair of derivatives is called the source
+two-jet. They constrain every exact generator, including nonlinear ones.
+We can therefore prove nonexistence without first listing all possible
+generators. The target need not be Gaussian, radial, or unimodal.\AIassistance
+
+\begin{lemma}[Source two-jet identity]
+\label{lem:twojet}
+Suppose a $u\in\overline{\mathcal B}_K$ generates
+$p_t=\Law((1-t)G+tY)$ near zero, where $Y$ is centered, independent of
+$G$, and has covariance $S$. Let $r(x)=u(0,x)+x$.
+Then $\operatorname{div}(\gamma_dr)=0$. For a unit vector $e$, define
+$Q_e(y)=\E[(e\cdot r(G))^2\mid e\cdot G=y]$ and let $\varphi$ be the
+standard one-dimensional Gaussian density. For a scalar test $\psi$ with
+bounded first and second derivatives and at most linear growth,
+\begin{equation}
+ \E[\psi'(e\cdot G)e\cdot a_0(G)]
+ =\int\psi''(y)\{e^\top Se-Q_e(y)\}\varphi(y)\,dy.
+ \label{eq:twojet-proof}
+\end{equation}
+The equality also holds for $C^{1,1}$ tests with almost-everywhere second
+derivatives, by approximation.
+\end{lemma}
+\begin{proof}
+An exact generator and the prescribed interpolation give the same average
+of each test wherever their distributions agree. Their first and second
+time derivatives must therefore agree at zero. For the first derivative, a compact smooth test
+along the prescribed straight interpolation gives
+$-\E\nabla\Phi(G)\cdot G$. The derivative along the flow gives
+$\E\nabla\Phi(G)\cdot u_0(G)$.
+Equality says that the correction leaves the Gaussian source unchanged,
+which is Gaussian solenoidality. Testing along $e$ shows
+that the distributional derivative of
+$\varphi(y)\E[e\cdot r(G)\mid e\cdot G=y]$ vanishes.
+This function is integrable, hence the constant is zero.
+Lipschitz growth of $r$ and Gaussian conditional expectation give continuous
+versions of the conditional first and second moments.
+
+For the second derivative, the value along the straight interpolation is
+$\E\psi''(e\cdot G)(e\cdot(Y-G))^2$, whose conditional squared factor is
+$y^2+e^\top Se$. Along the flow the second derivative is
+\[
+ \E\big[\psi''(e\cdot G)(e\cdot u_0(G))^2
+       +\psi'(e\cdot G)e\cdot a_0(G)\big].
+\]
+The first conditional squared factor equals $y^2+Q_e(y)$ because the
+conditional mean of $e\cdot r$ is zero. Subtracting the two second-derivative
+expressions proves the identity. A $C^1$ field is enough to differentiate
+the trajectory twice. Linear growth gives the integrable bounds needed to
+differentiate its expectation. Only the second moment of $Y$ is used.
+For noncompact scalar tests, first apply spatial cutoffs and then remove
+them using Gaussian integrability of $|r|^2$, linear growth of $a_0$, and
+the bounded test derivatives. Smooth approximation gives the $C^{1,1}$
+case without boundary atoms, since the scalar Gaussian has a density.
+\end{proof}
+
+\begin{lemma}[Uniform positive strip test function in odd dimension]
+\label{lem:pole}
+Assume $d$ is odd and $\lambda=\lambda_{\min}(S)>0$. Define
+\begin{equation}
+ A_d=d+\sqrt{d^2+d-2},\qquad
+ R_K=\max\{1,2A_d(K+1)/\sqrt\lambda\},\qquad
+ \delta_K=\frac{\lambda}{2\sqrt{2\pi}}e^{-(R_K+1)^2/2}.
+ \label{eq:pole-constants}
+\end{equation}
+Every exact generator $u\in\overline{\mathcal B}_K$ has a unit direction $e$
+and a convex strip test $\phi_e(x)=\psi(e\cdot x)$, with gradient and
+gradient-Lipschitz bounds one, such that
+$\E[\nabla\phi_e(G)\cdot a_0(G)]\ge\delta_K>0$.
+\end{lemma}
+\begin{proof}
+The identity compares target variance with the mean squared correction in a
+chosen direction. We seek a region where the latter is too small to cancel
+the former. A topological argument selects a point on a large sphere.
+Lipschitz continuity controls the correction near that point. A convex test
+then detects the acceleration that remains.
+
+Put $L_r=\operatorname{Lip}(r)\le K+1$. The continuous weighted-divergence
+identity is pointwise and gives
+$\operatorname{div}r(x)=x\cdot r(x)$, so $|x\cdot r(x)|\le dL_r$.
+Project the correction onto directions tangent to the sphere of radius
+$R_K$. This gives a continuous tangent vector field on a sphere of even
+dimension $d-1$. The hairy-ball theorem says that this field must vanish
+somewhere~\citep{hatcher2002algebraic}. In $d=1$ the tangent space is
+zero-dimensional, so the step is immediate. Thus $r(R_Ke)$ is parallel to
+$e$ for some unit $e$. We have not assumed that $r$ is tangent elsewhere.
+
+For $y\in[R_K,R_K+1]$ write $G=ye+Z_\perp$ under the scalar conditioning,
+where $Z_\perp\sim\mathcal N(0,I_{d-1})$. Since
+$Z_\perp\cdot r(R_Ke)=0$, the divergence identity and Lipschitz bound give
+\[
+ |e\cdot r(ye+Z_\perp)|\le\frac{L_r}{R_K}
+ \left[d+|Z_\perp|\sqrt{(y-R_K)^2+|Z_\perp|^2}\right].
+\]
+Use $\E|Z_\perp|^2=d-1$ and
+$\E|Z_\perp|^4=(d-1)(d+1)$ in Minkowski's inequality to obtain
+$\sqrt{Q_e(y)}\le A_dL_r/R_K\le\sqrt\lambda/2$ throughout the strip.
+Choose $\psi'$ equal to zero below $R_K$, increasing with slope one
+on the strip, and equal to one above it. Equation~\eqref{eq:twojet-proof}
+then gives
+\[
+ \E\nabla\phi_e(G)\cdot a_0(G)
+ \ge\frac{3\lambda}{4}\Pr\{R_K\le N(0,1)\le R_K+1\}
+ \ge\frac{3\lambda}{4\sqrt{2\pi}}e^{-(R_K+1)^2/2}\ge\delta_K.
+\]
+The test average is positive, but its lower bound includes a Gaussian tail
+probability. It can therefore be extremely small for large derivative
+bounds. The argument establishes positivity, not a useful numerical
+forecast of the error.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:odd-transfer}]
+An order-elevating generator would give zero average acceleration effect
+for every compact smooth gradient test. Cutting off the strip test on
+larger and larger sets and controlling the Gaussian tail gives the same
+zero value for the strip test in Lemma~\ref{lem:pole}. This contradicts
+its positive average.
+The general uniform lower bound in Theorem~\ref{thm:characterization}
+therefore applies to every field, including fields whose exact law differs
+from the prescribed interpolation.
+
+One constant in this lower-bound argument remains nonconstructive: we prove
+that it exists without obtaining a formula for it. Compactness yields
+$\eta_K>0$ such that $\mathfrak b(u)\le\eta_K$ implies a strip test function
+with source pairing at least $\delta_K/2$. Otherwise a sequence of biases
+converging to zero would have a $C^1_{\rm loc}$ limit generating $p$;
+choose that limit's direction and pass its acceleration pairing to the
+sequence to obtain a contradiction. Fix
+\[
+ \tau=\min\{T,\delta_K/(4M_w)\},\quad
+ H_0=\min\{\eta_K/(2C_{\rm path}),\tau/2,
+                  \delta_K/(32C_{\times,w})\}.
+\]
+If $E_c\ge\eta_K/2$, the lower bound is immediate with $c\le\eta_K/2$.
+Otherwise \eqref{eq:bias-from-nodes} gives $\mathfrak b(u)\le\eta_K$.
+The transported test function has $I_u(t)\ge\delta_K/4$ on $[0,\tau]$.
+Let $t_j$ be the last node before $\tau$. The prefix version of
+\eqref{eq:contrast-full}, with $Z_0=0$, gives
+\[
+ C_F(E_c+E_f)\ge|Z_j|\ge\frac{\delta_K}{32}\sum_{k<j}h_k^2
+ \ge\frac{\delta_K\tau^2}{128N}.
+\]
+Thus an admissible $c$ is
+$\min\{\eta_K/2,\delta_K\tau^2/(128C_F)\}$.
+The strip location $R_K$ and lower bound $\delta_K$ have explicit formulas,
+but $\eta_K$ does not. The proof therefore does not give a computable
+threshold for the general odd-dimensional result.
+\end{proof}
+
+\subsection{A non-Gaussian target with an admissible exact generator}
+The lower bound is not only about paths that no regular field can generate.
+The following mixture has a regular exact generator. In odd dimension, the
+obstruction still prevents its acceleration from satisfying the required
+distribution-preserving condition.
+
+For $Y=\mu\xi e_1+\sigma Z$, with independent symmetric sign $\xi$,
+standard $d$-dimensional Gaussian $Z$, and $\sigma>0$, let
+$q(t)=(1-t)^2+\sigma^2t^2$. The canonical conditional velocity is
+\begin{equation}
+ v_t(x)=\frac{(1+\sigma^2)t-1}{q(t)}x+
+ \frac{\mu(1-t)}{q(t)}
+ \tanh\left(\frac{\mu t x_1}{q(t)}\right)e_1.
+ \label{eq:mixture-generator}
+\end{equation}
+This velocity generates the independent path: it averages $Y-G$ conditional
+on the interpolated position. The function $q$ stays
+strictly positive on a neighborhood of $[0,1]$, so all scalar coefficient
+derivatives needed here are bounded. Write the nonlinear term
+$c(t)\tanh(b(t)x_1)$. Its time derivative grows at most linearly in $x$;
+its second time derivative at most quadratically. Spatial derivatives
+through order two are uniformly bounded. For the mixed derivative,
+terms such as $b(t)x_1\tanh''(b(t)x_1)$ are uniformly bounded, since
+$z\tanh''z$ is bounded on the real line. All remaining terms are bounded
+scalar coefficients times bounded hyperbolic derivatives. Hence this
+field belongs to some finite $\mathcal B_K$, including for separated
+multimodal targets.
+Thus the class of exact generators can be nonempty for a non-Gaussian
+target. Positive covariance alone still does not make every
+$\mathcal P_2$ target reachable by a globally Lipschitz flow.
+
+\section{An explicit initial-risk bound without exact marginal preservation}
+\label{app:risk}
+
+Throughout this section the target path is \eqref{eq:independent}, but
+$u$ is any field in $\overline{\mathcal B}_K$. Put $\nu=\tr S$ and
+$\Delta_0(u)=\E|u(0,G)+G|^2$. Independence gives the elementary risk identity
+\begin{equation}
+ \mathcal L_0(u)=\E|u(0,G)-(Y-G)|^2=\nu+\Delta_0(u).
+ \label{eq:source-loss-proof}
+\end{equation}
+Here population loss means an expectation over the source and target
+distributions, rather than an average over a finite training batch.
+The Bayes velocity minimizes this squared prediction loss. At the source
+it is $-x$, with minimum loss $\nu$. The excess risk $\Delta_0$ measures
+how much loss the candidate adds above that minimum. The decomposition is
+standard. We use it to constrain a candidate through its two numerical runs,
+without assuming that its continuous flow preserves the target path.\AIassistance
+
+\subsection{Quadratic transported tests and all constants}
+We now test the mean squared position, which is the second moment. This
+test is unbounded and its gradient grows linearly. We therefore keep the
+moment factors explicitly when repeating the earlier comparison of test
+averages. The constants below make the final source-risk inequality
+computable.
+
+Use \eqref{eq:base-constants} and set
+\begin{align}
+ H_q&=(1+KT)C_F^3, & D_q&=3C_F^3\sqrt{M_2}, & M_q&=BC_F^4\sqrt{M_2M_4},\\
+ D_0&=AC_F^2M_2, & c_\ell&=\min\{T/D_0,1/(2M_q)\},\\
+ C_{q0}&=JC_F^5/6+KAC_F^3/2+TH_qA^2C_F^3/4,\\
+ C_{qb}&=H_qA+C_F^2C_D, &
+ C_q&=M_3\{C_{q0}C_F^3+\tfrac12 C_{qb}C_F^2C_ET\},\\
+ C_{\times,q}&=\tfrac54 C_q+M_q/16, &
+ C_H&=\max\{2/c_\ell,16C_{\times,q}\},\\
+ C_m&=C_F\sqrt{M_2}+\sqrt d+\sqrt\nu, &
+ J_m&=6KAC_F^2M_2+2JC_F^3M_3.
+ \label{eq:risk-constants}
+\end{align}
+Let $\psi_t(x)=|F_{t,0}(x)|^2/2$ and
+$I(t)=\E[\nabla\psi_t(X_t)\cdot a_t(X_t)]$.
+Then
+\begin{align}
+ |\nabla\psi_t(x)|&\le C_F^2(1+|x|), &
+ \|D^2\psi_t(x)\|&\le H_q(1+|x|),\\
+ |I'(t)|&\le M_q, & |I(0)|&\le D_0.
+ \label{eq:quadratic-bounds}
+\end{align}
+The derivative bound follows from \eqref{eq:transport-jerk}. Take the dot
+product of transported acceleration with $G$, then use Cauchy--Schwarz and
+the Gaussian moment bounds. The same constant also gives a conservative
+bound when the test is transported to any other fixed reference time.
+
+The proof of Lemma~\ref{lem:weak}, now with a linearly growing Hessian,
+gives a one-step remainder at most $C_{q0}h^3(1+|x|)^3$.
+To see the three terms, the trajectory Taylor remainder costs
+$JC_F^5h^3(1+|x|)^3/6$, the transport of the gradient costs at most
+$KAC_F^3h^3(1+|x|)^2/2$, and the quadratic Taylor remainder costs at most
+$TH_qA^2C_F^3h^3(1+|x|)^3/4$.
+The scalar measurement $\nabla\psi_t\cdot a_t$ has derivative bounded by
+$C_{qb}(1+|x|)^2$. At numerical and exact states its expectation difference
+is at most $C_{qb}C_F^2C_EM_3S_{2,k}$.
+Summation and $S_{2,k}\le TH$ yield the interval weak remainder
+$C_qH\sum h_k^2$.
+Consequently the two-grid contrast formula \eqref{eq:contrast-full} holds
+with $C_{\times,q}$ in place of $C_{\times,w}$.
+
+Although $\psi_t$ is not globally Lipschitz, for the two numerical laws
+$\alpha,\beta$ at the same time it satisfies
+\begin{equation}
+ \left|\int\psi_t\,d\alpha-\int\psi_t\,d\beta\right|
+ \le D_qW_2(\alpha,\beta)\le D_q(E_c+E_f).
+ \label{eq:quadratic-comparison}
+\end{equation}
+Indeed the mean-value inequality bounds the integrand by
+$C_F^2(1+|x|+|y|)|x-y|$; both numerical states have root second moment at
+most $C_F\sqrt{M_2}$. Cauchy--Schwarz gives the conservative constant $D_q$.
+The target is used only in the Wasserstein triangle inequality, so no
+fourth moment of $Y$ is required here.
+
+Put $a_*=|I(0)|=|\E G\cdot a_0(G)|$. If $a_*>0$, on
+$[0,\ell]$ with $\ell=\min\{T,a_* /(2M_q)\}\ge c_\ell a_*$ the
+pairing has a common sign and magnitude at least $a_*/2$.
+If $H\le\ell/2$ and $H\le a_* /(16C_{\times,q})$, choose the last node
+before $\ell$. The contrast and \eqref{eq:quadratic-comparison} give
+\[
+ D_q(E_c+E_f)\ge\frac{a_*}{16}\sum_{k<j}h_k^2.
+\]
+Cauchy--Schwarz gives
+\begin{equation}
+ a_*\le\left\{\frac{64D_qN(E_c+E_f)}{c_\ell^2}\right\}^{1/3}.
+ \label{eq:cubic-observe}
+\end{equation}
+On the uniform grid, $\sum_{k<j}h_k^2=(T/N)t_j\ge T\ell/(2N)$, giving
+\begin{equation}
+ a_*\le\left\{\frac{32D_qN(E_c+E_f)}{Tc_\ell}\right\}^{1/2}.
+ \label{eq:square-observe}
+\end{equation}
+If either small-mesh condition fails, then $a_*\le C_HH$ instead.
+Adding this term makes each displayed bound valid without a mesh
+qualification. If $a_*=0$, the same statements hold trivially.
+
+\subsection{Recovering the first two source-time moment derivatives}
+To use the source-risk identity, we need the first two time derivatives of
+the model's second moment at time zero. Accuracy along the path controls
+the moment itself. A common bound on its third derivative then controls
+these two source-time derivatives. We obtain explicit bounds by using
+forward finite differences, which estimate derivatives from nearby times.
+
+Let $m_u(t)=\E|X_t^u|^2$,
+$m_p(t)=d(1-t)^2+\nu t^2$, and $f=m_u-m_p$.
+Then $f(0)=0$ and
+\begin{equation}
+ \|f\|_\infty\le C_m\mathfrak b(u),\qquad
+ |f'''(t)|\le J_m\quad\hbox{almost everywhere}.
+ \label{eq:moment-bias}
+\end{equation}
+The square roots of second moments differ by at most the Wasserstein
+distance. This inequality gives the first bound. The second follows from
+$m_u'''=6\E[u_t\cdot a_t]+2\E[X_t\cdot j_t]$ and
+\eqref{eq:flow-bounds}. For a closure field the inequality follows by
+passing the uniform finite-difference estimates of smooth approximants;
+classical continuous third derivatives are not being assumed.
+
+For $0<s\le T/2$, forward differences and the Lipschitz bound on $f''$
+give
+\begin{align}
+ |f'(0)|&\le\frac{5C_m\mathfrak b(u)}{2s}+J_ms^2,\\
+ |f''(0)|&\le\frac{3C_m\mathfrak b(u)}{s^2}+J_ms.
+ \label{eq:jet-estimates}
+\end{align}
+The first formula uses $(4f(s)-f(2s))/(2s)$; the second uses
+$(f(2s)-2f(s)+f(0))/s^2$.
+For the latter, the double-integral kernel has average evaluation time
+$s$, so a $J_m$-Lipschitz second derivative incurs at most $J_ms$.
+Since $s\le1$,
+\begin{equation}
+ |f'(0)+f''(0)/2|\le\omega_K(\mathfrak b(u)),\quad
+ \omega_K(b)=\inf_{0<s\le T/2}\left\{\frac{4C_mb}{s^2}+\frac32J_ms\right\}.
+ \label{eq:omega-proof}
+\end{equation}
+The infimum chooses the finite-difference spacing that gives the smallest
+bound. Here $\omega_K(0)=0$, and for $b>0$ the minimizer is
+$s=\min\{T/2,(16C_mb/(3J_m))^{1/3}\}$. This explicit modulus is
+nondecreasing and $O(b^{1/3})$ as $b\downarrow0$.
+
+The exact source identity, valid for every field, is
+\begin{equation}
+ \E[G\cdot a_0(G)]
+ =\nu-\Delta_0(u)+f'(0)+\tfrac12f''(0).
+ \label{eq:approximate-risk-identity}
+\end{equation}
+To verify it, note that
+$m_u'(0)=2\E[G\cdot u_0(G)]$ and
+$\E|u_0(G)|^2=d-f'(0)+\Delta_0(u)$.
+Insert these into
+$m_u''(0)=2\E|u_0(G)|^2+2\E[G\cdot a_0(G)]$ and use
+$m_p''/2=d+\nu$. This calculation does not require Gaussian
+solenoidality or exact path preservation.
+
+\begin{proof}[Proof of Theorem~\ref{thm:source-risk}]
+Combine \eqref{eq:approximate-risk-identity}, \eqref{eq:omega-proof},
+\eqref{eq:bias-from-nodes}, and either \eqref{eq:cubic-observe} or
+\eqref{eq:square-observe}, including the $C_HH$ alternative.
+This gives precisely Eqs.~\eqref{eq:risk-main}--\eqref{eq:risk-uniform}.
+If $H_N\to0$ and $E_c+E_f=o(N^{-1})$, every term tends to zero,
+so $\Delta_0(u_N)\to\nu$ and $\mathcal L_0(u_N)\to2\nu$.
+For a fixed gap $|\Delta_0-\nu|\ge g>0$, an entirely explicit choice is
+\begin{align}
+ s_g&=\min\{T/2,g/(12J_m)\}, & b_g&=g s_g^2/(32C_m),\\
+ H_g&=\min\{T,g/(4C_H),b_g/(2C_{\rm path})\}, &
+ c_g&=\min\{b_g/2,c_\ell^2g^3/(4096D_q)\}.
+ \label{eq:explicit-gap-barrier}
+\end{align}
+If $H\le H_g$ and $\mathcal J_N<c_g/N$, then
+$E_c+C_{\rm path}H\le b_g$. Evaluating the infimum in $\omega_K$
+at $s_g$ gives at most $g/4$, the mesh term is at most $g/4$, and
+the cubic term is at most $g/4$. The asserted gap would therefore be
+at most $3g/4$, a contradiction. Thus the risk-gap barrier is uniform
+over all sufficiently fine deterministic grids, with no lower step
+bound or condition $H=O(N^{-1})$.
+Although every constant has a formula, the bounds may be far too
+conservative to give a useful numerical certificate.
+\end{proof}
+
+\section{Exact examples, loss of a fit after refinement, and necessary restrictions}
+\label{app:controls}
+
+\subsection{An exact fit on one Euler grid can fail after refinement}
+The next example separates two questions: does Euler follow the fitted
+velocity accurately, and does its output match the target? We choose a
+velocity for which Euler matches the target exactly at one step size.
+The exact continuous flow of that velocity does not match the target.
+Using smaller steps therefore exposes the model error that the coarse
+numerical error had canceled.\AIassistance
+
+Let $g(t)=\sqrt{(1-t)^2+\sigma^2t^2}$, $\sigma>0$, and
+$u_h(t,x)=c_h(t)x$, where
+$c_h(t)=(g(t+h)-g(t))/(h g(t))$. On a fixed neighborhood of $[0,1]$,
+$g$ is positive, so this family has a common derivative bound as $h\downarrow0$.
+The exact algebraic identity
+\[
+ 1+hc_h(t)=g(t+h)/g(t)
+\]
+shows why the coarse computation is exact at every target node. The scale
+factors multiply, and each denominator cancels the preceding numerator.
+This gives every target node marginal exactly in every dimension.
+The exact scale of the continuous model is
+$q_h(t)=\exp\{\int_0^tc_h(s)ds\}$ and Taylor expansion gives
+\begin{equation}
+ q_h(t)=g(t)\exp\left\{\frac h2\int_0^t\frac{g''(s)}{g(s)}ds+O(h^2)\right\}.
+ \label{eq:secant-model}
+\end{equation}
+Now keep this \emph{same} $u_h$ and use Euler step $h/2$. For a smooth scalar
+coefficient $c$, the logarithm of the Euler scale on step $k$ is
+\[
+ \int_0^t c(s)ds-\frac k2\int_0^t\{c'(s)+c(s)^2\}ds+O(k^2).
+\]
+To obtain this expression, approximate the integral by its left Riemann
+sum and expand $\log(1+kc)$. The coefficient family and the derivatives
+used in this calculation have common bounds. The remainder bounds are
+therefore uniform in $h$.
+With $c_h=g'/g+(h/2)g''/g+O(h^2)$ and $k=h/2$, the refined scale satisfies
+\begin{equation}
+ \widehat g_{h/2;u_h}(t)
+ =g(t)\exp\left\{\frac h4\int_0^t\frac{g''(s)}{g(s)}ds+O(h^2)\right\}
+ \label{eq:secant-transfer}
+\end{equation}
+at common nodes. Since $g''/g=\sigma^2/g^4>0$, the refined target error
+is $\Theta(h)$ even though the fitted coarse error is exactly zero.
+The same computation for step $h/m$ has coefficient
+$(h/2)(1-1/m)$, for any fixed integer $m\ge2$.
+Thus a velocity chosen for one grid can attain the first-order lower
+bound. This calculation explains the cancellation, but it does not give
+a general learning algorithm. If a network receives the requested step
+size as an input, changing that input can change the evaluated field.
+Such a comparison falls outside the same-field requirement here.
+
+For the convex blend
+$c_{h,\theta}=(1-\theta)g'/g+\theta c_h$, the leading logarithmic target
+errors on steps $h$ and $h/2$ have coefficients
+$(\theta-1)h/2$ and $(\theta-1/2)h/2$ respectively.
+Their largest absolute coefficient is minimized at $\theta=3/4$, with
+strictly positive value $h/8$. Fitting both resolutions within this scalar
+family therefore reduces the error constant while leaving the order
+unchanged. The numerical one-dimensional bounded optimization checks
+this fact for the stated family, not for all neural fields.
+
+\subsection{Even-dimensional exactness and insufficiency of scalar risk}
+The restriction to odd dimension matters. In even dimension, a rotation
+can change which source and target points are paired while preserving
+the Gaussian distribution at every time. The resulting trajectories can
+be straight, so Euler can be exact. The following construction provides
+this contrasting case.
+
+For even $d$ choose $J^\top=-J$, $J^2=-I$, and set
+$A_t=(1-t)I+\sigma tJ$. The process $A_tG$ has covariance $g(t)^2I$,
+with straight trajectories. Its velocity
+$u_t=(\sigma J-I)A_t^{-1}x$ has zero pointwise acceleration, belongs to
+a class $\mathcal B_K$ with finite $K$, and Euler is exact on every grid.
+This skew-coupling construction is known and is credited to the existing
+Gaussian geometry rather than counted as a new theorem
+\citep{obzherin2026density,obzherin2026finite}.
+At the source, $u_0+\operatorname{id}=\sigma Jx$, so
+$\Delta_0=d\sigma^2=\nu$ and the doubled-risk necessity is attained.
+
+Matching the required source loss alone is not sufficient to make
+acceleration distribution-preserving. In $d=3$, take $S=I_3$,
+$g^2=(1-t)^2+t^2$, and
+\[
+ u_t(x)=\left\{(g'/g)I+\sqrt{3/2}\,g^{-2}J_{12}\right\}x,
+\]
+where $J_{12}$ is the unit rotation on coordinates $1,2$ and is zero
+on coordinate $3$. This is an exact generator. Its source excess is
+$3=\nu$, but $a_0(x)=\operatorname{diag}(-1/2,-1/2,1)x$.
+The quadratic test $x_3^2/2$ detects a positive average acceleration
+effect, so the acceleration condition fails. Thus neither the loss equality
+nor small target errors at one or two finite step counts establish the
+existence of an order-elevating generator.
+
+\subsection{Why endpoint-only tests are excluded}
+An acceleration contribution can be positive during one part of the
+interval and negative during another. These contributions can cancel at
+the final time while errors remain at intermediate times. The following
+scalar example shows why testing only the final distribution cannot
+replace testing the whole path.
+
+An explicit scalar example is $X_t=f(t)G$, with
+$u(t,x)=(f'(t)/f(t))x$ and $f>0$. The leading terminal Euler coefficient
+is proportional to $\int_0^T f''(s)/f(s)\,ds$; it may cancel while the
+prefix integrals do not. For example, on $[0,1]$ take
+$f(t)=\exp\{-5t^3/3\}$. Then $u(t,x)=-5t^2x$ and
+$\int_0^1 f''/f=-5+25/5=0$, although $f''/f$ is not identically
+zero. Thus terminal Euler error is second-order for this example while
+whole-path error is first-order. The necessity proof compares two times
+surrounding an interval on which the average acceleration effect is
+nonzero and keeps one sign. Final-time data alone cannot provide those
+two-time comparisons. Existing finite-step
+Gaussian terminal-cancellation constructions likewise leave intermediate
+marginals unconstrained~\citep{obzherin2026finite}. None of the main
+results rules out accurate endpoint-only generators, other numerical
+methods, state augmentation, or step-conditioned average-velocity models.

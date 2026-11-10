@@ -1,0 +1,141 @@
+{
+  "parameters": {
+    "a": 0.4,
+    "epsilon": 0.08,
+    "quantile_delta": 0.2
+  },
+  "metric": "Full W2 between centered isotropic two-dimensional Gaussians: sqrt(2)*abs(scale difference).",
+  "reference_path": "N(0, exp(2*a*t) I_2), t in [0,1]",
+  "mesh": "Uniform or inverse CDF of rho(t)=1+delta*cos(2*pi*t).",
+  "constants": {
+    "cosine_uniform": {
+      "endpoint_order": 2,
+      "endpoint_coefficient": 0.09001637205706355,
+      "interior_order": 1,
+      "interior_time": 0.25,
+      "interior_coefficient": 0.00995003409685834,
+      "max_node_order": 1,
+      "max_node_coefficient": 0.012177634542334925,
+      "max_node_asymptotic_time": 0.7601184635770072
+    },
+    "cosine_quantile": {
+      "endpoint_order": 1,
+      "endpoint_coefficient": 0.008700951365974504,
+      "interior_order": 1,
+      "interior_time": 0.25,
+      "interior_coefficient": 0.008612705058860977,
+      "max_node_order": 1,
+      "max_node_coefficient": 0.018449713315556063,
+      "max_node_asymptotic_time": 0.7656104236746039
+    },
+    "ap_control_uniform": {
+      "endpoint_order": 2,
+      "endpoint_coefficient": 0.09001637205706355,
+      "interior_order": 2,
+      "interior_time": 0.25,
+      "interior_coefficient": 0.016671442144884332,
+      "max_node_order": 2,
+      "max_node_coefficient": 0.09001637205706355,
+      "max_node_asymptotic_time": 1.0
+    },
+    "ap_control_quantile": {
+      "endpoint_order": 2,
+      "endpoint_coefficient": 0.09570059897410219,
+      "interior_order": 2,
+      "interior_time": 0.25,
+      "interior_coefficient": 0.013241032421872441,
+      "max_node_order": 2,
+      "max_node_coefficient": 0.09570059897410219,
+      "max_node_asymptotic_time": 1.0
+    }
+  },
+  "finest_mesh_results": [
+    {
+      "field": "cosine",
+      "schedule": "uniform",
+      "n": 4096,
+      "endpoint_w2": 5.364632539867104e-09,
+      "quarter_node_time": 0.25,
+      "quarter_w2": 2.4315871365354507e-06,
+      "max_node_time": 0.76025390625,
+      "max_node_w2": 2.9666322809382333e-06,
+      "endpoint_log_scale_error": -2.5427706474725766e-09,
+      "endpoint_observed_order": 1.9997952645729793,
+      "quarter_observed_order": 1.00141004380783,
+      "max_node_observed_order": 0.9968739725548469,
+      "endpoint_scaled_error": 0.09000359888197902,
+      "endpoint_limit": 0.09001637205706355,
+      "max_node_scaled_error": 0.012151325822723004,
+      "max_node_limit": 0.012177634542334925
+    },
+    {
+      "field": "cosine",
+      "schedule": "quantile",
+      "n": 4096,
+      "endpoint_w2": 2.117696113770032e-06,
+      "quarter_node_time": 0.24990729803117348,
+      "quarter_w2": 2.1046150695390595e-06,
+      "max_node_time": 0.7655655947968418,
+      "max_node_w2": 4.497127743925804e-06,
+      "endpoint_log_scale_error": 1.0037617243981829e-06,
+      "endpoint_observed_order": 0.995523165514108,
+      "quarter_observed_order": 1.0013573430422469,
+      "max_node_observed_order": 0.9976888707061264,
+      "endpoint_scaled_error": 0.008674083282002051,
+      "endpoint_limit": 0.008700951365974504,
+      "max_node_scaled_error": 0.018420235239120092,
+      "max_node_limit": 0.018449713315556063
+    },
+    {
+      "field": "ap_control",
+      "schedule": "uniform",
+      "n": 4096,
+      "endpoint_w2": 5.3646079886413605e-09,
+      "quarter_node_time": 0.25,
+      "quarter_w2": 9.935498371474398e-10,
+      "max_node_time": 1.0,
+      "max_node_w2": 5.3646079886413605e-09,
+      "endpoint_log_scale_error": -2.542759010489839e-09,
+      "endpoint_observed_order": 1.999788665319043,
+      "quarter_observed_order": 1.999788669445216,
+      "max_node_observed_order": 1.999788665319043,
+      "endpoint_scaled_error": 0.09000318698076165,
+      "endpoint_limit": 0.09001637205706355,
+      "max_node_scaled_error": 0.09000318698076165,
+      "max_node_limit": 0.09001637205706355
+    },
+    {
+      "field": "ap_control",
+      "schedule": "quantile",
+      "n": 4096,
+      "endpoint_w2": 5.70331239618782e-09,
+      "quarter_node_time": 0.24990729803117348,
+      "quarter_w2": 7.887258837909665e-10,
+      "max_node_time": 1.0,
+      "max_node_w2": 5.70331239618782e-09,
+      "endpoint_log_scale_error": -2.70330078486907e-09,
+      "endpoint_observed_order": 1.999775398898354,
+      "quarter_observed_order": 1.9998107204062248,
+      "max_node_observed_order": 1.999775398898354,
+      "endpoint_scaled_error": 0.09568570398632063,
+      "endpoint_limit": 0.09570059897410219,
+      "max_node_scaled_error": 0.09568570398632063,
+      "max_node_limit": 0.09570059897410219
+    }
+  ],
+  "validation": {
+    "covariance_max_absolute_difference": 1.0436096431476471e-13,
+    "covariance_w2_max_absolute_difference": 4.905918925191455e-14,
+    "high_precision_digits": 100,
+    "high_precision_max_relative_w2_difference": 1.4438489865565421e-12,
+    "checks_passed": true,
+    "arithmetic_scope": "Independent 100-digit agreement; not an interval enclosure."
+  },
+  "scope": "Analytic Gaussian counterexample and AP control; no learned model or image-generation benchmark.",
+  "runtime_seconds": 5.584486923000441,
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.39",
+    "numpy": "2.3.5"
+  }
+}

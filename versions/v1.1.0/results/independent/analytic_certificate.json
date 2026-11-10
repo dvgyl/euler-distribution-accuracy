@@ -1,0 +1,13 @@
+{
+  "case": "independent_standard_gaussian_d3_canonical",
+  "dimension": 3,
+  "source_covariance": "I",
+  "target_covariance": "I",
+  "r0_lipschitz": 0,
+  "lambda_min": 1,
+  "exact_residual": 1.7320508075688772,
+  "lower_bound_formula": 0.02699548325659403,
+  "rational_certified_lower_bound": "1/54",
+  "proof": "e<3 and pi<4 imply exp(-2)/(2 sqrt(2pi))>1/54",
+  "status": "analytic_rational_certificate_not_interval_quadrature"
+}
