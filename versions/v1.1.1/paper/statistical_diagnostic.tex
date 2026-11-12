@@ -1,0 +1,130 @@
+\section{What the finite-sample diagnostic can establish}
+\label{app:statistical}
+Theorem~\ref{thm:spectral-proof} requires population $W_2$ errors, or
+justified upper bounds on them. The sample-based sliced distances and
+finite-feature discrepancies do not supply those upper bounds.
+We therefore ask a separate statistical question: do the numerical and
+target distributions agree on a fixed collection of measurements?
+
+Each measurement is the mean of a bounded test function, called a witness.
+The finite-witness metric is the largest absolute difference between the
+numerical and target means. It is a finite integral probability metric.
+Concentration bounds give confidence intervals for this particular metric.
+Simultaneous coverage means that the confidence statement applies to all
+reported comparisons together. Such testing and kernel mean comparisons
+are standard~\citep{gretton2012kernel}.\AIassistance
+
+\begin{proposition}[Simultaneous target-fidelity intervals]
+\label{prop:statistical-proof}
+Condition on all training data, fitted fields, diagnostic times,
+solver configurations, and a finite dictionary $f_1,\ldots,f_J$ with
+$|f_j|\le1$. For every numerical or target law, estimate its witness means
+from $n_l$ independent draws, independent of this conditioning. Let $Q_{\rm
+means}$ be the total number of scalar means estimated. For failure
+probability $0<\delta<1$, set
+\[
+ r_l=\sqrt{\frac{2\log(2Q_{\rm means}/\delta)}{n_l}}.
+\]
+With probability at least $1-\delta$, simultaneously for all reported
+comparisons of law $l$ and target $p$,
+\begin{align}
+ L_l&=\max\{0,\widehat D_l-r_l-r_p\}\le D_{\cal F}(\mu_l,p),\\
+ D_{\cal F}(\mu_l,p)&\le U_l=\min\{2,\widehat D_l+r_l+r_p\},
+ \label{eq:statistical-interval}
+\end{align}
+where $D_{\cal F}(\mu,\nu)=\max_j|\E_\mu f_j-\E_\nu f_j|$ and
+$\widehat D_l$ is its empirical counterpart. Samples can be shared between
+resolutions, times, and target comparisons; independence across these
+means is not required. Independence within each sample mean is required.
+If each witness is also 1-Lipschitz, $L_l\le W_1(\mu_l,p)\le W_2(\mu_l,p)$.
+\end{proposition}
+\begin{proof}
+First bound the error of each sample mean. Then add the failure
+probabilities to bound the chance that any one of those bounds fails.
+This is the union-bound step. It gives simultaneous coverage of every
+reported comparison and does not require different comparisons to be independent.
+
+For a variable in $[-1,1]$, Hoeffding's bounded-mean inequality gives
+$\Pr(|\widehat m-m|>r)\le2\exp(-nr^2/2)$.
+This follows, for example, by bounding the centered moment generating
+function by $\exp(s^2/2)$, applying Markov's inequality, and minimizing in
+$s$; the lower tail is identical. A union bound over all means gives
+simultaneous errors at most $r_l$. Triangle inequalities for each difference
+and then the finite maximum give \eqref{eq:statistical-interval}.
+The final Wasserstein inequality is the Lipschitz coupling bound.
+\end{proof}
+
+Hoeffding's interval uses only the witness's range. It does not use how
+much the observed values vary. An empirical Bernstein interval also uses
+the sample variance and can therefore be narrower. For this alternative,
+pair each numerical sample with one independent target sample and write $D_i=f_j(\widehat X_i)-f_j(Y_i)\in[-2,2]$.
+Let $v_n$ be its unbiased sample variance. For $Q_{\rm diff}$ scalar
+differences and $n\ge2$, a simultaneous two-sided radius is
+\begin{equation}
+ r^{\rm EB}=\sqrt{\frac{2v_n\log(4Q_{\rm diff}/\delta)}{n}}
+     +\frac{28\log(4Q_{\rm diff}/\delta)}{3(n-1)}.
+ \label{eq:bernstein-radius}
+\end{equation}
+This is the empirical Bernstein inequality of Maurer and
+Pontil~\citep[Theorem 4]{maurer2009bernstein}, scaled from $[0,1]$ to
+$[-2,2]$. We combine the failure probabilities for both signs and every
+selected difference, so that the intervals hold simultaneously. For each metric,
+take the maximum of $\max\{0,|\widehat D_j|-r_j^{\rm EB}\}$ as its lower
+bound and the maximum of $\min\{2,|\widehat D_j|+r_j^{\rm EB}\}$ as its
+upper bound. The experiment splits its total failure probability equally between
+this family and the Hoeffding family so both displays hold simultaneously.
+
+If $L_{\rm fine}>U_{\rm coarse}$, the intervals establish worsening in
+this \emph{specified finite-witness metric} at the stated confidence level.
+They do not establish worsening in full $W_2$, because $U_{\rm coarse}$
+is not a Wasserstein upper bound.
+Small finite-witness discrepancy does not establish distributional fidelity.
+Two distributions can agree on every selected mean while differing on a test
+that was not included in the dictionary. A low cross-grid discrepancy alone is
+still weaker: the zero field has perfectly consistent outputs at every
+resolution while following the wrong path whenever the target moves.
+Neither test identifies an asymptotic order from finitely many resolutions.
+
+The confidence statement assumes that the evaluation set does not select
+the models or witnesses. Selecting them on that set requires either a
+suitable complexity bound or a new evaluation set. A finite collection of
+models specified in advance is allowed if every mean is counted in
+$Q_{\rm means}$. The experimental dictionary comprises fixed sine
+and cosine functions with frequency norm at most one, chosen independently
+of all training and evaluation samples. The intervals can be wide at 1,024 samples. An inconclusive interval
+establishes neither an increase nor its absence. The comparison on the larger evaluation set
+uses the same fitted fields with independent evaluation samples.
+
+\section{Global regularity bounds for the tested networks}
+\label{app:network-budgets}
+A penalty can make derivatives small at sampled inputs without bounding
+them elsewhere. Membership in the theoretical class requires bounds for
+all spatial and time inputs. We obtain sufficient bounds directly from
+the network's weights. These bounds can be conservative.\AIassistance
+
+For the two-hidden-layer tanh field
+$u(z)=W_3\tanh(W_2\tanh(W_1z+b_1)+b_2)+b_3$, where $z=(x,t)$ and
+both hidden widths equal $w$, let $s_i\ge\|W_i\|_2$ and
+$b\ge\|b_3\|$. Since $|\tanh'|\le1$, $|\tanh''|\le2$,
+\begin{align}
+ \sup|u|&\le s_3\sqrt w+b=:U,\\
+ \sup\|Du\|&\le s_3s_2s_1=:P,\\
+ \sup\|D^2u\|&\le2s_3s_2(s_2+1)s_1^2=:R.
+ \label{eq:network-budget}
+\end{align}
+Here derivatives are with respect to all input coordinates. The matrix norm
+$\|W_i\|_2$ is the spectral norm, the largest amplification of a unit input
+vector. The chain rule gives the first-derivative bound. For the second derivative,
+it gives two terms: one differentiates the outer activation twice, and the
+other differentiates the inner activation twice. Thus
+$K=\max\{1,U,P,R\}$ is a sufficient derivative bound in \eqref{eq:budget}, including
+time derivatives; bounded functions automatically meet its growth bounds.
+The implementation bounds each spectral norm by the Frobenius norm, the
+square root of the sum of squared matrix entries. It then bounds that norm
+by an integer using exact rational sums of the
+stored binary coefficients and integer square-root comparisons. Taking
+$\sqrt w\le w$ yields a fully integer, conservative certificate. This is
+an analytic certificate for the real-valued tanh network with those stored
+coefficients. It is not a rounding-error certificate for hardware inference
+or a certified ODE solution. These sufficient derivative bounds are too large for practically useful
+worst-case lower-bound constants.

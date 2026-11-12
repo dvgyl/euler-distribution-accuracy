@@ -1,0 +1,29 @@
+{
+  "a": 0.6,
+  "eta": 0.3,
+  "evaluation_budgets": [
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128,
+    256,
+    512,
+    1024,
+    2048,
+    4096
+  ],
+  "gaussian_maximum_scale_difference": 1.1286477118022598e-77,
+  "horizon": 1.0,
+  "maximum_cartesian_absolute_difference": 2.020783540501725e-11,
+  "maximum_primary_relative_refinement": 1.7884280578694955e-07,
+  "maximum_reference_error_fraction": 2.5852814592628458e-08,
+  "nonlinear_corrected_over_heun_w2_range": [
+    0.9525353614296902,
+    0.9671440202182401
+  ],
+  "primary_quadrature_order": 128,
+  "rows": 36
+}

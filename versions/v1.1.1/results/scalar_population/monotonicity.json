@@ -1,0 +1,337 @@
+{
+  "arithmetic": "float64 with a 0.01 acceptance margin; no directed rounding",
+  "checked_fields": 30,
+  "minimum_update_derivative_lower_bound": 0.03782155942323351,
+  "rows": [
+    {
+      "checkpoint": "cfm_s0.pt",
+      "sha256": "8f4353058648f2b4b7ab6746dbd1c63dbb8ed3b45c8f7e0aa37a750a1915fee3",
+      "velocity_derivative_lower_bound_all_times": -13.5097816212586,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.19848016804129998,
+        "8": 0.59924008402065,
+        "16": 0.799620042010325,
+        "32_or_more": 0.5778193243356687
+      }
+    },
+    {
+      "checkpoint": "cfm_s1.pt",
+      "sha256": "6917e40abfbdd83e00fc9f4203a9cd99db9cd34ca6940b1eaa9ea47f46a3f679",
+      "velocity_derivative_lower_bound_all_times": -13.81068519957702,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.24813945638736867,
+        "8": 0.6240697281936843,
+        "16": 0.8120348640968422,
+        "32_or_more": 0.5684160875132181
+      }
+    },
+    {
+      "checkpoint": "cfm_s2.pt",
+      "sha256": "6870ebbcbbda2843dc8dfc2d307e0aafb6c36f1703a8988e0813a8ba107e1f9d",
+      "velocity_derivative_lower_bound_all_times": -12.830965163712492,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.20946956508260461,
+        "8": 0.6047347825413023,
+        "16": 0.8023673912706512,
+        "32_or_more": 0.5990323386339846
+      }
+    },
+    {
+      "checkpoint": "cfm_s3.pt",
+      "sha256": "f83b9cce06f8c6c7d57330a0c12715253e75af7a343c114096d499d8718eacc1",
+      "velocity_derivative_lower_bound_all_times": -15.370092898714194,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.13714445740923475,
+        "8": 0.5685722287046173,
+        "16": 0.7842861143523087,
+        "32_or_more": 0.5196845969151814
+      }
+    },
+    {
+      "checkpoint": "cfm_s4.pt",
+      "sha256": "9d27064841890f0cc44f8f9abf144f075da2f7a3618bb8fdacfe769ec634db02",
+      "velocity_derivative_lower_bound_all_times": -14.80250338343265,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.12091287803711559,
+        "8": 0.5604564390185578,
+        "16": 0.7802282195092789,
+        "32_or_more": 0.5374217692677297
+      }
+    },
+    {
+      "checkpoint": "cfm_s5.pt",
+      "sha256": "b57270cd69e05ecd1696c1ed8ce59a074188825977f5440ddffa6cd6859425bd",
+      "velocity_derivative_lower_bound_all_times": -16.27433025701086,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.10331655478231438,
+        "8": 0.5516582773911571,
+        "16": 0.7742067806202366,
+        "32_or_more": 0.49142717946841064
+      }
+    },
+    {
+      "checkpoint": "cfm_s6.pt",
+      "sha256": "7bd8b2f84260e41cf071d71a241a4d25a49515a6705fc704d8d9e3c691d21ee1",
+      "velocity_derivative_lower_bound_all_times": -13.606260809486294,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.26353314328543576,
+        "8": 0.6317665716427179,
+        "16": 0.8158832858213589,
+        "32_or_more": 0.5748043497035533
+      }
+    },
+    {
+      "checkpoint": "cfm_s7.pt",
+      "sha256": "b61998da57c04341923b33710d96b580f7bccf5213aade51ba964f0b641e344b",
+      "velocity_derivative_lower_bound_all_times": -13.454676372223721,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.17434125490080787,
+        "8": 0.5871706274504039,
+        "16": 0.793585313725202,
+        "32_or_more": 0.5795413633680087
+      }
+    },
+    {
+      "checkpoint": "cfm_s8.pt",
+      "sha256": "36753a5bed8cba7f294b6cb77b2b750ac067fbdef48f720a9ffefd0917cac227",
+      "velocity_derivative_lower_bound_all_times": -16.26539228836543,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.03782155942323351,
+        "8": 0.48690671190601353,
+        "16": 0.7393710420461889,
+        "32_or_more": 0.4917064909885803
+      }
+    },
+    {
+      "checkpoint": "cfm_s9.pt",
+      "sha256": "ddaa528445baa5ce998c67809201399a9f9c0885822fe9982695e657bf3b5366",
+      "velocity_derivative_lower_bound_all_times": -14.994938248747015,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.13723710201524908,
+        "8": 0.5686185510076245,
+        "16": 0.7843092755038122,
+        "32_or_more": 0.5314081797266558
+      }
+    },
+    {
+      "checkpoint": "one_grid_s0.pt",
+      "sha256": "cdd3e56eebc49b53d0174791bf969c315d7ae56da60e71af8403af4af88750cd",
+      "velocity_derivative_lower_bound_all_times": -9.498344120805914,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.35212404169958234,
+        "8": 0.6476114307600254,
+        "16": 0.8238057153800127,
+        "32_or_more": 0.7031767462248152
+      }
+    },
+    {
+      "checkpoint": "one_grid_s1.pt",
+      "sha256": "f584330b93485cbfe93f058550ac91354ca136c52d77d43fc62488a08f8b3924",
+      "velocity_derivative_lower_bound_all_times": -9.492143384946186,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.29923995438210405,
+        "8": 0.649619977191052,
+        "16": 0.8241338147983162,
+        "32_or_more": 0.7033705192204317
+      }
+    },
+    {
+      "checkpoint": "one_grid_s2.pt",
+      "sha256": "ff18ce6a0c3a0ea9a33d1438b0976b1b88b409049c776781d62e960bb242c77b",
+      "velocity_derivative_lower_bound_all_times": -9.417480146065259,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.34578936274817607,
+        "8": 0.6295982404794966,
+        "16": 0.8147991202397483,
+        "32_or_more": 0.7057037454354607
+      }
+    },
+    {
+      "checkpoint": "one_grid_s3.pt",
+      "sha256": "612aae0f3833c70123284c96260da88e022246d792ad00431fe01f4b7616bd96",
+      "velocity_derivative_lower_bound_all_times": -11.224856558983769,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.14436397703338444,
+        "8": 0.4859785665134887,
+        "16": 0.7429892832567444,
+        "32_or_more": 0.6492232325317573
+      }
+    },
+    {
+      "checkpoint": "one_grid_s4.pt",
+      "sha256": "6096fec22e35223a062231b5a3c14cf5dd679bab07989371cf8ee80ff13b7bff",
+      "velocity_derivative_lower_bound_all_times": -9.944416522571474,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.28659997800615367,
+        "8": 0.6111555352089356,
+        "16": 0.8055777676044678,
+        "32_or_more": 0.6892369836696415
+      }
+    },
+    {
+      "checkpoint": "one_grid_s5.pt",
+      "sha256": "5f41dd63dd135a1f72be503ff53d2c47baace034540400c5d31a7e8445f504f3",
+      "velocity_derivative_lower_bound_all_times": -10.787635972651604,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.27865703702862354,
+        "8": 0.5729753116114159,
+        "16": 0.7864876558057079,
+        "32_or_more": 0.6628863758546374
+      }
+    },
+    {
+      "checkpoint": "one_grid_s6.pt",
+      "sha256": "28725547c80acf3b90549ed34fc35fce25650caa3dd092deb387cae4459244f4",
+      "velocity_derivative_lower_bound_all_times": -7.910353539788407,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.4820081685286022,
+        "8": 0.6935376249517441,
+        "16": 0.8467688124758721,
+        "32_or_more": 0.7528014518816123
+      }
+    },
+    {
+      "checkpoint": "one_grid_s7.pt",
+      "sha256": "425d64e0dfbb28e967cb575cceb992d2cce2f104db15a3f76786302e3203f7a8",
+      "velocity_derivative_lower_bound_all_times": -9.395155616059117,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.3221337839527192,
+        "8": 0.6351465019326192,
+        "16": 0.8175732509663096,
+        "32_or_more": 0.7064013869981526
+      }
+    },
+    {
+      "checkpoint": "one_grid_s8.pt",
+      "sha256": "5416327c0c8aa69b65e981b0f84cc270659be8ebe951a168ac49aa2207863b40",
+      "velocity_derivative_lower_bound_all_times": -11.11663656496256,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.17814147151341542,
+        "8": 0.4719845615901742,
+        "16": 0.7359922807950872,
+        "32_or_more": 0.6526051073449199
+      }
+    },
+    {
+      "checkpoint": "one_grid_s9.pt",
+      "sha256": "fd05c173e0b7c3bf8eb69b7c10f61dd097dced3cd7e1d921da675fa31b380477",
+      "velocity_derivative_lower_bound_all_times": -7.946537477205588,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.39875646690786404,
+        "8": 0.699378233453932,
+        "16": 0.849689116726966,
+        "32_or_more": 0.7516707038373254
+      }
+    },
+    {
+      "checkpoint": "two_grid_s0.pt",
+      "sha256": "4729141a0eb67159b507e0a8723cc4d87eaa7d2447ca63fabe8070d486a2d6c2",
+      "velocity_derivative_lower_bound_all_times": -9.970395917833025,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.34462708482302506,
+        "8": 0.6521593908638798,
+        "16": 0.8260796954319398,
+        "32_or_more": 0.688425127567718
+      }
+    },
+    {
+      "checkpoint": "two_grid_s1.pt",
+      "sha256": "adeb08282cd04d8f3fe7df423ffe72841a502c737741d0163150525d83e49547",
+      "velocity_derivative_lower_bound_all_times": -9.457065623608955,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.33869875779564784,
+        "8": 0.669349378897824,
+        "16": 0.8286739764061887,
+        "32_or_more": 0.7044666992622202
+      }
+    },
+    {
+      "checkpoint": "two_grid_s2.pt",
+      "sha256": "b7da10774bdb29e48c7fcdc892431a013b9dcd70c34dc8c2d05d6d18a6eaf73c",
+      "velocity_derivative_lower_bound_all_times": -10.118998545126807,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.3159827675738873,
+        "8": 0.5931419263035171,
+        "16": 0.7965709631517586,
+        "32_or_more": 0.6837812954647873
+      }
+    },
+    {
+      "checkpoint": "two_grid_s3.pt",
+      "sha256": "5d28b0c7fd50ae848502b711776534186b171bfaa162569855681cb4d662a092",
+      "velocity_derivative_lower_bound_all_times": -11.960141340172903,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.2082596095112278,
+        "8": 0.5096771671716968,
+        "16": 0.7548385835858484,
+        "32_or_more": 0.6262455831195968
+      }
+    },
+    {
+      "checkpoint": "two_grid_s4.pt",
+      "sha256": "af8e9679541f979394572e093510921ec9b3fb846f1fed59bbd99723bcdc45ec",
+      "velocity_derivative_lower_bound_all_times": -10.563581331789141,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.24503133387763132,
+        "8": 0.5988064134447245,
+        "16": 0.7924282036411628,
+        "32_or_more": 0.6698880833815893
+      }
+    },
+    {
+      "checkpoint": "two_grid_s5.pt",
+      "sha256": "96873fd56ff5f4b7ae8a08908b5f7aa10905df5443b62a86be20f1da0bd7396e",
+      "velocity_derivative_lower_bound_all_times": -11.736988184103751,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.2084476194844227,
+        "8": 0.536820423603174,
+        "16": 0.768410211801587,
+        "32_or_more": 0.6332191192467578
+      }
+    },
+    {
+      "checkpoint": "two_grid_s6.pt",
+      "sha256": "bd859e861a83e6e84f7bfb42d16e94b827cd4ae529d086f7a35e772fcce8ac61",
+      "velocity_derivative_lower_bound_all_times": -8.437932223266932,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.41286620920392125,
+        "8": 0.6759299271315375,
+        "16": 0.8374550284751084,
+        "32_or_more": 0.7363146180229083
+      }
+    },
+    {
+      "checkpoint": "two_grid_s7.pt",
+      "sha256": "4f67e2a477adf4a83ce8e1238541aba4d6914cacf52497cb657375ec15ec16da",
+      "velocity_derivative_lower_bound_all_times": -9.840423105278683,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.36613566012650445,
+        "8": 0.6377179991804618,
+        "16": 0.8188589995902309,
+        "32_or_more": 0.6924867779600412
+      }
+    },
+    {
+      "checkpoint": "two_grid_s8.pt",
+      "sha256": "33893414be9452e6a1c16bc0932ca49b6e90255ac26e6ac9a86b5a72236517ea",
+      "velocity_derivative_lower_bound_all_times": -10.390852245676328,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.2632522332037601,
+        "8": 0.5756046631519987,
+        "16": 0.7878023315759993,
+        "32_or_more": 0.6752858673226148
+      }
+    },
+    {
+      "checkpoint": "two_grid_s9.pt",
+      "sha256": "ee81cbeb878666b969d453cbc28d58306fa3b447f496595dcbeab66539656a5c",
+      "velocity_derivative_lower_bound_all_times": -8.852441241346348,
+      "euler_update_derivative_lower_bounds": {
+        "4": 0.3721211422060784,
+        "8": 0.6860605711030392,
+        "16": 0.8428497796534189,
+        "32_or_more": 0.7233612112079266
+      }
+    }
+  ]
+}

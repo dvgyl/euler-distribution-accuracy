@@ -1,0 +1,122 @@
+{
+  "flow_matching_maximum_particle_residual": 2.482534153247273e-16,
+  "flow_matching_runs": 22,
+  "heun_corrected_over_base_finest": 1.9997802686078154,
+  "horizon": 1.0,
+  "maximum_high_precision_matrix_difference": "5.9153999999999999999999999999999999998185519842627e-49",
+  "maximum_matrix_difference": 1.5828494520945743e-14,
+  "sensitivity_orders": [
+    {
+      "coarse_steps": 4096,
+      "expected_order": 1,
+      "fine_steps": 8192,
+      "observed_order": 0.9999137148423107,
+      "predicted_coefficient": 0.49197207610543736,
+      "relative_difference": 5.981061782056596e-05,
+      "rotation_ratio": 0.0,
+      "scaled_error": 0.49194265095161505
+    },
+    {
+      "coarse_steps": 4096,
+      "expected_order": 1,
+      "fine_steps": 8192,
+      "observed_order": 1.0005266820445793,
+      "predicted_coefficient": 0.09347469446003305,
+      "relative_difference": 0.00036536172846313164,
+      "rotation_ratio": 0.9,
+      "scaled_error": 0.09350884653596853
+    },
+    {
+      "coarse_steps": 4096,
+      "expected_order": 1,
+      "fine_steps": 8192,
+      "observed_order": 1.0033330970226741,
+      "predicted_coefficient": 0.019482094213775385,
+      "relative_difference": 0.0023188853859907876,
+      "rotation_ratio": 0.98,
+      "scaled_error": 0.019527270957336206
+    },
+    {
+      "coarse_steps": 4096,
+      "expected_order": 2,
+      "fine_steps": 8192,
+      "observed_order": 1.9998414978906256,
+      "predicted_coefficient": 0.3935776608843498,
+      "relative_difference": 0.0001098579165960123,
+      "rotation_ratio": 1.0,
+      "scaled_error": 0.3935344232625063
+    },
+    {
+      "coarse_steps": 4096,
+      "expected_order": 1,
+      "fine_steps": 8192,
+      "observed_order": 0.9962888936873022,
+      "predicted_coefficient": 0.019875671874659672,
+      "relative_difference": 0.002563000540548477,
+      "rotation_ratio": 1.02,
+      "scaled_error": 0.019824730516901156
+    },
+    {
+      "coarse_steps": 4096,
+      "expected_order": 1,
+      "fine_steps": 8192,
+      "observed_order": 0.9991205494245842,
+      "predicted_coefficient": 0.10331413598214192,
+      "relative_difference": 0.0006091485725567836,
+      "rotation_ratio": 1.1,
+      "scaled_error": 0.10325120232368347
+    }
+  ],
+  "sensitivity_runs": 72,
+  "solver_orders": [
+    {
+      "coefficient_relative_difference": 0.0001196135660501696,
+      "expected_order": 1,
+      "method": "base",
+      "observed_order": 0.9998274473951428,
+      "predicted_coefficient": 0.49197207610543736,
+      "solver": "euler"
+    },
+    {
+      "coefficient_relative_difference": 0.0002197051029427799,
+      "expected_order": 2,
+      "method": "corrected",
+      "observed_order": 1.9996829900000377,
+      "predicted_coefficient": 0.3935776608843498,
+      "solver": "euler"
+    },
+    {
+      "coefficient_relative_difference": 1.4662595793413224e-05,
+      "expected_order": 1,
+      "method": "heun_cubic_cancellation",
+      "observed_order": 0.9999788050488523,
+      "predicted_coefficient": 0.3279813840702916,
+      "solver": "euler"
+    },
+    {
+      "coefficient_relative_difference": 0.0001098579165960123,
+      "expected_order": 2,
+      "method": "base",
+      "observed_order": 1.9998414978906256,
+      "predicted_coefficient": 0.09839441522108745,
+      "solver": "heun"
+    },
+    {
+      "coefficient_relative_difference": 0.00021971154307176555,
+      "expected_order": 2,
+      "method": "corrected",
+      "observed_order": 1.9996829620960117,
+      "predicted_coefficient": 0.1967888304421749,
+      "solver": "heun"
+    },
+    {
+      "coefficient_relative_difference": 0.00011718749890721192,
+      "expected_order": 3,
+      "method": "heun_cubic_cancellation",
+      "observed_order": 2.999830904461911,
+      "predicted_coefficient": 0.039357766088434984,
+      "solver": "heun"
+    }
+  ],
+  "solver_runs": 66
+}

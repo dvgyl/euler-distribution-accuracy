@@ -1,0 +1,75 @@
+\input{preamble}
+\input{generated_numbers}
+\renewcommand{\AIcitations}{\citep{openai_chatgpt,openai_codex,anthropic_claude_fable}}
+\externaldocument{../build/main-labels}
+\hypersetup{pdftitle={Supplementary Material: A Two-Grid Characterization of Euler Sampling Accuracy in Flow Matching},pdfauthor={Dev D. Goyal}}
+\begin{document}
+\onecolumn
+\setcounter{page}{1}
+\markboth{Supplementary material}{Supplementary material}
+\begin{center}
+{\Large Supplementary Material}\\[6pt]
+{\large A Two-Grid Characterization of Euler Sampling Accuracy in Flow Matching}
+\\[4pt]{\normalsize Dev D. Goyal}
+\end{center}
+This supplement supports the main article with complete proofs, explicit
+constants, and experimental methods. The table below shows where to find
+each part of the argument. Supplementary section, equation, theorem, figure, and
+table numbers start with S. References without S point to the main article.
+Each document starts at page one.
+
+\begin{center}
+\begin{tabular}{@{}p{.42\textwidth}p{.50\textwidth}@{}}
+\toprule
+Main-article claim & Supplementary sections\\
+\midrule
+Two-grid characterization and error lower bound
+& \ref{app:uniform}--\ref{app:characterization}. Uniform estimates and the proof.\\
+Odd-dimensional nonexistence result
+& \ref{app:source} and \ref{app:radial-extension}. Gaussian and radial-source arguments.\\
+Initial-risk constraint
+& \ref{app:risk}. Quadratic tests and explicit constants.\\
+Exact examples and scalar optimum
+& \ref{app:controls}, \ref{app:sharp-minimax}, and \ref{app:observable-geometry}. Constructions and scope.\\
+Quantitative residual bound and solver extensions
+& \ref{app:observable}--\ref{app:scheme-extension}. Coefficient bounds, spectral tail, and numerical comparisons.\\
+Sample-based evaluation
+& \ref{app:statistical}--\ref{app:experiments} and \ref{app:set-variability}. Confidence bounds, network regularity, protocol, and variability across evaluation sets.\\
+Learned scalar fields
+& \ref{app:scalar-population}. Training, quadrature, and results for each model.\\
+Population mixture comparison
+& \ref{app:population-example}. Exact Gaussian block, quantile integration, and all resolutions.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\setcounter{section}{0}
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thesubsection}{\thesection-\Alph{subsection}}
+\setcounter{equation}{0}
+\renewcommand{\theequation}{S\arabic{equation}}
+\setcounter{theorem}{0}
+\renewcommand{\thetheorem}{S\arabic{theorem}}
+\setcounter{definition}{0}
+\renewcommand{\thedefinition}{S\arabic{definition}}
+\setcounter{table}{0}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\input{transfer_proofs}
+\input{quantitative_extensions}
+\input{geometric_extensions}
+\input{statistical_diagnostic}
+\input{extended_experiments_details}
+\input{learned_scalar_details}
+\section*{Acknowledgment of AI Assistance}
+OpenAI models GPT-5.6 Sol and GPT-6 Astra
+assisted substantially with mathematical analysis, proof verification,
+experimental code, figures, and writing in Supplementary Sections~S1--S14~\citep{openai_chatgpt,openai_codex}. OpenAI Codex, with the model
+GPT-6.1 Sol, assisted with writing and experimental code in these sections~\citep{openai_codex}. Anthropic Claude Fable 5.2 assisted
+with writing, mathematical analysis, numerical verification, and the
+experiments of Supplementary
+Sections~\ref{app:scalar-population} and~\ref{app:set-variability}~\citep{anthropic_claude_fable}.
+The author takes responsibility for the scientific content and
+attribution.
+\bibliographystyle{IEEEtran}
+\bibliography{supplement-references}
+\end{document}

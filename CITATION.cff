@@ -4,8 +4,9 @@ title: "Source and results for A Two-Grid Characterization of Euler Sampling Acc
 authors:
   - family-names: Goyal
     given-names: Dev D.
-version: 1.1.0
-date-released: '2026-11-10'
+    orcid: 'https://orcid.org/0009-0009-9132-744X'
+version: 1.1.1
+date-released: '2026-11-12'
 repository-code: 'https://github.com/dvgyl/euler-distribution-accuracy'
 preferred-citation:
   type: unpublished
@@ -13,8 +14,9 @@ preferred-citation:
   authors:
     - family-names: Goyal
       given-names: Dev D.
+      orcid: 'https://orcid.org/0009-0009-9132-744X'
   year: 2026
-  version: 1.1.0
-  doi: '10.5281/zenodo.24103957'
-  url: 'https://zenodo.org/records/24103957'
+  version: 1.1.1
+  doi: '10.5281/zenodo.24149016'
+  url: 'https://zenodo.org/records/24149016'
   notes: "Preprint"

@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Population $W_2$ errors for two exact generators of the three-dimensional mixture path. Errors are deterministic quadrature estimates, with no training or evaluation samples. Lower errors are better. Order is estimated from the sum of the errors at consecutive coarse step counts.}
+\label{tab:population-example}
+\small
+\begin{tabular}{@{}r rrr rrr@{}}
+\toprule
+& \multicolumn{3}{c}{Conditional velocity} & \multicolumn{3}{c}{Planar skew}\\
+$N$ & $E_c$ & $E_f$ & Order & $E_c$ & $E_f$ & Order\\
+\midrule
+8 & 0.1932745 & 0.0992033 & \multicolumn{1}{c}{--} & 0.1511015 & 0.0768981 & \multicolumn{1}{c}{--}\\
+16 & 0.0992033 & 0.0503485 & 0.968 & 0.0768981 & 0.0388608 & 0.978\\
+32 & 0.0503485 & 0.0253755 & 0.982 & 0.0388608 & 0.0195436 & 0.987\\
+64 & 0.0253755 & 0.0127400 & 0.990 & 0.0195436 & 0.0098015 & 0.993\\
+128 & 0.0127400 & 0.0063833 & 0.995 & 0.0098015 & 0.0049083 & 0.996\\
+256 & 0.0063833 & 0.0031950 & 0.997 & 0.0049083 & 0.0024561 & 0.998\\
+\bottomrule
+\end{tabular}
+\end{table}

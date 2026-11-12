@@ -1,0 +1,209 @@
+\section{Learned scalar fields with population errors}
+\label{app:scalar-population}
+This section gives the training and evaluation methods for the scalar
+fields of Section~\ref{sec:scalar-learned}. We estimate population
+errors by numerical integration over a Gaussian start.\AIassistance
+
+\subsection{Target, fields, and training}
+The target is $Y=\mu\xi+\sigma Z$ with $\mu=1.5$, $\sigma=0.5$, a
+symmetric random sign $\xi$, and an independent standard Gaussian $Z$.
+The path is the independent interpolation \eqref{eq:independent}. Thus
+$p_t$ is an equal mixture of the two Gaussians
+$\mathcal N(\pm\mu t,(1-t)^2+\sigma^2t^2)$. The dimension is odd, so
+Theorem~\ref{thm:odd-transfer} applies. The exact conditional velocity is
+\eqref{eq:mixture-generator} with $d=1$.
+
+Each field is a network with the input $(x,t)$, two hidden layers of 48
+tanh units, and a scalar output. It has 2,545 parameters. The step size
+is not an input. There are three objectives.
+\begin{itemize}
+\item \emph{CFM.} The conditional flow matching loss
+$\E|u(t,(1-t)G+tY)-(Y-G)|^2$, with $t$ uniform on $[0,1]$ and a
+minibatch of 1,024 independent draws.
+\item \emph{One-grid fit.} The CFM loss plus $10\,L_8$.
+\item \emph{Two-grid fit.} The CFM loss plus $10\,(L_8+L_{16})/2$.
+\end{itemize}
+The loss $L_n$ is computed as follows. Run $n$ uniform Euler steps from
+1,024 new Gaussian start points. Take each of the times
+$1/4,1/2,3/4,1$. Sort the Euler outputs and sort 1,024 new samples of
+$p_t$. Then take the mean squared difference of the sorted values. This value is the squared
+$W_2$ distance between the two empirical distributions. The loss $L_n$
+is the mean over the four times, and its gradient is taken through the
+Euler steps.
+
+Each run uses 8,000 Adam updates with the learning rate $10^{-3}$ in
+double precision. New samples are drawn at each update. Each objective
+uses the ten seeds 0 to 9, which gives \ScalarModelCount{} fields. All
+settings were fixed before the evaluation, and no field was selected
+with the evaluation results.
+
+\subsection{Population errors by quadrature}
+Let $z\mapsto\widehat X_k(z)$ be the Euler map from the start point to
+the state at node $k$. We evaluate it on 8,001 equally spaced points
+$z\in[-9,9]$. If the map is increasing, the pairing of equal quantiles
+is optimal, and
+\[
+ W_2^2(\Law(\widehat X_k),p_t)
+ =\int\big(\widehat X_k(z)-Q_t(\Phi(z))\big)^2\varphi(z)\dd z .
+\]
+Here $Q_t$ is the quantile function of $p_t$, and $\Phi$ and $\varphi$
+are the standard Gaussian distribution function and density. We compute
+$Q_t$ by bisection on the distribution function of the mixture, and the
+integral by the trapezoidal rule. The Gaussian mass outside $[-9,9]$ is
+below $3\times10^{-19}$. For all \ScalarModelCount{} fields, the Euler maps increase on the
+quadrature nodes. We also bound the derivative of each update,
+$1+\partial_xu/N$, from the network weights. For $N=4,8,16$ we
+propagate bounds through both layers on intervals covering the real
+line. For $N\ge32$ we use the sum of the negative products of weights
+along paths from the input to the output. Each tanh derivative lies
+between zero and one. The smallest computed lower bound is above
+$0.037$. These checks use double precision without directed rounding. For the exact conditional
+velocity, this quadrature gives the skew-field columns of
+Table~\ref{tab:population-example}, which contain only the error in the mixture
+coordinate, to seven digits.
+
+The reference for the exact flow of a field is the classical
+fourth-order Runge--Kutta method with 1,024 steps. The \emph{model bias}
+is the largest $W_2$ distance between this reference and the target path
+at 64 equally spaced times. The \emph{integration error} at $N$ steps compares the
+Euler run and the reference from the same start points. It is their
+largest root mean squared distance at the four shared times. The
+\emph{target error} at $N$ steps is the largest $W_2$ distance to the
+target path at the four shared times. The quantities $E_c$ and $E_f$ of
+\eqref{eq:errors} use all nodes of the coarse grid.
+
+\subsection{Results}
+Table~\ref{tab:scalar-models} gives the results for each field. The
+means are in Table~\ref{tab:scalar} of the main article.
+
+\emph{CFM fields.} The target error is smaller at 16, 64, and 256 steps
+than at 8 steps for all ten seeds. The mean is \ScalarCfmEight{} at 8
+steps and \ScalarCfmLarge{} at 256 steps. The model bias is between
+\ScalarCfmBiasMin{} and \ScalarCfmBiasMax{}, with a mean of
+\ScalarCfmBias{}. For \ScalarCfmArgminLast{} of the ten seeds, the
+smallest target error is at 256 steps. For the other seeds it is at an
+intermediate step count, and the difference from the value at 256 steps
+is small.
+
+\emph{One-grid fields.} The mean target error is \ScalarOneEight{} at 8
+steps, \ScalarOneSixteen{} at 16 steps, \ScalarOneSixtyFour{} at 64
+steps, and \ScalarOneLarge{} at 256 steps. The smallest target error is
+at 8 steps for \ScalarOneArgminEight{} seeds and at 16 steps for
+\ScalarOneArgminSixteen{} seeds. Compare each value with the value
+at 8 steps. The target error is larger at 16 steps for
+\ScalarOneIncreaseSixteen{} of the ten seeds, at 64 steps for
+\ScalarOneIncreaseSixtyFour{} seeds, and at 256 steps for
+\ScalarOneIncreaseLarge{} seeds. The exact two-sided
+Wilcoxon signed-rank tests for these three paired comparisons give
+$p=\ScalarOneWilcoxonSixteen$, $p=\ScalarOneWilcoxonSixtyFour$, and
+$p=\ScalarOneWilcoxonLarge$. The mean model bias is \ScalarOneBias{}.
+The mean integration error decreases from \ScalarOneOwnEight{} at 8
+steps to \ScalarOneOwnLarge{} at 256 steps.
+
+\emph{Two-grid fields.} The mean target error is \ScalarTwoEight{} at 8
+steps, \ScalarTwoSixteen{} at 16 steps, \ScalarTwoSixtyFour{} at 64
+steps, and \ScalarTwoLarge{} at 256 steps. The smallest target error is
+at 16 steps for \ScalarTwoArgminSixteen{} of the ten seeds. Compared
+with the value at 8 steps, the target error is larger at 64 steps for
+\ScalarTwoIncreaseSixtyFour{} seeds and at 256 steps for
+\ScalarTwoIncreaseLarge{} seeds ($p=\ScalarTwoWilcoxonSixtyFour$ and
+$p=\ScalarTwoWilcoxonLarge$). Compared with the value at 16 steps, it
+is larger at 64 steps for \ScalarTwoFromSixteenIncreaseSixtyFour{} seeds
+and at 256 steps for \ScalarTwoFromSixteenIncreaseLarge{} seeds
+($p=\ScalarTwoFromSixteenWilcoxonSixtyFour$ and
+$p=\ScalarTwoFromSixteenWilcoxonLarge$). The same comparison with the
+value at 16 steps gives \ScalarOneFromSixteenIncreaseSixtyFour{} and
+\ScalarOneFromSixteenIncreaseLarge{} seeds for the one-grid fields, and
+\ScalarCfmFromSixteenIncreaseSixtyFour{} and
+\ScalarCfmFromSixteenIncreaseLarge{} seeds for the CFM fields. The mean
+model bias of the two-grid fields is \ScalarTwoBias{}.
+
+For a fixed field, the target error at the four evaluation times
+approaches the bias over those times as the step count increases. The
+theoretical two-grid error uses all shared nodes and approaches twice
+the bias over the full time interval. The table gives a 64-time estimate
+of bias and the two-grid error at $N=8$. Theorem~\ref{thm:characterization}
+concerns the best error over a class of fields. A fit at small step counts
+decreases the target error there. For the one-grid fields it also
+increases the model bias. The weight of the added loss was fixed and
+was not tuned, and a different weight can change the size of the
+effect.
+
+\begin{table}[ht]
+\centering
+\caption{Learned scalar fields: target error at $N$ Euler steps for each
+field, model bias, and the two-grid error $E_c+E_f$ of \eqref{eq:errors}
+at $N=8$. All values are population $W_2$ distances computed by
+quadrature.}
+\label{tab:scalar-models}
+\input{generated_table_scalar_models}
+\end{table}
+
+\section{Variability of sample-based comparisons across evaluation sets}
+\label{app:set-variability}
+Section~\ref{app:experiments} reports the sliced distance SW2 on one
+evaluation set of 1,024 samples and on one evaluation set of 262,144
+samples. The two sets give different directions for the change between
+8 and 16 steps. Here we measure how often the direction changes across
+independent evaluation sets of the same size.\AIassistance
+
+\subsection{Protocol}
+The nine two-dimensional fields of Section~\ref{app:experiments} and its
+128 projection directions are fixed. Only
+the evaluation samples change. One evaluation set contains start points
+for the numerical runs, and independent noise and data points for the
+target path. We draw \VarSmallSets{} independent sets of 1,024 samples and
+\VarMediumSets{} independent sets of 16,384 samples. Their random seeds are different from the seeds of
+those two sets. For each set we compute SW2 at 8, 16, and 64 Euler steps
+as the maximum over the five diagnostic times, in double precision.
+This implementation gives the values of Table~\ref{tab:seed-grid-details} on
+the separate 1,024-sample set with differences below $3\times10^{-8}$.
+
+\subsection{Results}
+Table~\ref{tab:set-variability} gives the results for each field and
+each size. It gives the mean and the standard deviation across sets of
+SW2, of its change from 8 to 16 steps, and of its change from 8 to 64
+steps. It also gives the percentage
+of sets in which SW2 increases.
+
+\emph{Change from 8 to 16 steps.} For the three CFM fields, SW2 decreases in all sets of both sizes. For the six fitted fields (one-grid fit and two-grid
+fit), the mean change is negative at both sizes. With
+1,024 samples, the standard deviation of the change across sets is
+\VarSmallChangeSd{} on average over the six fields, and the mean change
+is $\VarSmallChangeMean$. SW2 increases in \VarSmallFractionMin{}\% to
+\VarSmallFractionMax{}\% of the sets, as a function of the field. At
+least one of the six fields shows an increase in \VarSmallAnySix{}\% of
+the sets, and all six fields show an increase together in
+\VarSmallAllSix{}\% of the sets. The separate 1,024-sample set also shows all six increases. With 16,384 samples, the standard deviation of the
+change is \VarMediumChangeSd{}, and SW2 increases in at most
+\VarMediumFractionMax{}\% of the sets. On the set of 262,144
+samples, SW2 decreases for all six fields
+(Table~\ref{tab:large-bank}).
+
+\emph{Change from 8 to 64 steps.} This change differs between the
+fields. For the one-grid field with seed 17, the mean change is positive at both sizes. SW2 increases in \VarSmallGridLongFraction{}\% of the
+sets of 1,024 samples and in \VarMediumGridLongFraction{}\% of the sets
+of 16,384 samples. It also increases on the set of 262,144
+samples. This agrees with the finite-witness intervals of
+Section~\ref{app:large-bank-timing} for the same field. With 16,384
+samples, the values for the other two one-grid fields are
+\VarMediumLongOneB{}\% and \VarMediumLongOneC{}\%, and the values for
+the three two-grid fields are \VarMediumLongTwoA{}\%,
+\VarMediumLongTwoB{}\%, and \VarMediumLongTwoC{}\%.
+
+With these fields and directions, increases from 8 to 16 steps occur
+less often on sets of 16,384 samples than on sets of 1,024. The same
+samples are used across fields within a set, so changes for the six
+fields are correlated. The mean SW2 values in
+Table~\ref{tab:set-variability} are also smaller on the larger sets.
+
+\begin{table*}[ht]
+\centering
+\caption{Empirical SW2 of the nine two-dimensional fields on independent
+evaluation sets. Entries are means across sets, with standard deviations
+across sets in parentheses. The two increase columns give the percentages of sets in which SW2
+increases from 8 to 16 and from 8 to 64 steps.}
+\label{tab:set-variability}
+\footnotesize
+\input{generated_table_variability}
+\end{table*}

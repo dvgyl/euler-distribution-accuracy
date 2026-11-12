@@ -1,0 +1,25 @@
+{
+  "figure_paths_relative_to_results": [
+    "figures/nonlinear_convergence.pdf",
+    "figures/nonlinear_shape.pdf",
+    "figures/gaussian_sensitivity.pdf",
+    "figures/solver_dependence.pdf",
+    "figures/equal_evaluation.pdf"
+  ],
+  "macros": {
+    "HeunErrorRatio": "1.9998",
+    "NonlinearActionDifference": "4.4374",
+    "NonlinearBaseAction": "4.2342",
+    "NonlinearBaseCoefficient": "1.3894",
+    "NonlinearBaseFineError": "3.391e-04",
+    "NonlinearBaseOrder": "0.9997",
+    "NonlinearCorrectedAction": "8.6716",
+    "NonlinearCorrectedCoefficient": "1.6258",
+    "NonlinearCorrectedFineError": "9.687e-08",
+    "NonlinearCorrectedOrder": "1.9995",
+    "NonlinearParticleCoefficient": "2.6835",
+    "NonlinearParticleFineError": "6.551e-04",
+    "NonlinearParticleOrder": "0.9998",
+    "NonlinearQuadratureOrder": "128"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "asymptotic_checks": [
+    {
+      "allowance": "0.002",
+      "method": "base",
+      "quantity": "terminal_w2_scaled",
+      "relative_difference": "0.00011961356605030673386864306317346597189783423978121",
+      "steps": 4096
+    },
+    {
+      "allowance": "0.002",
+      "method": "base",
+      "quantity": "sum_node_w2_squared_scaled",
+      "relative_difference": "0.00025195407605576536118829020104059969214237842267451",
+      "steps": 4096
+    },
+    {
+      "allowance": "0.002",
+      "method": "corrected",
+      "quantity": "terminal_w2_scaled",
+      "relative_difference": "0.0002197051029431576377617294644255615640839252974299",
+      "steps": 4096
+    },
+    {
+      "allowance": "0.002",
+      "method": "corrected",
+      "quantity": "sum_node_w2_squared_scaled",
+      "relative_difference": "0.000042510741868730233466778485015917824633585444411288",
+      "steps": 4096
+    }
+  ],
+  "calibrated_node_comparisons": 35,
+  "calibration_points": 9,
+  "convergence_order_checks": 12,
+  "corrected_particle_constant_relative_difference": "0.000097656092687340176649516148265957407040119580269946",
+  "maximum_node_bound_checks": 44,
+  "maximum_residuals": {
+    "action_absolute": 1.7763568394002505e-15,
+    "covariance_absolute": 4.179327588497719e-12,
+    "mean_absolute": 6.061817714453355e-14,
+    "particle_rms_absolute": 1.5297780945645878e-14,
+    "residual_over_allowance": 0.015390129805449938,
+    "w2_absolute": 1.0051092987420351e-12
+  },
+  "negative_controls_rejected": 3,
+  "node_comparisons": 16983,
+  "precision_digits": 80,
+  "runs": 81
+}

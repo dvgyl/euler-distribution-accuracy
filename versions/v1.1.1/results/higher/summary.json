@@ -1,0 +1,23 @@
+{
+  "even_observed_orders_finest_pair": {
+    "0.0": 0.9995476855552522,
+    "0.5": 1.4999805945321212,
+    "1.0": 1.99999817284629
+  },
+  "odd_scaled_errors_range": [
+    1.094946340499988,
+    1.528058500404928
+  ],
+  "secant_maximum_roundoff_across_runs": 4.80740671595891e-15,
+  "secant_terminal_bias_N2048": 0.0010874382755839008,
+  "secant_bias_order_finest_pair": 1.000452501396089,
+  "mixture_identity_largest_discrepancy": 1.1269141175773711e-10,
+  "mixture_quadrature_largest_change": 1.8861454620378026e-08,
+  "rational_certificates": 12,
+  "non_gaussian_whole_path_order": 0.9984884768776392,
+  "non_gaussian_whole_path_quadrature_change": 9.71445146547012e-17,
+  "largest_certificate_interval_width": 1.491509338313323e-35,
+  "verification_scope": "population examples and rational enclosures, not theorem formalization",
+  "Python": "3.13.5",
+  "NumPy": "2.3.5"
+}

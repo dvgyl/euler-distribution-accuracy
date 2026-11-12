@@ -1,0 +1,13 @@
+direction,wave_number,shift_projection,closed_marginal_derivative,straight_coupling_derivative,absolute_discrepancy,note
+parallel,0.3,1.1,-0.2245638084825952,-0.2245638084825952,0,analytic_weak_two_jet_for_nonGaussian_target
+parallel,0.75,1.1,-0.9075766777039705,-0.9075766777039707,1.110223024625157e-16,analytic_weak_two_jet_for_nonGaussian_target
+parallel,1.5,1.1,-0.3287106232003292,-0.3287106232003292,5.551115123125783e-17,analytic_weak_two_jet_for_nonGaussian_target
+parallel,2.0,1.1,0.703743472830386,0.7037434728303859,1.110223024625157e-16,analytic_weak_two_jet_for_nonGaussian_target
+orthogonal,0.3,0.0,-0.1204556827109706,-0.1204556827109706,1.387778780781446e-17,analytic_weak_two_jet_for_nonGaussian_target
+orthogonal,0.75,0.0,-0.3938139736002024,-0.3938139736002024,0,analytic_weak_two_jet_for_nonGaussian_target
+orthogonal,1.5,0.0,0.5551557191827781,0.5551557191827781,0,analytic_weak_two_jet_for_nonGaussian_target
+orthogonal,2.0,0.0,1.358766243695591,1.358766243695591,0,analytic_weak_two_jet_for_nonGaussian_target
+oblique,0.3,0.55,-0.1464827141538767,-0.1464827141538767,0,analytic_weak_two_jet_for_nonGaussian_target
+oblique,0.75,0.55,-0.5222546496261444,-0.5222546496261444,0,analytic_weak_two_jet_for_nonGaussian_target
+oblique,1.5,0.55,0.3341891335870013,0.3341891335870013,0,analytic_weak_two_jet_for_nonGaussian_target
+oblique,2.0,0.55,1.19501055097929,1.19501055097929,2.220446049250313e-16,analytic_weak_two_jet_for_nonGaussian_target

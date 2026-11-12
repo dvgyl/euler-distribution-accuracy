@@ -1,0 +1,9 @@
+{
+  "python": "3.13.5",
+  "secant_transfer_order": 1.0005185224872202,
+  "balanced_fit_order": 0.9999926819720445,
+  "balanced_theta_last": 0.749960780850018,
+  "balanced_N_scaled_max_last": 0.3213494627241289,
+  "max_fitted_grid_roundoff": 4.999702984597266e-15,
+  "scope": "population Gaussian formulas, floating point; finite-N nonlinear lower bounds are not certified by these examples"
+}

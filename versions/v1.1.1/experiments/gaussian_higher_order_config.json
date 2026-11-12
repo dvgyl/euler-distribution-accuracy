@@ -1,0 +1,8 @@
+{
+  "evaluation_budgets": [12, 48, 192, 384],
+  "rate": "0.6",
+  "horizon": "1",
+  "covariance": [["1.5", "0.25"], ["0.25", "0.75"]],
+  "precision_digits": [50, 80],
+  "relative_allowance": "1e-35"
+}

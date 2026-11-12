@@ -1,0 +1,29 @@
+\begin{table}[ht]
+\centering
+\caption{Equal 96-field-evaluation comparisons, means of three seeds. All target metrics use the same held-out evaluation set.}
+\label{tab:equal-nfe-new}
+\begin{tabular}{@{}cllrr@{}}
+\toprule
+$d$ & Training & Solver & Target SW2 & Own-flow RMS\\
+\midrule
+2 & CFM & euler & 0.18585 & 0.02491\\
+2 & CFM & heun & 0.18763 & 0.00064\\
+2 & CFM & rk3 & 0.18766 & 0.00002\\
+2 & One-grid fit & euler & 0.26455 & 0.02274\\
+2 & One-grid fit & heun & 0.27325 & 0.00059\\
+2 & One-grid fit & rk3 & 0.27344 & 0.00002\\
+2 & Two-grid fit & euler & 0.25574 & 0.02283\\
+2 & Two-grid fit & heun & 0.26382 & 0.00058\\
+2 & Two-grid fit & rk3 & 0.26400 & 0.00002\\
+8 & CFM & euler & 0.11673 & 0.02526\\
+8 & CFM & heun & 0.11346 & 0.00048\\
+8 & CFM & rk3 & 0.11342 & 0.00001\\
+8 & One-grid fit & euler & 0.13290 & 0.02064\\
+8 & One-grid fit & heun & 0.13426 & 0.00037\\
+8 & One-grid fit & rk3 & 0.13426 & 0.00001\\
+8 & Two-grid fit & euler & 0.13254 & 0.02046\\
+8 & Two-grid fit & heun & 0.13363 & 0.00036\\
+8 & Two-grid fit & rk3 & 0.13362 & 0.00001\\
+\bottomrule
+\end{tabular}
+\end{table}

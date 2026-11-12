@@ -1,0 +1,12 @@
+{
+  "checkpoints": 6,
+  "parameters": 2545,
+  "reference_max_refinement": 1.3291799913668992e-10,
+  "quantile_max_checked_change": 0.0009613481442549,
+  "mean_secant_target_16": 0.0247962629661659,
+  "mean_secant_target_32": 0.0931484267945022,
+  "mean_secant_own_16": 0.14861758215946166,
+  "mean_secant_own_32": 0.0809931319724556,
+  "source_target_variance": 4.0,
+  "scope": "small analytic-teacher diagnostic; no certified neural W2 bound or practical global derivative budget"
+}

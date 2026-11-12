@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{Descriptive three-seed comparisons on the 1,024-sample evaluation set. Entries are means with sample standard deviations in parentheses below. Subscripts give Euler step counts. Lower values are better. SW2 uses 128 directions and five times; RMS uses a common-start numerical reference.}
+\label{tab:small-bank}
+\small
+\begin{tabular}{@{}clrrrr@{}}
+\toprule
+$d$ & Training & SW2$_8$ & SW2$_{16}$ & RMS$_8$ & RMS$_{16}$\\
+\midrule
+2 & CFM & \shortstack{$0.245$\\$(0.028)$} & \shortstack{$0.197$\\$(0.020)$} & \shortstack{$0.291$\\$(0.002)$} & \shortstack{$0.147$\\$(0.001)$}\\
+2 & One-grid fit & \shortstack{$0.214$\\$(0.039)$} & \shortstack{$0.230$\\$(0.033)$} & \shortstack{$0.264$\\$(0.003)$} & \shortstack{$0.134$\\$(0.001)$}\\
+2 & Two-grid fit & \shortstack{$0.216$\\$(0.041)$} & \shortstack{$0.225$\\$(0.036)$} & \shortstack{$0.265$\\$(0.004)$} & \shortstack{$0.135$\\$(0.002)$}\\
+8 & CFM & \shortstack{$0.174$\\$(0.015)$} & \shortstack{$0.139$\\$(0.016)$} & \shortstack{$0.300$\\$(0.008)$} & \shortstack{$0.151$\\$(0.005)$}\\
+8 & One-grid fit & \shortstack{$0.148$\\$(0.014)$} & \shortstack{$0.130$\\$(0.013)$} & \shortstack{$0.243$\\$(0.007)$} & \shortstack{$0.123$\\$(0.004)$}\\
+8 & Two-grid fit & \shortstack{$0.153$\\$(0.014)$} & \shortstack{$0.133$\\$(0.013)$} & \shortstack{$0.240$\\$(0.007)$} & \shortstack{$0.122$\\$(0.004)$}\\
+\bottomrule
+\end{tabular}
+\end{table}

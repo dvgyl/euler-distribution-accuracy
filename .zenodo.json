@@ -5,11 +5,12 @@
   "description": "<p>A flow-matching model learns a velocity field that moves noise toward a data distribution. More solver steps can follow this field more closely yet produce a worse match to the data. This can happen because numerical error offsets an error in the field. We ask what accuracy at two step counts reveals about the field. We run explicit Euler with the same field from Gaussian noise on a grid of N steps and on the grid that halves each step. At the shared times, we compare both outputs with the target distributions using the quadratic Wasserstein distance. Under common derivative bounds, the sum of these errors can decrease faster than 1/N exactly when a limit of the allowed fields generates the target path and its acceleration preserves each distribution. Second-order accuracy is then possible. Otherwise the error sum is at least a positive constant times 1/N on all sufficiently fine grids. For the path that joins independent noise and data by straight lines, this lower bound holds in odd dimension for centered targets with positive definite covariance. For a scalar Gaussian path on uniform grids, the sharp constant is (2+π)/8. For each of 20 scalar neural fields fitted at small step counts, going from 16 to 64 steps reduces the integration error and increases the error against the target. This difference matters when a sampler is used at a different step count from the one used in training.</p><p>The PDF contains the article and supplementary material. The source archive contains the manuscript source, code, settings, results, and model weights. CC BY 4.0 applies to the manuscript. See the separate notices for code and third-party files.</p>",
   "creators": [
     {
-      "name": "Goyal, Dev D."
+      "name": "Goyal, Dev D.",
+      "orcid": "0009-0009-9132-744X"
     }
   ],
-  "publication_date": "2026-11-10",
-  "version": "1.1.0",
+  "publication_date": "2026-11-12",
+  "version": "1.1.1",
   "access_right": "open",
   "license": "cc-by-4.0",
   "keywords": [

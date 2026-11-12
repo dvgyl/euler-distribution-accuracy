@@ -1,0 +1,49 @@
+{
+  "seconds": 3.233088524999971,
+  "log": [
+    {
+      "update": 1,
+      "cfm_train": 3.592963218688965,
+      "extra": 0.041312284767627716,
+      "val_cfm": 3.982485055923462
+    },
+    {
+      "update": 300,
+      "cfm_train": 2.986776113510132,
+      "extra": 0.0,
+      "val_cfm": 3.0823349952697754
+    },
+    {
+      "update": 600,
+      "cfm_train": 2.828153610229492,
+      "extra": 0.0,
+      "val_cfm": 2.7792160511016846
+    },
+    {
+      "update": 900,
+      "cfm_train": 2.7201457023620605,
+      "extra": 0.0,
+      "val_cfm": 2.64436936378479
+    },
+    {
+      "update": 1200,
+      "cfm_train": 2.3568613529205322,
+      "extra": 0.0,
+      "val_cfm": 2.587543487548828
+    },
+    {
+      "update": 1500,
+      "cfm_train": 2.7986133098602295,
+      "extra": 0.0,
+      "val_cfm": 2.5759711265563965
+    },
+    {
+      "update": 1800,
+      "cfm_train": 2.8321685791015625,
+      "extra": 0.0,
+      "val_cfm": 2.5670247077941895
+    }
+  ],
+  "n_parameters": 2642,
+  "checkpoint_rule": "final fixed update; no test-based selection"
+}

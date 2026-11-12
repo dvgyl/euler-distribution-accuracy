@@ -1,0 +1,8 @@
+{
+  "covariance_max_absolute_difference": 1.0436096431476471e-13,
+  "covariance_w2_max_absolute_difference": 4.905918925191455e-14,
+  "high_precision_digits": 100,
+  "high_precision_max_relative_w2_difference": 1.4438489865565421e-12,
+  "checks_passed": true,
+  "arithmetic_scope": "Independent 100-digit agreement; not an interval enclosure."
+}
